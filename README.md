@@ -11,10 +11,25 @@ $ yarn
 ### Local Development
 
 ```
+npx docusaurus start
+```
+
+```
+yarn run start -- --locale es
+yarn run start -- --locale en
+```
+
+
+```
 $ yarn start
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+### Build translations
+```
+yarn run write-translations --locale en
+```
 
 ### Build
 

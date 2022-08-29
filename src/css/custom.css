@@ -6,7 +6,8 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
+  --ifm-color-primary: #334bff;
+  --ifm-color-grey: #d1d3d4;
   --ifm-color-primary-dark: #29784c;
   --ifm-color-primary-darker: #277148;
   --ifm-color-primary-darkest: #205d3b;
@@ -19,7 +20,7 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary: #BB86FC /* b1baff */;
   --ifm-color-primary-dark: #21af90;
   --ifm-color-primary-darker: #1fa588;
   --ifm-color-primary-darkest: #1a8870;
@@ -28,3 +29,75 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+.footer__links {
+  border-bottom: 1px solid var(--ifm-color-grey);
+  padding-bottom: 1rem;
+}
+
+article aside,
+article .aside {
+  margin: 2rem 0;
+  background-color: #fff7e5;
+  color: #1c1e21;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+article aside a,
+article .aside a {
+  color: #334bff;
+}
+
+article aside p:last-child,
+article .aside p:last-child {
+  margin-bottom: 0;
+}
+
+table th,
+table td {
+  white-space: nowrap;
+}
+table td:last-child {
+  white-space: normal;
+}
+
+.-mb-2{
+  margin-bottom: 2rem;
+}
+
+/*
+article table {
+  border-radius: 0 0 6px 6px;
+  margin-top: -28px;
+  border: none;
+  border-top: 1px solid #f1f2f2;
+  background: #000529;
+  position: relative;
+  z-index: 2;
+
+  border: 1px solid #000529;
+  padding-bottom: 4px;
+  margin-bottom: 40px;
+}
+table, code[class*=language-], pre[class*=language-] {
+  color: #f1f2f2;
+  background: none;
+  text-shadow: 0 1px rgba(0,5,41,.3);
+  font-family: PT Mono,monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  tab-size: 4;
+  hyphens: none;
+}
+article table th,
+article table td {
+  border-bottom-color: #f1f2f2;
+  border-top: none;
+  padding: 12px 24px;
+  vertical-align: bottom;
+}*/
