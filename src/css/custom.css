@@ -57,12 +57,17 @@ table th,
 table td {
   white-space: nowrap;
 }
+
 table td:last-child {
   white-space: normal;
 }
 
 .-mb-2{
   margin-bottom: 2rem;
+}
+
+code {
+  white-space: nowrap;
 }
 
 /*

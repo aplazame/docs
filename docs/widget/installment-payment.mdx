@@ -9,17 +9,6 @@ sidebar_position: 1
 Si usas la configuración básica, podrás personalizarlo desde el <a href="https://vendors.aplazame.com/" target="_blank">panel de control</a>, en la vista de personalización del widget en la pestaña correspondiente al valor de <code>data-view</code>.
 </div>
 
-<div class="-mb-2">
-  <div data-aplazame-widget-instalments
-       data-amount="15900"
-       data-currency="EUR"
-       data-country="ES"
-       data-type="button"
-       data-option-branding="true"
-       data-option-downpayment-info="true"
-       data-option-title-smart="true"></div>
-</div>
-
 ``` html
 <div data-aplazame-widget-instalments
      data-amount="15900"
@@ -30,12 +19,33 @@ Si usas la configuración básica, podrás personalizarlo desde el <a href="http
 
 |<Translate id="table.parameter">Parámetro</Translate> | <Translate id="table.type">Tipo</Translate> | <Translate id="table.required">Requerido</Translate> | <Translate id="table.description">Descripción</Translate>|
 |---------|---------|---------|---------|
-|data-amount | decimal | Sí | Cantidad a financiar **en céntimos**. Este campo se puede omitir si se usa [`data-price`](#precio-variable)
+|data-amount | decimal | Sí | Cantidad a financiar **en céntimos**. Este campo se puede omitir si se usa [`data-price`](../widget#precio-variable)
 |data-currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | Sí | Moneda en la que se venderá el artículo.
 |data-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | Sí | País donde aplicará la venta.
 |data-view | enum | No | Vista dónde se incluye el widget, corresponde con la pestaña de personalización del [panel de control](https://vendors.aplazame.com/).<br/>Los posibles valores son: `product`, `cart`
 
 Por omisión se usará: `product`
+
+
+### Simulación
+
+``` html
+<div data-aplazame-widget-instalments
+     data-amount="15900"
+     data-currency="EUR"
+     data-country="ES"
+     data-view="product"></div>
+```
+<div class="-mb-2">
+  <div data-aplazame-widget-instalments
+       data-amount="15900"
+       data-currency="EUR"
+       data-country="ES"
+       data-type="button"
+       data-option-branding="true"
+       data-option-downpayment-info="true"
+       data-option-title-smart="true"></div>
+</div>
 
 ## Integración avanzada
 

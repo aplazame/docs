@@ -5,16 +5,15 @@ title: Integración del widget
 import Translate from '@docusaurus/Translate';
 
 # Integración del widget
-El widget de Aplazame te permite mostrar una simulación de las cuotas de una financiación junto al precio de tus productos. Puedes elegir entre una [integración básica](#integracion-basica) que controlas desde tu panel de control de Aplazame y una [integración avanzada](#integracion-avanzada) si deseas tener la máxima flexibilidad." **aplazame.js**
+El widget de Aplazame te permite mostrar una simulación de las cuotas de una financiación junto al precio de tus productos. Puedes elegir entre una [integración básica](installment-payment#integración-básica) que controlas desde tu panel de control de Aplazame y una [integración avanzada](installment-payment#integración-avanzada) si deseas tener la máxima flexibilidad.
 
+## Carga de aplazame.js
 
 <div class="aside">
   Debes incluir <strong>aplazame.js</strong> en las páginas donde deba aparecer el widget. Consulta todas las <a href="../sdk-javascript/#integracion">opciones de integración</a>.
 </div>
 
-> Para producción el valor de sandbox debe ser `false`
-
-```html
+```html title="Carga de la librería Aplazame"
 <script
   src="https://cdn.aplazame.com/aplazame.js"
   data-aplazame="api_public_key"
@@ -23,16 +22,18 @@ El widget de Aplazame te permite mostrar una simulación de las cuotas de una fi
 </script>
 ```
 
+> Para producción el valor de sandbox debe ser `false`
+
 |<Translate id="table.parameter">Parámetro</Translate> | <Translate id="table.type">Tipo</Translate> | <Translate id="table.required">Requerido</Translate> | <Translate id="table.description">Descripción</Translate>|
 |---------|---------|---------|---------|
 |public-key | string | si | [tu clave pública](https://vendors.aplazame.com)
 |sandbox | boolean | si | Indica si las peticiones usarán el modo de pruebas (true) o producción (false).
 
 
-### Personalizar el texto legal
+## Personalizar el texto legal
 
 Existe la opción de personalizar el texto legal que se muestra bajo el simulador de cuotas. Eso te permitirá que los valores de la financiación (importe de la compra, importe de la entrada, importe de las cuotas, comisión de apertura, TAE, etc) sean dinámicos y muestren los	texto	no	Esta opción permite personalizar la página destino del botón ‘¿Quieres saber más?’
-data-option-url-more-info importes reales para la compra que el cliente esté realizando. Para ello, sólo hay que introducir las siguientes variables entre llaves dentro del valor del atributo <code>data-option-legal-text</code>.
+`data-option-url-more-info` importes reales para la compra que el cliente esté realizando. Para ello, sólo hay que introducir las siguientes variables entre llaves dentro del valor del atributo <code>data-option-legal-text</code>.
 
 |<Translate id="table.var">Variable</Translate> | <Translate id="table.desc">Descripción</Translate> |
 --------- | ----
@@ -50,20 +51,20 @@ data-option-url-more-info importes reales para la compra que el cliente esté re
 
   Un ejemplo de texto legal con variables sería el texto que viene por defecto:
 
-  <code>Ejemplo de financiación con APLAZAME para una cesta de &#123; order_amount &#125; a &#123; num_instalments  &#125; meses y que comienza a pagar a los 20 días desde la solicitud. Se solicita una entrada de &#123; downpayment_amount  &#125; que el usuario debe pagar a través de su tarjeta en el momento en que realiza la operación. El importe a financiar es la diferencia entre el valor de la cesta y la entrada: &#123; principal_amount  &#125;. Se solicitan &#123; num_instalments  &#125; mensualidades de &#123; instalments_amount  &#125;. Comisión de apertura: &#123; tax  &#125;. TIN: &#123; tin  &#125; TAE: &#123; tae  &#125;. Importe total adeudado: &#123; total_amount  &#125;. Sujeto a la aprobación por parte de APLAZAME, S.L.</code>
+  <code style={{ whiteSpace: 'normal' }}>Ejemplo de financiación con APLAZAME para una cesta de &#123; order_amount &#125; a &#123; num_instalments  &#125; meses y que comienza a pagar a los 20 días desde la solicitud. Se solicita una entrada de &#123; downpayment_amount  &#125; que el usuario debe pagar a través de su tarjeta en el momento en que realiza la operación. El importe a financiar es la diferencia entre el valor de la cesta y la entrada: &#123; principal_amount  &#125;. Se solicitan &#123; num_instalments  &#125; mensualidades de &#123; instalments_amount  &#125;. Comisión de apertura: &#123; tax  &#125;. TIN: &#123; tin  &#125; TAE: &#123; tae  &#125;. Importe total adeudado: &#123; total_amount  &#125;. Sujeto a la aprobación por parte de APLAZAME, S.L.</code>
 </aside>
 
 
-### Personalizar CSS
+## Personalizar CSS
 
 <aside>
-  Para personalizar más aún el widget, está la opción `data-option-custom-styles`.
+  Para personalizar más aún el widget, está la opción <code>data-option-custom-styles</code>.
 
   Consulta la [documentación de Personalización CSS del Widget](./custom-styles/) para saber más.
 </aside>
 
 
-### Precio variable
+## Precio variable
 
 <aside>
   El precio variable sólo es configurable en el widget del producto 'Pago a plazos'.
@@ -81,10 +82,10 @@ data-option-url-more-info importes reales para la compra que el cliente esté re
 
 |<Translate id="table.parameter">Parámetro</Translate> | <Translate id="table.type">Tipo</Translate> | <Translate id="table.required">Requerido</Translate> | <Translate id="table.description">Descripción</Translate>|
 |---------|---------|---------|---------|
-|data-currency | $type{currency} | Sí | Moneda en la que se venderá el artículo.
-|data-country | $type{country} | Sí | País donde aplicará la venta.
-|data-price | $type{css} | Sí | Selector CSS que indique el elemento que contiene el precio final. Se actualiza en vivo si hay cambios en el precio. Si se usa conjuntamente con `data-amount`, se mostrará el valor de este último y de data-price si el precio cambia.
-|data-qty | $type{css} | No | Selector CSS que indique el elemento que contiene el número de artículos. Si está definido, la cantidad a financiar se calculará multiplicando `price*qty`.
+|data-currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | Sí | Moneda en la que se venderá el artículo.
+|data-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | Sí | País donde aplicará la venta.
+|data-price | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | Sí | Selector CSS que indique el elemento que contiene el precio final. Se actualiza en vivo si hay cambios en el precio. Si se usa conjuntamente con `data-amount`, se mostrará el valor de este último y de data-price si el precio cambia.
+|data-qty | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | No | Selector CSS que indique el elemento que contiene el número de artículos. Si está definido, la cantidad a financiar se calculará multiplicando `price*qty`.
 
 
 $include{ ./_simulator-api.md }
