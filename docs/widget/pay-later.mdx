@@ -1,9 +1,11 @@
 ---
 title: Paga en 15 días
 sidebar_position: 2
+toc_min_heading_level: 2
 ---
 import Translate from '@docusaurus/Translate';
 import SimulatorPayLater from '../_common/simulatorPayLater.mdx'
+
 
 ## Pago en 15 días
 
@@ -12,8 +14,6 @@ import SimulatorPayLater from '../_common/simulatorPayLater.mdx'
 - Selecciona a continuación qué tipo de widget quieres incluir.
 - Configura los distintos parámetros de acuerdo a tus necesidades. Aplica los colores que desees, elige la alineación y decide si quieres que tu widget use el branding de Aplazame o no.
 - El código de ejemplo de tu widget se irá actualizando en función de los valores que definas. Una vez tengas el diseño que buscabas, sólo tienes que copiar el código para llevártelo a tu tienda online y ¡listo!
-
-<SimulatorPayLater />
 
 <aside>
   Los valores por defecto en ese caso, son los que se muestran en esta documentación.
@@ -42,3 +42,16 @@ import SimulatorPayLater from '../_common/simulatorPayLater.mdx'
 |data-option-branding | boolean | No | Indica si debe mostrarse o no el logotipo de Aplazame en la parte inferior del widget
 |data-option-custom-styles | boolean | No | Indica si los estilos se heredan de la tienda `true` o se usan los de Aplazame `false`.
 |data-option-disable-modal | boolean | No | Indica si debe dejar de mostrarse la modal de información para los tipos `text` y `button`. El valor por omisión es `false`.
+
+## Simulador
+
+<simulator
+  data-country="ES"
+  data-type="button"
+  data-option-text-color="#ff0000"
+  data-option-btn-text-color="#00ff00"
+  data-option-btn-bg-color="#0000ff"
+  data-option-branding="true"
+  data-option-align="center">
+  data-aplazame-widget-paylater</simulator>
+
