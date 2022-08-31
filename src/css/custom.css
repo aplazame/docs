@@ -38,8 +38,7 @@
   padding-bottom: 1rem;
 }
 
-article aside,
-article .aside {
+article aside {
   margin: 2rem 0;
   background-color: #fff7e5;
   color: #1c1e21;
@@ -47,13 +46,15 @@ article .aside {
   border-radius: 1rem;
 }
 
-article aside a,
-article .aside a {
+article aside code {
+  background-color: rgb(246, 247, 248);
+}
+
+article aside a {
   color: #334bff;
 }
 
-article aside p:last-child,
-article .aside p:last-child {
+article aside p:last-child {
   margin-bottom: 0;
 }
 

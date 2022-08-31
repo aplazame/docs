@@ -9,10 +9,9 @@
   flex-flow: wrap;
 }
 
-
 .grid-6\@sm {
   width: 100%;
-  padding: 1rem
+  padding: 0.5rem 1rem
 }
 
 @media screen and (min-width:996px) {
@@ -21,7 +20,9 @@
   }
 }
 
-
+.swatch {
+  border: 1px solid var(--ifm-table-border-color)
+}
 
 .apz-input-choice {
   white-space: nowrap;
@@ -76,9 +77,13 @@
   z-index: 1
 }
 
-/*
 .widget-container {
   display: flex;
+  min-height: 160px;
+  padding: 0 2rem;
+  background-color: white;
+  border-radius: var(--ifm-code-border-radius);
+  /* border-top-left-radius: var(--ifm-code-border-radius); */
   align-items: center;
   justify-content: center;
 }
@@ -87,4 +92,4 @@
   width: 100%;
   margin: auto;
 }
-*/
+

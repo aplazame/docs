@@ -44,11 +44,10 @@ class ColorPicker extends React.Component {
           backgroundColor: this.state.value,
         },
         swatch: {
-          width: '124px',
-          padding: '5px',
-          // background: '#fff',
-          borderRadius: '1px',
-          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+          width: '130px',
+          padding: '6px',
+          height: '40px',
+          borderRadius: '2px',
           display: 'inline-block',
           cursor: 'pointer',
         },
@@ -75,7 +74,7 @@ class ColorPicker extends React.Component {
 
     return (
       <div>
-        <div style={ styles.swatch } onClick={ this.handleClick }>
+        <div className='swatch' style={ styles.swatch } onClick={ this.handleClick }>
           <div style={ styles.color } />
           <span style={ styles.textHEX }>{ this.state.value }</span>
         </div>
