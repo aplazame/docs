@@ -37,14 +37,16 @@ class ColorPicker extends React.Component {
     const styles = reactCSS({
       'default': {
         color: {
+          display: 'inline-block',
           width: '36px',
           height: '14px',
           borderRadius: '2px',
           backgroundColor: this.state.value,
         },
         swatch: {
+          width: '124px',
           padding: '5px',
-          background: '#fff',
+          // background: '#fff',
           borderRadius: '1px',
           boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
           display: 'inline-block',
@@ -65,7 +67,7 @@ class ColorPicker extends React.Component {
           lineHeight: '1.5rem',
           display: 'inline-block',
           marginLeft: '0.5rem',
-          fontSize: '1.5rem',
+          fontSize: '1rem',
           verticalAlign: 'top',
         }
       },
@@ -75,6 +77,7 @@ class ColorPicker extends React.Component {
       <div>
         <div style={ styles.swatch } onClick={ this.handleClick }>
           <div style={ styles.color } />
+          <span style={ styles.textHEX }>{ this.state.value }</span>
         </div>
         { this.state.displayColorPicker ?
           <div style={ styles.popover }>
@@ -82,7 +85,7 @@ class ColorPicker extends React.Component {
             <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
           </div> : null
         }
-        <span style={ styles.textHEX }>{ this.state.value }</span>
+
       </div>
     )
   }

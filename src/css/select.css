@@ -1,0 +1,43 @@
+select.apz-select {
+  padding: 0 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 40px;
+  min-width: 120px;
+  border-radius: 2px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='12' width='8'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23333A3E'%3E%3Cpath d='M.752 3L3.966.5 7.252 3M.752 9l3.214 2.5L7.252 9'/%3E%3C/g%3E%3C/svg%3E");
+  background-position: calc(100% - 12px) 50%;
+  border: 1px solid rgba(51, 58, 62, .16)
+}
+
+[data-theme='dark'] select.apz-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 8 12' height='12' width='8'%3E%3Cg fill='none' fill-opacity='1' fill-rule='evenodd' stroke='%23fff' stroke-width='1' stroke-opacity='1' transform='translate(0.7521047,0.5)'%3E%3Cpolyline points='0 2.5 3.21428571 0 6.5 2.5' /%3E%3Cpolyline points='0 11 3.21428571 8.5 6.5 11' transform='matrix(1,0,0,-1,0,19.5)' /%3E%3C/g%3E%3C/svg%3E");
+}
+
+select.apz-select._width-color {
+  padding: 0 16px 0 12px;
+  background-position: calc(100% - 10px) 50%
+}
+
+select.apz-select,
+select.apz-select:active,
+select.apz-select:focus {
+  outline: 0;
+  border: 1px solid rgba(51, 58, 62, .16)
+}
+
+select.apz-select:invalid {
+  box-shadow: none
+}
+
+select.apz-select:invalid:not(:focus) {
+  color: #bfcdd5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='0 0 8 12' height='12' width='8'%3E%3Cg fill='none' fill-opacity='1' fill-rule='evenodd' stroke='%23333A3E' stroke-width='1' stroke-opacity='1' transform='translate(0.7521047,0.5)'%3E%3Cpolyline points='0 2.5 3.21428571 0 6.5 2.5' /%3E%3Cpolyline points='0 11 3.21428571 8.5 6.5 11' transform='matrix(1,0,0,-1,0,19.5)' /%3E%3C/g%3E%3C/svg%3E");
+}
+
+select.apz-select:invalid:not(:focus):hover {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='12' width='8'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23333A3E'%3E%3Cpath d='M.752 3L3.966.5 7.252 3M.752 9l3.214 2.5L7.252 9'/%3E%3C/g%3E%3C/svg%3E")
+}

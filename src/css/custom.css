@@ -30,6 +30,9 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+@import './select.css';
+@import './simulator.css';
+
 .footer__links {
   border-bottom: 1px solid var(--ifm-color-grey);
   padding-bottom: 1rem;
@@ -43,6 +46,7 @@ article .aside {
   padding: 2rem;
   border-radius: 1rem;
 }
+
 article aside a,
 article .aside a {
   color: #334bff;
@@ -70,39 +74,3 @@ code {
   white-space: nowrap;
 }
 
-/*
-article table {
-  border-radius: 0 0 6px 6px;
-  margin-top: -28px;
-  border: none;
-  border-top: 1px solid #f1f2f2;
-  background: #000529;
-  position: relative;
-  z-index: 2;
-
-  border: 1px solid #000529;
-  padding-bottom: 4px;
-  margin-bottom: 40px;
-}
-table, code[class*=language-], pre[class*=language-] {
-  color: #f1f2f2;
-  background: none;
-  text-shadow: 0 1px rgba(0,5,41,.3);
-  font-family: PT Mono,monospace;
-  font-size: 1em;
-  text-align: left;
-  white-space: pre;
-  word-spacing: normal;
-  word-break: normal;
-  word-wrap: normal;
-  line-height: 1.5;
-  tab-size: 4;
-  hyphens: none;
-}
-article table th,
-article table td {
-  border-bottom-color: #f1f2f2;
-  border-top: none;
-  padding: 12px 24px;
-  vertical-align: bottom;
-}*/

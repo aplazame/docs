@@ -1,0 +1,90 @@
+.text-center {
+  text-align: center;
+}
+
+.apz-grid {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: wrap;
+}
+
+
+.grid-6\@sm {
+  width: 100%;
+  padding: 1rem
+}
+
+@media screen and (min-width:996px) {
+  .grid-6\@sm {
+    width: 50%;
+  }
+}
+
+
+
+.apz-input-choice {
+  white-space: nowrap;
+  height: 40px;
+  margin: 4px 0;
+  border-radius: 2px;
+  border: 1px solid var(--ifm-table-border-color)
+}
+
+.apz-input-choice input {
+  display: none;
+}
+
+.apz-input-choice,.apz-input-choice label {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative
+}
+
+.apz-input-choice label {
+  cursor: pointer;
+  margin-bottom: 0
+}
+
+.apz-input-choice label:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 12px;
+  left: -1px;
+  bottom: 12px;
+  border-left: 1px solid var(--ifm-table-border-color)
+}
+
+.apz-input-choice label:first-child:before {
+  border: none
+}
+
+.apz-input-choice label span {
+  height: 42px;
+  line-height: 40px;
+  margin: -16px -1px;
+  padding: 0 12px;
+  border: 1px solid var(--ifm-table-border-color);
+  border-radius: 2px;
+}
+
+.apz-input-choice label input:checked+span {
+  border-color: var(--ifm-link-color);
+  position: relative;
+  z-index: 1
+}
+
+/*
+.widget-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.widget-container > div {
+  width: 100%;
+  margin: auto;
+}
+*/
