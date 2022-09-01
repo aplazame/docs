@@ -12,4 +12,5 @@ export default {
   // `Highlight` will receive all props that were passed to `highlight` in MDX
   WidgetSimulator: WidgetSimulator,
   t: Translate,
+  T: Translate,
 };

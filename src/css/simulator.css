@@ -9,6 +9,7 @@
   flex-flow: wrap;
 }
 
+.grid-12\@sm,
 .grid-6\@sm {
   width: 100%;
   padding: 0.5rem 1rem
@@ -79,7 +80,7 @@
 
 .widget-container {
   display: flex;
-  min-height: 160px;
+  min-height: 180px;
   padding: 0 2rem;
   background-color: white;
   border-radius: var(--ifm-code-border-radius);
@@ -93,3 +94,11 @@
   margin: auto;
 }
 
+.form-configurator {}
+
+.form-configurator input[type='text'] {
+  border: 1px solid var(--ifm-table-border-color);
+  padding: 0 12px;
+  font-size: 1rem;
+  line-height: 40px;
+}

@@ -4,48 +4,61 @@ import CodeBlock from '@theme/CodeBlock';
 import ColorPicker from '@site/src/components/ColorPicker';
 import Switch from '@site/src/components/Switch';
 import reactCSS from 'reactcss'
+import { Translate as t } from '@docusaurus/Translate';
 
 class WidgetSimulator extends React.Component {
 
   state = {
     values: {
       widgetType: this.props.children,
+      amount: this.props['data-amount'],
       country: this.props['data-country'],
       type: this.props['data-type'],
       optionTextColor: this.props['data-option-text-color'],
       optionBtnTextColor: this.props['data-option-btn-text-color'],
       optionBtnBgColor: this.props['data-option-btn-bg-color'],
-      optionBranding: this.props['data-option-branding'] ? this.props['data-option-branding'] === 'true' : undefined,
+
       optionAlign: this.props['data-option-align'],
       optionPayIn: this.props['data-pay-in-4'],
+
+      // Booleans:
+      optionBranding: this.props['data-option-branding'] ? this.props['data-option-branding'] === 'true' : undefined,
+      optionDownpaymentInfo: this.props['data-option-downpayment-info'] ? this.props['data-option-downpayment-info'] === 'true' : undefined,
+      optionTitleSmart: this.props['data-option-title-smart'] ? this.props['data-option-title-smart'] === 'true' : undefined,
+      optionDisabledModal: this.props['data-option-disable-modal'] ? this.props['data-option-disable-modal'] === 'true' : undefined,
+      optionLegalAdvice: this.props['data-option-legal-advice'] ? this.props['data-option-legal-advice'] === 'true' : undefined,
+
+      // Text
+      optionTitleDefault: this.props['data-option-title-default'],
+      optionTitleZero: this.props['data-option-title-zero-interest'],
     }
   }
 
   rawHTML = () => {
     const text = `<div ${this.state.values.widgetType}
-      \t${this.state.values.country ? 'data-country="' + this.state.values.country + '"' : ''}
+      ${this.state.values.country ? 'data-country="' + this.state.values.country + '"' : ''}
+      ${ 'data-amount="' + this.state.values.amount + '"' }
       ${this.state.values.type ? 'data-type="' + this.state.values.type + '"' : ''}
       ${this.state.values.optionTextColor ? 'data-option-text-color="' + this.state.values.optionTextColor + '"' : ''}
       ${this.state.values.optionBtnTextColor ? 'data-option-btn-text-color="' + this.state.values.optionBtnTextColor + '"' : ''}
       ${this.state.values.optionBtnBgColor ? 'data-option-btn-bg-color="' + this.state.values.optionBtnBgColor + '"' : ''}
-      ${this.state.values.optionBranding ? 'data-option-branding="' + this.state.values.optionBranding + '"' : ''}
       ${this.state.values.optionAlign ? 'data-option-align="' + this.state.values.optionAlign + '"' : ''}
+      ${this.state.values.optionBranding ? 'data-option-branding="' + this.state.values.optionBranding + '"' : ''}
+      ${this.state.values.optionDownpaymentInfo ? 'data-downpayment-info="' + this.state.values.optionDownpaymentInfo + '"' : ''}
+      ${this.state.values.optionTitleSmart ? 'data-option-title-smart="' + this.state.values.optionTitleSmart + '"' : ''}
+      ${this.state.values.optionDisabledModal ? 'data-option-disable-modal="' + this.state.values.optionDisabledModal + '"' : ''}
+      ${this.state.values.optionLegalAdvice ? 'data-option-legal-advice="' + this.state.values.optionLegalAdvice + '"' : ''}
+      ${this.state.values.optionTitleDefault ? 'data-option-title-default="' + this.state.values.optionTitleDefault + '"' : ''}
+      ${this.state.values.optionTitleZero ? 'data-option-title-zero-interest="' + this.state.values.optionTitleZero + '"' : ''}
     ></div>`
+    console.log(text.toString())
 
-    return text.replaceAll('\n      \n', '\n')
+    return text.replace(/\r?\n* \n|\r/g, " ");
+    // return text.replaceAll('\n      \n', '\n').replaceAll('\n\n', '\n')
   }
 
-  updateValue = (newValue, name) => {
-    console.log(newValue, name)
-    this.setState({
-      values: {
-        ...this.state.values,
-        [name]: newValue
-      }
-    })
-  }
-
-  setBooleanValue = (newValue, name) => {
+  updateValueState = (newValue, name) => {
+    console.log('updateValueState --> ', newValue, name)
     this.setState({
       values: {
         ...this.state.values,
@@ -75,8 +88,6 @@ class WidgetSimulator extends React.Component {
       'data-pay-in-4' : this.state.values.optionPayIn !== undefined
     }
 
-    console.log(this.state.values.optionPayIn)
-
     return (
       <div>
         <main className="layout-docs container-xl header-padding footer-padding">
@@ -89,15 +100,15 @@ class WidgetSimulator extends React.Component {
                     {this.state.values.widgetType === 'data-aplazame-widget-paylater' &&
                      <div className="apz-input-choice">
                       <label>
-                        <input type="radio" name="data-type" defaultValue="button" onChange={(e) => this.updateValue(e.target.value, "type")}></input>
+                        <input type="radio" name="data-type" defaultValue="button" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
                         <span><Translate id="simulator.button">Botón</Translate></span>
                       </label>
                       <label>
-                        <input type="radio" name="data-type" defaultValue="link" defaultChecked onChange={(e) => this.updateValue(e.target.value, "type")}></input>
+                        <input type="radio" name="data-type" defaultValue="link" defaultChecked onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
                         <span><Translate id="simulator.text">Texto</Translate></span>
                       </label>
                       <label>
-                        <input type="radio" name="data-type" defaultValue="text" onChange={(e) => this.updateValue(e.target.value, "type")}></input>
+                        <input type="radio" name="data-type" defaultValue="text" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
                         <span><Translate id="simulator.extended_text">Texto extendido</Translate></span>
                       </label>
                       </div>
@@ -106,19 +117,19 @@ class WidgetSimulator extends React.Component {
                     {this.state.values.widgetType === 'data-aplazame-widget-instalments' &&
                      <div className="apz-input-choice">
                       <label>
-                        <input type="radio" name="data-type" defaultValue="button" onChange={(e) => this.updateValue(e.target.value, "type")}></input>
+                        <input type="radio" name="data-type" defaultValue="button" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
                         <span><Translate id="simulator.button">Botón</Translate></span>
                       </label>
                       <label>
-                        <input type="radio" name="data-type" defaultValue="text" defaultChecked onChange={(e) => this.updateValue(e.target.value, "type")}></input>
+                        <input type="radio" name="data-type" defaultValue="text" defaultChecked onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
                         <span><Translate id="simulator.text">Texto</Translate></span>
                       </label>
                       <label>
-                        <input type="radio" name="data-type" defaultValue="select" onChange={(e) => this.updateValue(e.target.value, "type")}></input>
+                        <input type="radio" name="data-type" defaultValue="select" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
                         <span><Translate id="simulator.extended_text">Selector</Translate></span>
                       </label>
                       <label>
-                        <input type="radio" name="data-type" defaultValue="big-button" onChange={(e) => this.updateValue(e.target.value, "type")}></input>
+                        <input type="radio" name="data-type" defaultValue="big-button" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
                         <span><Translate id="simulator.extended_text">Botón grande</Translate></span>
                       </label>
                       </div>
@@ -136,7 +147,7 @@ class WidgetSimulator extends React.Component {
                         <ColorPicker
                           name="optionTextColor"
                           first-color={this.state.values.optionTextColor}
-                          updateColor={this.updateValue} />
+                          updateColor={this.updateValueState} />
                       </div>
                     </label>
                   }
@@ -149,7 +160,7 @@ class WidgetSimulator extends React.Component {
                         <ColorPicker
                           name="optionBtnTextColor"
                           first-color={this.state.values.optionBtnTextColor}
-                          updateColor={this.updateValue} />
+                          updateColor={this.updateValueState} />
                       </div>
                     </label>
                   }
@@ -162,7 +173,7 @@ class WidgetSimulator extends React.Component {
                         <ColorPicker
                           name="optionBtnBgColor"
                           first-color={this.state.values.optionBtnBgColor}
-                          updateColor={this.updateValue} />
+                          updateColor={this.updateValueState} />
                       </div>
                     </label>
                   }
@@ -170,7 +181,7 @@ class WidgetSimulator extends React.Component {
                     <label style={styles.label} className="grid-6@sm">
                       <div className="-label">Alineación del widget</div>
                       <select
-                        onChange={(e) => this.updateValue(e.target.value, "optionAlign")}
+                        onChange={(e) => this.updateValueState(e.target.value, "optionAlign")}
                         className="apz-select">
                         <option value="left">Izquierda</option>
                         <option value="center" defaultValue>Centrado</option>
@@ -185,7 +196,81 @@ class WidgetSimulator extends React.Component {
                         <Switch
                           isOn={this.state.values.optionBranding}
                           name="optionBranding"
-                          handleToggle={() => this.setBooleanValue(!this.state.values.optionBranding, "optionBranding")}
+                          handleToggle={() => this.updateValueState(!this.state.values.optionBranding, "optionBranding")}
+                        />
+                      </div>
+                    </label>
+                  }
+                  {this.state.values.optionDownpaymentInfo !== undefined &&
+                    <label style={styles.label} className="grid-6@sm">
+                      <div className="-label">Downpayment info</div>
+                      <div>
+                        <Switch
+                          isOn={this.state.values.optionDownpaymentInfo}
+                          name="optionDownpaymentInfo"
+                          handleToggle={() => this.updateValueState(!this.state.values.optionDownpaymentInfo, "optionDownpaymentInfo")}
+                        />
+                      </div>
+                    </label>
+                  }
+                  {this.state.values.optionTitleSmart !== undefined &&
+                    <label style={styles.label} className="grid-6@sm">
+                      <div className="-label">Title smart</div>
+                      <div>
+                        <Switch
+                          isOn={this.state.values.optionTitleSmart}
+                          name="optionTitleSmart"
+                          handleToggle={() => this.updateValueState(!this.state.values.optionTitleSmart, "optionTitleSmart")}
+                        />
+                      </div>
+                    </label>
+                  }
+                  {this.state.values.optionDisabledModal !== undefined &&
+                    <label style={styles.label} className="grid-6@sm">
+                      <div className="-label">Disabled modal</div>
+                      <div>
+                        <Switch
+                          isOn={this.state.values.optionDisabledModal}
+                          name="optionDisabledModal"
+                          handleToggle={() => this.updateValueState(!this.state.values.optionDisabledModal, "optionDisabledModal")}
+                        />
+                      </div>
+                    </label>
+                  }
+                  {this.state.values.optionLegalAdvice !== undefined &&
+                    <label style={styles.label} className="grid-6@sm">
+                      <div className="-label">Aviso legal</div>
+                      <div>
+                        <Switch
+                          isOn={this.state.values.optionLegalAdvice}
+                          name="optionLegalAdvice"
+                          handleToggle={() => this.updateValueState(!this.state.values.optionLegalAdvice, "optionLegalAdvice" )}
+                        />
+                      </div>
+                    </label>
+                  }
+                  { this.state.values.optionTitleDefault !== undefined &&
+                    <label style={styles.label} className="grid-12@sm">
+                      <div className="-label">Título por defecto</div>
+                      <div>
+                        <input
+                          type="text"
+                          name="optionTitleDefault"
+                          value={this.state.values.optionTitleDefault}
+                          onChange={(e) => this.updateValueState(e.target.value, "optionTitleDefault" )}
+                        />
+                      </div>
+                    </label>
+                  }
+                  { this.state.values.optionTitleZero !== undefined &&
+                    <label style={styles.label} className="grid-12@sm">
+                      <div className="-label">Título de campaña</div>
+                      <div>
+                        <input
+                          type="text"
+                          name="optionTitleZero"
+                          value={this.state.values.optionTitleZero}
+                          onChange={(e) => this.updateValueState(e.target.value, "optionTitleZero" )}
                         />
                       </div>
                     </label>
@@ -195,9 +280,9 @@ class WidgetSimulator extends React.Component {
                       <div className="-label">Pay in 4</div>
                       <div>
                         <Switch
-                          isOn={this.state.values.optionBranding}
-                          name="optionBranding"
-                          handleToggle={() => this.setBooleanValue(!this.state.values.optionPayIn, "optionPayIn")}
+                          isOn={this.state.values.optionPayIn}
+                          name="optionPayIn"
+                          handleToggle={() => this.updateValueState(!this.state.values.optionPayIn, "optionPayIn")}
                         />
                       </div>
                     </label>
@@ -208,13 +293,20 @@ class WidgetSimulator extends React.Component {
                 <div { ...inputProps }
                   data-country="ES"
                   data-type={this.state.values.type}
-                  data-amount="9900"
+                  data-amount={this.state.values.amount}
                   data-option-text-color={this.state.values.optionTextColor}
                   data-option-btn-text-color={this.state.values.optionBtnTextColor}
                   data-option-btn-bg-color={this.state.values.optionBtnBgColor}
-                  data-option-branding={this.state.values.optionBranding}
                   data-option-align={this.state.values.optionAlign}
-
+                  // Booleans
+                  data-option-branding={this.state.values.optionBranding}
+                  data-option-downpayment-info={this.state.values.optionDownpaymentInfo}
+                  data-option-title-smart={this.state.values.optionTitleSmart}
+                  data-option-disable-modal={this.state.values.optionDisabledModal}
+                  data-option-legal-advice={this.state.values.optionLegalAdvice}
+                  // Text
+                  data-option-title-default={this.state.values.optionTitleDefault}
+                  data-option-title-zero-interest={this.state.values.optionTitleZero}
                   // { ...this.state.values.optionPayIn !== undefined && data-pay-in-4=this.state.values.optionPayIn }
                 ></div>
               </div>
