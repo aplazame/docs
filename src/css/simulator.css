@@ -1,7 +1,3 @@
-.text-center {
-  text-align: center;
-}
-
 .apz-grid {
   display: flex;
   justify-content: flex-start;
@@ -28,7 +24,7 @@
 .apz-input-choice {
   white-space: nowrap;
   height: 40px;
-  margin: 4px 0;
+  margin-bottom: 1rem;
   border-radius: 2px;
   border: 1px solid var(--ifm-table-border-color)
 }
@@ -37,7 +33,8 @@
   display: none;
 }
 
-.apz-input-choice,.apz-input-choice label {
+.apz-input-choice,
+.apz-input-choice label {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -78,6 +75,10 @@
   z-index: 1
 }
 
+.label {
+  line-height: 20px;
+}
+
 .widget-container {
   display: flex;
   min-height: 180px;
@@ -93,8 +94,6 @@
   width: 100%;
   margin: auto;
 }
-
-.form-configurator {}
 
 .form-configurator input[type='text'] {
   border: 1px solid var(--ifm-table-border-color);

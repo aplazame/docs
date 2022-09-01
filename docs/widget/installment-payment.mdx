@@ -5,9 +5,9 @@ sidebar_position: 1
 
 ## Integración básica
 
-<aside>
+:::tip
   Si usas la configuración básica, podrás personalizarlo desde el <a href="https://vendors.aplazame.com/" target="_blank">panel de control</a>, en la vista de personalización del widget en la pestaña correspondiente al valor de <code>data-view</code>.
-</aside>
+:::
 
 ``` html
 <div data-aplazame-widget-instalments
@@ -22,9 +22,7 @@ sidebar_position: 1
 |data-amount | decimal | Sí | Cantidad a financiar **en céntimos**. Este campo se puede omitir si se usa [`data-price`](../widget#precio-variable)
 |data-currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | Sí | Moneda en la que se venderá el artículo.
 |data-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | Sí | País donde aplicará la venta.
-|data-view | enum | No | Vista dónde se incluye el widget, corresponde con la pestaña de personalización del [panel de control](https://vendors.aplazame.com/).<br/>Los posibles valores son: `product`, `cart`
-
-Por omisión se usará: `product`
+|data-view | enum | No | Vista dónde se incluye el widget, corresponde con la pestaña de personalización del [panel de control](https://vendors.aplazame.com/).<br/>Los posibles valores son: `product`, `cart`. Por omisión se usará: `product`.
 
 
 ### Simulación
@@ -36,7 +34,7 @@ Por omisión se usará: `product`
      data-country="ES"
      data-view="product"></div>
 ```
-<div>
+<div className="widget-container">
   <div data-aplazame-widget-instalments
        data-amount="15900"
        data-currency="EUR"
@@ -49,23 +47,13 @@ Por omisión se usará: `product`
 
 ## Integración avanzada
 
-<aside>Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar la configuración avanzada y decidir qué valores quieres aplicar y con qué look and feel.</aside>
-
-- Selecciona a continuación qué tipo de widget quieres incluir.
-- Configura los distintos parámetros de acuerdo a tus necesidades. Aplica los colores que desees, elige la alineación y decide si quieres que tu widget use la funcionalidad de título inteligente y el branding de Aplazame o no.
-- El código de ejemplo de tu widget se irá actualizando en función de los valores que definas. Una vez tengas el diseño que buscabas, sólo tienes que copiar el código para llevártelo a tu tienda online y ¡listo!
-
-include{ ./_simulator_instalments.md }
-
-<aside>
-
+:::note
   Además de los parámetros obligatorios de la integración básica, se usará automáticamente la configuración avanzada al incluir algún <code>data-option-*</code>.
 
   Los valores por defecto en ese caso, son los que se muestran en esta documentación.
 
   Ten en cuenta que al cambiar los valores en el formulario, se actualizarán en el código de ejemplo.
-
-</aside>
+:::
 
 ``` html
 <div data-aplazame-widget-instalments
@@ -115,9 +103,14 @@ include{ ./_simulator_instalments.md }
 |data-option-out-of-limits | texto | No | Permite mostrar un widget diferente si el importe del producto (o carrito) está fuera de los límites configurados para tener Aplazame como método de pago. Con este widget, el cliente sabrá que aumentando el importe de la compra podrá financiarla (o pagarla en 4 pagos sin intereses). Si queremos que salga el widget alternativo, el valor debe ser 'show', por defecto el valor es 'hide'.
 |data-option-customer-id | texto | No | Documento de identidad del cliente. Si el cliente cumple los requisitos, el widget mostrará que el crédito está preaprobado.
 
+:::tip
+Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar la configuración avanzada y decidir qué valores quieres aplicar y con qué look and feel.
+:::
 
-### Configurador avanzado
+- Configura los distintos parámetros de acuerdo a tus necesidades. Aplica los colores que desees, elige la alineación y decide si quieres que tu widget use la funcionalidad de título inteligente y el branding de Aplazame o no.
+- El código de ejemplo de tu widget se irá actualizando en función de los valores que definas. Una vez tengas el diseño que buscabas, sólo tienes que copiar el código para llevártelo a tu tienda online y ¡listo!
 
+### Configurador
 
 <WidgetSimulator
   data-amount="12900"

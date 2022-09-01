@@ -9,9 +9,9 @@ El widget de Aplazame te permite mostrar una simulación de las cuotas de una fi
 
 ## Carga de aplazame.js
 
-<aside>
+:::info
   Debes incluir <strong>aplazame.js</strong> en las páginas donde deba aparecer el widget. Consulta todas las <a href="../sdk-javascript/#integracion">opciones de integración</a>.
-</aside>
+:::
 
 ```html title="Carga de la librería Aplazame"
 <script
@@ -22,7 +22,9 @@ El widget de Aplazame te permite mostrar una simulación de las cuotas de una fi
 </script>
 ```
 
-> Para producción el valor de sandbox debe ser `false`
+:::caution
+Para producción el valor de sandbox debe ser `false`
+:::
 
 |<Translate id="table.parameter">Parámetro</Translate> | <Translate id="table.type">Tipo</Translate> | <Translate id="table.required">Requerido</Translate> | <Translate id="table.description">Descripción</Translate>|
 |---------|---------|---------|---------|
@@ -47,30 +49,29 @@ Existe la opción de personalizar el texto legal que se muestra bajo el simulado
 |tae | TAE
 |tin | TIN
 
-<aside>
+:::note
 
   Un ejemplo de texto legal con variables sería el texto que viene por defecto:
 
   <code style={{ whiteSpace: 'normal' }}>Ejemplo de financiación con APLAZAME para una cesta de &#123; order_amount &#125; a &#123; num_instalments  &#125; meses y que comienza a pagar a los 20 días desde la solicitud. Se solicita una entrada de &#123; downpayment_amount  &#125; que el usuario debe pagar a través de su tarjeta en el momento en que realiza la operación. El importe a financiar es la diferencia entre el valor de la cesta y la entrada: &#123; principal_amount  &#125;. Se solicitan &#123; num_instalments  &#125; mensualidades de &#123; instalments_amount  &#125;. Comisión de apertura: &#123; tax  &#125;. TIN: &#123; tin  &#125; TAE: &#123; tae  &#125;. Importe total adeudado: &#123; total_amount  &#125;. Sujeto a la aprobación por parte de APLAZAME, S.L.</code>
-</aside>
-
+:::
 
 ## Personalizar CSS
 
-<aside>
+:::tip
   Para personalizar más aún el widget, está la opción <code>data-option-custom-styles</code>.
 
   Consulta la [documentación de Personalización CSS del Widget](./custom-styles/) para saber más.
-</aside>
+:::
 
 
 ## Precio variable
 
-<aside>
+:::caution
   El precio variable sólo es configurable en el widget del producto 'Pago a plazos'.
 
   En el caso, en que se prefiera usar un valor dinámico de un elemento de la página en lugar de un valor preestablecido, este puede definirse mediante un selector css indicado en la propiedad `data-price` en lugar de `data-amount`
-</aside>
+:::
 
 ``` html
 <div data-aplazame-widget-instalments
@@ -87,5 +88,3 @@ Existe la opción de personalizar el texto legal que se muestra bajo el simulado
 |data-price | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | Sí | Selector CSS que indique el elemento que contiene el precio final. Se actualiza en vivo si hay cambios en el precio. Si se usa conjuntamente con `data-amount`, se mostrará el valor de este último y de data-price si el precio cambia.
 |data-qty | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | No | Selector CSS que indique el elemento que contiene el número de artículos. Si está definido, la cantidad a financiar se calculará multiplicando `price*qty`.
 
-
-$include{ ./_simulator-api.md }

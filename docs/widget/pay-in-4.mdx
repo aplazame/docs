@@ -4,10 +4,25 @@ sidebar_position: 3
 ---
 import Translate from '@docusaurus/Translate';
 
-## Pago en 4
+# Pago en 4
+
+## Integración
 En caso de que el merchant soporte el producto **'Pago en 4'**, se puede añadir el atributo `data-pay-in-4` al [widget de pago a plazos](#pago-a-plazos). Esto provocará un cambio en el diseño del widget, que mostará la información necesaria unicamente para 'Pago en 4'.
 
-<div class="widget-container">
+
+
+|<Translate id="table.parameter">Parámetro</Translate> | <Translate id="table.type">Tipo</Translate> | <Translate id="table.required">Requerido</Translate> | <Translate id="table.description">Descripción</Translate>|
+|---------|---------|---------|---------|
+|data-pay-in-4 | boolean | Sí | El atributo puede tener el valor **true** o estar vacío para que funcione correctamente. Este campo provoca un cambio completo en la renderización del widget en caso de que el merchant soporte el producto 'Pago en 4'. En caso de que no lo soporte o el total del checkout no cumpla los requisitos para el producto, se comportará exactamente igual que el [widget 'Pago a plazos'](#pago-a-plazos)
+
+
+:::caution
+  Si el widget tiene el atributo `data-pay-in-4` pero el merchant no soporta el producto 'Pago en 4' o la cantidad a financiar (`data-amount`) es demasiado alta, el widget se comportará exactamente igual que el [widget de pago a plazos](#pago-a-plazos), siempre que el merchant soporte el producto 'Pago a plazos', heredando todos sus atributos.
+:::
+
+### Simulación
+
+<div className="widget-container" style={{ minHeight: '110px' }}>
   <div
     data-aplazame-widget-instalments
     data-amount="8000"
@@ -16,11 +31,6 @@ En caso de que el merchant soporte el producto **'Pago en 4'**, se puede añadir
     data-type="button"
     data-pay-in-4></div>
 </div>
-
-<aside>
-
-  Si el widget tiene el atributo `data-pay-in-4` pero el merchant no soporta el producto 'Pago en 4' o la cantidad a financiar (`data-amount`) es demasiado alta, el widget se comportará exactamente igual que el [widget de pago a plazos](#pago-a-plazos), siempre que el merchant soporte el producto 'Pago a plazos', heredando todos sus atributos.
-</aside>
 
 ``` html
 <div data-aplazame-widget-instalments
@@ -31,6 +41,4 @@ En caso de que el merchant soporte el producto **'Pago en 4'**, se puede añadir
      data-pay-in-4></div>
 ```
 
-|<Translate id="table.parameter">Parámetro</Translate> | <Translate id="table.type">Tipo</Translate> | <Translate id="table.required">Requerido</Translate> | <Translate id="table.description">Descripción</Translate>|
-|---------|---------|---------|---------|
-|data-pay-in-4 | boolean | Sí | El atributo puede tener el valor **true** o estar vacío para que funcione correctamente. Este campo provoca un cambio completo en la renderización del widget en caso de que el merchant soporte el producto 'Pago en 4'. En caso de que no lo soporte o el total del checkout no cumpla los requisitos para el producto, se comportará exactamente igual que el [widget 'Pago a plazos'](#pago-a-plazos)
+

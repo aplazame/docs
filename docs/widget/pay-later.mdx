@@ -1,16 +1,18 @@
 ---
 title: Paga en 15 días
 sidebar_position: 2
-toc_min_heading_level: 2
 ---
 import Translate from '@docusaurus/Translate';
 
+# Paga en 15 días
+
+## Integración
 Para que el widget se muestre en la versión "Paga más tarde", es necesario utilizar  `data-aplazame-widget-paylater` en lugar de `data-aplazame-widget-instalments`.
 
-<aside>Si deseas configurar el widget de acuerdo a tus necesidades, puedes definir los valores que quieres aplicar y con qué look and feel.</aside>
+:::note
+Si deseas configurar el widget de acuerdo a tus necesidades, puedes definir los valores que quieres aplicar y con qué look and feel.
+:::
 
-- Configura los distintos parámetros de acuerdo a tus necesidades. Aplica los colores que desees, elige la alineación y decide si quieres que tu widget use el branding de Aplazame o no.
-- El código de ejemplo de tu widget se irá actualizando en función de los valores que definas. Una vez tengas el diseño que buscabas, sólo tienes que copiar el código para llevártelo a tu tienda online y ¡listo!
 
 ``` html
 <div data-aplazame-widget-paylater
@@ -34,11 +36,14 @@ Para que el widget se muestre en la versión "Paga más tarde", es necesario uti
 |data-option-custom-styles | boolean | No | Indica si los estilos se heredan de la tienda `true` o se usan los de Aplazame `false`.
 |data-option-align | enum | No | Indica la alineación del widget. Se puede alinear a la izquierda `left` o a la derecha `right`. El valor por omisión es `center`.
 
-<aside>
+:::info
   Los valores por defecto en ese caso, son los que se muestran en esta documentación.
 
   Ten en cuenta que al cambiar los valores en el formulario, se actualizarán en el código de ejemplo.
-</aside>
+:::
+
+- Configura los distintos parámetros de acuerdo a tus necesidades. Aplica los colores que desees, elige la alineación y decide si quieres que tu widget use el branding de Aplazame o no.
+- El código de ejemplo de tu widget se irá actualizando en función de los valores que definas. Una vez tengas el diseño que buscabas, sólo tienes que copiar el código para llevártelo a tu tienda online y ¡listo!
 
 ### Configurador
 

@@ -75,3 +75,6 @@ code {
   white-space: nowrap;
 }
 
+.admonitionHeading_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module{
+  color: transparent; /* workaround to hide INFO CAUTION TIP etc. */
+}
