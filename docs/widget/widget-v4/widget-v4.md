@@ -1,3 +1,6 @@
+
+import Translate from '@docusaurus/Translate';
+
 # Nuevo widget v4
 ## Integración 
 Existe la posibilidad de integrar una nueva versión del widget, para ello, hay que asignar el valor v4 al atributo HTML: `data-aplazame-widget-instalments="v4"`
