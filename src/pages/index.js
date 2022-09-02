@@ -15,13 +15,13 @@ function HomepageHeader() {
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <p className="hero__subtitle">
-          <Translate description="home page subtitle">En el centro de desarrolladores encontrarás la documentación de la API para realizar la integración de Aplazame con tu desarrollo propio con un par de líneas de código</Translate>.
+          <Translate id="hero__subtitle" description="home page subtitle">En el centro de desarrolladores encontrarás la documentación de la API para realizar la integración de Aplazame con tu desarrollo propio con un par de líneas de código</Translate>.
         </p>
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro">
-              <Translate description="Main see more link">Ver más</Translate>            
+            to="/docs/widget/">
+              <Translate id="see_more" description="Main see more link">Ver más</Translate>
           </Link>
         </div>
       </div>
@@ -35,7 +35,7 @@ export default function Home() {
     <Layout
       title={`${siteConfig.title}`}
       description="siteConfig title">
-      <HomepageHeader />                 
+      <HomepageHeader />
     </Layout>
   );
   //  <main> <HomepageFeatures />  </main>

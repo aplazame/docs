@@ -45,29 +45,27 @@ class WidgetSimulator extends React.Component {
 
   rawHTML = () => {
     const text = `<div ${this.state.values.widgetType}
-      ${this.state.values.country ? 'data-country="' + this.state.values.country + '"' : ''}
-      ${ 'data-amount="' + this.state.values.amount + '"' }
-      ${this.state.values.type ? 'data-type="' + this.state.values.type + '"' : ''}
-      ${this.state.values.optionTextColor ? 'data-option-text-color="' + this.state.values.optionTextColor + '"' : ''}
-      ${this.state.values.optionBtnTextColor ? 'data-option-btn-text-color="' + this.state.values.optionBtnTextColor + '"' : ''}
-      ${this.state.values.optionBtnBgColor ? 'data-option-btn-bg-color="' + this.state.values.optionBtnBgColor + '"' : ''}
-      ${this.state.values.optionPrimaryColor ? 'data-option-primary-color="' + this.state.values.optionPrimaryColor + '"' : ''}
-      ${this.state.values.optionAlign ? 'data-option-align="' + this.state.values.optionAlign + '"' : ''}
-      ${this.state.values.optionBranding ? 'data-option-branding="' + this.state.values.optionBranding + '"' : ''}
-      ${this.state.values.optionDownpaymentInfo ? 'data-downpayment-info="' + this.state.values.optionDownpaymentInfo + '"' : ''}
-      ${this.state.values.optionTitleSmart ? 'data-option-title-smart="' + this.state.values.optionTitleSmart + '"' : ''}
-      ${this.state.values.optionDisabledModal ? 'data-option-disable-modal="' + this.state.values.optionDisabledModal + '"' : ''}
-      ${this.state.values.optionLegalAdvice ? 'data-option-legal-advice="' + this.state.values.optionLegalAdvice + '"' : ''}
-      ${this.state.values.optionBorderProduct ? 'data-option-border-product="' + this.state.values.optionBorderProduct + '"' : ''}
-      ${this.state.values.optionTitleDefault ? 'data-option-title-default="' + this.state.values.optionTitleDefault + '"' : ''}
-      ${this.state.values.optionTitleZero ? 'data-option-title-zero-interest="' + this.state.values.optionTitleZero + '"' : ''}
-      ${this.state.values.optionLayout ? 'data-option-layout="' + this.state.values.optionLayout + '"' : ''}
-      ${this.state.values.optionCustomStyles ? 'data-option-custom-styles="' + this.state.values.optionCustomStyles + '"' : ''}
+        ${this.state.values.country ? 'data-country="' + this.state.values.country + '"' : ''}
+        ${ 'data-amount="' + this.state.values.amount + '"' }
+        ${this.state.values.type ? 'data-type="' + this.state.values.type + '"' : ''}
+        ${this.state.values.optionTextColor ? 'data-option-text-color="' + this.state.values.optionTextColor + '"' : ''}
+        ${this.state.values.optionBtnTextColor ? 'data-option-btn-text-color="' + this.state.values.optionBtnTextColor + '"' : ''}
+        ${this.state.values.optionBtnBgColor ? 'data-option-btn-bg-color="' + this.state.values.optionBtnBgColor + '"' : ''}
+        ${this.state.values.optionPrimaryColor ? 'data-option-primary-color="' + this.state.values.optionPrimaryColor + '"' : ''}
+        ${this.state.values.optionAlign ? 'data-option-align="' + this.state.values.optionAlign + '"' : ''}
+        ${this.state.values.optionBranding ? 'data-option-branding="' + this.state.values.optionBranding + '"' : ''}
+        ${this.state.values.optionDownpaymentInfo ? 'data-downpayment-info="' + this.state.values.optionDownpaymentInfo + '"' : ''}
+        ${this.state.values.optionTitleSmart ? 'data-option-title-smart="' + this.state.values.optionTitleSmart + '"' : ''}
+        ${this.state.values.optionDisabledModal ? 'data-option-disable-modal="' + this.state.values.optionDisabledModal + '"' : ''}
+        ${this.state.values.optionLegalAdvice ? 'data-option-legal-advice="' + this.state.values.optionLegalAdvice + '"' : ''}
+        ${this.state.values.optionBorderProduct ? 'data-option-border-product="' + this.state.values.optionBorderProduct + '"' : ''}
+        ${this.state.values.optionTitleDefault ? 'data-option-title-default="' + this.state.values.optionTitleDefault + '"' : ''}
+        ${this.state.values.optionTitleZero ? 'data-option-title-zero-interest="' + this.state.values.optionTitleZero + '"' : ''}
+        ${this.state.values.optionLayout ? 'data-option-layout="' + this.state.values.optionLayout + '"' : ''}
+        ${this.state.values.optionCustomStyles ? 'data-option-custom-styles="' + this.state.values.optionCustomStyles + '"' : ''}
     ></div>`
-    console.log(this.state.values)
 
-    return text.replace(/\r?\n* \n|\r/g, " ");
-    // return text.replaceAll('\n      \n', '\n').replaceAll('\n\n', '\n')
+    return text.replace(/  +/g, '').replace(/\n+/g, '\n')
   }
 
   updateValueState = (newValue, name) => {
