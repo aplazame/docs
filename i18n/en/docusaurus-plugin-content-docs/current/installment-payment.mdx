@@ -1,0 +1,135 @@
+---
+title: Paga a plazos
+sidebar_position: 1
+---
+
+## Basic integration
+
+:::tip
+  Si usas la configuración básica, podrás personalizarlo desde el <a href="https://vendors.aplazame.com/" target="_blank">panel de control</a>, en la vista de personalización del widget en la pestaña correspondiente al valor de <code>data-view</code>.
+:::
+
+``` html
+<div data-aplazame-widget-instalments
+     data-amount="15900"
+     data-currency="EUR"
+     data-country="ES"
+     data-view="product"></div>
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+|data-amount | decimal | Sí | Cantidad a financiar **en céntimos**. Este campo se puede omitir si se usa [`data-price`](../widget#precio-variable)
+|data-currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | Sí | Moneda en la que se venderá el artículo.
+|data-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | Sí | País donde aplicará la venta.
+|data-view | enum | No | Vista dónde se incluye el widget, corresponde con la pestaña de personalización del [panel de control](https://vendors.aplazame.com/).<br/>Los posibles valores son: `product`, `cart`. Por omisión se usará: `product`.
+
+
+### Simulación
+
+``` html
+<div data-aplazame-widget-instalments
+     data-amount="15900"
+     data-currency="EUR"
+     data-country="ES"
+     data-view="product"></div>
+```
+<div className="widget-container">
+  <div data-aplazame-widget-instalments
+       data-amount="15900"
+       data-currency="EUR"
+       data-country="ES"
+       data-type="button"
+       data-option-branding="true"
+       data-option-downpayment-info="true"
+       data-option-title-smart="true"></div>
+</div>
+
+## Integración avanzada
+
+:::note
+  Además de los parámetros obligatorios de la integración básica, se usará automáticamente la configuración avanzada al incluir algún <code>data-option-*</code>.
+
+  Los valores por defecto en ese caso, son los que se muestran en esta documentación.
+
+  Ten en cuenta que al cambiar los valores en el formulario, se actualizarán en el código de ejemplo.
+:::
+
+``` html
+<div data-aplazame-widget-instalments
+    data-amount="5900"
+    data-currency="EUR"
+    data-country="ES"
+    data-type="button"
+    data-option-text-color="#333A3E"
+    data-option-btn-text-color="#FFFFFF"
+    data-option-btn-bg-color="#267BBD"
+    data-option-branding="true"
+    data-option-downpayment-info="true"
+    data-option-title-smart="true"
+    data-option-disable-modal="false"
+    data-option-legal-advice="true"
+    data-option-url-more-info-hide-mobile="true"
+    data-option-title-default="Págalo a plazos"
+    data-option-title-zero-interest="Consíguelo sin intereses"
+    data-option-legal-text="${ simulator_legal_text }"
+    data-option-url-more-info="https://www.aplazame.com"
+    data-option-default-instalments="6"
+    data-option-out-of-limits="hide"
+    data-option-customer-id="12345678A">
+</div>
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+|data-type | enum | No | Permite elegir el tipo de widget. Las opciones son: `text`, `button`, `select`, `big-button`. Por omisión se usará el que se haya definido en el [panel de control](https://vendors.aplazame.com/)
+|data-option-text-color | color css | No | Establece el color del *texto* que queda *fuera del botón*.
+|data-option-btn-text-color | color css | No | Establece el color del *texto* del botón.
+|data-option-btn-bg-color | color css | No | Establece el color del *fondo* del botón.
+|data-option-branding | boolean | No | Indica si debe mostrarse o no el logotipo de Aplazame en la parte inferior del widget
+|data-option-downpayment-info | boolean | No | Indica si debe mostrarse o no el importe del pago inicial en la parte superior del widget
+|data-option-title-smart | boolean | No | Indica si debe mostrarse o no el texto en la parte superior del widget. Este texto cambiará en función de si hay alguna campaña sin intereses activa. Texto normal: *Págalo a plazos* Texto sin intereses: *¡Consíguelo sin intereses!*
+|data-option-title-default | texto | No | Esta opción permite personalizar el texto que aparece encima del widget cuando **no** hay campañas sin intereses activa.
+|data-option-title-zero-interest | texto | No | Esta opción permite personalizar el texto que aparece encima del widget cuando hay campañas sin intereses activa.
+|data-option-custom-styles | boolean | No | Indica si los estilos se heredan de la tienda `true` o se usan los de Aplazame `false`.
+|data-option-disable-modal | boolean | No | Indica si debe dejar de mostrarse la modal de información para los tipos `text` y `button`. El valor por omisión es `false`.
+|data-option-legal-advice | boolean | No | Indica si debe mostrarse el texto legal justo después del widget. El valor por omisión es `false`.
+|data-option-legal-text | texto | No | Esta opción permite personalizar el texto legal que aparece debajo del widget.
+|data-option-url-more-info | texto | No | Esta opción permite personalizar la página destino del botón ‘¿Quieres saber más?’
+|data-option-url-more-info-hide-mobile | boolean | No | Esta opción permite ocultar el botón ‘¿Quieres saber más?’. Únicamente en versión mobile.
+|data-option-default-instalments | decimal | No | Permite configurar el número de cuotas seleccionadas que mostrará el widget por defecto
+|data-option-out-of-limits | texto | No | Permite mostrar un widget diferente si el importe del producto (o carrito) está fuera de los límites configurados para tener Aplazame como método de pago. Con este widget, el cliente sabrá que aumentando el importe de la compra podrá financiarla (o pagarla en 4 pagos sin intereses). Si queremos que salga el widget alternativo, el valor debe ser 'show', por defecto el valor es 'hide'.
+|data-option-customer-id | texto | No | Documento de identidad del cliente. Si el cliente cumple los requisitos, el widget mostrará que el crédito está preaprobado.
+
+:::tip
+Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar la configuración avanzada y decidir qué valores quieres aplicar y con qué look and feel.
+:::
+
+- Configura los distintos parámetros de acuerdo a tus necesidades. Aplica los colores que desees, elige la alineación y decide si quieres que tu widget use la funcionalidad de título inteligente y el branding de Aplazame o no.
+- El código de ejemplo de tu widget se irá actualizando en función de los valores que definas. Una vez tengas el diseño que buscabas, sólo tienes que copiar el código para llevártelo a tu tienda online y ¡listo!
+
+### Configurador
+
+<WidgetSimulator
+  data-amount="12900"
+  data-country="ES"
+  data-currency="EUR"
+  data-type="button"
+  data-option-text-color="#ff0000"
+  data-option-btn-text-color="#00ff00"
+  data-option-btn-bg-color="#267BBD"
+  data-option-align="center"
+  data-option-branding="true"
+  data-option-downpayment-info="true"
+  data-option-title-smart="true"
+  data-option-disable-modal="false"
+  data-option-legal-advice="true"
+  data-option-title-default="Págalo a plazos"
+  data-option-title-zero-interest="Consíguelo sin intereses"
+  data-option-legal-text="${ simulator_legal_text }"
+  data-option-url-more-info="https://www.aplazame.com"
+  data-option-url-more-info-hide-mobile="true"
+  data-option-default-instalments="6"
+  data-option-out-of-limits="hide"
+  data-option-customer-id="12345678A">
+  data-aplazame-widget-instalments</WidgetSimulator>
