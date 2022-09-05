@@ -259,5 +259,11 @@
     "description": "The ARIA label and title attribute for expand button of doc sidebar"
   },
   "title": { "message": "Aplazame technical integration" },
-  "tagline": { "message": "We work so that the integration of Aplazame in your e-commerce platform is fast, agile and easy, whether your store is self-developed or if you use one of the most popular platforms on the market" }
+  "tagline": { "message": "We work so that the integration of Aplazame in your e-commerce platform is fast, agile and easy, whether your store is self-developed or if you use one of the most popular platforms on the market" },
+
+
+  "table.parameter":{ "message": "Parameter" },
+  "table.type":{ "message": "Type" },
+  "table.required":{ "message": "Required" },
+  "table.description":{ "message": "Description" }
 }

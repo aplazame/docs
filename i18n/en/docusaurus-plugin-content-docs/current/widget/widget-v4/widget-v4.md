@@ -24,7 +24,9 @@ Esta versión pretende simplificar la integración para el widget de pago a plaz
     data-option-align="center"></div>
 
 :::note
-Los valores por defecto en ese caso, son los que se muestran en esta documentación.
+  The default values in this case are those shown in this documentation.
+
+  Note that when you change the values in the form it will be updated in the sample code.
 :::
 
 ``` html

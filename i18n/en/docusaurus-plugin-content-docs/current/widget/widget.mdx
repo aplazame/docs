@@ -57,25 +57,24 @@ Para producción el valor de sandbox debe ser `false`
 |sandbox | boolean | si | Indica si las peticiones usarán el modo de pruebas (true) o producción (false).
 
 
-## Personalizar el texto legal
+## Customize legal text
 
-Existe la opción de personalizar el texto legal que se muestra bajo el simulador de cuotas. Eso te permitirá que los valores de la financiación (importe de la compra, importe de la entrada, importe de las cuotas, comisión de apertura, TAE, etc) sean dinámicos y muestren los	texto	no	Esta opción permite personalizar la página destino del botón ‘¿Quieres saber más?’
-`data-option-url-more-info` importes reales para la compra que el cliente esté realizando. Para ello, sólo hay que introducir las siguientes variables entre llaves dentro del valor del atributo <code>data-option-legal-text</code>.
+There is the option to customize the legal text displayed under the odds simulator. This will allow the financing values (purchase amount, ticket amount, installment amount, opening commission, APR, etc.) to be dynamic and show the real amounts for the purchase that the customer is making. To do this, just enter the following variables in braces within the value of the `data-option-legal-text`.
 
 |<Translate id="table.var">Variable</Translate> | <Translate id="table.desc">Descripción</Translate> |
 --------- | ----
-|order_amount | Importe de la cesta
-|total_amount | Importe total adeudado
-|principal_amount | Importe a financiar
-|instalments_amount | Importe de la cuota
-|num_instalments | Número de cuotas
-|downpayment_amount | Entrada
-|tax | Comisión de apertura
+|order_amount | Shopping cart amount
+|total_amount | Total amount
+|principal_amount | Amount to finance
+|instalments_amount | Fee amount
+|num_instalments | Number of installments
+|downpayment_amount | Total down payment
+|tax | Opening commission
 |tae | TAE
 |tin | TIN
 
 :::note
-  Un ejemplo de texto legal con variables sería el texto que viene por defecto:
+An example of legal text with variables would be the text that comes by default:
 :::
 
   <code style={{ whiteSpace: 'normal' }}>Ejemplo de financiación con APLAZAME para una cesta de &#123; order_amount &#125; a &#123; num_instalments  &#125; meses y que comienza a pagar a los 20 días desde la solicitud. Se solicita una entrada de &#123; downpayment_amount  &#125; que el usuario debe pagar a través de su tarjeta en el momento en que realiza la operación. El importe a financiar es la diferencia entre el valor de la cesta y la entrada: &#123; principal_amount  &#125;. Se solicitan &#123; num_instalments  &#125; mensualidades de &#123; instalments_amount  &#125;. Comisión de apertura: &#123; tax  &#125;. TIN: &#123; tin  &#125; TAE: &#123; tae  &#125;. Importe total adeudado: &#123; total_amount  &#125;. Sujeto a la aprobación por parte de APLAZAME, S.L.</code>
