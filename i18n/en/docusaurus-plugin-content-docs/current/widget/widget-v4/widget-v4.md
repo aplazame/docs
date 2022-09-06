@@ -1,9 +1,12 @@
+---
+title: New widget v4
+sidebar_position: 5
+keywords: [widget V4]
+---
 
-import Translate from '@docusaurus/Translate';
-
-# Nuevo widget v4
-## Integración 
-Existe la posibilidad de integrar una nueva versión del widget, para ello, hay que asignar el valor v4 al atributo HTML: `data-aplazame-widget-instalments="v4"`
+# Widget v4
+## Integration 
+There is the possibility of integrating a new version of the widget, for this, you must assign the value "v4" to the HTML attribute: `data-aplazame-widget-instalments="v4"`
 
 ```html
 <div 
@@ -11,9 +14,11 @@ Existe la posibilidad de integrar una nueva versión del widget, para ello, hay 
   data-amount="3900">
   </div>
 ```
-Esta versión pretende simplificar la integración para el widget de pago a plazos. Tiene dos diseños: `product` y `cart` y dos posiciones `horizontal` y `vertical`.
 
-<div data-aplazame-widget-instalments="v4"
+This version aims to simplify the integration for the installment payment widget. It has two layouts: `product` and `cart` and two positions `horizontal` y `vertical`.
+
+<div className="widget-container">
+  <div data-aplazame-widget-instalments="v4"
     data-amount="3900"
     data-type="product"
     data-option-legal-advice="false"
@@ -21,7 +26,10 @@ Esta versión pretende simplificar la integración para el widget de pago a plaz
     data-option-layout="vertical"
     data-option-default-instalments="6"
     data-option-border-product="true"
-    data-option-align="center"></div>
+    data-option-align="center">
+    </div>
+</div>
+
 
 :::note
   The default values in this case are those shown in this documentation.
@@ -41,23 +49,24 @@ Esta versión pretende simplificar la integración para el widget de pago a plaz
     data-option-align="center"></div>
 ```
 
-|<Translate id="table.parameter">Parámetro</Translate> | <Translate id="table.type">Tipo</Translate> | <Translate id="table.required">Requerido</Translate> | <Translate id="table.description">Descripción</Translate>|
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-|data-price | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | <Translate id="docs.yes">Sí</Translate> | Selector CSS que indique el elemento que contiene el precio final. Se actualiza en vivo si hay cambios en el precio. Si se usa conjuntamente con `data-amount`, se mostrará el valor de este último y de data-price si el precio cambia.
-|data-amount | decimal | <Translate id="docs.yes">Sí</Translate> | Cantidad a financiar **en céntimos**. Este campo se puede omitir si se usa [`data-price`](#precio-variable)
-|data-type | enum | No | El diseño del widget cambiará en función del valor seleccionado. <br/>Los posibles valores son: `product`, `cart`. Por omisión se usará: `product`
-|data-option-legal-advice | boolean | No | Indica si debe mostrarse el texto legal justo después del widget. El valor por omisión es `false`.
-|data-option-primary-color | [css color](https://developer.mozilla.org/es/docs/Web/CSS/color_value) | No | Establece el color del fondo del botón y del borde.
-|data-option-layout | enum | No | Se puede escoger la posición `horizontal` (que cambiará automáticamente si no tiene el suficiente espacio) o `vertical`. Vertical por defecto.
-|data-option-default-instalments | decimal | No | Permite configurar el número de cuotas seleccionadas que mostrará el widget por defecto
-|data-option-border-product |boolean | <Translate id="docs.yes">Sí</Translate> | Indica si debe mostrarse el borde de color cuando es de tipo `producto`. El valor por omisión es `true`.
-|data-option-align | enum | No | Indica la alineación del widget. Se puede alinear a la izquierda `left` o a la derecha `right`. El valor por omisión es `center`.
+|data-price | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | Yes | CSS selector that indicates the element that contains the final price. It is updated live if there are changes in the price. If used in conjunction with `data-amount`, the value of the latter and `data-price` will be shown if the price changes.
+|data-amount | decimal | Yes| Quantity to be financed in cents. This field can be omitted if the [`data-price`](./#variable-price) is used
+|data-type | enum | No | The widget layout will change based on the selected value. The possible values are: `product` (by default) and `cart`
+|data-option-legal-advice | boolean | No | Indicates whether you should displaying the legal text after the widget. The default value is `false`
+|data-option-primary-color | [css color](https://developer.mozilla.org/es/docs/Web/CSS/color_value) | No | Set the background colour of the button and the border
+|data-option-layout | enum | No | You can choose `horizontal` (which will change automatically if you don't have enough space) or `vertical` (by default)
+|data-option-default-instalments | decimal | No | Allows you to configure the number of instalments that the widget will display by default
+|data-option-border-product |boolean | Yes | Indicates whether you should displaying the color border if the type is `product`. The default value is `true`.
+|data-option-align | enum | No | Indicates widget alignment. Can be aligned at `left` or `right`. The default value is `center`.
 
 :::tip
-Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el configurador y decidir qué valores quieres aplicar y con qué look and feel.
+If you want to configure the widget according to your requirements you can use the configurator and decide which values you want to apply and with what look and feel.
 :::
 
-- Configura los distintos parámetros de acuerdo a tus necesidades. Aplica los colores que desees, elige la alineación y decide si quieres que tu widget muestre el texto legal.
+- Configure the different parameters according to your requirements. Apply the colours you want, choose the alignment and decide whether you want your widget to show the legal text.
+
 
 
 ### Configurador

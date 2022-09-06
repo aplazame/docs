@@ -1,10 +1,11 @@
 import React from 'react';
-import Translate from '@docusaurus/Translate';
+
 import CodeBlock from '@theme/CodeBlock';
 import ColorPicker from '@site/src/components/ColorPicker';
 import Switch from '@site/src/components/Switch';
 import reactCSS from 'reactcss'
-import { Translate as t } from '@docusaurus/Translate';
+import { Translate as T } from '@docusaurus/Translate';
+import Translate from '@docusaurus/Translate';
 
 class WidgetSimulator extends React.Component {
 
@@ -69,7 +70,7 @@ class WidgetSimulator extends React.Component {
   }
 
   updateValueState = (newValue, name) => {
-    console.log('updateValueState --> ', newValue, name)
+    // console.log('updateValueState --> ', newValue, name)
     this.setState({
       values: {
         ...this.state.values,
@@ -91,6 +92,9 @@ class WidgetSimulator extends React.Component {
           justifyContent: 'space-between',
           alignItems: 'center',
         },
+        container: {
+          backgroundColor: this.state.values.optionCustomStyles ? 'inherit' : 'white'
+        }
       }
     })
 
@@ -100,7 +104,6 @@ class WidgetSimulator extends React.Component {
       } else {
         inputProps[this.state.values.widgetType] = ''
       }
-      console.log('inputProps ', inputProps)
       return inputProps
     }
 
@@ -120,40 +123,39 @@ class WidgetSimulator extends React.Component {
                 {this.state.values.type !== undefined &&
                   <div className="text--center">
                     {this.state.values.widgetType === 'data-aplazame-widget-paylater' &&
-                     <div className="apz-input-choice">
-                      <label>
-                        <input type="radio" name="data-type" defaultValue="button" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
-                        <span><Translate id="simulator.button">Botón</Translate></span>
-                      </label>
-                      <label>
-                        <input type="radio" name="data-type" defaultValue="link" defaultChecked onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
-                        <span><Translate id="simulator.text">Texto</Translate></span>
-                      </label>
-                      <label>
-                        <input type="radio" name="data-type" defaultValue="text" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
-                        <span><Translate id="simulator.extended_text">Texto extendido</Translate></span>
-                      </label>
+                      <div className="apz-input-choice">
+                        <label>
+                          <input type="radio" name="data-type" defaultValue="button" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
+                          <span><Translate id="simulator.button">Botón</Translate></span>
+                        </label>
+                        <label>
+                          <input type="radio" name="data-type" defaultValue="link" defaultChecked onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
+                          <span><Translate id="simulator.text">Texto</Translate></span>
+                        </label>
+                        <label>
+                          <input type="radio" name="data-type" defaultValue="text" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
+                          <span><Translate id="simulator.extended_text">Texto extendido</Translate></span>
+                        </label>
                       </div>
                     }
-
                     {this.state.values.widgetType === 'data-aplazame-widget-instalments' &&
-                     <div className="apz-input-choice">
-                      <label>
-                        <input type="radio" name="data-type" defaultValue="button" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
-                        <span><Translate id="simulator.button">Botón</Translate></span>
-                      </label>
-                      <label>
-                        <input type="radio" name="data-type" defaultValue="text" defaultChecked onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
-                        <span><Translate id="simulator.text">Texto</Translate></span>
-                      </label>
-                      <label>
-                        <input type="radio" name="data-type" defaultValue="select" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
-                        <span><Translate id="simulator.extended_text">Selector</Translate></span>
-                      </label>
-                      <label>
-                        <input type="radio" name="data-type" defaultValue="big-button" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
-                        <span><Translate id="simulator.extended_text">Botón grande</Translate></span>
-                      </label>
+                      <div className="apz-input-choice">
+                        <label>
+                          <input type="radio" name="data-type" defaultValue="button" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
+                          <span><Translate id="simulator.button">Botón</Translate></span>
+                        </label>
+                        <label>
+                          <input type="radio" name="data-type" defaultValue="text" defaultChecked onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
+                          <span><Translate id="simulator.text">Texto</Translate></span>
+                        </label>
+                        <label>
+                          <input type="radio" name="data-type" defaultValue="select" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
+                          <span><Translate id="simulator.extended_text">Selector</Translate></span>
+                        </label>
+                        <label>
+                          <input type="radio" name="data-type" defaultValue="big-button" onChange={(e) => this.updateValueState(e.target.value, "type")}></input>
+                          <span><Translate id="simulator.big_button">Botón grande</Translate></span>
+                        </label>
                       </div>
                     }
                     {this.state.values.widgetType === 'data-aplazame-widget-instalments="v4"' &&
@@ -225,26 +227,26 @@ class WidgetSimulator extends React.Component {
                   }
                   {this.state.values.optionAlign !== undefined &&
                     <label style={styles.label} className="grid-6@sm">
-                      <div className="-label">Alineación del widget</div>
+                      <div className="-label"><Translate id="simulator.widget_alignment">Alineación del widget</Translate></div>
                       <select
                         onChange={(e) => this.updateValueState(e.target.value, "optionAlign")}
                         className="apz-select"
                         value={this.state.values.optionAlign}>
-                        <option value="left">Izquierda</option>
-                        <option value="center" defaultValue>Centrado</option>
-                        <option value="right">Derecha</option>
+                        <option value="left"><T id="simulator.left">Izquierda</T></option>
+                        <option value="center" defaultValue><T id="simulator.center">Centrado</T></option>
+                        <option value="right"><T id="simulator.right">Derecha</T></option>
                       </select>
                     </label>
                   }
                   {this.state.values.optionLayout !== undefined &&
                     <label style={styles.label} className="grid-6@sm">
-                      <div className="-label">Posición:</div>
+                      <div className="-label"><Translate id="simulator.position">Posición</Translate>:</div>
                       <select
                         onChange={(e) => this.updateValueState(e.target.value, "optionLayout")}
                         className="apz-select"
                         value={this.state.values.optionLayout}>
-                        <option value="vertical">Vertical</option>
-                        <option value="horizontal" defaultValue>Horizontal</option>
+                        <option value="vertical"><T id="simulator.pverticalosition">Vertical</T></option>
+                        <option value="horizontal" defaultValue><T id="simulator.horizontal">Horizontal</T></option>
                       </select>
                     </label>
                   }
@@ -274,7 +276,7 @@ class WidgetSimulator extends React.Component {
                   }
                   {this.state.values.optionTitleSmart !== undefined &&
                     <label style={styles.label} className="grid-6@sm">
-                      <div className="-label">Title smart</div>
+                      <div className="-label"><Translate id="simulator.smart_title">Título inteligente</Translate></div>
                       <div>
                         <Switch
                           isOn={this.state.values.optionTitleSmart}
@@ -286,7 +288,7 @@ class WidgetSimulator extends React.Component {
                   }
                   {this.state.values.optionDisabledModal !== undefined &&
                     <label style={styles.label} className="grid-6@sm">
-                      <div className="-label">Disabled modal</div>
+                      <div className="-label"><Translate id="simulator.disable_modal">Disabled modal</Translate></div>
                       <div>
                         <Switch
                           isOn={this.state.values.optionDisabledModal}
@@ -296,10 +298,9 @@ class WidgetSimulator extends React.Component {
                       </div>
                     </label>
                   }
-                  {this.state.values.optionLegalAdvice !== undefined &&
+                {this.state.values.optionLegalAdvice !== undefined &&
                     <label style={styles.label} className="grid-6@sm">
-                      <div className="-label">Aviso legal</div>
-                      <div>
+                      <div className="-label"><Translate id="simulator.legal_advertise">Aviso legal</Translate></div>                      <div>
                         <Switch
                           isOn={this.state.values.optionLegalAdvice}
                           name="optionLegalAdvice"
@@ -310,7 +311,7 @@ class WidgetSimulator extends React.Component {
                   }
                   {this.state.values.optionBorderProduct !== undefined &&
                     <label style={styles.label} className="grid-6@sm">
-                      <div className="-label">Ver borde</div>
+                      <div className="-label"><Translate id="simulator.show_border">Ver borde</Translate></div>
                       <div>
                         <Switch
                           isOn={this.state.values.optionBorderProduct}
@@ -322,7 +323,7 @@ class WidgetSimulator extends React.Component {
                   }
                   {this.state.values.optionCustomStyles !== undefined &&
                     <label style={styles.label} className="grid-6@sm">
-                      <div className="-label">Estilos propios</div>
+                      <div className="-label"><Translate id="simulator.custom_styles">Estilos propios</Translate></div>
                       <div>
                         <Switch
                           isOn={this.state.values.optionCustomStyles}
@@ -334,7 +335,7 @@ class WidgetSimulator extends React.Component {
                   }
                   { this.state.values.optionTitleDefault !== undefined &&
                     <label style={styles.label} className="grid-12@sm">
-                      <div className="-label">Título por defecto</div>
+                      <div className="-label"><Translate id="simulator.default_title">Título por defecto</Translate></div>
                       <div>
                         <input
                           type="text"
@@ -347,7 +348,7 @@ class WidgetSimulator extends React.Component {
                   }
                   { this.state.values.optionTitleZero !== undefined &&
                     <label style={styles.label} className="grid-12@sm">
-                      <div className="-label">Título de campaña</div>
+                      <div className="-label"><Translate id="simulator.campaign_title">Título de campaña</Translate></div>
                       <div>
                         <input
                           type="text"
@@ -360,7 +361,7 @@ class WidgetSimulator extends React.Component {
                   }
                   {this.state.values.optionPayIn !== undefined &&
                     <label style={styles.label} className="grid-6@sm">
-                      <div className="-label">Pay in 4</div>
+                      <div className="-label"><Translate id="simulator.pay_in_4">Paga en 4</Translate></div>
                       <div>
                         <Switch
                           isOn={this.state.values.optionPayIn}
@@ -372,7 +373,7 @@ class WidgetSimulator extends React.Component {
                   }
                 </div>
               </form>
-              <div className="widget-container">
+              <div className="widget-container" style={ styles.container }>
                 <div { ...inputProps }
                   data-country="ES"
                   data-type={this.state.values.type}
@@ -394,7 +395,6 @@ class WidgetSimulator extends React.Component {
                   // Text
                   data-option-title-default={this.state.values.optionTitleDefault}
                   data-option-title-zero-interest={this.state.values.optionTitleZero}
-                  // { ...this.state.values.optionPayIn !== undefined && data-pay-in-4=this.state.values.optionPayIn }
 
                   // V4
                   data-option-layout={this.state.values.optionLayout}

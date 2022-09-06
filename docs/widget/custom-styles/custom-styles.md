@@ -1,7 +1,12 @@
+---
+title: Personalización CSS del Widget
+sidebar_position: 4
+keywords: [custom CSS, styles, reset design, own styles]
+---
 # Personalización CSS del Widget
 
 ## Integración
-Para personalizar los estilos del widget vía CSS hay que incluir la opción `custom-styles`
+Para personalizar los estilos del widget vía CSS hay que incluir la opción `data-option-custom-styles="true"`
 
 ``` html
 <div data-aplazame-simulator

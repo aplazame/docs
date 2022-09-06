@@ -2,22 +2,21 @@
 title: Paga en 4
 sidebar_position: 3
 ---
-import Translate from '@docusaurus/Translate';
 
 # Pago en 4
 
 ## Integración
-En caso de que el merchant soporte el producto **'Pago en 4'**, se puede añadir el atributo `data-pay-in-4` al [widget de pago a plazos](#pago-a-plazos). Esto provocará un cambio en el diseño del widget, que mostará la información necesaria unicamente para 'Pago en 4'.
+En caso de que el merchant soporte el producto **'Pago en 4'**, se puede añadir el atributo `data-pay-in-4` al [widget de pago a plazos](./installment-payment). Esto provocará un cambio en el diseño del widget, que mostará la información necesaria unicamente para 'Pago en 4'.
 
 
 
-|<Translate id="table.parameter">Parámetro</Translate> | <Translate id="table.type">Tipo</Translate> | <Translate id="table.required">Requerido</Translate> | <Translate id="table.description">Descripción</Translate>|
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-|data-pay-in-4 | boolean | Sí | El atributo puede tener el valor **true** o estar vacío para que funcione correctamente. Este campo provoca un cambio completo en la renderización del widget en caso de que el merchant soporte el producto 'Pago en 4'. En caso de que no lo soporte o el total del checkout no cumpla los requisitos para el producto, se comportará exactamente igual que el [widget 'Pago a plazos'](#pago-a-plazos)
+|data-pay-in-4 | boolean | Sí | El atributo puede tener el valor **true** o estar vacío para que funcione correctamente. Este campo provoca un cambio completo en la renderización del widget en caso de que el merchant soporte el producto 'Pago en 4'. En caso de que no lo soporte o el total del checkout no cumpla los requisitos para el producto, se comportará exactamente igual que el [widget 'Pago a plazos'](./installment-payment)
 
 
 :::caution
-  Si el widget tiene el atributo `data-pay-in-4` pero el merchant no soporta el producto 'Pago en 4' o la cantidad a financiar (`data-amount`) es demasiado alta, el widget se comportará exactamente igual que el [widget de pago a plazos](#pago-a-plazos), siempre que el merchant soporte el producto 'Pago a plazos', heredando todos sus atributos.
+  Si el widget tiene el atributo `data-pay-in-4` pero el merchant no soporta el producto 'Pago en 4' o la cantidad a financiar (`data-amount`) es demasiado alta, el widget se comportará exactamente igual que el [widget de pago a plazos](./installment-payment), siempre que el merchant soporte el producto 'Pago a plazos', heredando todos sus atributos.
 :::
 
 ### Simulación

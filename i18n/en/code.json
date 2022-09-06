@@ -261,9 +261,33 @@
   "title": { "message": "Aplazame technical integration" },
   "tagline": { "message": "We work so that the integration of Aplazame in your e-commerce platform is fast, agile and easy, whether your store is self-developed or if you use one of the most popular platforms on the market" },
 
-
+  "table.variable":{ "message": "Variable" },
   "table.parameter":{ "message": "Parameter" },
   "table.type":{ "message": "Type" },
   "table.required":{ "message": "Required" },
-  "table.description":{ "message": "Description" }
+  "table.description":{ "message": "Description" },
+
+  "simulator.button":{ "message": "Button" },
+  "simulator.text":{ "message": "Text" },
+  "simulator.extended_text":{ "message": "Extended text" },
+  "simulator.big_button":{ "message": "Big button" },
+  "simulator.external_color_text":{ "message": "External color text" },
+  "simulator.color_button_text":{ "message": "Button text color" },
+  "simulator.color_primary":{ "message": "Primary color" },
+  "simulator.color_bg_button":{ "message": "Button background color" },
+  "simulator.widget_alignment":{ "message": "Widget alignment" },
+  "simulator.left":{ "message": "Left" },
+  "simulator.center":{ "message": "Center" },
+  "simulator.right":{ "message": "Right" },
+  "simulator.position":{ "message": "Position" },
+  "simulator.vertical":{ "message": "Vertical" },
+  "simulator.horizontal":{ "message": "Horizontal" },
+  "simulator.smart_title":{ "message": "Smart title" },
+  "simulator.disable_modal":{ "message": "Disabled modal" },
+  "simulator.legal_advertise":{ "message": "Legal advertise" },
+  "simulator.show_border":{ "message": "Show border" },
+  "simulator.custom_styles":{ "message": "Custom styles" },
+  "simulator.default_title":{ "message": "Título por defecto" },
+  "simulator.campaign_title":{ "message": "Título de campaña" },
+  "simulator.pay_in_4":{ "message": "Pay in 4" }
 }

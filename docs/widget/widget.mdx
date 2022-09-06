@@ -51,7 +51,7 @@ El widget de Aplazame te permite mostrar una simulación de las cuotas de una fi
 Para producción el valor de sandbox debe ser `false`
 :::
 
-|<Translate id="table.parameter">Parámetro</Translate> | <Translate id="table.type">Tipo</Translate> | <Translate id="table.required">Requerido</Translate> | <Translate id="table.description">Descripción</Translate>|
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 |public-key | string | si | [tu clave pública](https://vendors.aplazame.com)
 |sandbox | boolean | si | Indica si las peticiones usarán el modo de pruebas (true) o producción (false).
@@ -61,7 +61,7 @@ Para producción el valor de sandbox debe ser `false`
 
 Existe la opción de personalizar el texto legal que se muestra bajo el simulador de cuotas. Eso te permitirá que los valores de la financiación (importe de la compra, importe de la entrada, importe de las cuotas, comisión de apertura, TAE, etc) sean dinámicos y muestren los importes reales para la compra que el cliente esté realizando. Para ello, sólo hay que introducir las siguientes variables entre llaves dentro del valor del atributoatributo <code>data-option-legal-text</code>.
 
-|<Translate id="table.var">Variable</Translate> | <Translate id="table.desc">Descripción</Translate> |
+|<t id="table.Variable">Variable</t> | <t id="table.description">Descripción</t> |
 --------- | ----
 |order_amount | Importe de la cesta
 |total_amount | Importe total adeudado
@@ -77,7 +77,7 @@ Existe la opción de personalizar el texto legal que se muestra bajo el simulado
   Un ejemplo de texto legal con variables sería el texto que viene por defecto:
 :::
 
-  <code style={{ whiteSpace: 'normal' }}>Ejemplo de financiación con APLAZAME para una cesta de &#123; order_amount &#125; a &#123; num_instalments  &#125; meses y que comienza a pagar a los 20 días desde la solicitud. Se solicita una entrada de &#123; downpayment_amount  &#125; que el usuario debe pagar a través de su tarjeta en el momento en que realiza la operación. El importe a financiar es la diferencia entre el valor de la cesta y la entrada: &#123; principal_amount  &#125;. Se solicitan &#123; num_instalments  &#125; mensualidades de &#123; instalments_amount  &#125;. Comisión de apertura: &#123; tax  &#125;. TIN: &#123; tin  &#125; TAE: &#123; tae  &#125;. Importe total adeudado: &#123; total_amount  &#125;. Sujeto a la aprobación por parte de APLAZAME, S.L.</code>
+<code style={{ whiteSpace: 'normal' }}>Ejemplo de financiación con APLAZAME para una cesta de &#123; order_amount &#125; a &#123; num_instalments  &#125; meses y que comienza a pagar a los 20 días desde la solicitud. Se solicita una entrada de &#123; downpayment_amount  &#125; que el usuario debe pagar a través de su tarjeta en el momento en que realiza la operación. El importe a financiar es la diferencia entre el valor de la cesta y la entrada: &#123; principal_amount  &#125;. Se solicitan &#123; num_instalments  &#125; mensualidades de &#123; instalments_amount  &#125;. Comisión de apertura: &#123; tax  &#125;. TIN: &#123; tin  &#125; TAE: &#123; tae  &#125;. Importe total adeudado: &#123; total_amount  &#125;. Sujeto a la aprobación por parte de APLAZAME, S.L.</code>
 
 ## Personalizar CSS
 
@@ -104,7 +104,7 @@ Existe la opción de personalizar el texto legal que se muestra bajo el simulado
      data-qty="form#article input[name='qty']"></div>
 ```
 
-|<Translate id="table.parameter">Parámetro</Translate> | <Translate id="table.type">Tipo</Translate> | <Translate id="table.required">Requerido</Translate> | <Translate id="table.description">Descripción</Translate>|
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 |data-currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | Sí | Moneda en la que se venderá el artículo.
 |data-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | Sí | País donde aplicará la venta.

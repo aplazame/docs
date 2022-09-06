@@ -4,7 +4,6 @@ import MDXComponents from '@theme-original/MDXComponents';
 import WidgetSimulator from '@site/src/components/WidgetSimulator';
 import Translate from '@docusaurus/Translate';
 
-
 export default {
   // Re-use the default mapping
   ...MDXComponents,
@@ -12,5 +11,4 @@ export default {
   // `Highlight` will receive all props that were passed to `highlight` in MDX
   WidgetSimulator: WidgetSimulator,
   t: Translate,
-  T: Translate,
 };

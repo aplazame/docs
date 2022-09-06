@@ -1,7 +1,12 @@
-# Personalización CSS del Widget
+---
+title: CSS customization of the Widget
+sidebar_position: 4
+keywords: [custom CSS, styles reset, design,own styles]
+---
+# CSS customization of the Widget
 
-## Integración
-Para personalizar los estilos del widget vía CSS hay que incluir la opción `custom-styles`
+## Integration
+To customize the styles of the widget via CSS you must include the `data-option-custom-styles="true"`
 
 ``` html
 <div data-aplazame-simulator
@@ -19,12 +24,13 @@ Para personalizar los estilos del widget vía CSS hay que incluir la opción `cu
 
 :::info
 
-  Al activar la opción `data-option-custom-styles="true"` el HTML se insertará en línea, en lugar de en un `iframe`, de modo que aplicarán los estilos que incluya la página.  
+  When activating the option `data-option-custom-styles="true"`  the HTML will be inserted on line, instead of in an `iframe`, so that the styles that the page includes will be applied.
   
-  Por lo que los campos `data-option-text-color`, `data-option-btn-text-color` y `data-option-btn-bg-color` de la [integración avanzada](./#integracion-avanzada) no aplican.  
+  So the `data-option-text-color`, `data-option-btn-text-color` and `data-option-btn-bg-color` fields of the [advanced integration](./#integracion-avanzada) do not apply.
+ 
 :::
 
-### Configurador
+### Configurator
 
 <WidgetSimulator
   data-amount="22900"
