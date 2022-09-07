@@ -1,0 +1,64 @@
+---
+title: Pay in 4
+sidebar_position: 4
+keywords: [checkout aplazame, Pay in 4]
+---
+
+# Pay in 4
+This section describes the entire checkout process in case you want to integrate the 'Pay in 4' module. This is divided into four steps: creation, start, confirmation and result. From here, you will jump to the different sections where each operation is described in detail.
+
+## Checkout process
+![checkout-flow](../../../../../static/img/checkout-integration-flow-en.svg)
+
+
+### 1. Checkout creation
+Once the buyer has selected Aplazame as the payment method for your online store, you need set up a call to your server that allows the creation of a new checkout to begin using Aplazame’s REST API.
+
+
+[See the technical description of how to create a checkout](../checkout-creation/)
+
+:::info
+We offer you the possibility of integrating our payment button with Aplazame, which enables or disables the payment method automatically based on the [limits configured in your account](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-)
+:::
+
+
+* [JavaScript SDK](../sdk-javascript/check-availability)
+* [iOS™ SDK](../sdk-ios/check-availability)
+* [Android™ SDK](../sdk-android/check-availability)
+
+### 2. Initiating the checkout
+
+<div className="apz-grid" style={{alignItems: 'flex-start'}}>
+  <div className="grid-6@sm grid-7@md grid-8@lg">
+    <p>Once you have created the checkout, Aplazame will return an 'ID' with which the gateway payment method for the buyer will begin.</p>
+  </div>
+  <div className="grid-6@sm grid-5@md grid-4@lg text-right">
+
+  ![checkout-flow](../../../../../static/img/checkout-paylater-1-welcome.svg)
+  </div>
+</div>
+
+:::info
+See how to start the checkout process for the buyer with:
+:::
+
+* [JavaScript SDK](../sdk-javascript/#checkout-setup)
+* [iOS™ SDK](../sdk-ios/#checkout-setup)
+* [Android™ SDK](../sdk-android/#checkout-setup)
+
+
+### 3. Order confirmation
+Once the buyer has completed the payment process satisfactorily, Aplazame will confirm the result with your store.
+
+[See the technical description of how to confirm an order](../checkout-confirmation/)
+
+### 4. Result of the request
+Finally, once the payment process has been completed, Aplazame will show the result of the financing request to the buyer.
+
+:::info
+If you like, you can configure return functions for different process events:
+:::
+
+* [JavaScript](../sdk-javascript/#checkout-result)
+* [iOS™ SDK](../sdk-ios/#checkout-result)
+* [Android™ SDK](../sdk-android/#checkout-result)

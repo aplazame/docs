@@ -57,7 +57,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'widget/widget',
+            docId: 'checkout-process/checkout-process',
             position: 'left',
             label: 'Docs',
           },
@@ -199,7 +199,7 @@ const config = {
   // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'es',
-    locales: ['en', 'es', 'it'],
+    locales: ['en', 'es'],
     path: 'i18n',
     /*localeConfigs: {
       es: {

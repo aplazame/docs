@@ -4,7 +4,6 @@ import CodeBlock from '@theme/CodeBlock';
 import ColorPicker from '@site/src/components/ColorPicker';
 import Switch from '@site/src/components/Switch';
 import reactCSS from 'reactcss'
-import { Translate as T } from '@docusaurus/Translate';
 import Translate from '@docusaurus/Translate';
 
 class WidgetSimulator extends React.Component {
@@ -232,9 +231,9 @@ class WidgetSimulator extends React.Component {
                         onChange={(e) => this.updateValueState(e.target.value, "optionAlign")}
                         className="apz-select"
                         value={this.state.values.optionAlign}>
-                        <option value="left"><T id="simulator.left">Izquierda</T></option>
-                        <option value="center" defaultValue><T id="simulator.center">Centrado</T></option>
-                        <option value="right"><T id="simulator.right">Derecha</T></option>
+                        <option value="left"><Translate id="simulator.left">Izquierda</Translate></option>
+                        <option value="center" defaultValue><Translate id="simulator.center">Centrado</Translate></option>
+                        <option value="right"><Translate id="simulator.right">Derecha</Translate></option>
                       </select>
                     </label>
                   }
@@ -245,8 +244,8 @@ class WidgetSimulator extends React.Component {
                         onChange={(e) => this.updateValueState(e.target.value, "optionLayout")}
                         className="apz-select"
                         value={this.state.values.optionLayout}>
-                        <option value="vertical"><T id="simulator.pverticalosition">Vertical</T></option>
-                        <option value="horizontal" defaultValue><T id="simulator.horizontal">Horizontal</T></option>
+                        <option value="vertical"><Translate id="simulator.pverticalosition">Vertical</Translate></option>
+                        <option value="horizontal" defaultValue><Translate id="simulator.horizontal">Horizontal</Translate></option>
                       </select>
                     </label>
                   }
