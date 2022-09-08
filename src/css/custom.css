@@ -38,26 +38,6 @@
   padding-bottom: 1rem;
 }
 
-article aside {
-  margin: 2rem 0;
-  background-color: #fff7e5;
-  color: #1c1e21;
-  padding: 2rem;
-  border-radius: 1rem;
-}
-
-article aside code {
-  background-color: rgb(246, 247, 248);
-}
-
-article aside a {
-  color: #334bff;
-}
-
-article aside p:last-child {
-  margin-bottom: 0;
-}
-
 table th,
 table td {
   white-space: nowrap;
@@ -67,15 +47,6 @@ table td:last-child {
   white-space: normal;
 }
 
-.-mb-2{
-  margin-bottom: 2rem;
-}
-
-/*
-code {
-  white-space: nowrap;
-}
-*/
 
 .admonitionHeading_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module{
   color: transparent; /* workaround to hide INFO CAUTION TIP etc. */

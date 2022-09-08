@@ -8,7 +8,7 @@ keywords: [checkout aplazame, pago en 15 días, pay later]
 Esta sección describe todo el proceso del checkout en el caso de que se quiera integrar el módulo 'Pago en 15 días'. Éste se divide en cinco pasos: creación, inicio, confirmación, resultado y captura del envío. Desde aquí, se saltará a las diferentes secciones dónde se describe en detalle la operación.
 
 ## Proceso checkout
-![checkout-flow](../../static/img/checkout-paylater-integration-flow-es.svg)
+![checkout-flow](/img/checkout-paylater-integration-flow-es.svg)
 
 ### 1. Creación del checkout
 Una vez que el comprador ha seleccionado Aplazame como método de pago en tu comercio online, deberás implementar una llamada a tu servidor que permita iniciar la creación de un nuevo checkout usando la API REST de Aplazame.
@@ -25,13 +25,13 @@ Te ofrecemos la posibilidad de integrar nuestro botón de pago con Aplazame, que
 
 ### 2. Inicio del checkout
 
-<div className="apz-grid" style={{alignItems: 'flex-start'}}>
-  <div className="grid-6@sm grid-7@md grid-8@lg">
+<div className="row" style={{alignItems: 'flex-start'}}>
+  <div className="col col--6 margin-bottom--lg">
     <p>Una vez creado el checkout, Aplazame devolverá un `id` con el cuál se iniciará la pasarela del método de pago para el comprador.</p>
   </div>
-  <div className="grid-6@sm grid-5@md grid-4@lg text-right">
+  <div className="col col--6 margin-bottom--lg text-right">
 
-  ![checkout-flow](../../static/img/checkout-paylater-1-welcome.svg)
+  ![checkout-flow](/img/checkout-paylater-1-welcome.svg)
   </div>
 </div>
 

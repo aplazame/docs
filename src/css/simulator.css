@@ -1,14 +1,6 @@
-.apz-grid {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-flow: wrap;
-}
-
-.grid-12\@sm,
-.grid-6\@sm {
+.grid-12  {
   width: 100%;
-  padding: 0.5rem 1rem
+  padding: 0 1rem
 }
 
 @media screen and (min-width:996px) {

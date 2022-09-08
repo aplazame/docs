@@ -120,7 +120,7 @@ class WidgetSimulator extends React.Component {
             <div className="docs-content">
               <form style={styles.form} className="form-configurator" noValidate>
                 {this.state.values.type !== undefined &&
-                  <div className="text--center">
+                  <div className="text--center margin-bottom--md">
                     {this.state.values.widgetType === 'data-aplazame-widget-paylater' &&
                       <div className="apz-input-choice">
                         <label>
@@ -171,9 +171,9 @@ class WidgetSimulator extends React.Component {
                     }
                   </div>
                 }
-                <div className="apz-grid u-pv2" >
+                <div className="row">
                   {this.state.values.optionTextColor !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label">
                         <Translate id="simulator.external_color_text">Color texto exterior</Translate>
                       </div>
@@ -186,7 +186,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   {this.state.values.optionBtnTextColor !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label">
                         <Translate id="simulator.color_button_text">Color texto botón</Translate>
                       </div>
@@ -199,7 +199,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   {this.state.values.optionPrimaryColor !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label">
                         <Translate id="simulator.color_primary">Color primario</Translate>
                       </div>
@@ -212,7 +212,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   {this.state.values.optionBtnBgColor !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label">
                         <Translate id="simulator.color_bg_button">Color fondo botón</Translate>
                       </div>
@@ -225,20 +225,32 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   {this.state.values.optionAlign !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
-                      <div className="-label"><Translate id="simulator.widget_alignment">Alineación del widget</Translate></div>
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
+                      <div className="-label"><Translate id="simulator.widget_alignment">Alineación</Translate></div>
                       <select
                         onChange={(e) => this.updateValueState(e.target.value, "optionAlign")}
                         className="apz-select"
                         value={this.state.values.optionAlign}>
-                        <option value="left"><Translate id="simulator.left">Izquierda</Translate></option>
-                        <option value="center" defaultValue><Translate id="simulator.center">Centrado</Translate></option>
-                        <option value="right"><Translate id="simulator.right">Derecha</Translate></option>
+                        <option value="left">
+
+                          <Translate id="simulator.left">Izquierda</Translate>
+
+                        </option>
+                        <option value="center">
+
+                          <Translate id="simulator.center">Centrado</Translate>
+
+                        </option>
+                        <option value="right">
+
+                          <Translate id="simulator.right">Derecha</Translate>
+
+                        </option>
                       </select>
                     </label>
                   }
                   {this.state.values.optionLayout !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label"><Translate id="simulator.position">Posición</Translate>:</div>
                       <select
                         onChange={(e) => this.updateValueState(e.target.value, "optionLayout")}
@@ -250,7 +262,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   {this.state.values.optionBranding !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label">Branding</div>
                       <div>
                         <Switch
@@ -262,7 +274,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   {this.state.values.optionDownpaymentInfo !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label">Downpayment info</div>
                       <div>
                         <Switch
@@ -274,7 +286,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   {this.state.values.optionTitleSmart !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label"><Translate id="simulator.smart_title">Título inteligente</Translate></div>
                       <div>
                         <Switch
@@ -286,7 +298,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   {this.state.values.optionDisabledModal !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label"><Translate id="simulator.disable_modal">Disabled modal</Translate></div>
                       <div>
                         <Switch
@@ -298,7 +310,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                 {this.state.values.optionLegalAdvice !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label"><Translate id="simulator.legal_advertise">Aviso legal</Translate></div>                      <div>
                         <Switch
                           isOn={this.state.values.optionLegalAdvice}
@@ -309,7 +321,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   {this.state.values.optionBorderProduct !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label"><Translate id="simulator.show_border">Ver borde</Translate></div>
                       <div>
                         <Switch
@@ -321,7 +333,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   {this.state.values.optionCustomStyles !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label"><Translate id="simulator.custom_styles">Estilos propios</Translate></div>
                       <div>
                         <Switch
@@ -333,7 +345,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   { this.state.values.optionTitleDefault !== undefined &&
-                    <label style={styles.label} className="grid-12@sm">
+                    <label style={styles.label} className="grid-12 margin-bottom--md">
                       <div className="-label"><Translate id="simulator.default_title">Título por defecto</Translate></div>
                       <div>
                         <input
@@ -346,7 +358,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   { this.state.values.optionTitleZero !== undefined &&
-                    <label style={styles.label} className="grid-12@sm">
+                    <label style={styles.label} className="grid-12 margin-bottom--md">
                       <div className="-label"><Translate id="simulator.campaign_title">Título de campaña</Translate></div>
                       <div>
                         <input
@@ -359,7 +371,7 @@ class WidgetSimulator extends React.Component {
                     </label>
                   }
                   {this.state.values.optionPayIn !== undefined &&
-                    <label style={styles.label} className="grid-6@sm">
+                    <label style={styles.label} className="col col--6 margin-bottom--md">
                       <div className="-label"><Translate id="simulator.pay_in_4">Paga en 4</Translate></div>
                       <div>
                         <Switch

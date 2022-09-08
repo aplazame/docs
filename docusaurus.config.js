@@ -192,6 +192,9 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+
+        additionalLanguages: ['http', 'powershell', 'php', 'csharp', 'python'],
+
       },
     }),
   // Even if you don't use internalization, you can use this field to set useful
