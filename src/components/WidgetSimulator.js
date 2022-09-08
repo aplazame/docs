@@ -256,7 +256,7 @@ class WidgetSimulator extends React.Component {
                         onChange={(e) => this.updateValueState(e.target.value, "optionLayout")}
                         className="apz-select"
                         value={this.state.values.optionLayout}>
-                        <option value="vertical"><Translate id="simulator.pverticalosition">Vertical</Translate></option>
+                        <option value="vertical"><Translate id="simulator.vertical">Vertical</Translate></option>
                         <option value="horizontal" defaultValue><Translate id="simulator.horizontal">Horizontal</Translate></option>
                       </select>
                     </label>

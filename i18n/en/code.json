@@ -266,6 +266,7 @@
   "table.type":{ "message": "Type" },
   "table.required":{ "message": "Required" },
   "table.description":{ "message": "Description" },
+  "table.yes": { "message": "Yes" },
 
   "simulator.button":{ "message": "Button" },
   "simulator.text":{ "message": "Text" },
