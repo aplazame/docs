@@ -1,0 +1,78 @@
+---
+title: Test mode
+sidebar_position: 1
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Test mode
+Aplazame provides a test mode to facilitate the integration process before moving to production or to make changes without using real orders. It must be specified under the `Accept` header, just before the version.
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+  GET /orders HTTP/1.1
+  Accept: application/vnd.aplazame.sandbox.v1+json
+  Authorization: Bearer $api_token{private}
+  Host: api.aplazame.com
+```
+
+  </TabItem>
+  <TabItem value="shell" label="shell" default>
+
+```powershell
+  $ curl "https://api.aplazame.com/orders" \
+  -H "Accept: application/vnd.aplazame.sandbox.v1+json" \
+  -H "Authorization: Bearer $api_token{private}"
+```
+
+  </TabItem>
+  <TabItem value="require" label="python" default>
+
+```python
+  import aplazame_sdk
+
+  client = aplazame_sdk.Client('$api_token{private}', sandbox=True)
+
+  response = client.orders()
+```
+  </TabItem>
+
+  <TabItem value="php" label="php" default>
+
+```php
+  use Aplazame\Api\Client as AplazameClient;
+
+  $aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_SANDBOX, "$api_token{private}");
+  $result = $aplazameClient->get("/orders");
+```
+  </TabItem>
+  <TabItem value="C" label="C#" default>
+
+  ```csharp
+  using Aplazame.Api;
+
+  Client client = new Client("https://api.aplazame.com", Client.EnvironmentSandbox, "$api_token{private}");
+  dynamic result = client.Get("/orders");
+  ```
+  </TabItem>
+</Tabs>
+
+HEader | Mode | Value
+-------- | ---------------- | -----
+Accept | pruebas | application/vnd.aplazame.**sandbox**.v1+json
+Accept | production | application/vnd.aplazame.v1+json
+
+:::tip
+The response indicates the format returned under the `Content-Type` standard header and the API version in the `X-Defer Me-Media-Type` header
+:::
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+```
+
+
+

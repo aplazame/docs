@@ -1,0 +1,46 @@
+---
+title: Test data
+sidebar_position: 2
+---
+
+# Test data
+You can use the following data to simulate different statuses of the financing request in test mode.
+
+Use the following card to validate the payment method of the financing request:
+
+
+Field | Value | Expiry date | CVV
+|----- | ----- | -------- | ---
+Card | 4111 1111 1111 1111 | 11/25 | 123
+
+<br/>
+
+### Spain
+Use the following documents to obtain different results for the financing request:
+
+Field | Value | Result | Description
+-- | -- | -- | --
+DNI | 99999998 T | KO | Does not pass Aplazame’s admission criteria
+DNI | 99999995 C | Pending | You must complete the identity validation challenge
+DNI | Otra combinación válida | OK | The credit is accepted
+
+
+<br/>
+
+### Reto de validación de identidad
+
+:::info
+In case the result requires the *identity validation challenge* to be completed, you can use the documentation images that we provide below to check the operation.
+:::
+
+
+Field | Value | Result | Description
+--|--|--|--
+FRONT | <a href="/landing-assets/images/docs/fake-id-card/front-id-card-correct.jpg" target="_blank" style={{ display: 'inline-block' }}><img src="/landing-assets/images/docs/fake-id-card/front-id-card-correct.jpg" alt="front-id-card-correct" style={{ maxWidth: '160px', display: 'block' }}/></a> | OK | Valid ID image
+BACK | <a href="/landing-assets/images/docs/fake-id-card/back-id-card-correct.jpg" target="_blank" style={{ display: 'inline-block' }}><img src="/landing-assets/images/docs/fake-id-card/back-id-card-correct.jpg" alt="back-id-card-correct" style={{ maxWidth: '160px', display: 'block' }}/></a> | OK | Valid ID image
+FRONT | <a href="/landing-assets/images/docs/fake-id-card/front-id-card-incorrect.jpg" target="_blank" style={{ display: 'inline-block' }}><img src="/landing-assets/images/docs/fake-id-card/front-id-card-incorrect.jpg" alt="front-id-card-incorrect" style={{ maxWidth: '160px', display: 'block' }}/></a> | KO | Invalid ID image
+BACK | <a href="/landing-assets/images/docs/fake-id-card/back-id-card-incorrect.jpg" target="_blank" style={{ display: 'inline-block' }}><img src="/landing-assets/images/docs/fake-id-card/back-id-card-incorrect.jpg" alt="back-id-card-incorrect" style={{ maxWidth: '160px', display: 'block' }}/></a> | KO | Invalid ID image
+
+:::caution
+Any other image returns a result of manual verification of identity required
+:::
