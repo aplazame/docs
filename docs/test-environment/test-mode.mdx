@@ -14,7 +14,7 @@ Aplazame proporciona un modo de pruebas para facilitar el proceso de integració
 ```http
   GET /orders HTTP/1.1
   Accept: application/vnd.aplazame.sandbox.v1+json
-  Authorization: Bearer $api_token{private}
+  Authorization: Bearer api_private_key
   Host: api.aplazame.com
 ```
 
@@ -24,7 +24,7 @@ Aplazame proporciona un modo de pruebas para facilitar el proceso de integració
 ```powershell
   $ curl "https://api.aplazame.com/orders" \
   -H "Accept: application/vnd.aplazame.sandbox.v1+json" \
-  -H "Authorization: Bearer $api_token{private}"
+  -H "Authorization: Bearer api_private_key"
 ```
 
   </TabItem>
@@ -33,7 +33,7 @@ Aplazame proporciona un modo de pruebas para facilitar el proceso de integració
 ```python
   import aplazame_sdk
 
-  client = aplazame_sdk.Client('$api_token{private}', sandbox=True)
+  client = aplazame_sdk.Client('api_private_key', sandbox=True)
 
   response = client.orders()
 ```
@@ -44,7 +44,7 @@ Aplazame proporciona un modo de pruebas para facilitar el proceso de integració
 ```php
   use Aplazame\Api\Client as AplazameClient;
 
-  $aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_SANDBOX, "$api_token{private}");
+  $aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_SANDBOX, "api_private_key");
   $result = $aplazameClient->get("/orders");
 ```
   </TabItem>
@@ -53,7 +53,7 @@ Aplazame proporciona un modo de pruebas para facilitar el proceso de integració
   ```csharp
   using Aplazame.Api;
 
-  Client client = new Client("https://api.aplazame.com", Client.EnvironmentSandbox, "$api_token{private}");
+  Client client = new Client("https://api.aplazame.com", Client.EnvironmentSandbox, "api_private_key");
   dynamic result = client.Get("/orders");
   ```
   </TabItem>

@@ -19,14 +19,18 @@ Si estás iniciando la integración, te puede interesar consultar cómo establec
 
 Para mejorar la concesión de crédito, es recomendable que configures el envío del historial de pedidos del cliente ([ver documentación](../orders/#historial)).
 
-La petición **POST** debe enviar los siguientes campos:
+:::caution
+Recuerda visitar [primeros pasos](https://ayuda.aplazame.com/hc/es-es/articles/360014854679--C%C3%B3mo-me-creo-una-cuenta-como-tienda-en-Aplazame-) para obtener tu `api_private_key`.
+:::
+
+La petición **POST** debe enviar los siguientes campos y cabeceras:
 <Tabs>
   <TabItem value="prod" label="producción">
 
 ``` http
 POST https://api.aplazame.com/checkout
 Accept: application/vnd.aplazame.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Content-Type: application/json
 
 {
@@ -43,7 +47,7 @@ Content-Type: application/json
 ``` http
 POST https://api.aplazame.com/checkout
 Accept: application/vnd.aplazame.sandbox.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Content-Type: application/json
 
 {
@@ -58,7 +62,7 @@ Content-Type: application/json
   <TabItem value="PHP" label="PHP">
 
 ``` php
-$privateKey = '$api_token{private}';
+$privateKey = 'api_private_key';
 $environment = Aplazame\Api\Client::ENVIRONMENT_SANDBOX;
 $apiBaseUri = 'https://api.aplazame.com';
 
@@ -75,7 +79,7 @@ $order_created = $aplazameApiClient->post('/checkout', $payload);
 
 ``` js
 const aplazame = require('@aplazame/node')({
-  access_token: '$api_token{private}',
+  access_token: 'api_private_key',
   is_sandbox: true,
 })
 
@@ -102,7 +106,7 @@ aplazame.post('/checkout', {
 ``` shell
 $ curl --request POST "https://api.aplazame.com/checkout" \
     --header "Accept: application/vnd.aplazame.v1+json" \
-    --header "Authorization: Bearer $api_token{private}" \
+    --header "Authorization: Bearer api_private_key" \
     --data '{ "merchant": {...}, "order": {...}, "customer": {...}, "billing": {...}, "shipping": {...} }'
 ```
   </TabItem>
