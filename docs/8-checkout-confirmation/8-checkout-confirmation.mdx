@@ -63,7 +63,7 @@ Observa que las notificaciones enviadas por Aplazame incluyen la clave privada d
 
 ```http
 POST notification_url
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Content-Type: application/json
 
 {
@@ -99,18 +99,18 @@ id | string | Identificador del pedido de Aplazame (inmutable).
 [status_reason](#codigos-de-estado-del-pedido) | string | Código de estado del pedido.
 sandbox | boolean | El pedido fue realizado en el entorno de pruebas.
 mid | string | Identificador del pedido generado por el comercio o autogenerado por Aplazame.
-total_amount | $type{decimal} | Cantidad a financiar.
-tax_rate | $type{decimal} | Importe de descuento en el precio del pedido.
-discount | $type{decimal} | Importe de descuento en el precio del pedido.
-discount_rate | $type{decimal} | Tasa de descuento en el precio del pedido.
-currency | $type{currency} | Divisa del pedido.
+total_amount | [decimal](./integraciones/api/api-reference/#decimales) | Cantidad a financiar.
+tax_rate | [decimal](./integraciones/api/api-reference/#decimales) | Importe de descuento en el precio del pedido.
+discount | [decimal](./integraciones/api/api-reference/#decimales) | Importe de descuento en el precio del pedido.
+discount_rate | [decimal](./integraciones/api/api-reference/#decimales) | Tasa de descuento en el precio del pedido.
+currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | Divisa del pedido.
 rejected | boolean |El pedido ha sido rechazado.
-confirmed | $type{date} | Fecha y hora de confirmacion del pedido.
-verified | $type{date} | Fecha y hora de verificación del pedido.
-expired | $type{date} | Fecha y hora en que el pedido expiró.
-expires_at | $type{date} | Fecha y hora de expiración del pedido.
-cancelled | $type{date} | Fecha y hora de cancelación del pedido.
-created | $type{date} | Fecha y hora de creación del pedido.
+confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha y hora de confirmacion del pedido.
+verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha y hora de verificación del pedido.
+expired | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha y hora en que el pedido expiró.
+expires_at | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha y hora de expiración del pedido.
+cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha y hora de cancelación del pedido.
+created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha y hora de creación del pedido.
 
 ## Códigos de estado del pedido
 
