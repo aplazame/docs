@@ -1,17 +1,18 @@
 ---
-title: Peticiones a la API
+title: API Requests
 sidebar_position: 3
 keywords: [aplazame API, API reference]
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Peticiones a la API
+# API Requests
 
-## URL de API
+## API URL
+
 The URL of Aplazame’s API service is available at `https://api.aplazame.com`.
 
-## Cabeceras HTTP {#headers}
+## HTTP Headers {#headers}
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -64,10 +65,10 @@ dynamic result = client.Get("/orders");
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-Accept | string | <t id="table.yes">Sí</t> | Especifica la versión de la API de Aplazame y el tipo de dato esperado
-Authorization | string | <t id="table.yes">Sí</t> | Tipo y clave de acceso
+Accept | string | <t id="table.yes">Sí</t> | Specifies the Aplazame API version and the datatype expected
+Authorization | string | <t id="table.yes">Sí</t> | Type and access key
 
-### Respuesta
+### Response
 
 ```http
 HTTP/1.1 200 OK
@@ -75,12 +76,13 @@ Content-Type: application/json; charset=utf-8
 X-Aplazame-Media-Type: aplazame.v1
 ```
 
-[OAuth2](http://en.wikipedia.org/wiki/OAuth) es un estandard abierto de autorizacion definido en la [RFC 6749](http://tools.ietf.org/html/rfc6749).
+[OAuth2](http://en.wikipedia.org/wiki/OAuth) is an open standard for authorisation defined in [RFC 6749](http://tools.ietf.org/html/rfc6749).
 
-OAuth2 es más sencillo que OAuth1 y proporciona mayor nivel de seguridad.
+OAuth2 is easier to work with than OAuth1 and provides much better security.
 
 
-## Versionado
+## Versioning
+
 The `Accept` header is used to indicate the API version, expected content type (and [sandbox mode](#sandbox-mode))
 
 <Tabs>
@@ -117,11 +119,11 @@ client = aplazame_sdk.Client('api_private_key', ctype='xml')
   </TabItem>
 </Tabs>
 
-Aunque Aplazame soporta el versionado mediante URL (p.e. https://api.aplazame.com/v1/orders), se considera buena práctica usar la cabecera **Accept** en la petición para especificar el tipo y el formato esperado de la respuesta de la API.
+Although versioning via URL is currently allowed (e.g. https://api.aplazame.com/v1/orders), it is better practice to use the `Accept` header in the request to specify the type and format of the API service response.
 
-Si no se indica la versión de la API, se aplicará más reciente. Esto no es aconsejable ya que una nueva versión podría dejar obsoleto alguna propiedad.
+If the API version is not indicated in the header or via URL, the latest version of the API will be activated. Since a new version of the API can deprecate certain fields, it is recommended you always specify the API version
 
-### Tipos de formato soportados
+### Format types allowed
 
 Header | Version | Expected format | Value
 ------ | - | ----- | -----
@@ -132,10 +134,10 @@ Accept | 1 | xml | application/vnd.aplazame.**v1**+**xml**
 The latest API version is version 1 and the latest CHECKOUT version is version 2; this is the v1.2
 :::
 
-## Decimales
+## Decimals
 
 :::tip
-Es importante tener en cuenta que para las unidades monetarias, comisiones y descuentos se usan enteros, de modo que las cantidades que envían son céntimos. Por ejemplo, "12.50 €"‚ se envía como `1250`.
+All amounts related to taxes, discounts and prices will be formatted as an integer including two decimal places (i.e. amounts in cents). For example, if an item has a price of `€12.50` should be formatted as an integer `1250`.
 :::
 
 <Tabs>
@@ -153,7 +155,7 @@ assert(12.50 != 1250)
   </TabItem>
 </Tabs>
 
-## Errores {#errors}
+## Errors
 
 <Tabs>
   <TabItem value="bad_request" label="Bad request">
@@ -212,23 +214,23 @@ X-Aplazame-Media-Type: aplazame.v1
 
 </Tabs>
 
-Listado de códigos de error devueltos por la API.
+List of error codes returned by the API.
 
 
-Código | Error | Significado
+Code | Error | Meaning
 ---- | ----- | -------
-400 | Bad Request | Si hay algún error en los datos enviados
-401 | Unauthorized | No se ha enviado el token (public/private key) o el que se ha enviado no es válido
-403 | Forbidden | Aún siendo válido el token, la operación puede ser rechazada por permisos.
-404 | Not Found | No se ha encontrado el objeto o recurso.
-405 | Method Not Allowed | El método no está disponible para la url indicada (GET/POST/...)
-406 | Not Acceptable | La cabecera Accept no es válida [ver cabeceras](#headers)
-408 | Request timeout | Ha expirado el tiempo máximo de espera para la petición.
-409 | Conflict | Indica que se ha producido un conflicto con la petición, su significado depende del contexto.
-415 | Unsupported Media Type | No hay soporte para el tipo indicado por la cabecera 'Content-Type'
-429 | Too Many Requests | Se están recibiendo demasiadas peticiones.
-500 | Internal Server Error | Error en el servidor de la API, esto puede ser un fallo en la implementación, un problema puntual de la red, etc.
-503 | Service Unavailable | Fuera de servicio por mantenimiento.
+400 | Bad Request | If the data have not been correctly validated.
+401 | Unauthorized | If the token (public/private key) is not sent in the request or is wrong.
+403 | Forbidden | If you do not have permission to do this operation.
+404 | Not Found |If the object or the resource is not found.
+405 | Method Not Allowed | You tried to access with an invalid method (GET/POST/...)
+406 | Not Acceptable | The Accept header is invalid [see headers](#headers)
+408 | Request timeout | The server timed out waiting for the request.
+409 | Conflict | Indicates that the request could not be processed because of a conflict in the request.
+415 | Unsupported Media Type | There is no support for the content type indicated in the Content-Type header.
+429 | Too Many Requests | If multiple simultaneous requests are made.
+500 | Internal Server Error | Error in the API server. This may be caused by an implementation error, a temporary network issue, etc. Please try again later.
+503 | Service Unavailable | Temporarily offline for maintenance. Please try again later.
 
 ## Pagination
 
@@ -285,7 +287,7 @@ dynamic result = client.Get("/orders", new {page => 2});
   </TabItem>
 </Tabs>
 
-### Respuesta
+### Response
 
 
 ```http
@@ -309,11 +311,11 @@ X-Aplazame-Media-Type: aplazame.v1
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|
-[cursor](#cursor) | object | Puntero de paginación
-[paging](#paging) | object | Estado de paginación
-results | collection | Listado de tiendas
+[cursor](#cursor) | object | Pagination cursor object
+[paging](#paging) | object | Pagination status
+results | collection | List of stores
 
-### cursor {#cursor}
+### cursor
 ```json
 "cursor": {
   "after": 3,
@@ -322,11 +324,10 @@ results | collection | Listado de tiendas
 ```
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|
-after | integer | Índice de la página anterior.
-before | integer | Índice de la página siguente.
+after | integer | Index of the previous page.
+before | integer | Index of the next page.
 
-### paginación {#paging}
-
+### paging
 ```json
 "paging": {
   "count": 314,
@@ -336,22 +337,22 @@ before | integer | Índice de la página siguente.
 ```
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|
-count | integer | Número de elementos devueltos.
-next | URL | URL de la API a la siguente página de resultados.
-previous | URL | URL de la API a la página anterior de resultados.
+count | integer | Number of items found.
+next | URL | API URL (endpoint) to the next page of results.
+previous | URL | API URL (endpoint) to the previous page of data.
 
 
-## Filtros {#filters}
+## Filtros
 
-Los filtros en las consultas de listados se indican mediante parámetros de la URL.
+The filters of the list queries are indicated in the URL parameters.
+The parameter format is comprised of the entity, lookup type and value.
 
-El formato de cada parametro está compuesto por la entidad, el tipo de búsqueda y el valor a buscar.
 
 ```http
 GET /orders?propiedad-busqueda=valor
 ```
 
-En el siguente ejemplo, la petición devolverá todos los pedidos cuyo *id* comienze por `e791f`. Si se omite el tipo de concordancia, se usará `exact`.
+In the following example, the request will return all orders whose *id* starts with 'e791f'. If the match type is omitted, `exact` will be used.
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -401,7 +402,8 @@ dynamic result = client.Get("/orders?id-startswith=e791f");
 </Tabs>
 
 
-Si se especifican varios filtros, el resultado devolverá la combinación aditiva de ellos.
+If various filters are specified, the result will return a combination of all of them.
+
 
 ```http
 GET /orders?id-startswith=e791f&id-endswith=4ff4g HTTP/1.1
@@ -410,23 +412,22 @@ Authorization: Bearer api_private_key
 Host: api.aplazame.com
 ```
 
-### Búsqueda de texto
+### Text search
 
-
-Término | Uso | Descripción
+Term | Usage | Description
 ---- | ----- | -----------
-exact | `name-exact=AplaZame` | Coincidencia exacta
-iexact | `name-iexact=aplazame` | Coincidencia exacta *no sensible a mayúsculas/minúsculas*
-regex | `name-regex=^[A-Z].*$` | Expresión regular sensible a mayúsculas/minúsculas.
-iregex | `name-iregex=^[a-z].*$` | Expresión regular *no sensible a mayúsculas/minúsculas*.
-contains | `name-contains=plaZa` | Contiene la cadena especificada *no sensible a mayúsculas/minúsculas*
-icontains | `name-icontains=plaza` | Contiene la cadena especificada.
-startswith | `name-startswith=Apla` | Comienza por la cadena especificada.
-istartswith | `name-istartswith=apla` | Comienza por la cadena especificada *no sensible a mayúsculas/minúsculas*.
-endswith | `name-endswith=Zame` | Termina por la cadena especificada.
-iendswith | `name-iendswith=zame` | Termina por la cadena especificada *no sensible a mayúsculas/minúsculas*.
-in | `name-in=AplaZame,Aplazar` | Coincide con alguna de las opciones separadas por comas.
-search | `name-search=Ap` | Cadena de texto a buscar
+exact | `name-exact=AplaZame` | Exact match
+iexact | `name-iexact=aplazame` | Case-insensitive* exact match.
+regex | `name-regex=^[A-Z].*$` | Case-sensitive regular expression.
+iregex | `name-iregex=^[a-z].*$` | *Case-insensitive* regular expression.
+contains | `name-contains=plaZa` | String containing a *case-insensitive* value.
+icontains | `name-icontains=plaza` | String containing a case-sensitive value.
+startswith | `name-startswith=Apla` | String starts with specified value.
+istartswith | `name-istartswith=apla` | String starting with *case-insensitive* value.
+endswith | `name-endswith=Zame` | String ending with value.
+iendswith | `name-iendswith=zame` | String ending with *case-insensitive* value.
+in | `name-in=AplaZame,Aplazar` | Matches any of the comma-separated values.
+search | `name-search=Ap` | String search value.
 
 ### Por fecha
 
@@ -476,19 +477,19 @@ dynamic result = client.Get("/orders?confirmed-week_day=monday");
   </TabItem>
 </Tabs>
 
-Término | Uso | Descripción
+Term | Usage | Description
 ---- | ----- | -----------
-year | `created-year=2015` | Fechas cuyo año coincida con el indicado.
-month | `created-month=10` | Fechas cuyo mes coincida con el indicado.
-week_day | `created-week_day=monday` | Día de la semana, las opciones son: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`
-day | `created-day=2` | Fechas cuyo día del mes coincida con el indicado.
-hour | `created-hour=14` | Fechas cuya hora coincida con la indicada.
+year | `created-year=2015` | Dates whose year matches the value entered.
+month | `created-month=10` | Dates whose month matches the value entered.
+week_day | `created-week_day=monday` | Day of the week; the choices are: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`
+day | `created-day=2` | Dates whose day matches the value entered.
+hour | `created-hour=14` | Dates whose time matches the value entered.
 
 
 ### Nulo
-Término | Uso | Descripción
+Term | Usage | Description
 ---- | ----- | -----------
-isnull | `confirmed-isnull=yes` | Filtrar por campos nulos, `si` O `no`
+isnull | `confirmed-isnull=yes` | Filter by null fields, `yes` OR `no`
 
 
 ### Rangos de valores
@@ -540,10 +541,11 @@ dynamic result = client.Get("/orders?confirmed-gte=2015-10-02T18:15:45.101838Z")
 </Tabs>
 
 
-Término | Uso | Descripción
+Term | Usage | Description
 ---- | ----- | -----------
-exact | `total_amount-exact=10000` | Valor exacto
-gt | `total_amount-gt=8000` | Mayor qué
-gte | `total_amount-gte=10000` | Mayor o igual que
-lt | `total_amount-lt=12000` | Menor que
-lte | `total_amount-lte=10000` | Menor o igual que
+exact | `total_amount-exact=10000` | Exact value
+gt | `total_amount-gt=8000` | Greater than
+gte | `total_amount-gte=10000` | Greater than or equal to
+lt | `total_amount-lt=12000` | Less than
+lte | `total_amount-lte=10000` | Less than or equal to
+
