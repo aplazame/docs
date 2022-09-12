@@ -1,0 +1,90 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Integración vía postMessage
+
+## Integración
+
+La comunicación mediante postMessage permite, por ejemplo, integrar la aplicación del checkout de Aplazame en Android o iOS sin necesidad de iframe. Es la misma integración que implementan nuestros SDK
+
+:::info
+Para usar postMessage, debe usarse la siguiente URL
+:::
+
+```http
+https://checkout.aplazame.com/?order={{checkout_id}}&public-key=api_public_key&sandbox=true&post-message=true
+```
+
+## Flujo de mensajes
+
+<Tabs>
+  <TabItem value="messages" label="Recibir mensajes">
+
+```js
+  document.addEventListener('message', function (e) {
+
+  console.log('message:\n', e.data);
+  // message:
+  // {
+  //   "aplazame": "checkout",
+  //   "event": "get-checkout-data"
+  // }
+});
+```
+  </TabItem>
+  <TabItem value="sent" label="Enviar mensajes">
+
+```js
+document.addEventListener('message', function (e) {
+
+  e.source.postMessage({
+    aplazame: 'checkout',
+    event: 'checkout-data',
+    data: {
+      // ...
+    }
+  }, '*');
+
+});
+```
+  </TabItem>
+</Tabs>
+
+
+### Checkout cargado
+
+> Este evento se dispara cuando el checkout está cargado en el iframe/webview
+
+``` js
+// Received message
+{
+  "aplazame": "checkout",
+  "event": "checkout-ready"
+}
+```
+
+### Cambio de estado del checkout
+
+> Este evento se dispara cuando el checkout cambia de estado (La vista del checkout sigue abierta).
+
+``` js
+// Received message
+{
+  "aplazame": "checkout",
+  "event": "status-change",
+  "status": "success" // valores: success, pending, ko
+}
+```
+
+### Resultado tras cierre del checkout
+
+> Este evento se dispara cuando el checkout se ha cerrado
+
+``` js
+// Received message
+{
+  "aplazame": "checkout",
+  "event": "close",
+  "result": "success"  // valores: success, pending, dismiss, ko
+}
+```

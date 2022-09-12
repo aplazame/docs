@@ -1,53 +1,96 @@
+---
+title: SDK Javascript
+sidebar_position: 5
+keywords: [SDK Javascript, integration, JS]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # SDK Javascript
 
-## $message
-  es: "Integración"
-  en: "Integration"
+## Integración {#integration}
 
 
-<aside class="notice">$message
-  es: "Debes incluir **aplazame.js** en las páginas del botón y del checkout."
-  en: "You must include **aplazame.js** on the button and checkout pages."
-</aside>
-
-$include aplazame-js.md
-
-## $message
-   es: "Comprobar productos de financiación disponibles"
-   en: "Check available financing products"
+:::tip
+Debes incluir **aplazame.js** en las páginas del botón y del checkout.
+:::
 
 
- > $message
-   es: "Para mostrar el botón de pago con Aplazame en función de los productos configurados en tu cuenta"
-   en: "To display the Aplazame payment button based on the products configured in your account"
+<Tabs>
+  <TabItem value="aplazame.js" label="aplazame.js">
 
+```html
+<script
+  src="https://cdn.aplazame.com/aplazame.js?public-key=api_public_key&sandbox=true"
+  async defer>
+</script>
+```
+  </TabItem>
+  <TabItem value="requirejs" label="requirejs">
 
- <tab>HTML</tab>
- ``` html
+```js
+requirejs.config({
+    paths: {
+      aplazame: 'https://cdn.aplazame.com/aplazame.js'
+    }
+});
+
+require(['aplazame'], function (aplazame) {
+  aplazame.init({
+    // replace with merchant public key
+    public_key: "api_public_key",
+    sandbox: true
+  });
+
+  aplazame.checkout({
+    // ...
+  });
+});
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+public-key | string | <t id="table.yes">Sí</t> | [tu clave pública](https://vendors.aplazame.com)
+sandbox | boolean | <t id="table.yes">Sí</t> | Indica si las peticiones usarán el modo de pruebas (true) o producción (false).
+
+:::caution
+Para producción el valor de sandbox debe ser `false`.
+:::
+
+## Comprobar productos de financiación disponibles {#check-available-products}
+Para mostrar el botón de pago con Aplazame en función de los productos configurados en tu cuenta:
+
+<Tabs>
+  <TabItem value="html" label="html">
+
+ ```html
  <button type="button"
-   data-aplazame-button
-   data-amount="12050"
-   data-currency="EUR"></button>
+  data-aplazame-button
+  data-amount="12050"
+  data-currency="EUR"></button>
 
  <div data-aplazame-payment-info="">
-   $message
-     es: "Información acerca del pago con Aplazame que aparecerá y se ocultará con el botón"
-     en: "Information about payment with Aplazame that will appear and be hidden with the button"
-
+    Información acerca del pago con Aplazame que aparecerá y se ocultará con el botón
  </div>
  ```
- <tab>aplazame.js</tab>
+  </TabItem>
+  <TabItem value="aplazame.js" label="aplazame.js">
+
  ```js
  (window.aplazame = window.aplazame || []).push(function (aplazame)
    aplazame.button(
-     selector: '#some-button-or-wrapper-id', // $message es: "acepta cualquier selector CSS válido", en: "accepts any valid CSS selector"
+     selector: '#some-button-or-wrapper-id', // accepts any valid CSS selector
      amount: 12050,
      currency: 'EUR'
    )
  )
  ```
- <tab>HTTP</tab>
- ``` http
+  </TabItem>
+  <TabItem value="http" label="http">
+
+ ```http
  Request:
 
  GET /checkout/button?amount=12050&currency=EUR
@@ -61,126 +104,60 @@ $include aplazame-js.md
  Response (not available for this credit):
  HTTP/1.1 403 Forbidden
  ```
- $include table-code-header.md
- selector | $typecss | no | $message
-   es: "Selector CSS para mostrar/ocultar el método de pago Aplazame."
-   en: "CSS selector to display/hide Aplazame’s payment method."
 
- amount | $typedecimal | yes | $message
-   es: "Cantidad a financiar."
-   en: "Quantity to be financed."
-
- currency | $typecurrency | yes | $message
-   es: "Código de la moneda del pedido."
-   en: "The currency code of the order."
+  </TabItem>
+</Tabs>
 
 
-## $message
-   es: "Comprobar disponibilidad Pago a plazos"
-   en: "Check Instalments availability "
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+ selector | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | no | Selector CSS para mostrar/ocultar el método de pago Aplazame.
+ amount | [decimal](./integraciones/api/api-reference/#decimales) | <t id="table.yes">Sí</t> | Cantidad a financiar.
+ currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="table.yes">Sí</t> | Código de la moneda del pedido.
 
+## Comprobar Pago a plazos
+Para mostrar el botón de pago con Aplazame en función de los [límites configurados en tu cuenta](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-).
 
- > $message
-   es: "Para mostrar el botón de pago con Aplazame en función de los [límites configurados en tu cuenta](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-)"
-   en: "To display the payment button with Aplazame based on the [limits set in your account](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-)"
+Los [ejemplos](#check-available-products) anteriores usarán "Pago a plazos" (valor por omisión).
 
+ ## Comprobar Pago en 15 días
+Para mostrar el botón de pago con Aplazame en función de los [límites configurados en tu cuenta](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-).
 
- <tab>HTML</tab>
- ``` html
+Para comproabr la disponibilidad del producto "Pay later", debes añadir `data-product-type="pay_later"`, o `product: { type: 'pay_later' }`:
+
+<Tabs>
+  <TabItem value="html" label="html">
+
+ ```html
  <button type="button"
-   data-aplazame-button
-   data-amount="12050"
-   data-currency="EUR"></button>
-
- <div data-aplazame-payment-info="">
-   $message
-     es: "Información acerca del pago con Aplazame que aparecerá y se ocultará con el botón"
-     en: "Information about payment with Aplazame that will appear and be hidden with the button"
-
- </div>
- ```
- <tab>aplazame.js</tab>
- ```js
- (window.aplazame = window.aplazame || []).push(function (aplazame)
-   aplazame.button(
-     selector: '#some-button-or-wrapper-id', // $message es: "acepta cualquier selector CSS válido", en: "accepts any valid CSS selector"
-     amount: 12050,
-     currency: 'EUR',
-     product:
-      type: 'instalments'
-
-   )
- )
- ```
- <tab>HTTP</tab>
- ``` http
- Request:
-
- GET /checkout/button?amount=12050&currency=EUR&product[type]=instalments
- Accept: application/vnd.aplazame.v1+json
- Authorization: Bearer $api_tokenpublic
- Host: api.aplazame.com
-
- Response (available for this credit):
- HTTP/1.1 201 OK
-
- Response (not available for this credit):
- HTTP/1.1 403 Forbidden
- ```
- $include table-code-header.md
- selector | $typecss | no | $message
-   es: "Selector CSS para mostrar/ocultar el método de pago Aplazame."
-   en: "CSS selector to display/hide Aplazame’s payment method."
-
- amount | $typedecimal | yes | $message
-   es: "Cantidad a financiar."
-   en: "Quantity to be financed."
-
- currency | $typecurrency | yes | $message
-   es: "Código de la moneda del pedido."
-   en: "The currency code of the order."
-
-
- ## $message
-   es: "Comprobar disponibilidad Pago en 15 días"
-   en: "Check availability of Pay in 15 days"
-
-
- > $message
-   es: "Para mostrar el botón de pago con Aplazame en función de los [límites configurados en tu cuenta](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-)"
-   en: "To display the payment button with Aplazame based on the [limits set in your account](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-)"
-
-
- <tab>HTML</tab>
- ``` html
-<button type="button"
   data-aplazame-button
   data-amount="12050"
   data-currency="EUR"
   data-product-type="pay_later"></button>
 
  <div data-aplazame-payment-info="">
-   $message
-     es: "Información acerca del pago con Aplazame que aparecerá y se ocultará con el botón"
-     en: "Information about payment with Aplazame that will appear and be hidden with the button"
-
+    Información acerca del pago con Aplazame que aparecerá y se ocultará con el botón
  </div>
  ```
- <tab>aplazame.js</tab>
+  </TabItem>
+  <TabItem value="aplazame.js" label="aplazame.js">
+
  ```js
-(window.aplazame = window.aplazame || []).push(function (aplazame)
-  aplazame.button(
-    selector: '#some-button-or-wrapper-id', // $message es: "acepta cualquier selector CSS válido", en: "accepts any valid CSS selector"
+ (window.aplazame = window.aplazame || []).push(function (aplazame)
+   aplazame.button(
+    selector: '#some-button-or-wrapper-id', // accepts any valid CSS selector
     amount: 12050,
     currency: 'EUR'
-    product:
-        type: 'pay_later'
-
+    product: {
+      type: 'pay_later'
+    }
   )
 )
- ```
- <tab>HTTP</tab>
- ``` http
+```
+  </TabItem>
+  <TabItem value="http" label="http">
+
+```http
  Request:
 
  GET /checkout/button?amount=12050&currency=EUR&product[type]=pay_later
@@ -193,35 +170,20 @@ $include aplazame-js.md
 
  Response (not available for this credit):
  HTTP/1.1 403 Forbidden
- ```
- $include table-code-header.md
- selector | $typecss | no | $message
-   es: "Selector CSS para mostrar/ocultar el método de pago Aplazame."
-   en: "CSS selector to display/hide Aplazame’s payment method."
+```
 
- amount | $typedecimal | yes | $message
-   es: "Cantidad a pagar."
-   en: "Quantity to be financed."
+  </TabItem>
+</Tabs>
 
- currency | $typecurrency | yes | $message
-   es: "Código de la moneda del pedido."
-   en: "The currency code of the order."
+## Comprobar Pago en 4
+Para mostrar el botón de pago con Aplazame en función de los [límites configurados en tu cuenta](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-).
 
+Para comproabr la disponibilidad del producto "Paga en 4", debes añadir `data-product-type="pay_in_4"`, o `product: { type: 'pay_in_4' }`:
 
+<Tabs>
+  <TabItem value="html" label="html">
 
-
- ## $message
-   es: "Comprobar disponibilidad Pago en 4"
-   en: "Check availability of Pay in 4"
-
-
- > $message
-   es: "Para mostrar el botón de pago con Aplazame en función de los [límites configurados en tu cuenta](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-)"
-   en: "To display the payment button with Aplazame based on the [limits set in your account](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-)"
-
-
- <tab>HTML</tab>
- ``` html
+```html
 <button type="button"
   data-aplazame-button
   data-amount="12050"
@@ -229,17 +191,16 @@ $include aplazame-js.md
   data-product-type="pay_in_4"></button>
 
  <div data-aplazame-payment-info="">
-   $message
-     es: "Información acerca del pago con Aplazame que aparecerá y se ocultará con el botón"
-     en: "Information about payment with Aplazame that will appear and be hidden with the button"
-
+     Información acerca del pago con Aplazame que aparecerá y se ocultará con el botón
  </div>
  ```
- <tab>aplazame.js</tab>
+  </TabItem>
+  <TabItem value="aplazame.js" label="aplazame.js">
+
  ```js
 (window.aplazame = window.aplazame || []).push(function (aplazame)
   aplazame.button(
-    selector: '#some-button-or-wrapper-id', // $message es: "acepta cualquier selector CSS válido", en: "accepts any valid CSS selector"
+    selector: '#some-button-or-wrapper-id', // accepts any valid CSS selector
     amount: 12050,
     currency: 'EUR'
     product:
@@ -248,8 +209,10 @@ $include aplazame-js.md
   )
 )
  ```
- <tab>HTTP</tab>
- ``` http
+  </TabItem>
+  <TabItem value="http" label="http">
+
+ ```http
  Request:
 
  GET /checkout/button?amount=12050&currency=EUR&product[type]=pay_in_4
@@ -263,38 +226,18 @@ $include aplazame-js.md
  Response (not available for this credit):
  HTTP/1.1 403 Forbidden
  ```
- $include table-code-header.md
- selector | $typecss | no | $message
-   es: "Selector CSS para mostrar/ocultar el método de pago Aplazame."
-   en: "CSS selector to display/hide Aplazame’s payment method."
-
- amount | $typedecimal | yes | $message
-   es: "Cantidad a pagar."
-   en: "Quantity to be financed."
-
- currency | $typecurrency | yes | $message
-   es: "Código de la moneda del pedido."
-   en: "The currency code of the order."
+   </TabItem>
+</Tabs>
 
 
-
-## $message
-  es: "Inicio del checkout"
-  en: "Initiating the checkout"
+## Inicio del checkout
+[Here](#integration) you can see how to integrate the SDK
 
 
-> $message
-  es: "[Aquí](#integracion) puedes consultar como integrar el SDK"
-  en: "[Here](#integration) you can see how to integrate the SDK"
-
-
-``` html
+```html
 <script>
 (window.aplazame = window.aplazame || []).push(function (aplazame)
-  // $message
-    es: "Esta función se ejecuta cuando aplazame.js esté listo"
-    en: "This function is executed when aplazame.js is ready"
-
+  // This function is executed when aplazame.js is ready
 
   aplazame.checkout(checkout_id,
     // callbacks ...
@@ -303,117 +246,59 @@ $include aplazame-js.md
 </script>
 ```
 
+## Mostrar resultado
 
-
-## $message
-  es: "Mostrar resultado"
-  en: "Show result"
-
-
-``` js
+```js
 (window.aplazame = window.aplazame || []).push(function (aplazame)
-  // $message
-    es: "Esta función se ejecuta cuando aplazame.js esté listo"
-    en: "This function is executed when aplazame.js is ready"
+  // This function is executed when aplazame.js is ready
 
 
   aplazame.checkout(checkout_id,
-    onStatusChange: function (result_status)
-      console.log('$message
-  es: "IMPORTANTE: EL CHECKOUT TODAVÍA SIGUE ABIERTO"
-  en: "IMPORTANT: THE CHECKOUT IS STILL OPEN"
-')
+    onStatusChange: function (result_status) {
+      console.log('IMPORTANTE: EL CHECKOUT TODAVÍA SIGUE ABIERTO')
 
-      switch(result_status)
+      switch (result_status) {
         case 'success':
-          console.log('$message
-  es: "el checkout ha sido completado correctamente"
-  en: "the checkout has been completed successfully"
-')
+          console.log('el checkout ha sido completado correctamente')
           break
         case 'pending':
-          console.log('$message
-  es: "el checkout ha terminado pero está pendiente de ser validado"
-  en: "the checkout has been completed but is pending validation"
-')
+          console.log('el checkout ha terminado pero está pendiente de ser validado')
           break
         case 'ko':
-          console.log('$message
-  es: "el proceso de pago ha sido rechazado por parte de Aplazame"
-  en: "the payment process has been rejected by Aplazame"
-')
+          console.log('el proceso de pago ha sido rechazado por parte de Aplazame')
           break
-
-    ,
-    onClose: function (result_status)
-      switch(result_status)
+      }
+    },
+    onClose: function (result_status) {
+      switch (result_status) {
         case 'success':
-          console.log('$message
-  es: "el checkout ha sido completado correctamente"
-  en: "the checkout has been completed successfully"
-')
+          console.log('el checkout ha sido completado correctamente')
           break
         case 'pending':
-          console.log('$message
-  es: "el checkout ha terminado pero está pendiente de ser validado"
-  en: "the checkout has been completed but is pending validation"
-')
+          console.log('el checkout ha terminado pero está pendiente de ser validado')
           break
         case 'error':
-          console.log('$message
-  es: "ha ocurrido un error al cargar el checkout"
-  en: "an error occurred while loading the checkout"
-')
+          console.log('ha ocurrido un error al cargar el checkout')
           break
         case 'dismiss':
-          console.log('$message
-  es: "el usuario ha cerrado el checkout sin haberlo completado"
-  en: "the user closed the checkout without completing it"
-')
+          console.log('el usuario ha cerrado el checkout sin haberlo completado')
           break
         case 'ko':
-          console.log('$message
-  es: "el proceso de pago ha sido rechazado por parte de Aplazame"
-  en: "the payment process has been rejected by Aplazame"
-')
+          console.log('el proceso de pago ha sido rechazado por parte de Aplazame')
           break
-
-    ,
-  )
+      }
+    })
 )
 ```
-$include table-code-header.md
-onStatusChange | function | no | $message
-  es: "Función a la que se llamará cuando el Checkout cambie de estado."
-  en: "Function to be called when the Checkout changes its status."
-<br/><br/><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">onStatusChange</span> <span class="token punctuation">(</span>status<span class="token punctuation">)</span> <span class="token punctuation"></span> <span class="token comment" spellcheck="true">/&#42;&#42;/</span> <span class="token punctuation"></span></code><br/><br/>$message
-  es: "**Posibles estados**: success, pending, ko<br/><br/>**( ⚠ Al enviar esta señal, el checkout seguirá abierto hasta que se llame a algún callback abajo mencionado )**"
-  en: "**Possible statuses**: success, pending, ko<br/><br/>**( ⚠ When sending this signal, the checkout will remain open until a callback is made, as mentioned below)**"
 
-onClose | function | no | $message
-  es: "Función a la que se llamará cuando el Checkout se cierre."
-  en: "Function to be called when the Checkout closes."
-<br/><br/><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">onClose</span> <span class="token punctuation">(</span>status<span class="token punctuation">)</span> <span class="token punctuation"></span> <span class="token comment" spellcheck="true">/&#42;&#42;/</span> <span class="token punctuation"></span></code><br/><br/>$message
-  es: "**Posibles estados**: success, pending, ko, dismiss"
-  en: "**Possible statuses**: success, pending, ko, dismiss"
-
-onSuccess | function | no | $message
-  es: "Función a la que se llamará cuando se haya completado el pago. Al definir esta función el valor de `success_url` es ignorado"
-  en: "Function to be called when the payment is completed. When defining this function the `success_url` value is ignored"
-
-onPending | function | no | $message
-  es: "Función a la que se llamará cuando el pago quede pendiente de confirmación. Al definir esta función el valor de `pending_url` es ignorado"
-  en: "Function to be called when the payment is pending confirmation. When defining this function the `pending_url` value is ignored"
-
-onKO | function | no | $message
-  es: "Función a la que se llamará cuando se haya denegado el pago. Al definir esta función el valor de `ko_url` es ignorado"
-  en: "Function to be called when the payment is denied. When defining this function the `ko_url` value is ignored"
-
-onError | function | no | $message
-  es: "Función a la que se llamará cuando haya habido un error. Al definir esta función el valor de `error_url` es ignorado"
-  en: "Function to be called when an error occurs. When defining this function the `error_url` value is ignored"
-
-onDismiss | function | no | $message
-  es: "Función a la que se llamará cuando el usuario escoge volver a la tienda. Al definir esta función el valor de `dismiss_url` es ignorado"
-  en: "Function to be called when the user chooses to return to the store. When defining this function the `dismiss_url` value is ignored"
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+onStatusChange | function | no | `function onStatusChange(status) { /**/}` Función a la que se llamará cuando el Checkout cambie de estado.
+ **Posibles estados**: `success`, `pending`, `ko`. **(Al enviar esta señal, el checkout seguirá abierto hasta que se llame a algún callback abajo mencionado)**
+onClose | function | no | Función a la que se llamará cuando el Checkout se cierre. `function onClose(status) { /**/}` **Posibles estados**: `success`, `pending`, `ko`, `dismiss`.
+onSuccess | function | no | Función a la que se llamará cuando se haya completado el pago. Al definir esta función el valor de `success_url` es ignorado
+onPending | function | no | Función a la que se llamará cuando el pago quede pendiente de confirmación. Al definir esta función el valor de `pending_url` es ignorado
+onKO | function | no | Función a la que se llamará cuando se haya denegado el pago. Al definir esta función el valor de `ko_url` es ignorado
+onError | function | no | Función a la que se llamará cuando haya habido un error. Al definir esta función el valor de `error_url` es ignorado
+onDismiss | function | no | Función a la que se llamará cuando el usuario escoge volver a la tienda. Al definir esta función el valor de `dismiss_url` es ignorado
 
