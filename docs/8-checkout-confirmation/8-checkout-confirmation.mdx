@@ -1,0 +1,217 @@
+---
+title: Confirmación del checkout
+sidebar_position: 4
+keywords: [crear, checkout, iniciar, aplazame]
+---
+
+# Confirmación del pedido
+
+Aplazame utiliza la URL de callback definida en la creación del checkout como [notification_url](../checkout-creation/#merchant) para notificar cambios relevantes en el estado del pedido. El comercio deberá implementar un endpoint en la dirección proporcionada para responder a las notificaciones.
+
+:::info
+Específicamente, cuando el comprador complete el proceso de pago y el estado del pedido sea pendiente de confirmación, Aplazame enviará el resultado de la solicitud de financiación a esta dirección para que el comercio lo confirme.
+:::
+
+La notificación de confirmación es el último paso que se produce una vez que Aplazame ha aceptado la solicitud de financiación del comprador, y determina si finalmente el pedido será procesado. Una vez que el pedido ha sido confirmado por el comercio, el proceso de solicitud estará completado y se realizará la liquidación al comercio.
+
+## Flujo de confirmación
+
+Una vez completada la solicitud de financiación, Aplazame enviará una notificación a la dirección [notification_url](../checkout-creation/#merchant). Aplazame espera que el comercio responda a todas las notificaciones enviadas en el [formato de respuesta](#formato-de-respuesta) adecuado.
+
+Existen tres posibles escenarios como resultado de la solicitud de financiación del comprador:
+
+- La solicitud de **financiación** ha sido **denegada** por parte de Aplazame.
+
+:::info
+En caso de solicitud denegada el comercio recibirá una notificación cuyo `status` es `ko`.
+:::
+
+- La solicitud de **financiación** está **pendiente** ya que Aplazame requiere que el comprador complete un reto de validación de identidad. Mientras, el comercio debe reservar el stock del producto al comprador hasta que se determine el estado final del pedido.
+
+:::info
+En caso de solicitud pendiente por validación de identidad el comercio recibirá una notificación cuyo `status` es `pending` y `status_reason` es `challenge_required`.
+:::
+
+- La solicitud de **financiación** ha sido **aceptada** por Aplazame y ahora se requiere la confirmación con el comercio para completar el proceso.
+
+:::info
+En caso de solicitud aprobada el comercio recibirá una notificación cuyo `status` es `pending` y `status_reason` es `confirmation_required`.
+:::
+
+El comercio deberá responder a la notifiación de confirmación informando si finalmente [acepta](?tab-label=OK#formato-de-respuesta) o [deniega](?tab-label=KO#formato-de-respuesta) el pedido (ej: el producto ya no se encuentra en stock).
+
+En función de la respuesta del comercio, Aplazame realizará una última notificación adicional para informar del estado final del pedido. En caso que alguna de las notificaciones enviadas no obtengan respuesta o ésta no tenga el formato esperado, Aplazame realizará una serie de reintentos cuyo límite estará determinado por el tiempo de expiración máxima del pedido.
+
+:::info
+Observa el flujo de confirmación para un pedido que la tienda procede a confirmar después de ser aceptado por Aplazame
+:::
+
+![order-confirmation-ok](/img/confirmation_ok.svg)
+
+:::info
+Observa también el flujo de confirmación para un pedido que el comercio decide rechazar después de ser aceptado por Aplazame
+:::
+
+![order-confirmation-ko](/img/confirmation_ko.svg)
+
+
+## Datos de notificación
+
+Cada notificación de Aplazame incluye la siguiente información relevante para el estado del pedido.
+
+Observa que las notificaciones enviadas por Aplazame incluyen la clave privada del comercio como cabecera de autenticación. Se recomienda implementar un mecanismo para comprobar el contenido de la cabecera en el servidor del comercio y validar que el emisor de las notificaciones es Aplazame.
+
+```http
+POST notification_url
+Authorization: Bearer $api_token{private}
+Content-Type: application/json
+
+{
+  "id": "8606a585a5a56e51856e7f6d84a131b8",
+  "status": "pending",
+  "status_reason": "confirmation_required",
+  "sandbox": false,
+  "mid": "nOIpXXVTSGhc",
+  "total_amount": 124560,
+  "tax_rate": 2100,
+  "discount": 0,
+  "discount_rate": 0,
+  "currency": {
+    "name": "Euro",
+    "code": "EUR",
+    "numeric": "978",
+    "symbol": "€"
+  },
+  "rejected": false,
+  "confirmed": null,
+  "verified": "2017-09-11T15:47:12.503341Z",
+  "expired": null,
+  "expires_at": "2017-09-11T17:47:21.603326Z",
+  "cancelled": null,
+  "created": "2017-09-11T15:47:21.603326Z"
+}
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+id | string | Identificador del pedido de Aplazame (inmutable).
+[status](#codigos-de-estado-del-pedido) | string |Estado del pedido (`ok`, `pending` o `ko`).
+[status_reason](#codigos-de-estado-del-pedido) | string | Código de estado del pedido.
+sandbox | boolean | El pedido fue realizado en el entorno de pruebas.
+mid | string | Identificador del pedido generado por el comercio o autogenerado por Aplazame.
+total_amount | $type{decimal} | Cantidad a financiar.
+tax_rate | $type{decimal} | Importe de descuento en el precio del pedido.
+discount | $type{decimal} | Importe de descuento en el precio del pedido.
+discount_rate | $type{decimal} | Tasa de descuento en el precio del pedido.
+currency | $type{currency} | Divisa del pedido.
+rejected | boolean |El pedido ha sido rechazado.
+confirmed | $type{date} | Fecha y hora de confirmacion del pedido.
+verified | $type{date} | Fecha y hora de verificación del pedido.
+expired | $type{date} | Fecha y hora en que el pedido expiró.
+expires_at | $type{date} | Fecha y hora de expiración del pedido.
+cancelled | $type{date} | Fecha y hora de cancelación del pedido.
+created | $type{date} | Fecha y hora de creación del pedido.
+
+## Códigos de estado del pedido
+
+El estado del pedido se notifica en los campos `status` y `status_reason`. En función del campo `status` del pedido, el campo `status_reason` proporciona información específica para determinar el estado del pedido.
+
+- Un **pedido en estado** `pending` **significa** que aún no se ha determinado el estado final del pedido, el cuál depende de una acción por parte del comercio, el comprador o Aplazame. Por lo tanto, éste no es un estado final de un pedido.
+
+- Un **pedido en estado** `ok` **significa** que el pedido ha sido aceptado y confirmado tanto por el comercio como por Aplazame. Éste es un estado final de un pedido.
+
+- Un **pedido en estado** `ko` **significa** que el pedido ha sido rechazado por Aplazame o cancelado por el comercio. Éste es un estado final de un pedido.
+
+Status | Status reason | Cause
+------ | ---- | -----
+pending | confirmation_required | La solicitud de financiación ha sido aceptada por Aplazame y está a la espera de la confirmación final de la tienda.
+pending | challenge_required | Aplazame está a la espera de que el comprador complete un reto de validación de identidad tras finalizar la solicitud de financiación.
+ko | expired | La solicitud de financiación ha expirado.
+ko | expired_challenge | El comprador no ha superado el reto de validación de identidad a tiempo.
+ko | ko_generic | La solucitud de financiación no ha pasado el criterio de admisión de Aplazame.
+ko | failed_challenge | El comprador no ha superado el reto de validación de identidad.
+ko | confirmation_rejected_by_merchant | La tienda ha rechazado el pedido.
+ko | merchant_failed_to_confirm | No se ha podido confirmar con la tienda.
+ok | | La solicitud de financiación ha sido completada y aceptada por la tienda.
+
+## Formato de respuesta
+
+Aplazame utiliza un formato simple de respuesta para las peticiones de notificación enviadas al comercio. A excepción de la notificación de confirmación, Aplazame espera que el formato de la respuesta sea siempre un `HTTP 200 OK` con un estado `ok` como datos de respuesta. En cualquier otro caso, Aplazame realizará varios reintentos de entrega de la notificación.
+
+:::caution
+En el caso de la notificación de confirmación, el comercio también responderá con un `HTTP 200 OK` pero los datos de respuesta podrán incluir un estado `ok` para proceder a la confirmación del pedido o un estado `ko` para denegarlo.
+:::
+
+<Tabs>
+  <TabItem value="ok" label="OK">
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "status": "ok"
+}
+```
+  </TabItem>
+  <TabItem value="ko" label="KO">
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "status": "ko"
+}
+```
+  </TabItem>
+  <TabItem value="update" label="update order id">
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "status": "ok",
+  "order_id": "28475648233786783165"
+}
+```
+  </TabItem>
+</Tabs>
+
+
+Opcionalmente, sólo en caso de proceder a la confirmación del pedido, la [respuesta puede incluir el identificador actualizado del pedido](?tab-label=update%20order%20id::tab) (order_id) generado por la tienda en la transacción de confirmación.
+
+Este identificador será utilizado para reemplazar el identificador provisional asignado al pedido antes de su confirmación (mid). Una vez que Aplazame ha recibido la confirmación del pedido no es posible realizar cambios de identificador.
+
+### Algoritmo de confirmación
+
+Ejemplo de confirmación en pseudo-código para el servidor del comercio
+
+```js
+IF private_key != request.HEADER['Authorization'] THEN:
+  RETURN Response(status_code = 403)
+END IF
+
+SET payload to JSON.Decode(request.POST)
+IF payload.mid not found THEN:
+  RETURN Response(status_code = 404)
+END IF
+
+IF payload.status == 'pending' AND
+   payload.status_reason == 'confirmation_required' THEN:
+  IF order.do_payment_accept() THEN:
+    RETURN Response(status_code = 200, body = '{"status": "ok"}')
+  ELSE:
+    RETURN Response(status_code = 200, body = '{"status": "ko"}')
+  END IF
+ELSE IF payload.status == 'ko' THEN:
+  IF order.do_payment_cancel() THEN:
+    RETURN Response(status_code = 200, body = '{"status": "ok"}')
+  ELSE:
+    RETURN Response(status_code = 200, body = '{"status": "ko"}')
+  END IF
+ELSE:
+  RETURN Response(status_code = 200, body = '{"status": "ok"}')
+END IF
+```
