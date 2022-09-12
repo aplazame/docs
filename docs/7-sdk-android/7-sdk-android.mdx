@@ -1,0 +1,102 @@
+---
+title: SDK Android
+sidebar_position: 7
+keywords: [SDK Android, integration, Android, smartphone]
+---
+
+# SDK Android
+
+## Integración {#integration}
+
+```java
+import com.aplazame.sdk.AplazameSDK;
+
+String accessToken = "api_public_key";
+Boolean sandbox = true;
+AplazameSDK.setConfiguration(accessToken, sandbox);
+```
+
+## Comprobar la disponibilidad
+
+Para mostrar el botón de pago con Aplazame en función de los [límites configurados en tu cuenta](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-)
+
+```java
+Double amount = 120.50;
+String currency = "EUR";
+
+AplazameSDK.checkAvailability(amount, currency, new AvailabilityCallback() {
+  @Override
+  public void onAvailable() {
+    // Aplazame está disponible para este crédito
+  }
+
+  @Override
+  public void onNotAvailable() {
+    // Aplazame no está disponible para este crédito. No deberías mostrar Aplazame como un método de pago disponible
+  }
+
+  @Override
+  public void onFailure() {
+    // Ha ocurrido un error
+  }
+});
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+selector | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | no | Selector CSS para mostrar/ocultar el método de pago Aplazame.
+amount | [decimal](./integraciones/api/api-reference/#decimales)  | <t id="table.yes">Sí</t> | Cantidad a financiar.
+currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="table.yes">Sí</t> | Código de la moneda del pedido.
+
+
+## Inicio del checkout
+
+[Aquí](#integration) puedes consultar como integrar el SDK.
+
+```java
+AplazameSDK.setCheckout("checkout id");
+```
+
+Una vez definido el id del checkout, se iniciará el checkout junto con los callback de resultado descritos en el siguiente apartado.
+
+## Mostrar resultado
+
+```java
+WebView webView = findViewById(R.id.webview);
+AplazameSDK.initializeAplazameWebView(webView, new JsWebViewEvents() {
+  @Override
+  public void onReadyEvent() {
+    // La aplicación JS ha iniciado
+    webView.setVisibility(View.VISIBLE);
+  }
+
+  @Override
+  public void onStatusChangeEvent(String status) {
+    switch (status) {
+      case SUCCESS:
+      break;
+      case PENDING:
+      break;
+      case KO:
+      break;
+    }
+  }
+
+  @Override
+  public void onCloseEvent(String status) {
+    switch (status) {
+      case SUCCESS:
+      break;
+      case PENDING:
+      break;
+      case DISMISS:
+      break;
+      case KO:
+      break;
+    }
+  }
+});
+```
+:::info
+Puedes entontrar información más detallada en https://github.com/aplazame/android-sdk/
+:::

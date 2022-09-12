@@ -1,0 +1,75 @@
+---
+title: SDK iOS
+sidebar_position: 6
+keywords: [SDK iOS, integration, OSx, Mac, Apple]
+---
+
+# SDK iOS
+
+## Integration
+
+```swift
+// Check https://github.com/aplazame/ios-sdk/ for more detailed documentation
+
+let config = APZConfig(accessToken: "api_public_key", environment: .sandbox)
+let paymentContext = APZPaymentContext(config: config)
+```
+
+
+## Check availability
+
+To display the payment button with Aplazame based on the [limits set in your account](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-),
+
+
+```swift
+// Puedes entontrar información más detallada en https://github.com/aplazame/ios-sdk/
+
+paymentContext.checkAvailability(amount: 12050, currency: "EUR") { (status) in
+  switch status {
+    case .available:
+      // Aplazame está disponible para este crédito
+    case .notAvailable:
+      // Aplazame no está disponible para este crédito. No deberías mostrar Aplazame como un método de pago disponible
+    case .undefined:
+      // Ha ocurrido un error
+    }
+  }
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+selector | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | no | CSS selector to display/hide Aplazame’s payment method.
+amount | [decimal](./integraciones/api/api-reference/#decimales)  | <t id="table.yes">Sí</t> | Quantity to be financed.
+currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="table.yes">Sí</t> | The currency code of the order.
+
+
+## Initiating the checkout
+[Here](#integration) you can see how to integrate the SDK
+
+
+```swift
+// Start activity indicator
+paymentContext.requestCheckout(checkout: checkout, delegate: self, onReady: { vc in
+  // Stop activity indicator
+  self.navigationController?.pushViewController(vc, animated: true)
+})
+```
+
+## Show result
+
+```swift
+extension ViewController: APZPaymentContextDelegate {
+  func checkoutDidClose(checkoutVC: UIViewController, with reason: APZCheckoutCloseReason) {
+    print("checkoutDidCloseWithReason \(reason.rawValue)")
+    checkoutVC.dismiss(animated: true, completion: nil)
+  }
+
+  func checkoutStatusChanged(with status: APZCheckoutStatus) {
+    print("checkoutStatusChanged \(status.rawValue)")
+  }
+}
+```
+
+:::info
+You can find more detailed information at https://github.com/aplazame/ios-sdk/
+:::

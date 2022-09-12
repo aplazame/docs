@@ -193,7 +193,7 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
 
-        additionalLanguages: ['http', 'powershell', 'php', 'csharp', 'python'],
+        additionalLanguages: ['http', 'powershell', 'php', 'csharp', 'python', 'swift', 'java'],
 
       },
     }),
