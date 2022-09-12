@@ -1,0 +1,545 @@
+---
+title: Peticiones a la API
+sidebar_position: 3
+keywords: [aplazame API, API reference]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Peticiones a la API
+
+## URL de API
+The URL of Aplazame’s API service is available at `https://api.aplazame.com`.
+
+## Cabeceras HTTP {#headers}
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"
+```
+  </TabItem>
+  <TabItem value="phyton" label="phyton">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client('$api_token{private}', ctype='json', version='1')
+
+response = client.orders()
+```
+  </TabItem>
+  <TabItem value="PHP" label="PHP">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$result = $aplazameClient->get("/orders");
+```
+
+  </TabItem>
+  <TabItem value="cs" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+dynamic result = client.Get("/orders");
+```
+  </TabItem>
+</Tabs>
+
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|---------|
+Accept | string | <t id="table.yes">Sí</t> | Especifica la versión de la API de Aplazame y el tipo de dato esperado
+Authorization | string | <t id="table.yes">Sí</t> | Tipo y clave de acceso
+
+### Response
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+```
+
+[OAuth2](http://en.wikipedia.org/wiki/OAuth) is an open standard for authorisation defined in [RFC 6749](http://tools.ietf.org/html/rfc6749).
+
+## Versioning
+The `Accept` header is used to indicate the API version, expected content type (and [sandbox mode](#sandbox-mode))
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders HTTP/1.1
+Accept: application/vnd.aplazame.v1+(json|xml)
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"
+
+$ curl "https://api.aplazame.com/orders" \
+    -H "Accept: application/vnd.aplazame.v1+xml" \
+    -H "Authorization: Bearer $api_token{private}"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client('$api_token{private}', version='1')
+
+client = aplazame_sdk.Client('$api_token{private}', ctype='xml')
+```
+  </TabItem>
+</Tabs>
+
+Although versioning via URL is currently allowed (e.g. https://api.aplazame.com/v1/orders), it is better practice to use the `Accept` header in the request to specify the type and format of the API service response.
+
+If the API version is not indicated in the header or via URL, the latest version of the API will be activated. Since a new version of the API can deprecate certain fields, it is recommended you always specify the API version
+
+### Format types allowed
+
+Header | Version | Expected format | Value
+------ | - | ----- | -----
+Accept | 1 | json | application/vnd.aplazame.**v1**+**json**
+Accept | 1 | xml | application/vnd.aplazame.**v1**+**xml**
+
+:::caution
+The latest API version is version 1 and the latest CHECKOUT version is version 2; this is the v1.2
+:::
+
+## Decimals
+
+:::tip
+All amounts related to taxes, discounts and prices will be formatted as an integer including two decimal places (i.e. amounts in cents). For example, if an item has a price of `€12.50` should be formatted as an integer `1250`.
+:::
+
+<Tabs>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ if ((`bc <<< "12.50!=1250"`)); then echo "beep beeeeeeep!!!"; fi
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+assert(12.50 != 1250)
+```
+  </TabItem>
+</Tabs>
+
+## Errors
+
+<Tabs>
+  <TabItem value="bad_request" label="Bad request">
+
+```http
+HTTP/1.1 400 BAD REQUEST
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+
+{
+  "error": {
+    "fields": {
+      "articles": [
+        "This field is required."
+      ]
+    },
+    "message": "API validation error",
+    "type": "ApiValidationException"
+  }
+}
+```
+  </TabItem>
+  <TabItem value="unauthorized" label="Unauthorized">
+
+  ```http
+HTTP/1.1 401 UNAUTHORIZED
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+
+{
+  "error": {
+    "message": "Authentication credentials were not provided.",
+    "type": "UnauthorizedException"
+  }
+}
+```
+  </TabItem>
+  <TabItem value="not_found" label="Not Found">
+
+```http
+HTTP/1.1 404 NOT FOUND
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+
+{
+  "error": {
+    "fields": {
+      "order__id": "145000006"
+    },
+    "message": "Object not found",
+    "type": "ObjectNotFoundException"
+  }
+}
+```
+  </TabItem>
+
+</Tabs>
+
+Listado de códigos de error devueltos por la API.
+
+
+Código | Error | Significado
+---- | ----- | -------
+400 | Bad Request | Si hay algún error en los datos enviados
+401 | Unauthorized | No se ha enviado el token (public/private key) o el que se ha enviado no es válido
+403 | Forbidden | Aún siendo válido el token, la operación puede ser rechazada por permisos.
+404 | Not Found | No se ha encontrado el objeto o recurso.
+405 | Method Not Allowed | El método no está disponible para la url indicada (GET/POST/...)
+406 | Not Acceptable | La cabecera Accept no es válida [ver cabeceras](#headers)
+408 | Request timeout | Ha expirado el tiempo máximo de espera para la petición.
+409 | Conflict | Indica que se ha producido un conflicto con la petición, su significado depende del contexto.
+415 | Unsupported Media Type | No hay soporte para el tipo indicado por la cabecera 'Content-Type'
+429 | Too Many Requests | Se están recibiendo demasiadas peticiones.
+500 | Internal Server Error | Error en el servidor de la API, esto puede ser un fallo en la implementación, un problema puntual de la red, etc.
+503 | Service Unavailable | Fuera de servicio por mantenimiento.
+
+## Pagination
+
+<Tabs>
+  <TabItem value="pag_http" label="http">
+
+```http
+GET /orders?page=2 HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="not_found" label="Not Found">
+
+```shell
+$ curl "https://api.aplazame.com/orders?page=2" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"
+```
+  </TabItem>
+  <TabItem value="pag_python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client('$api_token{private}')
+
+response = client.orders(page=2)
+
+# Build a URL query string from a dictionary
+response = client.orders({
+  'page': 2
+})
+```
+  </TabItem>
+  <TabItem value="pag_php" label="PHP">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$result = $aplazameClient->get("/orders", ["page" => 2]);
+```
+  </TabItem>
+  <TabItem value="pag_c#" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+dynamic result = client.Get("/orders", new {page => 2});
+```
+  </TabItem>
+</Tabs>
+
+### Respuesta
+
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+
+{
+  "cursor": {
+    "after": 3,
+    "before": 1
+  },
+  "paging": {
+    "count": 314,
+    "next": "https://api.aplazame.com/orders?page=3",
+    "previous": "https://api.aplazame.com/orders?page=1"
+  },
+  "results": []
+}
+```
+
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|
+[cursor](#cursor) | object | Puntero de paginación
+[paging](#paging) | object | Estado de paginación
+results | collection | Listado de tiendas
+
+### cursor
+```json
+"cursor": {
+  "after": 3,
+  "before": 1
+}
+```
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|
+after | integer | Índice de la página anterior.
+before | integer | Índice de la página siguente.
+
+### paging
+```json
+"paging": {
+  "count": 314,
+  "next": "https://api.aplazame.com/orders?page=3",
+  "previous": "https://api.aplazame.com/orders?page=1"
+}
+```
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|
+count | integer | Número de elementos devueltos.
+next | URL | URL de la API a la siguente página de resultados.
+previous | URL | URL de la API a la página anterior de resultados.
+
+
+## Filtros
+
+Los filtros en las consultas de listados se indican mediante parámetros de la URL.
+
+El formato de cada parametro está compuesto por la entidad, el tipo de búsqueda y el valor a buscar.
+
+```http
+GET /orders?propiedad-busqueda=valor
+```
+
+En el siguente ejemplo, la petición devolverá todos los pedidos cuyo *id* comienze por `e791f`. Si se omite el tipo de concordancia, se usará `exact`.
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?id-startswith=e791f HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?id-startswith=e791f" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'id-startswith': 'e791f'
+})
+```
+  </TabItem>
+  <TabItem value="PHP" label="PHP">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$result = $aplazameClient->get("/orders", ["id-startswith" => "e791f"]);
+```
+  </TabItem>
+  <TabItem value="cs" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+dynamic result = client.Get("/orders?id-startswith=e791f");
+```
+
+  </TabItem>
+</Tabs>
+
+
+Si se especifican varios filtros, el resultado devolverá la combinación aditiva de ellos.
+
+```http
+GET /orders?id-startswith=e791f&id-endswith=4ff4g HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+
+### Búsqueda de texto
+
+
+Término | Uso | Descripción
+---- | ----- | -----------
+exact | `name-exact=AplaZame` | Coincidencia exacta
+iexact | `name-iexact=aplazame` | Coincidencia exacta *no sensible a mayúsculas/minúsculas*
+regex | `name-regex=^[A-Z].*$` | Expresión regular sensible a mayúsculas/minúsculas.
+iregex | `name-iregex=^[a-z].*$` | Expresión regular *no sensible a mayúsculas/minúsculas*.
+contains | `name-contains=plaZa` | Contiene la cadena especificada *no sensible a mayúsculas/minúsculas*
+icontains | `name-icontains=plaza` | Contiene la cadena especificada.
+startswith | `name-startswith=Apla` | Comienza por la cadena especificada.
+istartswith | `name-istartswith=apla` | Comienza por la cadena especificada *no sensible a mayúsculas/minúsculas*.
+endswith | `name-endswith=Zame` | Termina por la cadena especificada.
+iendswith | `name-iendswith=zame` | Termina por la cadena especificada *no sensible a mayúsculas/minúsculas*.
+in | `name-in=AplaZame,Aplazar` | Coincide con alguna de las opciones separadas por comas.
+search | `name-search=Ap` | Cadena de texto a buscar
+
+### Por fecha
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+``` http
+GET /orders?confirmed-week_day=monday HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+``` shell
+$ curl "https://api.aplazame.com/orders?confirmed-week_day=monday" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'confirmed-week_day': 'monday'
+})
+```
+  </TabItem>
+  <TabItem value="PHP" label="PHP">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$result = $aplazameClient->get("/orders", ["confirmed-week_day" => "monday"]);
+```
+  </TabItem>
+  <TabItem value="cs" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+dynamic result = client.Get("/orders?confirmed-week_day=monday");
+```
+  </TabItem>
+</Tabs>
+
+Término | Uso | Descripción
+---- | ----- | -----------
+year | `created-year=2015` | Fechas cuyo año coincida con el indicado.
+month | `created-month=10` | Fechas cuyo mes coincida con el indicado.
+week_day | `created-week_day=monday` | Día de la semana, las opciones son: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`
+day | `created-day=2` | Fechas cuyo día del mes coincida con el indicado.
+hour | `created-hour=14` | Fechas cuya hora coincida con la indicada.
+
+
+### Nulo
+Término | Uso | Descripción
+---- | ----- | -----------
+isnull | `confirmed-isnull=yes` | Filtrar por campos nulos, `si` O `no`
+
+
+### Rangos de valores
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+``` http
+GET /orders?confirmed-gte=2015-10-02T18:15:45.101838Z HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+``` shell
+$ curl "https://api.aplazame.com/orders?confirmed-gte=2015-10-02T18:15:45.101838Z" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+``` python
+response = client.orders({
+  'confirmed-gte': '2015-10-02T18:15:45.101838Z'
+})
+```
+  </TabItem>
+  <TabItem value="PHP" label="PHP">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$result = $aplazameClient->get("/orders", ["confirmed-gte" => "2015-10-02T18:15:45.101838Z"]);
+```
+  </TabItem>
+  <TabItem value="cs" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+dynamic result = client.Get("/orders?confirmed-gte=2015-10-02T18:15:45.101838Z");
+```
+  </TabItem>
+</Tabs>
+
+
+Término | Uso | Descripción
+---- | ----- | -----------
+exact | `total_amount-exact=10000` | Valor exacto
+gt | `total_amount-gt=8000` | Mayor qué
+gte | `total_amount-gte=10000` | Mayor o igual que
+lt | `total_amount-lt=12000` | Menor que
+lte | `total_amount-lte=10000` | Menor o igual que

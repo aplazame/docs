@@ -1,0 +1,422 @@
+---
+title: Checkout creation
+sidebar_position: 4
+keywords: [build, create checkout, aplazame]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Checkout creation
+
+## Request
+
+The creation of the checkout will be done by means of a **POST** request to the [Aplazame server](../api-reference/#api-url).
+
+:::tip
+This page describes how to create a checkout for the products we have available. This will also depend on the configuration that your trade has in our backend. If the type of product is not indicated in the request (first case described), the one that corresponds to you will be created according to that configuration.
+:::
+
+If you are starting the integration you may be interested in how to set the [test mode](../test-environment/#test-mode) as well as [test data](../test-environment/#test-data) available for the integration.
+
+To improve the provision of credit, it is recommended that you configure the sending of the customer's order history ([see documentation](../orders/#history)).
+
+:::caution
+Before starting integration, we recommend you visit our [first steps](https://ayuda.aplazame.com/hc/es-es/articles/360014854679--C%C3%B3mo-me-creo-una-cuenta-como-tienda-en-Aplazame-) section to complete the registration process and obtain your `api_private_key`.
+:::
+
+**POST** request should have next fields and headers:
+
+<Tabs>
+  <TabItem value="prod" label="production">
+
+```http
+POST https://api.aplazame.com/checkout
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Content-Type: application/json
+
+{
+  "merchant": {...},
+  "order": {...},
+  "customer": {...},
+  "billing": {...},
+  "shipping": {...}
+}
+```
+  </TabItem>
+  <TabItem value="tests" label="tests">
+
+```http
+POST https://api.aplazame.com/checkout
+Accept: application/vnd.aplazame.sandbox.v1+json
+Authorization: Bearer api_private_key
+Content-Type: application/json
+
+{
+  "merchant": {...},
+  "order": {...},
+  "customer": {...},
+  "billing": {...},
+  "shipping": {...}
+}
+```
+  </TabItem>
+  <TabItem value="PHP" label="PHP">
+
+```php
+$privateKey = 'api_private_key';
+$environment = Aplazame\Api\Client::ENVIRONMENT_SANDBOX;
+$apiBaseUri = 'https://api.aplazame.com';
+
+$aplazameApiClient = new Aplazame\Api\Client($apiBaseUri, $environment, $privateKey);
+
+$order_created = $aplazameApiClient->post('/checkout', $payload);
+
+// checkout how to create the payload:
+// https://github.com/aplazame/php-sdk/blob/master/examples/step1_checkout_create.php#L39
+```
+
+  </TabItem>
+  <TabItem value="node" label="node">
+
+```js
+const aplazame = require('@aplazame/node')({
+  access_token: 'api_private_key',
+  is_sandbox: true,
+})
+
+aplazame.post('/checkout', {
+  "merchant": {...},
+  "order": {...},
+  "customer": {...},
+  "billing": {...},
+  "shipping": {...}
+}).then(function (response) {
+
+  console.log('Order created successfully!', response.headers.location)
+
+}, function (response) {
+
+  console.log('Error creating order:' + response.status)
+
+})
+
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+``` shell
+$ curl --request POST "https://api.aplazame.com/checkout" \
+    --header "Accept: application/vnd.aplazame.v1+json" \
+    --header "Authorization: Bearer api_private_key" \
+    --data '{ "merchant": {...}, "order": {...}, "customer": {...}, "billing": {...}, "shipping": {...} }'
+```
+  </TabItem>
+</Tabs>
+
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|---------|
+[merchant](#merchant) | object | <t id="table.yes">Sí</t> | Merchant data
+[order](#order) | object | <t id="table.yes">Sí</t> | Your order data
+[customer](#customer) | object | <t id="table.yes">Sí</t> | Customer data
+[billing](#billing) | object | No | Billing address
+[shipping](#shipping) | object | <t id="table.yes">Sí</t> | Shipping info
+
+### Installment payment
+If a `product` field is not specified, the default checkout type will be "Installments".
+
+### Pay in 15 days
+The creation of a "Payment in 15 days" checkout is same as the "Installments" described above, with the difference that an additional field `product` with value `{ type: "pay_later"}` must be added, to the checkout creation request:
+
+```json
+{
+  ...
+  "product": {
+    "type": "pay_later"
+  }
+}
+```
+
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|---------|
+product | object | No| Product type. If this parameter is not indicated, the type is `installments` by default. Valid values are: `instalments`, `pay_later`, `pay_in_4`.
+
+
+### Pay in 4
+The creation of a "Pay in 4" checkout is same as the "Installments" described above, with the difference that an additional field `product` with value `{ type: "pay_in_4"}` must be added, to the checkout creation request:
+
+```json
+{
+  ...
+  "product": {
+    "type": "pay_in_4"
+  }
+}
+```
+
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|---------|
+product | object | No| Product type. If this parameter is not indicated, the type is `installments` by default. Valid values are: `instalments`, `pay_later`, `pay_in_4`.
+
+
+
+## merchant
+
+```js
+{
+  "merchant": {
+    "notification_url": "https://merchant.com/order/confirm",
+    "success_url": "/success",
+    "pending_url": "/pending",
+    "error_url": "/error",
+    "dismiss_url": "/",
+    "ko_url": "/ko",
+    "close_on_success": false,
+    "timeout_checkout": 60,
+    "timeout_extra": 2880
+  },
+  // ...
+}
+```
+
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|---------|
+notification_url | [url](https://en.wikipedia.org/wiki/URL) | <t id="table.yes">Sí</t> | URL to be notified of changes to the status of the order and which will serve to complete the final confirmation.
+success_url | [url](https://en.wikipedia.org/wiki/URL) | <t id="table.yes">Sí</t> | URL (relating to the store) to which the user will be redirected when payment has been completed.
+pending_url | [url](https://en.wikipedia.org/wiki/URL) | <t id="table.yes">Sí</t> | URL (relating to the store) to which the user will be redirected when the payment is pending confirmation.
+error_url | [url](https://en.wikipedia.org/wiki/URL) | <t id="table.yes">Sí</t> | URL (relating to the store) to which the user will be redirected when an error has occurred.
+dismiss_url | [url](https://en.wikipedia.org/wiki/URL) | No | URL (relating to the store) to which the user will be redirected when they choose to return to the store (by default '/').
+ko_url | [url](https://en.wikipedia.org/wiki/URL) | No | URL (relating to the store) to which the user will be redirected when payment has been denied.
+close_on_success | boolean | No | Indicates whether the checkout automatically redirects you to the success_url in case of success. (by default: `false`)
+timeout_checkout | integer | No | It establishes the maximum time, in minutes, that the user has to complete the checkout process (by default 60; min. 1; max. 120).
+timeout_extra | integer | No | It establishes the additional time, in minutes, that the user has to complete the identity validation task once the checkout process is finished (by default 2880; min. 0; max. 2880).
+
+## order
+:::caution
+Aplazame no permite diferentes pedidos con el mismo ID.
+:::
+
+```json
+{
+  "id": "28475648233786783165",
+  "articles": [
+    {
+      "id": "89793238462643383279",
+      "name": "18 ct white gold watch with diamonds",
+      "quantity": 2,
+      "price": 402000,
+      "tax_rate": 2100,
+      "discount_rate": 200,
+      "description": "High-precision quartz movement",
+      "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+      "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg"
+    },
+    ...
+  ],
+  "discount": 16000,
+  "currency": "EUR",
+  "total_amount": 462000,
+  "tax_rate": 2100,
+  "options": {...},
+}
+```
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|---------|
+id | string | <t id="table.yes">Sí</t> | Your order `ID`.
+discount | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount amount of the order
+discount_rate | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount rate on the price of the order
+cart_discount | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount amount of the cart
+cart_discount_rate | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount rate of the cart
+currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="table.yes">Sí</t> | Currency code of the order
+total_amount | [decimal](./integraciones/api/api-reference/#decimales) | <t id="table.yes">Sí</t> | Order tax rate
+[tax_rate](#tax_rate) | [decimal](./integraciones/api/api-reference/#decimales) | <t id="table.yes">Sí</t> | Total order amount
+[options](#options) | object | No | It allows defining specific options for this order, for example, the date of the first payment.
+[articles](#article) | collection | <t id="table.yes">Sí</t> | Articles in cart
+
+
+### tax_rate
+All order items must have a tax rate `tax_rate`. You can include this rate globally in `order.tax_rate` or you can choose to apply the rate to each individual item and shipping.
+
+:::caution
+The `tax_rate` of each individual item or shipping overrides the global tax rate defined.
+:::
+
+### options
+```json
+{
+  "event_date": "2021-06-15"
+}
+```
+
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|---------|
+event_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | It allows defining the date on which the purchased product will be enjoyed, for example: date of a trip or start of a course.
+
+
+### article
+
+```json
+{
+  "id": "89793238462643383279",
+  "name": "18 ct white gold watch with diamonds",
+  "quantity": 2,
+  "price": 402000,
+  "tax_rate": 2100,
+  "discount_rate": 200,
+  "description": "High-precision quartz movement",
+  "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+  "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg"
+}
+```
+
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|---------|
+id | string | <t id="table.yes">Sí</t> | ID
+name | string | <t id="table.yes">Sí</t> | Name
+description | string | No | Description
+url | URL | <t id="table.yes">Sí</t> | Article absolute URL
+image_url | URL | <t id="table.yes">Sí</t> | Article image absolute URL
+quantity | integer | <t id="table.yes">Sí</t> | Quantity
+price | [decimal](./integraciones/api/api-reference/#decimales) | <t id="table.yes">Sí</t> | Price (tax not included)
+tax_rate | [decimal](./integraciones/api/api-reference/#decimales) | No | Tax rate
+discount | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount amount
+discount_rate | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount rate
+
+
+## customer
+
+```json
+{
+  "id": "1618",
+  "email": "customer@address.com",
+  "type": "e",
+  "gender": 0,
+  "first_name": "John",
+  "last_name": "Coltrane",
+  "birthday": "1980-01-01",
+  "phone": "601234567",
+  "language": "en",
+  "date_joined": "2014-08-21T13:56:45+0000",
+  "last_login": "2020-08-27T19:57:56+0000",
+  "address": {
+    "phone": "601234567",
+    "street": "Plaza del Valle Boreal nº10",
+    "address_addition": "Near Pontiff Sulyvahn's Plaza",
+    "city": "Madrid",
+    "state": "Madrid",
+    "country": "ES",
+    "postcode": "28080"
+  }
+}
+```
+
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|---------|
+id | string | No | `ID` del cliente
+email | string | <t id="table.yes">Sí</t> | Customer email.
+type | char | No | Customer type; the choices are `g` guest, `n` new, `e` existing.
+gender | integer | No | Gender; the choices are `0` not known, `1` male, `2` female, `3` not applicable.
+first_name | string | No | First name.
+last_name | string | No | Last name.
+phone | string | No | Client phone number.
+birthday | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | Date of birth.
+language | [ISO 639-1](http://es.wikipedia.org/wiki/ISO_639-1) | No | Language preferences.
+date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | Date designating when the customer account was created.
+last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | Date of the customer's last login.
+[address](#customer-address)  | [object](http://docs.aplazame.com/#customer-address) | No | Address.
+
+
+### address
+
+```json
+{
+  "phone": "601234567",
+  "street": "Plaza del Valle Boreal nº10",
+  "address_addition": "Cerca de la plaza Pontífice Sulyvahn",
+  "city": "Madrid",
+  "state": "Madrid",
+  "country": "ES",
+  "postcode": "28080"
+}
+```
+
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|---------|
+phone | string | No | Phone number
+alt_phone | string | No | Alternative phone number
+street | string | <t id="table.yes">Sí</t> | Address
+address_addition | string | No | Additional line
+city | string | <t id="table.yes">Sí</t> | Town/city
+state | string | <t id="table.yes">Sí</t> | State/province
+country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.yes">Sí</t> | Country code
+postcode | string | <t id="table.yes">Sí</t> | Post code
+
+
+## billing
+
+```json
+{
+  "first_name": "Bill",
+  "last_name": "Evans",
+  "phone": "601765432",
+  "street": "Calle Central Yharnam 92",
+  "address_addition": "Cerca del Gran Puente",
+  "city": "Madrid",
+  "state": "Madrid",
+  "country": "ES",
+  "postcode": "28080"
+}
+```
+
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|---------|
+first_name | string | <t id="table.yes">Sí</t> | First name
+last_name | string | <t id="table.yes">Sí</t> | Last name
+phone | string | No | Número de teléfono de la dirección
+alt_phone | string | No | Número de teléfono alternativo
+street | string | <t id="table.yes">Sí</t> | Dirección
+address_addition | string | No | Línea adicional
+city | string | <t id="table.yes">Sí</t> | Municipio / ciudad
+state | string | <t id="table.yes">Sí</t> | Estado / provincia
+country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.yes">Sí</t> | Código de país
+postcode | string | <t id="table.yes">Sí</t> | Código postal
+
+## shipping
+
+```json
+{
+  "first_name": "Django",
+  "last_name": "Reinhard",
+  "phone": "601234567",
+  "street": "Plaza del Valle Boreal nº10",
+  "address_addition": "Cerca de la plaza Pontífice Sulyvahn",
+  "city": "Madrid",
+  "state": "Madrid",
+  "country": "ES",
+  "postcode": "28080",
+  "price": 500,
+  "tax_rate": 2100,
+  "name": "Planet Express",
+  "discount": 100,
+  "method": "postal"
+}
+```
+
+| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
+|---------|---------|---------|---------|
+first_name | string | <t id="table.yes">Sí</t> | First name
+last_name | string | <t id="table.yes">Sí</t> | Last name
+phone | string | No | Address phone number
+alt_phone | string | No | Alternative phone number
+street | string | <t id="table.yes">Sí</t> | Address
+address_addition | string | No | Additional line
+city | string | <t id="table.yes">Sí</t> | Town/ city
+state | string | <t id="table.yes">Sí</t> | State/ province
+country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.yes">Sí</t> | Country code
+postcode | string | <t id="table.yes">Sí</t> | Shipping postcode
+name | string | <t id="table.yes">Sí</t> | Shipping name
+price | [decimal](./integraciones/api/api-reference/#decimales) | <t id="table.yes">Sí</t> | Shipping price (tax is not included)
+tax_rate | [decimal](./integraciones/api/api-reference/#decimales) | No | Shipping tax rate
+discount | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount amount of the shipping
+discount_rate | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount rate of the shipping
+method | string |  No | Shipping method; choices are `pickup_store`, `pickup_point`, `postal`
