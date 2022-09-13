@@ -223,13 +223,13 @@ Aplazame no permite diferentes pedidos con el mismo ID.
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
 id | string | <t id="table.yes">Sí</t> | Your order `ID`.
-discount | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount amount of the order
-discount_rate | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount rate on the price of the order
-cart_discount | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount amount of the cart
-cart_discount_rate | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount rate of the cart
+discount | [decimal](../api-reference/#decimals) | No | Discount amount of the order
+discount_rate | [decimal](../api-reference/#decimals) | No | Discount rate on the price of the order
+cart_discount | [decimal](../api-reference/#decimals) | No | Discount amount of the cart
+cart_discount_rate | [decimal](../api-reference/#decimals) | No | Discount rate of the cart
 currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="table.yes">Sí</t> | Currency code of the order
-total_amount | [decimal](./integraciones/api/api-reference/#decimales) | <t id="table.yes">Sí</t> | Order tax rate
-[tax_rate](#tax_rate) | [decimal](./integraciones/api/api-reference/#decimales) | <t id="table.yes">Sí</t> | Total order amount
+total_amount | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Order tax rate
+[tax_rate](#tax_rate) | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Total order amount
 [options](#options) | object | No | It allows defining specific options for this order, for example, the date of the first payment.
 [articles](#article) | collection | <t id="table.yes">Sí</t> | Articles in cart
 
@@ -277,10 +277,10 @@ description | string | No | Description
 url | URL | <t id="table.yes">Sí</t> | Article absolute URL
 image_url | URL | <t id="table.yes">Sí</t> | Article image absolute URL
 quantity | integer | <t id="table.yes">Sí</t> | Quantity
-price | [decimal](./integraciones/api/api-reference/#decimales) | <t id="table.yes">Sí</t> | Price (tax not included)
-tax_rate | [decimal](./integraciones/api/api-reference/#decimales) | No | Tax rate
-discount | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount amount
-discount_rate | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount rate
+price | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Price (tax not included)
+tax_rate | [decimal](../api-reference/#decimals) | No | Tax rate
+discount | [decimal](../api-reference/#decimals) | No | Discount amount
+discount_rate | [decimal](../api-reference/#decimals) | No | Discount rate
 
 
 ## customer
@@ -415,8 +415,8 @@ state | string | <t id="table.yes">Sí</t> | State/ province
 country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.yes">Sí</t> | Country code
 postcode | string | <t id="table.yes">Sí</t> | Shipping postcode
 name | string | <t id="table.yes">Sí</t> | Shipping name
-price | [decimal](./integraciones/api/api-reference/#decimales) | <t id="table.yes">Sí</t> | Shipping price (tax is not included)
-tax_rate | [decimal](./integraciones/api/api-reference/#decimales) | No | Shipping tax rate
-discount | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount amount of the shipping
-discount_rate | [decimal](./integraciones/api/api-reference/#decimales) | No | Discount rate of the shipping
+price | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Shipping price (tax is not included)
+tax_rate | [decimal](../api-reference/#decimals) | No | Shipping tax rate
+discount | [decimal](../api-reference/#decimals) | No | Discount amount of the shipping
+discount_rate | [decimal](../api-reference/#decimals) | No | Discount rate of the shipping
 method | string |  No | Shipping method; choices are `pickup_store`, `pickup_point`, `postal`
