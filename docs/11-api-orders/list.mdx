@@ -1,0 +1,90 @@
+---
+title: Listado
+sidebar_position: 6
+keywords: [orders, listado, index, collection]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Listar pedidos
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client(' api_private_key')
+
+response = client.orders()
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+<?php
+
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
+
+$result = $aplazameClient->get("/orders");
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
+
+dynamic result = client.Get("/orders");
+```
+  </TabItem>
+</Tabs>
+
+### Respuesta
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+
+{
+  "cursor": {
+    "after": 3,
+    "before": 1
+  },
+  "paging": {
+    "count": 314,
+    "next": "https://api.aplazame.com/orders?page=3",
+    "previous": "https://api.aplazame.com/orders?page=1"
+  },
+  "results": [
+  ]
+}
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+cursor | object | Puntero de paginación
+paging | object | Estado de paginación
+results | collection | Listado de tiendas
+

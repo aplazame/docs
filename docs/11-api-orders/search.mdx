@@ -1,0 +1,111 @@
+---
+title: Búsqueda
+sidebar_position: 2
+keywords: [API search, search orders]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Búsqueda de pedidos
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?q=param1,param2,... HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?q=param1,param2,..." \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'q': 'param1,param2,...'
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "q" => "param1,param2,...",
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+dynamic result = client.Get($"/orders?q=param1,param2,...");
+```
+  </TabItem>
+</Tabs>
+
+Para buscar en el conjunto de pedidos.
+
+`GET https://api.aplazame.com/orders?q=param1,param2,...`
+
+La API de Aplazame permite una lista de nombres de campos que se buscarán cada vez que se envíe una consulta de búsqueda con el parámetro `q`.
+
+Las búsquedas utilizarán coincidencias parciales insensibles a mayúsculas y minúsculas. El parámetro de búsqueda puede contener varios términos de búsqueda, que deben estar separados por espacios en blanco y / o comas. Si se usan múltiples términos de búsqueda, entonces los objetos serán devueltos en la lista únicamente si todos los términos indicados coinciden
+
+## Campos
+Buscar por nombre, email, domain, ...
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?q=Alice,@gmail,.es HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?q=Alice,@gmail,.es" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'q': 'Alice,@gmail,.es'
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "q" => "Alice,@gmail,.es",
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+dynamic result = client.Get($"/orders?q=Alice,@gmail,.es");
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+account-first_name | Nombre
+account-last_name | Apellidos
+account-email | Correo

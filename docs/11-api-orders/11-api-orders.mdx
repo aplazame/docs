@@ -1,0 +1,97 @@
+---
+title: API de pedidos
+sidebar_position: 11
+keywords: [API orders, pedidos]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# API de pedidos
+
+## Creación
+
+:::info
+Puedes consultar cómo crear pedidos en [Creación del checkout](../checkout-creation/).
+:::
+
+## Captura
+
+:::caution
+Sólo se aceptan solicitudes de una captura para el producto pago en 15 días y el pedido ha de estar confirmado.
+:::
+
+Se ha de realizar una captura cuando se proceda al envío del producto o productos por el total del valor de los mismos. El importe de la captura debe corresponder al importe total del pedido menos el importe total de los artículos anulados.
+
+
+Puedes consultar los [detalles de la captura](../checkout-capture/#01---capture-detail) y la [solicitud de captura](../checkout-capture/#02---request-capture).
+
+## Detalles
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders/:orderId HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders/:orderId" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client(' api_private_key')
+
+response = client.get_order(':orderId')
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+<?php
+
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
+
+$result = $aplazameClient->get("/orders/{$orderId}");
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
+
+dynamic result = client.Get($"/orders/{orderId}");
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido.
+
+### Respuesta
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+
+{
+  "id": ":orderId",
+  "...": "..."
+}
+```

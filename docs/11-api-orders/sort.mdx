@@ -1,0 +1,166 @@
+---
+title: Ordenación
+sidebar_position: 4
+keywords: [API orders, sorting, sort, order by]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Ordenar pedidos
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?ordering=param1,-param2,... HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?ordering=param1,-param2,..." \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'ordering': 'param1,-param2,...'
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "ordering" => "param1,-param2,...",
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+dynamic result = client.Get($"/orders?ordering=param1,-param2,...");
+```
+  </TabItem>
+</Tabs>
+
+
+Para recuperar el conjunto de pedidos ordenado.
+
+`GET https://api.aplazame.com/orders?ordering=param1,-param2,...`
+
+El parámetro ordering es una tupla o lista de cadenas. Cada cadena es un nombre de campo con un prefijo opcional `-`, que indica el orden descendente. Los campos sin un `-` delante se ordenarán de forma ascendente.
+
+## Por pedido
+
+Cantidad total descendiente, fecha de creación ascendente.
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?ordering=-total_amount,created HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?ordering=-total_amount,created" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'ordering': '-total_amount,created'
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "ordering" => "-total_amount,created",
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+dynamic result = client.Get($"/orders?ordering=-total_amount,created");
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+total_amount | [decimal](../api-reference/#decimals) | Importe total del pedido
+created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se creó el pedido
+verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se ha verificado el pedido
+confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha en que se designó cuando se confirmó el pedido
+cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se canceló el pedido
+
+
+## Por cuenta
+Orden ascendente del último ingreso, orden descendente de la fecha de creación.
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?ordering=account-last_login,-account-created HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?ordering=account-last_login,-account-created" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'ordering': 'account-last_login,-account-created'
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "ordering" => "account-last_login,-account-created",
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+dynamic result = client.Get($"/orders?ordering=account-last_login,-account-created");
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+account-last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha del último inicio de sesión del cliente.
+account-date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se creó la cuenta de cliente.
+account-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se creó la cuenta de cliente en Aplazame

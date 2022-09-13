@@ -1,0 +1,197 @@
+---
+title: Anulación
+sidebar_position: 8
+keywords: [void orders, anulación, abort, undo]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Anular pedido
+
+:::caution
+Sólo se aceptan anulaciones para pedidos confirmados.
+:::
+
+Un pedido acepta varias anulaciones parciales siempre que el sumatorio del importe de las mismas no supere el total del pedido original. Si se anula el importe total, el pedido será cancelado.
+
+## 01 - Comprobar anulaciones
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders/:orderId/void HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders/:orderId/void" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client(' api_private_key')
+
+response = client.void_check(':orderId')
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+<?php
+
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
+
+$result = $aplazameClient->get("/orders/{$orderId}/void");
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
+
+dynamic result = client.Get($"/orders/{orderId}/void");
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido
+
+### Respuesta
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+
+{
+   "remaining_amount":60020,
+   "results":[
+      {
+         "amount":1000,
+         "id":"7b596c68e9044737a838d54b9e7971a3",
+         "created":"2020-10-09T13:56:09.043797+02:00"
+      },
+      {
+         "amount":500,
+         "id":"e07b9d47a72c4c7d8c9fc0c0bb2ba9b9",
+         "created":"2020-10-09T13:59:05.697921+02:00"
+      }
+   ]
+}
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+remaining_amount | [decimal](../api-reference/#decimals) | Cantidad restante del pedido
+results | collection | Listado de anulaciones
+
+## 02 - Solicitar anulación
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+POST /orders/:orderId/void HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+
+{
+  "amount": 10050
+}
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders/:orderId/void" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key" \
+    -X POST \
+    -d "amount=10050"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client(' api_private_key')
+
+response = client.void(':orderId', 10050)
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+<?php
+
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
+
+$result = $aplazameClient->post("/orders/{$orderId}/void", ["amount" => Aplazame\Serializer\Decimal::fromFloat(100.50)->value]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
+
+dynamic result = client.Post($"/orders/{orderId}/void", new {amount = Aplazame.Serializer.DecimalType.FromDouble(100.50)});
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido
+amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Importe a anular
+
+### Respuesta
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+
+{
+   "remaining_amount":60020,
+   "results":[
+      {
+         "amount":1000,
+         "id":"7b596c68e9044737a838d54b9e7971a3",
+         "created":"2020-10-09T13:56:09.043797+02:00"
+      },
+      {
+         "amount":500,
+         "id":"e07b9d47a72c4c7d8c9fc0c0bb2ba9b9",
+         "created":"2020-10-09T13:59:05.697921+02:00"
+      }
+   ]
+}
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+remaining_amount | [decimal](../api-reference/#decimals) | Cantidad restante del pedido
+results | collection | Listado de anulaciones
+

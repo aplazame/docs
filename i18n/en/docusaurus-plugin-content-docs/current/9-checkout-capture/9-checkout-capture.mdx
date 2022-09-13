@@ -45,7 +45,7 @@ remaining_amount | [decimal](../api-reference/#decimals)  | <t id="table.yes">SÃ
 ```http
 GET /orders/:orderId/captures HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Host: api.aplazame.com
 ```
   </TabItem>
@@ -54,7 +54,7 @@ Host: api.aplazame.com
 ```shell
 $ curl "https://api.aplazame.com/orders/:orderId/captures" \
     -H "Accept: application/vnd.aplazame.v1+json" \
-    -H "Authorization: Bearer $api_token{private}"
+    -H "Authorization: Bearer api_private_key"
 ```
   </TabItem>
   <TabItem value="python" label="python">
@@ -62,7 +62,7 @@ $ curl "https://api.aplazame.com/orders/:orderId/captures" \
 ```python
 import aplazame_sdk
 
-client = aplazame_sdk.Client('$api_token{private}')
+client = aplazame_sdk.Client(' api_private_key')
 
 response = client.get_capture_refund(':orderId')
 ```
@@ -74,7 +74,7 @@ response = client.get_capture_refund(':orderId')
 
 use Aplazame\Api\Client as AplazameClient;
 
-$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
 
 $result = $aplazameClient->get("/orders/{$orderId}/captures");
 ```
@@ -84,7 +84,7 @@ $result = $aplazameClient->get("/orders/{$orderId}/captures");
 ```csharp
 using Aplazame.Api;
 
-Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
 
 dynamic result = client.Get($"/orders/{orderId}/captures");
 ```
@@ -131,7 +131,7 @@ remaining_capture_amount | [decimal](../api-reference/#decimals)  | Remaining or
 ```http
 POST /orders/:orderId/captures HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Host: api.aplazame.com
 
 {
@@ -144,7 +144,7 @@ Host: api.aplazame.com
 ```shell
 $ curl "https://api.aplazame.com/orders/:orderId/captures" \
     -H "Accept: application/vnd.aplazame.v1+json" \
-    -H "Authorization: Bearer $api_token{private}" \
+    -H "Authorization: Bearer api_private_key" \
     -X POST \
     -d "amount=10050"
 ```
@@ -154,7 +154,7 @@ $ curl "https://api.aplazame.com/orders/:orderId/captures" \
 ```python
 import aplazame_sdk
 
-client = aplazame_sdk.Client('$api_token{private}')
+client = aplazame_sdk.Client(' api_private_key')
 
 response = client.capture_refund(':orderId', 10050)
 ```
@@ -166,7 +166,7 @@ response = client.capture_refund(':orderId', 10050)
 
 use Aplazame\Api\Client as AplazameClient;
 
-$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
 
 $result = $aplazameClient->post("/orders/{$orderId}/captures", ["amount" => Aplazame\Serializer\Decimal::fromFloat(100.50)->value]);
 
@@ -177,7 +177,7 @@ $result = $aplazameClient->post("/orders/{$orderId}/captures", ["amount" => Apla
 ```csharp
 using Aplazame.Api;
 
-Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
 
 dynamic result = client.Post($"/orders/{orderId}/captures", new {amount = Aplazame.Serializer.DecimalType.FromDouble(100.50)});
 ```

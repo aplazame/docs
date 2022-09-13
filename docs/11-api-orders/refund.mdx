@@ -1,0 +1,399 @@
+---
+title: Devolución
+sidebar_position: 7
+keywords: [refund orders, devolución, abort, undo]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Devolución de pedidos
+
+:::caution
+Sólo se aceptan solicitudes de devolución para pedidos confirmados.
+:::
+
+Para realizar una devolución se hará de una manera u otra dependiendo del tipo de operación.
+
+### Financiación online
+Devoluciones Financiación online.
+
+Un pedido acepta varias devoluciones parciales siempre que el sumatorio del importe de las mismas no supere el total del pedido original. Si se devuelve el importe total, el pedido será cancelado.
+
+Cada operación de devolución parcial afecta al importe de las futuras cuotas de un crédito. El importe de la devolución se verá reflejado en las liquidaciones del comercio y puede implicar una operación de devolución del importe al comprador.
+
+#### 01 - Comprobar cantidad restante
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders/:orderId/refund HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders/:orderId/refund" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client(' api_private_key')
+
+response = client.refund_check(':orderId')
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+<?php
+
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
+
+$result = $aplazameClient->get("/orders/{$orderId}/refund");
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
+
+dynamic result = client.Get($"/orders/{orderId}/refund");
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido
+
+#### Respuesta
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+
+{
+  "remaining_amount": 70070
+}
+```
+
+#### 02 - Solicitar devolución
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+POST /orders/:orderId/refund HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+
+{
+  "amount": 10050
+}
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders/:orderId/refund" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key" \
+    -X POST \
+    -d "amount=10050"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client(' api_private_key')
+
+response = client.refund(':orderId', 10050)
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+<?php
+
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
+
+$result = $aplazameClient->post("/orders/{$orderId}/refund", ["amount" => Aplazame\Serializer\Decimal::fromFloat(100.50)->value]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
+
+dynamic result = client.Post($"/orders/{orderId}/refund", new {amount = Aplazame.Serializer.DecimalType.FromDouble(100.50)});
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido
+amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | mporte a devolver
+
+#### Respuesta
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+
+{
+  "remaining_amount": 60020
+}
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+remaining_amount | [decimal](../api-reference/#decimals) | Cantidad restante del pedido
+
+
+### Pago en 15 días
+La devolución para la modalidad de pago en 15 días se realiza a nivel de captura dentro de un pedido.
+
+Una captura de un pedido acepta varias devoluciones parciales siempre que el sumatorio del importe de las mismas no supere el total de la captura original.
+
+
+```json
+{
+    "id": "db654bf752a84b7eaf6fcb7ab5801f60",
+    "amount": 10050,
+    "pending_amount": 0,
+    "accrual_date": "2019-06-21",
+    "credit_to_customer": 0,
+    "completed": false,
+    "completed_but_defaults": false,
+    "created": "2019-06-21T16:52:07.733892+02:00"
+}
+```
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+id | string | <t id="docs.yes">Sí</t> | `id` de la devolución
+amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Importe de la devolución
+pending_amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Cantidad restante de la captura
+accrual_date | string | <t id="docs.yes">Sí</t> | Fecha efectiva
+credit_to_customer | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Importe devuelto al cliente
+completed | boolean | <t id="docs.yes">Sí</t> | Pedido completado
+completed_but_defaults | boolean | <t id="docs.yes">Sí</t> | Pedido completado peor con deudas
+created | string | <t id="docs.yes">Sí</t> | Fecha de la devolución
+
+#### 01 - Comprobar cantidad restante
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders/:orderId/captures/:captureId/refunds HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders/:orderId/captures/:captureId/refunds" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client(' api_private_key')
+
+response = client.get_capture_refund(':orderId', ':captureId')
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+<?php
+
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
+
+$result = $aplazameClient->get("/orders/{$orderId}/captures/{$captureId}/refunds");
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
+
+dynamic result = client.Get($"/orders/{orderId}/captures/{captureId}/refunds");
+
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido.
+:captureId | string | <t id="docs.yes">Sí</t> |ID de la captura.
+
+#### Respuesta
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+
+{
+  "amount": 70070,
+  "id": "cf04aa87a6364f14b164e48a84e99936",
+  "created": "2019-06-21T16:51:19.494155+02:00",
+  "refunds": [],
+  "refunded_amount": 0,
+  "remaining_amount": 70070
+}
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+amount | [decimal](../api-reference/#decimals) | Importe de la captura
+id | string | `id` de la captura
+created | string | Fecha de la captura
+[refunds](./#pago-en-15-dias) | object | Devoluciones realizadas a la captura.
+refunded_amount | [decimal](../api-reference/#decimals) | Cantidad devuelta de la captura
+remaining_amount | [decimal](../api-reference/#decimals) | Cantidad restante de la captura
+
+
+#### 02 - Solicitar devolución
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+POST /orders/:orderId/captures/:captureId/refunds HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+
+{
+  "amount": 10050
+}
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders/:orderId/captures/:captureId/refunds" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key" \
+    -X POST \
+    -d "amount=10050"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client(' api_private_key')
+
+response = client.capture_refund(':orderId', ':captureId', 10050)
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+<?php
+
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
+
+$result = $aplazameClient->post("/orders/{$orderId}/captures/{$captureId}/refunds", ["amount" => Aplazame\Serializer\Decimal::fromFloat(100.50)->value]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
+
+dynamic result = client.Post($"/orders/{orderId}/captures/{captureId}/refunds", new {amount = Aplazame.Serializer.DecimalType.FromDouble(100.50)});
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido
+:captureId | string | <t id="docs.yes">Sí</t> | ID de la captura
+amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Importe a devolver
+
+#### Respuesta
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+X-Aplazame-Media-Type: aplazame.v1
+
+{
+    "amount": 70070,
+    "id": "cf04aa87a6364f14b164e48a84e99936",
+    "created": "2019-06-21T16:51:19.494155+02:00",
+    "refunds": [
+        {
+            "id": "db654bf752a84b7eaf6fcb7ab5801f60",
+            "amount": 10050,
+            "pending_amount": 60020,
+            "accrual_date": "2019-06-21",
+            "credit_to_customer": 0,
+            "completed": false,
+            "completed_but_defaults": false,
+            "created": "2019-06-21T16:52:07.733892+02:00"
+        }
+    ],
+    "refunded_amount": 10050,
+    "remaining_amount": 60020
+}
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+amount | [decimal](../api-reference/#decimals) | Importe de la captura
+id | string | `id` de la captura
+created | string | Fecha de la captura
+[refunds](./#pago-en-15-dias) | object | Devoluciones realizadas a la captura
+refunded_amount | [decimal](../api-reference/#decimals) | Cantidad devuelta de la captura
+remaining_amount | [decimal](../api-reference/#decimals) | Cantidad restante de la captura
+

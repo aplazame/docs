@@ -1,0 +1,428 @@
+---
+title: Edición
+sidebar_position: 1
+keywords: [API orders edition, edit, update, edit orders]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Editar pedido
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+PUT /orders/:orderId HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+Content-Type: application/json
+
+{
+  "order": {
+    "shipping": {
+      "first_name": "Django",
+      "last_name": "Reinhard",
+      "phone": "616123456",
+      "alt_phone": "+34917909930",
+      "street": "Plaza del Angel nº10",
+      "address_addition": "Cerca de la plaza Santa Ana",
+      "city": "Madrid",
+      "state": "Madrid",
+      "country": "ES",
+      "postcode": "28012",
+      "price": 500,
+      "tax_rate": 2100,
+      "name": "Planet Express",
+      "discount": 100
+    },
+    "articles": [
+      {
+        "id": "59825349042875546873",
+        "name": "N°5 eau premiere spray",
+        "description": "A decidedly lighter, fresher...",
+        "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+        "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+        "quantity": 1,
+        "price": 29000,
+        "tax_rate": 2100
+      }
+    ],
+    "discount": 300,
+    "currency": "EUR",
+    "total_amount": 31080
+  }
+}
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders/:orderId" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key" \
+    -X PUT \
+    --data-binary '{
+      "order": {
+        "shipping": {
+          "first_name": "Django",
+          "last_name": "Reinhard",
+          "phone": "616123456",
+          "alt_phone": "+34917909930",
+          "street": "Plaza del Angel nº10",
+          "address_addition": "Cerca de la plaza Santa Ana",
+          "city": "Madrid",
+          "state": "Madrid",
+          "country": "ES",
+          "postcode": "28012",
+          "price": 500,
+          "tax_rate": 2100,
+          "name": "Planet Express",
+          "discount": 100
+        },
+        "articles": [
+          {
+            "id": "59825349042875546873",
+            "name": "N°5 eau premiere spray",
+            "description": "A decidedly lighter, fresher...",
+            "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+            "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+            "quantity": 1,
+            "price": 29000,
+            "tax_rate": 2100
+          }
+        ],
+        "discount": 300,
+        "currency": "EUR",
+        "total_amount": 31080
+      }
+    }'
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+payload = {
+  "order": {
+    "shipping": {
+      "first_name": "Django",
+      "last_name": "Reinhard",
+      "phone": "616123456",
+      "alt_phone": "+34917909930",
+      "street": "Plaza del Angel nº10",
+      "address_addition": "Cerca de la plaza Santa Ana",
+      "city": "Madrid",
+      "state": "Madrid",
+      "country": "ES",
+      "postcode": "28012",
+      "price": 500,
+      "tax_rate": 2100,
+      "name": "Planet Express",
+      "discount": 100
+    },
+    "articles": [
+      {
+        "id": "59825349042875546873",
+        "name": "N°5 eau premiere spray",
+        "description": "A decidedly lighter, fresher...",
+        "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+        "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+        "quantity": 1,
+        "price": 29000,
+        "tax_rate": 2100
+      }
+    ],
+    "discount": 300,
+    "currency": "EUR",
+    "total_amount": 31080
+  }
+}
+
+client = aplazame_sdk.Client(' api_private_key')
+
+response = client.update(':orderId', payload)
+
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+<?php
+
+use Aplazame\Api\Client as AplazameClient;
+
+$payload = [
+  "order" => [
+    "shipping" => [
+      "first_name" => "Django",
+      "last_name" => "Reinhard",
+      "phone" => "616123456",
+      "alt_phone" => "+34917909930",
+      "street" => "Plaza del Angel nº10",
+      "address_addition" => "Cerca de la plaza Santa Ana",
+      "city" => "Madrid",
+      "state" => "Madrid",
+      "country" => "ES",
+      "postcode" => "28012",
+      "price" => Aplazame\Serializer\Decimal::fromFloat(5)->value,
+      "tax_rate" => Aplazame\Serializer\Decimal::fromFloat(21)->value,
+      "name" => "Planet Express",
+      "discount" => Aplazame\Serializer\Decimal::fromFloat(1)->value,
+    ],
+    "articles" => [
+      [
+        "id" => "59825349042875546873",
+        "name" => "N°5 eau premiere spray",
+        "description" => "A decidedly lighter, fresher...",
+        "url" => "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+        "image_url" => "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+        "quantity" => 1,
+        "price" => Aplazame\Serializer\Decimal::fromFloat(290)->value,
+        "tax_rate" => Aplazame\Serializer\Decimal::fromFloat(21)->value,
+      ],
+    ],
+    "discount" => Aplazame\Serializer\Decimal::fromFloat(3)->value,
+    "currency" => "EUR",
+    "total_amount" => Aplazame\Serializer\Decimal::fromFloat(310.80)->value,
+  ],
+];
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
+
+$result = $aplazameClient->put("/orders/{$orderId}", $payload);
+
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+use Aplazame\Api\Client as AplazameClient;
+
+dynamic payload = new {
+  order = new {
+    shipping = new {
+      first_name = "Django",
+      last_name = "Reinhard",
+      phone = "616123456",
+      alt_phone = "+34917909930",
+      street = "Plaza del Angel nº10",
+      address_addition = "Cerca de la plaza Santa Ana",
+      city = "Madrid",
+      state = "Madrid",
+      country = "ES",
+      postcode = "28012",
+      price = Aplazame.Serializer.DecimalType.FromDecimal(5),
+      tax_rate = Aplazame.Serializer.DecimalType.FromDecimal(21),
+      name = "Planet Express",
+      discount = Aplazame.Serializer.DecimalType.FromDecimal(1),
+    },
+    articles = new dynamic[] {
+      new {
+        id = "59825349042875546873",
+        name = "N°5 eau premiere spray",
+        description = "A decidedly lighter, fresher...",
+        url = "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+        image_url = "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+        quantity = 1,
+        price = Aplazame.Serializer.DecimalType.FromDecimal(290),
+        tax_rate = Aplazame.Serializer.DecimalType.FromDecimal(21),
+      },
+    },
+    discount = Aplazame.Serializer.DecimalType.FromDecimal(3),
+    currency = "EUR",
+    total_amount = Aplazame.Serializer.DecimalType.FromDecimal(310.80),
+  },
+};
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
+
+dynamic result = client.Put($"/orders/{orderId}", payload);
+
+```
+  </TabItem>
+</Tabs>
+
+
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido.
+[order](#order) | object | **<t id="docs.yes">Sí</t>** | Pedido a actualizar
+
+### Respuesta
+
+```http
+HTTP/1.1 204 No Content
+X-Aplazame-Media-Type: aplazame.v1
+```
+
+
+## Edición parcial
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+PATCH /orders/:orderId HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+Content-Type: application/json
+
+{
+  "order": {
+    "articles": [
+      {
+        "id": "59825349042875546873",
+        "name": "N°5 eau premiere spray",
+        "description": "A decidedly lighter, fresher...",
+        "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+        "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+        "quantity": 1,
+        "price": 29000,
+        "tax_rate": 2100
+      }
+    ],
+    "discount": 300
+  }
+}
+
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders/:orderId" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key" \
+    -X PATCH \
+    --data-binary '{
+      "order": {
+        "articles": [
+          {
+            "id": "59825349042875546873",
+            "name": "N°5 eau premiere spray",
+            "description": "A decidedly lighter, fresher...",
+            "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+            "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+            "quantity": 1,
+            "price": 29000,
+            "tax_rate": 2100
+          }
+        ],
+        "discount": 300
+      }
+    }'
+
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+payload = {
+  "order": {
+    "articles": [
+      {
+        "id": "59825349042875546873",
+        "name": "N°5 eau premiere spray",
+        "description": "A decidedly lighter, fresher...",
+        "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+        "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+        "quantity": 1,
+        "price": 29000,
+        "tax_rate": 2100
+      }
+    ],
+    "discount": 300
+  }
+}
+
+client = aplazame_sdk.Client(' api_private_key')
+
+response = client.update(':orderId', payload, partial=True)
+
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+<?php
+
+use Aplazame\Api\Client as AplazameClient;
+
+$payload = [
+  "order" => [
+    "articles" => [
+      [
+        "id" => "59825349042875546873",
+        "name" => "N°5 eau premiere spray",
+        "description" => "A decidedly lighter, fresher...",
+        "url" => "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+        "image_url" => "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+        "quantity" => 1,
+        "price" => Aplazame\Serializer\Decimal::fromFloat(290)->value,
+        "tax_rate" => Aplazame\Serializer\Decimal::fromFloat(21)->value,
+      ],
+    ],
+    "discount" => Aplazame\Serializer\Decimal::fromFloat(3)->value,
+  ],
+];
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
+
+$result = $aplazameClient->patch("/orders/{$orderId}", $payload);
+
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+use Aplazame\Api\Client as AplazameClient;
+
+dynamic payload = new {
+  order = new {
+    articles = new dynamic[] {
+      new {
+        id = "59825349042875546873",
+        name = "N°5 eau premiere spray",
+        description = "A decidedly lighter, fresher...",
+        url = "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+        image_url = "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+        quantity = 1,
+        price = Aplazame.Serializer.DecimalType.FromDecimal(290),
+        tax_rate = Aplazame.Serializer.DecimalType.FromDecimal(21),
+      },
+    },
+    discount = Aplazame.Serializer.DecimalType.FromDecimal(3),
+  },
+};
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
+
+dynamic result = client.Patch($"/orders/{orderId}", payload);
+
+```
+  </TabItem>
+</Tabs>
+
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido.
+[order](#order) | object | **<t id="docs.yes">Sí</t>** | Pedido a actualizar
+
+### Respuesta
+
+```http
+HTTP/1.1 204 No Content
+X-Aplazame-Media-Type: aplazame.v1
+```
+

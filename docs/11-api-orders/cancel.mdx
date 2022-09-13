@@ -1,0 +1,82 @@
+---
+title: Cancelación
+sidebar_position: 9
+keywords: [cancel orders, Cancelación, abort, undo]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Cancelar pedido
+
+:::caution
+Sólo se aceptan solicitudes de cancelación para pedidos confirmados.
+:::
+
+Una vez cancelado un pedido, ya no se podrá modificar.
+
+El importe de la cancelación se verá reflejado en las liquidaciones del comercio y se realizará una devolución total de los importes previamente abonados por el comprador.
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+POST /orders/:orderId/cancel HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders/:orderId/cancel" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key" \
+    -X POST
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client(' api_private_key')
+
+response = client.cancel(':orderId')
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+<?php
+
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
+
+$result = $aplazameClient->post("/orders/{$orderId}/cancel", []);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
+
+dynamic result = client.Post($"/orders/{orderId}/cancel", new {});
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+:orderId | string | <t id="docs.yes">Sí</t> |ID del pedido
+
+#### Response
+
+```http
+HTTP/1.1 204 No Content
+X-Aplazame-Media-Type: aplazame.v1
+```
