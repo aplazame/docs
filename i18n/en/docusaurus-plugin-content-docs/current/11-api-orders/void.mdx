@@ -1,20 +1,20 @@
 ---
-title: Anulación
+title: Void
 sidebar_position: 8
 keywords: [void orders, anulación, abort, undo]
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Anular pedido
+# Void order
 
 :::caution
-Sólo se aceptan anulaciones para pedidos confirmados.
+Void requests are only accepted for confirmed orders.
 :::
 
-Un pedido acepta varias anulaciones parciales siempre que el sumatorio del importe de las mismas no supere el total del pedido original. Si se anula el importe total, el pedido será cancelado.
+An order accepts several partial voids only if the sum of the amount does not exceed the total of the original order. If the total amount is void, the order will be canceled.
 
-## 01 - Comprobar anulaciones
+## 01 - Check voids
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -70,9 +70,9 @@ dynamic result = client.Get($"/orders/{orderId}/void");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido
+:orderId | string | <t id="docs.yes">Sí</t> | Order ID
 
-### Respuesta
+### Response
 
 ```http
 HTTP/1.1 200 OK
@@ -98,10 +98,10 @@ X-Aplazame-Media-Type: aplazame.v1
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-remaining_amount | [decimal](../api-reference/#decimals) | Cantidad restante del pedido
-results | collection | Listado de anulaciones
+remaining_amount | [decimal](../api-reference/#decimals) | Remaining capture amount
+results | collection | List of voids
 
-## 02 - Solicitar anulación
+## 02 - Request void
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -163,10 +163,10 @@ dynamic result = client.Post($"/orders/{orderId}/void", new {amount = Aplazame.S
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido
-amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Importe a anular
+:orderId | string | <t id="docs.yes">Sí</t> | Order ID
+amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Amount to void
 
-### Respuesta
+### Response
 
 ```http
 HTTP/1.1 200 OK
@@ -192,6 +192,5 @@ X-Aplazame-Media-Type: aplazame.v1
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-remaining_amount | [decimal](../api-reference/#decimals) | Cantidad restante del pedido
-results | collection | Listado de anulaciones
-
+remaining_amount | [decimal](../api-reference/#decimals) | Remaining capture amount
+results | collection | List of voids

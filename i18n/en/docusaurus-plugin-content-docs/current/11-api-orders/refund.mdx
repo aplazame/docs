@@ -1,28 +1,27 @@
 ---
-title: Devolución
+title: Refund
 sidebar_position: 7
 keywords: [refund orders, devolución, abort, undo]
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Devolución de pedidos
+# Refund orders
 
 :::caution
-Sólo se aceptan solicitudes de devolución para pedidos confirmados.
+Refund requests are only accepted for confirmed orders.
 :::
 
-Para realizar una devolución se hará de una manera u otra dependiendo del tipo de operación.
+To make a refund, It will be done in one way or another depending on the type of operation
 
-## Financiación online
-Devoluciones Financiación online.
+## Check remaining amount
+Refund online financing
 
-Un pedido acepta varias devoluciones parciales siempre que el sumatorio del importe de las mismas no supere el total del pedido original. Si se devuelve el importe total, el pedido será cancelado.
+An order accepts several partial returns only if the sum of the amount does not exceed the total of the original order. If the total amount is refunded, the order will be canceled.
 
-Cada operación de devolución parcial afecta al importe de las futuras cuotas de un crédito. El importe de la devolución se verá reflejado en las liquidaciones del comercio y puede implicar una operación de devolución del importe al comprador.
+Each partial refund operation affects the amount of future loan instalments. The amount of the refund will be reflected in the store’s commercial transactions and may include a refund of the amount to the buyer.
 
-### 01 - Comprobar cantidad restante
-
+### 01 - Check remaining amount
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -78,9 +77,9 @@ dynamic result = client.Get($"/orders/{orderId}/refund");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido
+:orderId | string | <t id="docs.yes">Sí</t> | Order ID
 
-### Respuesta
+### Response
 
 ```http
 HTTP/1.1 200 OK
@@ -92,8 +91,7 @@ X-Aplazame-Media-Type: aplazame.v1
 }
 ```
 
-### 02 - Solicitar devolución
-
+### 02 - Request refund
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -155,10 +153,10 @@ dynamic result = client.Post($"/orders/{orderId}/refund", new {amount = Aplazame
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido
-amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Importe a devolver
+:orderId | string | <t id="docs.yes">Sí</t> | Order ID
+amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | mporte a devolver
 
-### Respuesta
+### Response
 
 ```http
 HTTP/1.1 200 OK
@@ -172,14 +170,13 @@ X-Aplazame-Media-Type: aplazame.v1
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-remaining_amount | [decimal](../api-reference/#decimals) | Cantidad restante del pedido
-
+remaining_amount | [decimal](../api-reference/#decimals) | Remaining capture amount
+results | collection | List of voids
 
 ## Pago en 15 días
 La devolución para la modalidad de pago en 15 días se realiza a nivel de captura dentro de un pedido.
 
 Una captura de un pedido acepta varias devoluciones parciales siempre que el sumatorio del importe de las mismas no supere el total de la captura original.
-
 
 ```json
 {
@@ -263,10 +260,10 @@ dynamic result = client.Get($"/orders/{orderId}/captures/{captureId}/refunds");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido.
+:orderId | string | <t id="docs.yes">Sí</t> | Order ID.
 :captureId | string | <t id="docs.yes">Sí</t> |ID de la captura.
 
-### Respuesta
+### Response
 
 ```http
 HTTP/1.1 200 OK
@@ -294,6 +291,7 @@ remaining_amount | [decimal](../api-reference/#decimals) | Cantidad restante de 
 
 
 ### 02 - Solicitar devolución
+
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -355,11 +353,11 @@ dynamic result = client.Post($"/orders/{orderId}/captures/{captureId}/refunds", 
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido
+:orderId | string | <t id="docs.yes">Sí</t> | Order ID
 :captureId | string | <t id="docs.yes">Sí</t> | ID de la captura
 amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Importe a devolver
 
-### Respuesta
+### Response
 
 ```http
 HTTP/1.1 200 OK

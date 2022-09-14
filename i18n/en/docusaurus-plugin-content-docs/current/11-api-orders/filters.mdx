@@ -1,0 +1,472 @@
+---
+title: Filtros
+sidebar_position: 3
+keywords: [API orders filters, filter orders]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Filtrar pedidos
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?parameter-lookup=value HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?parameter-lookup=value" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'my-param-term': 'value'
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+<?php
+
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, " api_private_key");
+
+$result = $aplazameClient->get("/orders", [
+  "my-param-term" => "value",
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, " api_private_key");
+
+dynamic result = client.Get("/orders?my-param-term=value");
+```
+  </TabItem>
+</Tabs>
+
+:::info
+Te puede interesar consultar la [documentación general de filtros de la API](../../api-reference/#filtros).
+:::
+
+**Los tipos de búsquedas** están explicados **[AQUÍ](../search/#campos)** (`string`, `choices`, `range`, `isnull` y `date`).
+
+Cantidad financiada exacta:
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?total_amount=462000 HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?total_amount=462000" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'total_amount': 462000
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "total_amount" => Aplazame\Serializer\Decimal::fromFloat(4620)->value,
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+dynamic result = client.Get($"/orders?total_amount=462000");
+```
+  </TabItem>
+</Tabs>
+
+Confirmado después de:
+
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?confirmed-gte=2015-12-22T15:09:30.537951Z HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?confirmed-gte=2015-12-22T15:09:30.537951Z" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'verified-isnull': True,
+  'confirmed-isnull': False
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "verified-isnull" => "yes",
+  "confirmed-isnull" => "no",
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+dynamic result = client.Get($"/orders?verified-isnull=yes&confirmed-isnull=no");
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+id | hash | `string` | `ID` del pedido en aplazame
+mid | string | `string` | `ID` del pedido
+ | | | |
+total_amount | [decimal](../api-reference/#decimals) | `range` | Importe del pedido
+discount | [decimal](../api-reference/#decimals) | `isnull`, `range` | Cantidad del descuento del pedido
+discount_rate | [decimal](../api-reference/#decimals) | `isnull`, `range` | Tasa de descuento en el precio del pedido
+ | | | |
+created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Fecha de creación del pedido
+verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se ha verificado el pedido
+confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se confirmó el pedido
+cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se canceló el pedido
+
+Pago inicial:
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?instalment_plan-downpayment-state=failed HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?instalment_plan-downpayment-state=failed" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'instalment_plan-downpayment-state': ['failed']
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "instalment_plan-downpayment-state" => ["failed"],
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+dynamic result = client.Get($"/orders?instalment_plan-downpayment-state=failed");
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+instalment_plan-downpayment-state | string | `choices` | Estado del pago inicial
+instalment_plan-downpayment-amount | [decimal](../api-reference/#decimals) | `isnull`, `range` | Importe del pago inicial
+
+## Por teléfono
+Número de teléfono del cliente exacto
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?customer-phone-number=612345678 HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?customer-phone-number=612345678" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'customer-phone-number': '612345678'
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "customer-phone-number" => "612345678",
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+dynamic result = client.Get($"/orders?customer-phone-number=612345678");
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+customer-id | hash | `string` | `ID` de cliente
+customer-phone-number | string | `string` | Teléfono móvil del cliente
+customer-phone-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | Prefijo telefónico del país
+customer-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Fecha de creación
+
+## Por documento de identificación del cliente
+
+Tipo de documento de identificación; Las opciones son `nif` o` nie`.
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?customer-document_id-type=nif&customer-document_id-type=nie HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?customer-document_id-type=nif&customer-document_id-type=nie" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'customer-document_id-type': ['nif', 'nie']
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "customer-phone-number" => ["nif", "nie"],
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+dynamic result = client.Get($"/orders?customer-document_id-type=nif&customer-document_id-type=nie");
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+customer-document_id-number | string | `string` | Número de identificación del documento del cliente
+customer-document_id-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | País emisor del documento de identificación del cliente
+customer-document_id-type | string | `choices` | Tipo de documento identificativo del cliente, los valores pueden ser `nif`, `nie`, `cif`, `passport`, `others`
+
+## Por cuenta
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?account-type=existing&account-gender=0 HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?account-type=existing&account-gender=0" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'account-type': 'existing',
+  'account-gender': 0
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "account-type" => "existing",
+  "account-gender" => 0,
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+dynamic result = client.Get($"/orders?account-type=existing&account-gender=0");
+```
+  </TabItem>
+</Tabs>
+
+
+El último login no es `null`.
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?account-last_login-isnull=no HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?account-last_login-isnull=no" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer api_private_key"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'account-last_login-isnull': False
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "account-last_login-isnull" => "no",
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+dynamic result = client.Get($"/orders?account-last_login-isnull=no");
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+account-id | hash | `string` | `ID` del cliente
+account-type | string | `choices` | Tipo de cliente; las opciones son `g` invitado, `n` nuevo, `e` existente
+account-gender | integer | `choices` | Género; las opciones son `0` desconocido, `1` hombre, `2` mujer, `3` no aplica
+account-last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha del último inicio de sesión.
+account-date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se creó la cuenta.
+
+
+
+
+
+
+
+
+
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```csharp
+
+```
+  </TabItem>
+</Tabs>
+

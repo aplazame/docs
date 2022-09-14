@@ -1,12 +1,12 @@
 ---
-title: Edición
+title: Edit
 sidebar_position: 1
 keywords: [API orders edition, edit, update, edit orders]
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Editar pedido
+# Edit order
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -246,22 +246,19 @@ dynamic result = client.Put($"/orders/{orderId}", payload);
   </TabItem>
 </Tabs>
 
-
-
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido.
-[order](#order) | object | **<t id="docs.yes">Sí</t>** | Pedido a actualizar
+:orderId | string | <t id="docs.yes">Sí</t> | Order ID
+[order](#order) | object | **<t id="docs.yes">Sí</t>** | Order to update
 
-### Respuesta
+### Response
 
 ```http
 HTTP/1.1 204 No Content
 X-Aplazame-Media-Type: aplazame.v1
 ```
 
-
-## Edición parcial
+## Partial edit
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -416,10 +413,10 @@ dynamic result = client.Patch($"/orders/{orderId}", payload);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | ID del pedido.
-[order](#order) | object | **<t id="docs.yes">Sí</t>** | Pedido a actualizar
+:orderId | string | <t id="docs.yes">Sí</t> | Order ID
+[order](#order) | object | **<t id="docs.yes">Sí</t>** | Order to update
 
-### Respuesta
+### Response
 
 ```http
 HTTP/1.1 204 No Content

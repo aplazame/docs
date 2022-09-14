@@ -1,31 +1,30 @@
 ---
-title: API de pedidos
+title: Order API
 sidebar_position: 11
 keywords: [API orders, pedidos]
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# API de pedidos
+# Order API
 
-## Creación
+## Creation
 
 :::info
-Puedes consultar cómo crear pedidos en [Creación del checkout](../checkout-creation/).
+You can query how to create orders in [checkout creation](../checkout-creation/).
 :::
 
-## Captura
+## Capture
 
 :::caution
-Sólo se aceptan solicitudes de una captura para el producto pago en 15 días y el pedido ha de estar confirmado.
+We only accept requests for a catch for the product paid in 15 days and the order must be confirmed.
 :::
 
-Se ha de realizar una captura cuando se proceda al envío del producto o productos por el total del valor de los mismos. El importe de la captura debe corresponder al importe total del pedido menos el importe total de los artículos anulados.
+A capture must be made when the product or products are sent with the import of the total price of the sale. The amount of the capture must be the total amount of the order less total amount of the canceled items.
 
+Yo cna check [details of the capture](../checkout-capture/#01---capture-detail) and [request capture](../checkout-capture/#02---request-capture).
 
-Puedes consultar los [detalles de la captura](../checkout-capture/#01---capture-detail) y la [solicitud de captura](../checkout-capture/#02---request-capture).
-
-## Detalles
+## Details
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -83,7 +82,7 @@ dynamic result = client.Get($"/orders/{orderId}");
 |---------|---------|---------|---------|
 :orderId | string | <t id="docs.yes">Sí</t> | ID del pedido.
 
-### Respuesta
+### Response
 
 ```http
 HTTP/1.1 200 OK
