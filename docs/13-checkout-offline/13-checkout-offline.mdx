@@ -1,0 +1,162 @@
+---
+title: Integración POS
+sidebar_position: 13
+keywords: [Integración POS, checkout offline]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Integración POS
+
+Este servicio ofrece la posibilidad de ofrecer financiación instantánea desde el Punto de Venta (TPV/POS) físico de tu tienda. Antes de comenzar por favor ponte en contacto con nuestro equipo en [hola@aplazame.com](mailto:hola@aplazame.com) y te guiaremos a través del proceso de implementación.
+
+## Crear un checkout offline
+
+```http
+POST https://api.aplazame.com/checkout/offline HTTP/1.1
+Authorization: Bearer $api_token{private}
+Accept: application/vnd.aplazame.v3+json
+Content-Type: application/json
+```
+```json
+{
+  "order": {},
+  "customer": {},
+  "billing": {},
+  "shipping": {},
+  "merchant": {
+    "ipn_url": "https://..."
+  }
+}
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+[customer](../checkout-creation/#customer) | object | ${yes} | Datos del cliente
+[order](../checkout-creation/#order) | object | ${yes} | Datos del pedido
+[billing](../checkout-creation/#billing) | object | ${no} | Dirección de facturación.
+[shipping](../checkout-creation/#shipping) | object | ${no} | Información de envío.
+[ipn_url](../checkout-creation/#merchant) | object | ${no} | (Instant Payment Notification) URL absoluta donde se envían los cambios de estado del checkout.
+
+### Respuesta
+
+<Tabs>
+  <TabItem value="ok" label="OK">
+
+```http
+HTTP/1.1 201 OK
+X-Aplazame-Media-Type: aplazame.v3
+```
+```json
+{
+  "id": ":checkoutId"
+}
+```
+  </TabItem>
+  <TabItem value="ko" label="Crédito no disponible">
+
+```http
+HTTP/1.1 403 Forbidden
+X-Aplazame-Media-Type: aplazame.v3
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+:checkoutId | string | ID del checkout asignado por Aplazame
+
+## Estado del checkout
+
+Se podrá consultar el estado de un checkout a través de su ID
+
+``` http
+GET https://api.aplazame.com/checkout/:checkoutId/status
+Authorization: Bearer $api_token{private}
+Accept: application/vnd.aplazame.v3+json
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+:checkoutId | string | ID del checkout asignado por Aplazame
+
+### Respuesta
+
+``` http
+HTTP/1.1 200 OK
+X-Aplazame-Media-Type: aplazame.v3
+Content-Type: application/json
+
+{
+  "id": ":checkoutId",
+  "mid": "28475648233786783165",
+  "total_amount": 12050,
+  "currency": {
+    "name": "Euro",
+    "code": "EUR",
+    "numeric": "978"
+  },
+  "status": "pending",
+  "status_reason": "confirmation_required",
+  "sandbox": false
+}
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+:checkoutId | string | ID del checkout asignado por Aplazame
+mid | string | Identificador del pedido generado por la tienda o autogenerado por Aplazame.
+total_amount | $type{decimal} | Cantidad a financiar.
+currency | $type{currency} | Divisa del pedido.
+[status](../checkout-confirmation/#codigos-de-estado-del-pedido) | string | Estado del pedido (`ok`, `pending` o `ko`)
+[status_reason](../checkout-confirmation/#codigos-de-estado-del-pedido) | string | Código de estado del pedido.
+sandbox | boolean | El pedido fue realizado en el entorno de sandbox.
+
+## IPN (Instant Payment Notification)
+
+Los cambios de estado del checkout son notificados a la URL indicada al crear el checkout
+
+### Contenido de la notificación
+
+```json
+{
+  "id": ":checkoutId",
+  "mid": "28475648233786783165",
+  "total_amount": 12050,
+  "currency": {
+    "name": "Euro",
+    "code": "EUR",
+    "numeric": "978"
+  },
+  "status": "pending",
+  "status_reason": "confirmation_required",
+  "sandbox": false
+}
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+:checkoutId | string | ID del checkout asignado por Aplazame
+mid | string | Identificador del pedido generado por la tienda o autogenerado por Aplazame
+total_amount | $type{decimal} | Cantidad a financiar
+currency | $type{currency} | Divisa del pedido
+[status](../checkout-confirmation/#codigos-de-estado-del-pedido) | string | Estado del pedido (`ok`, `pending` o `ko`)
+[status_reason](../checkout-confirmation/#codigos-de-estado-del-pedido) | string | Código de estado del pedido
+sandbox | boolean | El pedido fue realizado en el entorno de pruebas
+
+### Códigos de estado
+
+En función del campo `status` del pedido, el campo `status_reason` proporciona información específica de las razones de Aplazame para determinar el estado del pedido.
+
+Status | Status reason | Cause
+------ | ---- | -----
+pending | in_process | El comprador ha iniciado el proceso de pago pero aún no lo ha completado.
+pending | confirmation_required | La solicitud de financiación ha sido aceptada por Aplazame y está a la espera de la confirmación final de la tienda.
+pending | challenge_required | Aplazame está a la espera de que el comprador complete un reto de validación de identidad tras finalizar la solicitud de financiación.
+ko | expired | La solicitud de financiación ha expirado.
+ko | expired_challenge | El comprador no ha superado el reto de validación de identidad a tiempo.
+ko | ko_generic | La solucitud de financiación no ha pasado el criterio de admisión de Aplazame.
+ko | failed_challenge | El comprador no ha superado el reto de validación de identidad.
+ko | confirmation_rejected_by_merchant | La tienda ha rechazado el pedido.
+ko | merchant_failed_to_confirm | No se ha podido confirmar con la tienda.
+ok | | La solicitud de financiación ha sido completada y aceptada por la tienda.

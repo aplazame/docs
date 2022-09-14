@@ -1,0 +1,136 @@
+---
+title: Creación
+sidebar_position: 1
+keywords: [API campañas, crear campaña]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Creación
+El tipo de campaña se determina por el parámetro `partial`, puede ser una *campaña total* que se aplica a todos los artículos de tu comercio o puede ser una *campaña parcial* que se aplica a artículos espefícicos.
+
+En el caso de *campaña parcial* es necesario [añadir los artículos](./articles/#anadir) sobre los que aplica la *campaña de financiación*.
+
+Consulta como gestionar los [artículos](./articles/) de una *campaña de financiación*.
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+POST /me/campaigns HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+Content-Type: application/json
+```
+```json
+{
+  "name": "Summertime",
+  "start_date": "2016-06-01T00:00:00",
+  "end_date": "2016-08-31T23:59:59",
+  "interest": "2500",
+  "partial": true,
+  "num_instalments": [1, 2, 3, 5, 8]
+}
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/me/campaigns" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"\
+    --data-binary '{
+      "name": "Summertime",
+      "start_date": "2016-06-01T00:00:00",
+      "end_date": "2016-08-31T23:59:59",
+      "interest": "2500",
+      "partial": true,
+      "num_instalments": [1, 2, 3, 5, 8]
+    }'
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client('$api_token{private}')
+response = client.post_campaign(':merchantId', {
+  'name': 'Summertime',
+  'start_date': '2016-06-01T00:00:00',
+  'end_date': '2016-08-31T23:59:59',
+  'interest': '2500',
+  'partial': True,
+  'num_instalments': [1, 2, 3, 5, 8]
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+
+$campaign = [
+  "name" => "Summertime",
+  "start_date" => Aplazame\Serializer\Decimal::fromDateTime(new DateTime("2016-06-01 00:00:00")),
+  "end_date" => Aplazame\Serializer\Decimal::fromDateTime(new DateTime("2016-08-31 23:59:59")),
+  "interest" => Aplazame\Serializer\Decimal::fromFloat(25),
+  "partial" => true,
+  "num_instalments" => [1, 2, 3, 5, 8],
+];
+$result = $aplazameClient->post("/me/campaigns", $campaign);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+
+dynamic campaign = new {
+  name = "Summertime",
+  start_date = Aplazame.Serializer.DateType.FromDateTime(DateTime.Parse("2016-06-01 00:00:00")),
+  end_date = Aplazame.Serializer.DateType.FromDateTime(DateTime.Parse("2016-08-31 23:59:59")),
+  interest = Aplazame.Serializer.DecimalType.FromDouble(25),
+  partial = true,
+  num_instalments = [1, 2, 3, 5, 8],
+};
+dynamic result = client.Post($"/me/campaigns", campaign);
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+name | string | ${yes} | Nombre de la campaña
+start_date | $type{date} | ${yes} | Fecha de inicio de la campaña
+end_date | $type{date} | ${no} | Fecha fin de la campaña
+interest | $type{decimal} | ${yes} | Tasa de descuento en los intereses
+partial | Boolean | ${no} | Determina si la campaña aplica a todos los productos, por defecto `false`
+num_instalments | array | ${no} | Número de cuotas disponibles para la campaña
+min_order_amount | $type{decimal} | ${no} | [Importe mínimo del carrito (order.total_amount)](../checkout-creation/#order) al que aplica la campaña
+max_order_amount | $type{decimal} | ${no} | [Importe máximo del carrito (order.total_amount)](../checkout-creation/#order) al que aplica la campaña
+
+ ### Respuesta
+
+```http
+HTTP/1.1 201 CREATED
+Content-Type: application/json
+X-Aplazame-Media-Type: aplazame.v1
+```
+```json
+{
+  "id": "c994e03e42d24be7bf6e1fcbad3334c0",
+  "name": "Summertime",
+  "start_date": "2016-06-01T00:00:00",
+  "end_date": "2016-08-31T23:59:59",
+  "interest": 2500,
+  "partial": true,
+  "num_instalments": [1, 2, 3, 5, 8],
+  "created": "2016-03-10T11:08:57.265971"
+}
+```

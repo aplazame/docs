@@ -1,0 +1,90 @@
+---
+title: Detalles
+sidebar_position: 2
+keywords: [API campañas, crear campaña]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Detalles
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /me/campaigns/:campaignId HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/me/campaigns/:campaignId" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client('$api_token{private}')
+response = client.get_campaign(':merchantId', ':campaignId')
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$result = $aplazameClient->get("/me/campaigns/{$campaignId}");
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+dynamic result = client.Get($"/me/campaigns/{campaignId}");
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+:merchantId | hash | ${yes} | `id` de la tienda con el que hacer las peticiones
+:campaignId | hash | ${yes} | `id` de la campaña con el que hacer las peticiones
+
+ ### Respuesta
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+X-Aplazame-Media-Type: aplazame.v1
+```
+```json
+{
+  "id": "c994e03e42d24be7bf6e1fcbad3334c0",
+  "name": "Summertime",
+  "start_date": "2016-06-01T00:00:00",
+  "end_date": "2016-08-31T23:59:59",
+  "interest": 2500,
+  "partial": true,
+  "num_instalments": [1, 2, 3, 5, 8],
+  "created": "2016-03-10T11:08:57.265971"
+}
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+id | hash | `id` del hostname
+name | string | Nombre de la campaña
+start_date | $type{date} | Fecha de inicio de la campaña
+end_date | $type{date} | Fecha fin de la campaña
+interest | $type{decimal} | Tasa de descuento en los intereses
+partial | Boolean | Determina si la campaña aplica a todos los productos

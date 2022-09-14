@@ -1,0 +1,200 @@
+---
+title: Edición
+sidebar_position: 3
+keywords: [API campañas, crear campaña]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Edición
+
+## Edición completa
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+PUT /me/campaigns/:campaignId HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer api_private_key
+Host: api.aplazame.com
+Content-Type: application/json
+```
+```json
+{
+  "name": "Summertime",
+  "start_date": "2016-06-01T00:00:00",
+  "end_date": "2016-08-31T23:59:59",
+  "interest": "2500",
+  "partial": true,
+  "num_instalments": [1, 2, 3, 5, 8]
+}
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/me/campaigns/:campaignId" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"\
+    -X PUT\
+    --data-binary '{
+      "name": "Summertime",
+      "start_date": "2016-06-01T00:00:00",
+      "end_date": "2016-08-31T23:59:59",
+      "interest": "2500",
+      "partial": true,
+      "num_instalments": [1, 2, 3, 5, 8]
+    }'
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client('$api_token{private}')
+response = client.put_campaign(':merchantId', ':campaignId', {
+  'name': 'Summertime',
+  'start_date': '2016-06-01T00:00:00',
+  'end_date': '2016-08-31T23:59:59',
+  'interest': '2500',
+  'partial': True,
+  'num_instalments': [1, 2, 3, 5, 8]
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+
+$campaign = [
+  "name" => "Summertime",
+  "start_date" => Aplazame\Serializer\Decimal::fromDateTime(new DateTime("2016-06-01 00:00:00")),
+  "end_date" => Aplazame\Serializer\Decimal::fromDateTime(new DateTime("2016-08-31 23:59:59")),
+  "interest" => Aplazame\Serializer\Decimal::fromFloat(25),
+  "partial" => true,
+  "num_instalments" => [1, 2, 3, 5, 8],
+];
+$result = $aplazameClient->put("/me/campaigns/{campaignId}", $campaign);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+
+dynamic campaign = new {
+  name = "Summertime",
+  start_date = Aplazame.Serializer.DateType.FromDateTime(DateTime.Parse("2016-06-01 00:00:00")),
+  end_date = Aplazame.Serializer.DateType.FromDateTime(DateTime.Parse("2016-08-31 23:59:59")),
+  interest = Aplazame.Serializer.DecimalType.FromDouble(25),
+  partial = true,
+  num_instalments = [1, 2, 3, 5, 8],
+};
+dynamic result = client.Put($"/me/campaigns/{campaignId}", campaign);
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+name | string | ${yes} | $message{ Nombre de la campaña
+start_date | $type{date} | ${yes} | Fecha de inicio de la campaña
+end_date | $type{date} | ${no} | Fecha fin de la campaña
+interest | $type{decimal} | ${yes} | Tasa de descuento en los intereses
+partial | Boolean | ${no} | Determina si la campaña aplica a todos los productos, por defecto `false`
+num_instalments | array | ${no} | Número de cuotas disponibles para la campaña
+
+ ### Respuesta
+
+```http
+HTTP/1.1 204 NO CONTENT
+X-Aplazame-Media-Type: aplazame.v1
+```
+
+### Edición parcial
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+PATCH /me/campaigns/:campaignId HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+Content-Type: application/json
+```
+```json
+{
+  "start_date": "2016-06-22T00:00:00"
+}
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/me/campaigns/:campaignId" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"\
+    -X PATCH\
+    --data-binary '{
+      "start_date": "2016-06-22T00:00:00"
+    }'
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client('$api_token{private}')
+response = client.patch_campaign(':merchantId', ':campaignId', {
+  'start_date': '2016-06-22'
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+
+$campaign = [
+  "start_date" => Aplazame\Serializer\Decimal::fromDateTime(new DateTime("2016-06-22 00:00:00")),
+];
+$result = $aplazameClient->patch("/me/campaigns/{campaignId}", $campaign);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+
+dynamic campaign = new {
+  start_date = Aplazame.Serializer.DateType.FromDateTime(DateTime.Parse("2016-06-22 00:00:00")),
+};
+dynamic result = client.Patch($"/me/campaigns/{campaignId}", campaign);
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+:merchantId | hash | ${yes} | `id` de la tienda con el que hacer las peticiones
+:campaignId | hash | ${yes} | `id` de la campaña con el que hacer las peticiones
+
+### Respuesta
+
+```http
+HTTP/1.1 204 NO CONTENT
+X-Aplazame-Media-Type: aplazame.v1
+```
