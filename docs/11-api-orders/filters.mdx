@@ -66,8 +66,7 @@ Te puede interesar consultar la [documentación general de filtros de la API](..
 
 **Los tipos de búsquedas** están explicados **[AQUÍ](../search/#campos)** (`string`, `choices`, `range`, `isnull` y `date`).
 
-Cantidad financiada exacta:
-
+#### Cantidad financiada exacta
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -111,9 +110,7 @@ dynamic result = client.Get($"/orders?total_amount=462000");
   </TabItem>
 </Tabs>
 
-Confirmado después de:
-
-
+#### Confirmado después de
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -154,6 +151,52 @@ $result = $aplazameClient->get("/orders", [
   <TabItem value="c" label="C#">
 
 ```csharp
+dynamic result = client.Get($"/orders?confirmed-gte=2015-12-22T15:09:30.537951Z");
+```
+  </TabItem>
+</Tabs>
+
+#### Verificado pero no confirmado
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?verified-isnull=yes&confirmed-isnull=no HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?verified-isnull=yes&confirmed-isnull=no" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'verified-isnull': True,
+  'confirmed-isnull': False
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "verified-isnull" => "yes",
+  "confirmed-isnull" => "no",
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
 dynamic result = client.Get($"/orders?verified-isnull=yes&confirmed-isnull=no");
 ```
   </TabItem>
@@ -163,17 +206,15 @@ dynamic result = client.Get($"/orders?verified-isnull=yes&confirmed-isnull=no");
 |---------|---------|---------|---------|
 id | hash | `string` | `ID` del pedido en aplazame
 mid | string | `string` | `ID` del pedido
- | | | |
 total_amount | [decimal](../api-reference/#decimals) | `range` | Importe del pedido
 discount | [decimal](../api-reference/#decimals) | `isnull`, `range` | Cantidad del descuento del pedido
 discount_rate | [decimal](../api-reference/#decimals) | `isnull`, `range` | Tasa de descuento en el precio del pedido
- | | | |
 created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Fecha de creación del pedido
 verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se ha verificado el pedido
 confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se confirmó el pedido
 cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se canceló el pedido
 
-Pago inicial:
+#### Pago inicial
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -329,6 +370,7 @@ customer-document_id-type | string | `choices` | Tipo de documento identificativ
 
 ## Por cuenta
 
+Género exacto
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -427,46 +469,3 @@ account-type | string | `choices` | Tipo de cliente; las opciones son `g` invita
 account-gender | integer | `choices` | Género; las opciones son `0` desconocido, `1` hombre, `2` mujer, `3` no aplica
 account-last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha del último inicio de sesión.
 account-date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se creó la cuenta.
-
-
-
-
-
-
-
-
-
-
-<Tabs>
-  <TabItem value="http" label="http">
-
-```http
-
-```
-  </TabItem>
-  <TabItem value="shell" label="shell">
-
-```shell
-
-```
-  </TabItem>
-  <TabItem value="python" label="python">
-
-```python
-
-```
-  </TabItem>
-  <TabItem value="php" label="php">
-
-```php
-
-```
-  </TabItem>
-  <TabItem value="c" label="C#">
-
-```csharp
-
-```
-  </TabItem>
-</Tabs>
-

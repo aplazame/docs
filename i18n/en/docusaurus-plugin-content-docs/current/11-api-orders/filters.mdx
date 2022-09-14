@@ -61,13 +61,12 @@ dynamic result = client.Get("/orders?my-param-term=value");
 </Tabs>
 
 :::info
-Te puede interesar consultar la [documentación general de filtros de la API](../../api-reference/#filtros).
+You may want to check [general API filters documentation](../../api-reference/#filtros).
 :::
 
-**Los tipos de búsquedas** están explicados **[AQUÍ](../search/#campos)** (`string`, `choices`, `range`, `isnull` y `date`).
+**Filters lookups** are listed **[HERE](../search/#campos)** (`string`, `choices`, `range`, `isnull` y `date`).
 
-Cantidad financiada exacta:
-
+#### Exact total amount
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -111,9 +110,7 @@ dynamic result = client.Get($"/orders?total_amount=462000");
   </TabItem>
 </Tabs>
 
-Confirmado después de:
-
-
+#### Confirmed after
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -154,6 +151,52 @@ $result = $aplazameClient->get("/orders", [
   <TabItem value="c" label="C#">
 
 ```csharp
+dynamic result = client.Get($"/orders?confirmed-gte=2015-12-22T15:09:30.537951Z");
+```
+  </TabItem>
+</Tabs>
+
+#### Verified but not confirmed
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /orders?verified-isnull=yes&confirmed-isnull=no HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/orders?verified-isnull=yes&confirmed-isnull=no" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+response = client.orders({
+  'verified-isnull': True,
+  'confirmed-isnull': False
+})
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+$result = $aplazameClient->get("/orders", [
+  "verified-isnull" => "yes",
+  "confirmed-isnull" => "no",
+]);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
 dynamic result = client.Get($"/orders?verified-isnull=yes&confirmed-isnull=no");
 ```
   </TabItem>
@@ -161,19 +204,17 @@ dynamic result = client.Get($"/orders?verified-isnull=yes&confirmed-isnull=no");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-id | hash | `string` | `ID` del pedido en aplazame
-mid | string | `string` | `ID` del pedido
- | | | |
-total_amount | [decimal](../api-reference/#decimals) | `range` | Importe del pedido
-discount | [decimal](../api-reference/#decimals) | `isnull`, `range` | Cantidad del descuento del pedido
-discount_rate | [decimal](../api-reference/#decimals) | `isnull`, `range` | Tasa de descuento en el precio del pedido
- | | | |
-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Fecha de creación del pedido
-verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se ha verificado el pedido
-confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se confirmó el pedido
-cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se canceló el pedido
+id | hash | `string` | Your order `ID` in aplazame
+mid | string | `string` | Your order ID
+total_amount | [decimal](../api-reference/#decimals) | `range` | Order amount
+discount | [decimal](../api-reference/#decimals) | `isnull`, `range` | Order discount amount
+discount_rate | [decimal](../api-reference/#decimals) | `isnull`, `range` | Discount rate on the price of the order
+created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Date designating when the order was created
+verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the order was verified
+confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the order was confirmed
+cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the order was cancelled
 
-Pago inicial:
+#### Downpayment
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -219,11 +260,12 @@ dynamic result = client.Get($"/orders?instalment_plan-downpayment-state=failed")
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-instalment_plan-downpayment-state | string | `choices` | Estado del pago inicial
-instalment_plan-downpayment-amount | [decimal](../api-reference/#decimals) | `isnull`, `range` | Importe del pago inicial
+instalment_plan-downpayment-state | string | `choices` | Downpayment status
+instalment_plan-downpayment-amount | [decimal](../api-reference/#decimals) | `isnull`, `range` | Downpayment amount
 
-## Por teléfono
-Número de teléfono del cliente exacto
+## By phone
+Customer phone number exact
+
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -269,14 +311,14 @@ dynamic result = client.Get($"/orders?customer-phone-number=612345678");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-customer-id | hash | `string` | `ID` de cliente
-customer-phone-number | string | `string` | Teléfono móvil del cliente
-customer-phone-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | Prefijo telefónico del país
-customer-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Fecha de creación
+customer-id | hash | `string` | Customer `ID`
+customer-phone-number | string | `string` | Customer mobile phone number
+customer-phone-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | Customer phone country
+customer-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Date designating when the customer was created
 
-## Por documento de identificación del cliente
+## By customer document ID
 
-Tipo de documento de identificación; Las opciones son `nif` o` nie`.
+Document ID type; choices are `nif` or `nie`
 
 
 <Tabs>
@@ -323,11 +365,13 @@ dynamic result = client.Get($"/orders?customer-document_id-type=nif&customer-doc
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-customer-document_id-number | string | `string` | Número de identificación del documento del cliente
-customer-document_id-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | País emisor del documento de identificación del cliente
-customer-document_id-type | string | `choices` | Tipo de documento identificativo del cliente, los valores pueden ser `nif`, `nie`, `cif`, `passport`, `others`
+customer-document_id-number | string | `string` | Customer document ID number
+customer-document_id-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | Customer document ID country
+customer-document_id-type | string | `choices` | Customer document ID type; the choices are `nif`, `nie`, `cif`, `passport`, `others`
 
-## Por cuenta
+## By account
+
+Gender exact
 
 
 <Tabs>
@@ -375,7 +419,7 @@ dynamic result = client.Get($"/orders?account-type=existing&account-gender=0");
 </Tabs>
 
 
-El último login no es `null`.
+Last login is not `null`.
 
 
 <Tabs>
@@ -422,51 +466,8 @@ dynamic result = client.Get($"/orders?account-last_login-isnull=no");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-account-id | hash | `string` | `ID` del cliente
-account-type | string | `choices` | Tipo de cliente; las opciones son `g` invitado, `n` nuevo, `e` existente
-account-gender | integer | `choices` | Género; las opciones son `0` desconocido, `1` hombre, `2` mujer, `3` no aplica
-account-last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha del último inicio de sesión.
-account-date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se creó la cuenta.
-
-
-
-
-
-
-
-
-
-
-<Tabs>
-  <TabItem value="http" label="http">
-
-```http
-
-```
-  </TabItem>
-  <TabItem value="shell" label="shell">
-
-```shell
-
-```
-  </TabItem>
-  <TabItem value="python" label="python">
-
-```python
-
-```
-  </TabItem>
-  <TabItem value="php" label="php">
-
-```php
-
-```
-  </TabItem>
-  <TabItem value="c" label="C#">
-
-```csharp
-
-```
-  </TabItem>
-</Tabs>
-
+account-id | hash | `string` | Customer `ID`
+account-type | string | `choices` | Customer type; the choices are `g` guest, `n` new, `e` existing
+account-gender | integer | `choices` | Gender; the choices are `0` not known, `1` male, `2` female, `3` not applicable
+account-last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date of the customer's last login
+account-date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the customer account was created
