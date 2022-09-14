@@ -63,7 +63,8 @@ See that the notifications sent by Aplazame include the store's private code as 
 POST notification_url
 Authorization: Bearer api_private_key
 Content-Type: application/json
-
+```
+```json
 {
   "id": "8606a585a5a56e51856e7f6d84a131b8",
   "status": "pending",
@@ -148,7 +149,8 @@ In the case of the confirmation notification, the store will also respond with a
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+```
+```json
 {
   "status": "ok"
 }
@@ -159,7 +161,8 @@ Content-Type: application/json
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+```
+```json
 {
   "status": "ko"
 }
@@ -170,7 +173,8 @@ Content-Type: application/json
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+```
+```json
 {
   "status": "ok",
   "order_id": "28475648233786783165"

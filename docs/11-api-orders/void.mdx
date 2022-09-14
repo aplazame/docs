@@ -78,7 +78,8 @@ dynamic result = client.Get($"/orders/{orderId}/void");
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 X-Aplazame-Media-Type: aplazame.v1
-
+```
+```json
 {
    "remaining_amount":60020,
    "results":[
@@ -111,7 +112,8 @@ POST /orders/:orderId/void HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
 Authorization: Bearer api_private_key
 Host: api.aplazame.com
-
+```
+```json
 {
   "amount": 10050
 }
@@ -172,7 +174,8 @@ amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Impo
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 X-Aplazame-Media-Type: aplazame.v1
-
+```
+```json
 {
    "remaining_amount":60020,
    "results":[

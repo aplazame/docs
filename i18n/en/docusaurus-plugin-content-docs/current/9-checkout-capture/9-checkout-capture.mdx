@@ -102,7 +102,8 @@ orderId | string | <t id="table.yes">Sí</t> | Order ID
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 X-Aplazame-Media-Type: aplazame.v1
-
+```
+```json
 {
     "remaining_capture_amount": 60020,
     "results": [
@@ -133,7 +134,8 @@ POST /orders/:orderId/captures HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
 Authorization: Bearer api_private_key
 Host: api.aplazame.com
-
+```
+```json
 {
   "amount": 10050
 }
@@ -196,15 +198,16 @@ dynamic result = client.Post($"/orders/{orderId}/captures", new {amount = Aplaza
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 X-Aplazame-Media-Type: aplazame.v1
-
+```
+```json
 {
-    "remaining_capture_amount": 49970,
-    "amount": 10050,
-    "id": "cf04aa87a6364f14b164e48a84e99936",
-    "created": "2019-06-21T16:51:19.494155+02:00",
-    "refunds": [],
-    "refunded_amount": 0,
-    "remaining_amount": 10050
+  "remaining_capture_amount": 49970,
+  "amount": 10050,
+  "id": "cf04aa87a6364f14b164e48a84e99936",
+  "created": "2019-06-21T16:51:19.494155+02:00",
+  "refunds": [],
+  "refunded_amount": 0,
+  "remaining_amount": 10050
 }
 ```
 

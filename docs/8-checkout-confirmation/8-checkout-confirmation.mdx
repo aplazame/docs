@@ -65,7 +65,8 @@ Observa que las notificaciones enviadas por Aplazame incluyen la clave privada d
 POST notification_url
 Authorization: Bearer api_private_key
 Content-Type: application/json
-
+```
+```json
 {
   "id": "8606a585a5a56e51856e7f6d84a131b8",
   "status": "pending",
@@ -148,7 +149,8 @@ En el caso de la notificación de confirmación, el comercio también responder�
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+```
+```json
 {
   "status": "ok"
 }
@@ -159,7 +161,8 @@ Content-Type: application/json
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+```
+```json
 {
   "status": "ko"
 }
@@ -170,7 +173,8 @@ Content-Type: application/json
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
-
+```
+```json
 {
   "status": "ok",
   "order_id": "28475648233786783165"

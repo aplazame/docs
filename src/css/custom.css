@@ -52,3 +52,8 @@ table td:last-child {
   color: transparent; /* workaround to hide INFO CAUTION TIP etc. */
   display: none;
 }
+
+
+.language-http.theme-code-block + .language-json.theme-code-block {
+  margin-top: -1.5rem
+}

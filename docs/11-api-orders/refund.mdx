@@ -86,7 +86,8 @@ dynamic result = client.Get($"/orders/{orderId}/refund");
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 X-Aplazame-Media-Type: aplazame.v1
-
+```
+```json
 {
   "remaining_amount": 70070
 }
@@ -103,7 +104,8 @@ POST /orders/:orderId/refund HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
 Authorization: Bearer api_private_key
 Host: api.aplazame.com
-
+```
+```json
 {
   "amount": 10050
 }
@@ -164,7 +166,8 @@ amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Impo
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 X-Aplazame-Media-Type: aplazame.v1
-
+```
+```json
 {
   "remaining_amount": 60020
 }
@@ -272,7 +275,8 @@ dynamic result = client.Get($"/orders/{orderId}/captures/{captureId}/refunds");
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 X-Aplazame-Media-Type: aplazame.v1
-
+```
+```json
 {
   "amount": 70070,
   "id": "cf04aa87a6364f14b164e48a84e99936",
@@ -303,7 +307,8 @@ POST /orders/:orderId/captures/:captureId/refunds HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
 Authorization: Bearer api_private_key
 Host: api.aplazame.com
-
+```
+```json
 {
   "amount": 10050
 }
@@ -365,7 +370,8 @@ amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Impo
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
 X-Aplazame-Media-Type: aplazame.v1
-
+```
+```json
 {
     "amount": 70070,
     "id": "cf04aa87a6364f14b164e48a84e99936",
