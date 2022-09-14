@@ -1,21 +1,20 @@
 ---
-title: Cancelación
+title: Cancellation
 sidebar_position: 9
-keywords: [cancel orders, Cancelación, abort, undo]
+keywords: [cancel orders, cancellation, abort, undo]
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Cancelar pedido
+# Cancellation
 
 :::caution
-Sólo se aceptan solicitudes de cancelación para pedidos confirmados.
+Cancellation requests are only accepted for confirmed orders.
 :::
 
-Una vez cancelado un pedido, ya no se podrá modificar.
+Once the order has been cancelled, it cannot be modified.
 
-El importe de la cancelación se verá reflejado en las liquidaciones del comercio y se realizará una devolución total de los importes previamente abonados por el comprador.
-
+The cancellation amount will show up in the store’s commercial transactions and a full refund will be given for the amounts previously paid by the buyer.
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -72,7 +71,7 @@ dynamic result = client.Post($"/orders/{orderId}/cancel", new {});
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> |ID del pedido
+:orderId | string | <t id="docs.yes">Sí</t> | Order `ID`
 
 #### Response
 

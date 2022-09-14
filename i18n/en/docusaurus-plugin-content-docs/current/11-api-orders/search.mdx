@@ -1,12 +1,12 @@
 ---
-title: Búsqueda
+title: Search
 sidebar_position: 13
 keywords: [API search, search orders]
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Búsqueda de pedidos
+# Search orders
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -50,17 +50,16 @@ dynamic result = client.Get($"/orders?q=param1,param2,...");
   </TabItem>
 </Tabs>
 
-Para buscar en el conjunto de pedidos.
+To search order queryset.
 
 `GET https://api.aplazame.com/orders?q=param1,param2,...`
 
-La API de Aplazame permite una lista de nombres de campos que se buscarán cada vez que se envíe una consulta de búsqueda con el parámetro `q`.
+Aplazame API allows a list of field names that will be searched whenever a search query with the parameter `q` is submitted.
 
-Las búsquedas utilizarán coincidencias parciales insensibles a mayúsculas y minúsculas. El parámetro de búsqueda puede contener varios términos de búsqueda, que deben estar separados por espacios en blanco y / o comas. Si se usan múltiples términos de búsqueda, entonces los objetos serán devueltos en la lista únicamente si todos los términos indicados coinciden
+Searches will use case-insensitive partial matches. The search parameter may contain multiple search terms, which should be separated by whitespaces and/or commas. If multiple search terms are used, then objects will be returned in the list only if all the provided terms are matched.
 
-## Campos
-Buscar por nombre, email, domain, ...
-
+## Fields
+Search by name, email, domain, etc.
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -106,6 +105,6 @@ dynamic result = client.Get($"/orders?q=Alice,@gmail,.es");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-account-first_name | Nombre
-account-last_name | Apellidos
-account-email | Correo
+account-first_name | First name
+account-last_name | Last name
+account-email | Email

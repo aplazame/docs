@@ -1,12 +1,12 @@
 ---
-title: Ordenación
+title: Ordering
 sidebar_position: 11
-keywords: [API orders, sorting, sort, order by]
+keywords: [API ordering , sorting, sort, order by]
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Ordenar pedidos
+# Ordering
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -51,16 +51,14 @@ dynamic result = client.Get($"/orders?ordering=param1,-param2,...");
 </Tabs>
 
 
-Para recuperar el conjunto de pedidos ordenado.
+To retrieve the order queryset ordered.
 
 `GET https://api.aplazame.com/orders?ordering=param1,-param2,...`
 
-El parámetro ordering es una tupla o lista de cadenas. Cada cadena es un nombre de campo con un prefijo opcional `-`, que indica el orden descendente. Los campos sin un `-` delante se ordenarán de forma ascendente.
+The ordering parameter is a tuple or list of strings. Each string is a field name with an optional `-` prefix, which indicates descending order. Fields without a leading `-` will be ordered ascending.
 
-## Por pedido
-
-Cantidad total descendiente, fecha de creación ascendente.
-
+## By order
+Descending total amount, Ascending created
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -106,16 +104,14 @@ dynamic result = client.Get($"/orders?ordering=-total_amount,created");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-total_amount | [decimal](../api-reference/#decimals) | Importe total del pedido
-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se creó el pedido
-verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se ha verificado el pedido
-confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha en que se designó cuando se confirmó el pedido
-cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se canceló el pedido
+total_amount | [decimal](../api-reference/#decimals) | Total order amount
+created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Date designating when the order was created
+verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Date designating when the order was verified
+confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Datetime designating when the order was confirmed
+cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Date designating when the order was cancelled
 
-
-## Por cuenta
-Orden ascendente del último ingreso, orden descendente de la fecha de creación.
-
+## By account
+Ascending account last login, Descending account creation date
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -161,6 +157,6 @@ dynamic result = client.Get($"/orders?ordering=account-last_login,-account-creat
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-account-last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha del último inicio de sesión del cliente.
-account-date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se creó la cuenta de cliente.
-account-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se creó la cuenta de cliente en Aplazame
+account-last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Date of the customer's last login
+account-date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Date designating when the customer account was created
+account-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Date designating when the customer account was created in Aplazame

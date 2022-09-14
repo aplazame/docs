@@ -1,18 +1,18 @@
 ---
-title: Historial
+title: History
 sidebar_position: 10
-keywords: [orders history, list, index]
+keywords: [orders history, history, list, index]
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Historial de pedidos
+# Orders history
 
 :::info
-Una vez iniciado el proceso de pago, se recomienda realizar el envío del historial de compra del cliente en el comercio para mejorar la concesión de la solicitud de financiación.
+Once the payment process has begun, sending the history of the customer's store purchases is recommended in order to improve the likelihood of the financing request being accepted.
 :::
 
-Se recomienda realizar el envío de manera asíncrona para no retrasar la carga de la plantilla.
+It is recommended that this be sent asynchronously so as not to delay the loading of the template.
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -212,16 +212,16 @@ dynamic result = client.Post($"/orders/{orderId}/history", payload);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | `id` del pedido
-id | string | <t id="docs.yes">Sí</t> | `id` del pedido
-amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Importe del pedido
-due | [decimal](../api-reference/#decimals) | no | Importe total del pedido
-status | string | <t id="docs.yes">Sí</t> | Estado del pedido; Las opciones son `pending`, `cancelled`, `processing` y `complete`
-type | string | <t id="docs.yes">Sí</t> | Tipo de pedido
-order_date | string | <t id="docs.yes">Sí</t> | Fecha del pedido
-currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="docs.yes">Sí</t> | Código de la moneda del pedido
-[billing](../checkout-creation/#billing) | object | no | Dirección de facturación.
-[shipping](../checkout-creation/#shipping) | object | no | Información de envío.
+:orderId | string | <t id="docs.yes">Sí</t> | Your order `id`
+id | string | <t id="docs.yes">Sí</t> | Your order `id`
+amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Order amount
+due | [decimal](../api-reference/#decimals) | no | Total order amount due
+status | string | <t id="docs.yes">Sí</t> | "Order status; the choices are `pending`, `cancelled`, `processing` and `complete`
+type | string | <t id="docs.yes">Sí</t> | Order type
+order_date | string | <t id="docs.yes">Sí</t> | Date of the order
+currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="docs.yes">Sí</t> | Currency code of the order
+[billing](../checkout-creation/#billing) | object | no | Billing address
+[shipping](../checkout-creation/#shipping) | object | no | Shipping info
 
 #### Response
 

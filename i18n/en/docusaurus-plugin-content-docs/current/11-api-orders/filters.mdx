@@ -1,12 +1,12 @@
 ---
-title: Filtros
+title: Filters
 sidebar_position: 12
 keywords: [API orders filters, filter orders]
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Filtrar pedidos
+# Filter orders
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -370,9 +370,7 @@ customer-document_id-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_31
 customer-document_id-type | string | `choices` | Customer document ID type; the choices are `nif`, `nie`, `cif`, `passport`, `others`
 
 ## By account
-
 Gender exact
-
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -418,9 +416,7 @@ dynamic result = client.Get($"/orders?account-type=existing&account-gender=0");
   </TabItem>
 </Tabs>
 
-
 Last login is not `null`.
-
 
 <Tabs>
   <TabItem value="http" label="http">
