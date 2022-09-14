@@ -114,7 +114,7 @@ The value of sandbox must be `false` for production environment
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
- selector | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | no | CSS selector to display/hide Aplazame’s payment method.
+ selector | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | No | CSS selector to display/hide Aplazame’s payment method.
  amount | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Quantity to be financed.
  currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="table.yes">Sí</t> | The currency code of the order.
 
@@ -297,11 +297,11 @@ To check "Pay in 4" product, yo need add `data-product-type="pay_in_4"`, or `pro
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-onStatusChange | function | no | `function onStatusChange(status) { /**/}` Function to be called when the Checkout changes its status. **Possible statuses**: `success`, `pending`, `ko`. **(When sending this signal, the checkout will remain open until a callback is made, as mentioned below)**
-onClose | function | no | Function to be called when the Checkout closes. `function onClose(status) { /**/}` **Possible statuses**: `success`, `pending`, `ko`, `dismiss`.
-onSuccess | function | no | Function to be called when the payment is completed. When defining this function the `success_url` value is ignored
-onPending | function | no | Function to be called when the payment is pending confirmation. When defining this function the `pending_url` value is ignored
-onKO | function | no | Function to be called when the payment is denied. When defining this function the `ko_url` value is ignored
-onError | function | no | Function to be called when an error occurs. When defining this function the `error_url` value is ignored
-onDismiss | function | no | Function to be called when the user chooses to return to the store. When defining this function the `dismiss_url` value is ignored
+onStatusChange | function | No | `function onStatusChange(status) { /**/}` Function to be called when the Checkout changes its status. **Possible statuses**: `success`, `pending`, `ko`. **(When sending this signal, the checkout will remain open until a callback is made, as mentioned below)**
+onClose | function | No | Function to be called when the Checkout closes. `function onClose(status) { /**/}` **Possible statuses**: `success`, `pending`, `ko`, `dismiss`.
+onSuccess | function | No | Function to be called when the payment is completed. When defining this function the `success_url` value is ignored
+onPending | function | No | Function to be called when the payment is pending confirmation. When defining this function the `pending_url` value is ignored
+onKO | function | No | Function to be called when the payment is denied. When defining this function the `ko_url` value is ignored
+onError | function | No | Function to be called when an error occurs. When defining this function the `error_url` value is ignored
+onDismiss | function | No | Function to be called when the user chooses to return to the store. When defining this function the `dismiss_url` value is ignored
 

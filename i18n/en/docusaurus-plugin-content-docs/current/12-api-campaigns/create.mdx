@@ -19,7 +19,7 @@ Learn how to manage the [articles](./articles/) of a *financing campaign*.
 ```http
 POST /me/campaigns HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Host: api.aplazame.com
 Content-Type: application/json
 ```
@@ -39,7 +39,7 @@ Content-Type: application/json
 ```shell
 $ curl "https://api.aplazame.com/me/campaigns" \
     -H "Accept: application/vnd.aplazame.v1+json" \
-    -H "Authorization: Bearer $api_token{private}"\
+    -H "Authorization: Bearer api_private_key"\
     --data-binary '{
       "name": "Summertime",
       "start_date": "2016-06-01T00:00:00",
@@ -55,7 +55,7 @@ $ curl "https://api.aplazame.com/me/campaigns" \
 ```python
 import aplazame_sdk
 
-client = aplazame_sdk.Client('$api_token{private}')
+client = aplazame_sdk.Client('api_private_key')
 response = client.post_campaign(':merchantId', {
   'name': 'Summertime',
   'start_date': '2016-06-01T00:00:00',
@@ -71,7 +71,7 @@ response = client.post_campaign(':merchantId', {
 ```php
 use Aplazame\Api\Client as AplazameClient;
 
-$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "api_private_key");
 
 $campaign = [
   "name" => "Summertime",
@@ -89,7 +89,7 @@ $result = $aplazameClient->post("/me/campaigns", $campaign);
 ```cs
 using Aplazame.Api;
 
-Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "api_private_key");
 
 dynamic campaign = new {
   name = "Summertime",
@@ -106,14 +106,14 @@ dynamic result = client.Post($"/me/campaigns", campaign);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-name | string | ${yes} | Campaign name
-start_date | $type{date} | ${yes} | Start date of the campaign
-end_date | $type{date} | ${no} | End date of the campaign
-interest | $type{decimal} | ${yes} | Interest discount rate
-partial | Boolean | ${no} | Determines if the campaign applies to all products, `false` by default
-num_instalments | array | ${no} | Minimum shopping cart amount (order.total_amount) to which the campaign applies
-min_order_amount | $type{decimal} | ${no} | [Minimum shopping cart amount (order.total_amount)](../checkout-creation/#order) to which the campaign applies
-max_order_amount | $type{decimal} | ${no} | [Maximum shopping cart amount (order.total_amount)](../checkout-creation/#order) to which the campaign applies
+name | string | <t id="table.yes">Sí</t> | Campaign name
+start_date | $type{date} | <t id="table.yes">Sí</t> | Start date of the campaign
+end_date | $type{date} | No | End date of the campaign
+interest | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Interest discount rate
+partial | Boolean | No | Determines if the campaign applies to all products, `false` by default
+num_instalments | array | No | Minimum shopping cart amount (order.total_amount) to which the campaign applies
+min_order_amount | [decimal](../api-reference/#decimals) | No | [Minimum shopping cart amount (order.total_amount)](../checkout-creation/#order) to which the campaign applies
+max_order_amount | [decimal](../api-reference/#decimals) | No | [Maximum shopping cart amount (order.total_amount)](../checkout-creation/#order) to which the campaign applies
 
  ### Response
 

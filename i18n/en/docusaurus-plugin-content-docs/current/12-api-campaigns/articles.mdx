@@ -17,7 +17,7 @@ Once the campaign is created, you must add the list of the articles to which it 
 ```http
 POST /me/campaigns/:campaignId/articles HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Host: api.aplazame.com
 ```
 ```json
@@ -44,7 +44,7 @@ Host: api.aplazame.com
 ```shell
 $ curl "https://api.aplazame.com/me/campaigns/:campaignId/articles" \
     -H "Accept: application/vnd.aplazame.v1+json" \
-    -H "Authorization: Bearer $api_token{private}"\
+    -H "Authorization: Bearer api_private_key"\
     --data-binary '[
   {
     "id": "89793238462643383279",
@@ -68,7 +68,7 @@ $ curl "https://api.aplazame.com/me/campaigns/:campaignId/articles" \
 ```python
 import aplazame_sdk
 
-client = aplazame_sdk.Client('$api_token{private}')
+client = aplazame_sdk.Client('api_private_key')
 response = client.post_campaign_articles(':merchantId', ':campaignId', [
   {
     'id': '89793238462643383279',
@@ -92,7 +92,7 @@ response = client.post_campaign_articles(':merchantId', ':campaignId', [
 ```php
 use Aplazame\Api\Client as AplazameClient;
 
-$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "api_private_key");
 
 $articles = [
   [
@@ -118,7 +118,7 @@ $result = $aplazameClient->post("/me/campaigns/{$campaignId}/articles", $article
 ```cs
 using Aplazame.Api;
 
-Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "api_private_key");
 
 dynamic[] articles = new dynamic[] {
   new {
@@ -143,11 +143,11 @@ dynamic result = client.Post($"/me/campaigns/{campaignId}/articles", articles);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-id | string | ${yes} | Article `id`
-name | string | ${yes} | Article name
-description | string | ${no} | Article description
-url | URL | ${yes} | Article absolute URL
-image_url | URL | ${no} | Article image absolute URL
+id | string | <t id="table.yes">Sí</t> | Article `id`
+name | string | <t id="table.yes">Sí</t> | Article name
+description | string | No | Article description
+url | URL | <t id="table.yes">Sí</t> | Article absolute URL
+image_url | URL | No | Article image absolute URL
 
 ### Response
 
@@ -165,7 +165,7 @@ Individual deletion of an article included in a campaign.
 ```http
 DELETE /me/campaigns/:campaignId/articles/:articleId HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Host: api.aplazame.com
 ```
   </TabItem>
@@ -174,7 +174,7 @@ Host: api.aplazame.com
 ```shell
 $ curl "https://api.aplazame.com/me/campaigns/:campaignId/articles/:articleId" \
     -H "Accept: application/vnd.aplazame.v1+json" \
-    -H "Authorization: Bearer $api_token{private}"\
+    -H "Authorization: Bearer api_private_key"\
     -X DELETE'
 ```
   </TabItem>
@@ -183,7 +183,7 @@ $ curl "https://api.aplazame.com/me/campaigns/:campaignId/articles/:articleId" \
 ```python
 import aplazame_sdk
 
-client = aplazame_sdk.Client('$api_token{private}')
+client = aplazame_sdk.Client('api_private_key')
 response = client.delete_campaign_article(':merchantId', ':campaignId', ':articleId')
 ```
   </TabItem>
@@ -192,7 +192,7 @@ response = client.delete_campaign_article(':merchantId', ':campaignId', ':articl
 ```php
 use Aplazame\Api\Client as AplazameClient;
 
-$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "api_private_key");
 $result = $aplazameClient->delete("/me/campaigns/{$campaignId}/articles/{$articleId}");
 ```
   </TabItem>
@@ -201,7 +201,7 @@ $result = $aplazameClient->delete("/me/campaigns/{$campaignId}/articles/{$articl
 ```cs
 using Aplazame.Api;
 
-Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "api_private_key");
 dynamic result = client.Delete($"/me/campaigns/{campaignId}/articles/{articleId}");
 ```
   </TabItem>
@@ -223,7 +223,7 @@ if you do not include the article `id` in the URL, all campaign articles are ref
 ```http
 DELETE /me/campaigns/:campaignId/articles HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Host: api.aplazame.com
 ```
   </TabItem>
@@ -232,7 +232,7 @@ Host: api.aplazame.com
 ```shell
 $ curl "https://api.aplazame.com/me/campaigns/:campaignId/articles" \
     -H "Accept: application/vnd.aplazame.v1+json" \
-    -H "Authorization: Bearer $api_token{private}"\
+    -H "Authorization: Bearer api_private_key"\
     -X DELETE'
 ```
   </TabItem>
@@ -241,7 +241,7 @@ $ curl "https://api.aplazame.com/me/campaigns/:campaignId/articles" \
 ```python
 import aplazame_sdk
 
-client = aplazame_sdk.Client('$api_token{private}')
+client = aplazame_sdk.Client('api_private_key')
 response = client.delete_campaign_articles(':merchantId', ':campaignId')
 ```
   </TabItem>
@@ -250,7 +250,7 @@ response = client.delete_campaign_articles(':merchantId', ':campaignId')
 ```php
 use Aplazame\Api\Client as AplazameClient;
 
-$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "api_private_key");
 $result = $aplazameClient->delete("/me/campaigns/{$campaignId}/articles");
 ```
   </TabItem>
@@ -259,7 +259,7 @@ $result = $aplazameClient->delete("/me/campaigns/{$campaignId}/articles");
 ```cs
 using Aplazame.Api;
 
-Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "api_private_key");
 dynamic result = client.Delete($"/me/campaigns/{campaignId}/articles");
 ```
   </TabItem>
@@ -281,7 +281,7 @@ Content-Type: application/vnd.aplazame.v1+json
 ```http
 GET /me/campaigns/:campaignId/articles?page=2 HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Host: api.aplazame.com
 ```
   </TabItem>
@@ -290,7 +290,7 @@ Host: api.aplazame.com
 ```shell
 $ curl "https://api.aplazame.com/me/campaigns/:campaignId/articles" \
     -H "Accept: application/vnd.aplazame.v1+json" \
-    -H "Authorization: Bearer $api_token{private}"
+    -H "Authorization: Bearer api_private_key"
 ```
   </TabItem>
   <TabItem value="python" label="python">
@@ -298,7 +298,7 @@ $ curl "https://api.aplazame.com/me/campaigns/:campaignId/articles" \
 ```python
 import aplazame_sdk
 
-client = aplazame_sdk.Client('$api_token{private}')
+client = aplazame_sdk.Client('api_private_key')
 response = client.get_campaign_articles(':merchantId', ':campaignId')
 ```
   </TabItem>
@@ -307,7 +307,7 @@ response = client.get_campaign_articles(':merchantId', ':campaignId')
 ```php
 use Aplazame\Api\Client as AplazameClient;
 
-$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "api_private_key");
 $result = $aplazameClient->get("/me/campaigns/{$campaignId}/articles");
 ```
   </TabItem>
@@ -319,7 +319,7 @@ using Aplazame.Api;
 Client client = new Client(
   "https://api.aplazame.com",
   Client.EnvironmentProduction,
-  "$api_token{private}"
+  "api_private_key"
 );
 dynamic result = client.Get($"/me/campaigns/{campaignId}/articles");
 ```

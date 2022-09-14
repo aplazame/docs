@@ -164,7 +164,7 @@ dynamic result = client.Get($"/orders?confirmed-gte=2015-12-22T15:09:30.537951Z"
 ```http
 GET /orders?verified-isnull=yes&confirmed-isnull=no HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Host: api.aplazame.com
 ```
   </TabItem>
@@ -173,7 +173,7 @@ Host: api.aplazame.com
 ```shell
 $ curl "https://api.aplazame.com/orders?verified-isnull=yes&confirmed-isnull=no" \
     -H "Accept: application/vnd.aplazame.v1+json" \
-    -H "Authorization: Bearer $api_token{private}"
+    -H "Authorization: Bearer api_private_key"
 ```
   </TabItem>
   <TabItem value="python" label="python">

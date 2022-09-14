@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 ```http
 DELETE /me/campaigns/:campaignId HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Host: api.aplazame.com
 ```
 
@@ -24,7 +24,7 @@ Host: api.aplazame.com
 ```shell
 $ curl "https://api.aplazame.com/me/campaigns/:campaignId " \
     -H "Accept: application/vnd.aplazame.v1+json" \
-    -H "Authorization: Bearer $api_token{private}"\
+    -H "Authorization: Bearer api_private_key"\
     -X DELETE
 ```
   </TabItem>
@@ -33,7 +33,7 @@ $ curl "https://api.aplazame.com/me/campaigns/:campaignId " \
 ```python
 import aplazame_sdk
 
-client = aplazame_sdk.Client('$api_token{private}')
+client = aplazame_sdk.Client('api_private_key')
 response = client.delete_campaign(':merchantId', ':campaignId')
 ```
   </TabItem>
@@ -42,7 +42,7 @@ response = client.delete_campaign(':merchantId', ':campaignId')
 ```php
 use Aplazame\Api\Client as AplazameClient;
 
-$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "api_private_key");
 $result = $aplazameClient->delete("/me/campaigns/{$campaignId}");
 ```
   </TabItem>
@@ -51,7 +51,7 @@ $result = $aplazameClient->delete("/me/campaigns/{$campaignId}");
 ```cs
 using Aplazame.Api;
 
-Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "api_private_key");
 dynamic result = client.Delete($"/me/campaigns/{campaignId}");
 ```
   </TabItem>

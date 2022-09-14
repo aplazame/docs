@@ -14,7 +14,7 @@ Este servicio ofrece la posibilidad de ofrecer financiación instantánea desde 
 
 ```http
 POST https://api.aplazame.com/checkout/offline HTTP/1.1
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Accept: application/vnd.aplazame.v3+json
 Content-Type: application/json
 ```
@@ -32,11 +32,11 @@ Content-Type: application/json
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-[customer](../checkout-creation/#customer) | object | ${yes} | Datos del cliente
-[order](../checkout-creation/#order) | object | ${yes} | Datos del pedido
-[billing](../checkout-creation/#billing) | object | ${no} | Dirección de facturación.
-[shipping](../checkout-creation/#shipping) | object | ${no} | Información de envío.
-[ipn_url](../checkout-creation/#merchant) | object | ${no} | (Instant Payment Notification) URL absoluta donde se envían los cambios de estado del checkout.
+[customer](../checkout-creation/#customer) | object | <t id="table.yes">Sí</t> | Datos del cliente
+[order](../checkout-creation/#order) | object | <t id="table.yes">Sí</t> | Datos del pedido
+[billing](../checkout-creation/#billing) | object | No | Dirección de facturación.
+[shipping](../checkout-creation/#shipping) | object | No | Información de envío.
+[ipn_url](../checkout-creation/#merchant) | object | No | (Instant Payment Notification) URL absoluta donde se envían los cambios de estado del checkout.
 
 ### Respuesta
 
@@ -72,7 +72,7 @@ Se podrá consultar el estado de un checkout a través de su ID
 
 ``` http
 GET https://api.aplazame.com/checkout/:checkoutId/status
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Accept: application/vnd.aplazame.v3+json
 ```
 
@@ -107,8 +107,8 @@ Content-Type: application/json
 |---------|---------|---------|
 :checkoutId | string | ID del checkout asignado por Aplazame
 mid | string | Identificador del pedido generado por la tienda o autogenerado por Aplazame.
-total_amount | $type{decimal} | Cantidad a financiar.
-currency | $type{currency} | Divisa del pedido.
+total_amount | [decimal](../api-reference/#decimals) | Cantidad a financiar.
+currency | [decimal](../api-reference/#decimals) | Divisa del pedido.
 [status](../checkout-confirmation/#codigos-de-estado-del-pedido) | string | Estado del pedido (`ok`, `pending` o `ko`)
 [status_reason](../checkout-confirmation/#codigos-de-estado-del-pedido) | string | Código de estado del pedido.
 sandbox | boolean | El pedido fue realizado en el entorno de sandbox.
@@ -139,8 +139,8 @@ Los cambios de estado del checkout son notificados a la URL indicada al crear el
 |---------|---------|---------|
 :checkoutId | string | ID del checkout asignado por Aplazame
 mid | string | Identificador del pedido generado por la tienda o autogenerado por Aplazame
-total_amount | $type{decimal} | Cantidad a financiar
-currency | $type{currency} | Divisa del pedido
+total_amount | [decimal](../api-reference/#decimals) | Cantidad a financiar
+currency | [decimal](../api-reference/#decimals) | Divisa del pedido
 [status](../checkout-confirmation/#codigos-de-estado-del-pedido) | string | Estado del pedido (`ok`, `pending` o `ko`)
 [status_reason](../checkout-confirmation/#codigos-de-estado-del-pedido) | string | Código de estado del pedido
 sandbox | boolean | El pedido fue realizado en el entorno de pruebas

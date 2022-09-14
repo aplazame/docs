@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 ```http
 GET /me/campaigns/:campaignId HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Host: api.aplazame.com
 ```
   </TabItem>
@@ -23,7 +23,7 @@ Host: api.aplazame.com
 ```shell
 $ curl "https://api.aplazame.com/me/campaigns/:campaignId" \
     -H "Accept: application/vnd.aplazame.v1+json" \
-    -H "Authorization: Bearer $api_token{private}"
+    -H "Authorization: Bearer api_private_key"
 ```
   </TabItem>
   <TabItem value="python" label="python">
@@ -31,7 +31,7 @@ $ curl "https://api.aplazame.com/me/campaigns/:campaignId" \
 ```python
 import aplazame_sdk
 
-client = aplazame_sdk.Client('$api_token{private}')
+client = aplazame_sdk.Client('api_private_key')
 response = client.get_campaign(':merchantId', ':campaignId')
 ```
   </TabItem>
@@ -40,7 +40,7 @@ response = client.get_campaign(':merchantId', ':campaignId')
 ```php
 use Aplazame\Api\Client as AplazameClient;
 
-$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "api_private_key");
 $result = $aplazameClient->get("/me/campaigns/{$campaignId}");
 ```
   </TabItem>
@@ -49,7 +49,7 @@ $result = $aplazameClient->get("/me/campaigns/{$campaignId}");
 ```cs
 using Aplazame.Api;
 
-Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "api_private_key");
 dynamic result = client.Get($"/me/campaigns/{campaignId}");
 ```
   </TabItem>
@@ -57,8 +57,8 @@ dynamic result = client.Get($"/me/campaigns/{campaignId}");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:merchantId | hash | ${yes} | `id` de la tienda con el que hacer las peticiones
-:campaignId | hash | ${yes} | `id` de la campaña con el que hacer las peticiones
+:merchantId | hash | <t id="table.yes">Sí</t> | `id` de la tienda con el que hacer las peticiones
+:campaignId | hash | <t id="table.yes">Sí</t> | `id` de la campaña con el que hacer las peticiones
 
  ### Respuesta
 
@@ -86,5 +86,5 @@ id | hash | `id` del hostname
 name | string | Nombre de la campaña
 start_date | $type{date} | Fecha de inicio de la campaña
 end_date | $type{date} | Fecha fin de la campaña
-interest | $type{decimal} | Tasa de descuento en los intereses
+interest | [decimal](../api-reference/#decimals) | Tasa de descuento en los intereses
 partial | Boolean | Determina si la campaña aplica a todos los productos

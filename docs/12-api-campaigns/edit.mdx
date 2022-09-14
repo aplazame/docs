@@ -36,7 +36,7 @@ Content-Type: application/json
 ```shell
 $ curl "https://api.aplazame.com/me/campaigns/:campaignId" \
     -H "Accept: application/vnd.aplazame.v1+json" \
-    -H "Authorization: Bearer $api_token{private}"\
+    -H "Authorization: Bearer api_private_key"\
     -X PUT\
     --data-binary '{
       "name": "Summertime",
@@ -53,7 +53,7 @@ $ curl "https://api.aplazame.com/me/campaigns/:campaignId" \
 ```python
 import aplazame_sdk
 
-client = aplazame_sdk.Client('$api_token{private}')
+client = aplazame_sdk.Client('api_private_key')
 response = client.put_campaign(':merchantId', ':campaignId', {
   'name': 'Summertime',
   'start_date': '2016-06-01T00:00:00',
@@ -69,7 +69,7 @@ response = client.put_campaign(':merchantId', ':campaignId', {
 ```php
 use Aplazame\Api\Client as AplazameClient;
 
-$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "api_private_key");
 
 $campaign = [
   "name" => "Summertime",
@@ -87,7 +87,7 @@ $result = $aplazameClient->put("/me/campaigns/{campaignId}", $campaign);
 ```cs
 using Aplazame.Api;
 
-Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "api_private_key");
 
 dynamic campaign = new {
   name = "Summertime",
@@ -104,12 +104,12 @@ dynamic result = client.Put($"/me/campaigns/{campaignId}", campaign);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-name | string | ${yes} | $message{ Nombre de la campaña
-start_date | $type{date} | ${yes} | Fecha de inicio de la campaña
-end_date | $type{date} | ${no} | Fecha fin de la campaña
-interest | $type{decimal} | ${yes} | Tasa de descuento en los intereses
-partial | Boolean | ${no} | Determina si la campaña aplica a todos los productos, por defecto `false`
-num_instalments | array | ${no} | Número de cuotas disponibles para la campaña
+name | string | <t id="table.yes">Sí</t> | $message{ Nombre de la campaña
+start_date | $type{date} | <t id="table.yes">Sí</t> | Fecha de inicio de la campaña
+end_date | $type{date} | No | Fecha fin de la campaña
+interest | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Tasa de descuento en los intereses
+partial | Boolean | No | Determina si la campaña aplica a todos los productos, por defecto `false`
+num_instalments | array | No | Número de cuotas disponibles para la campaña
 
  ### Respuesta
 
@@ -126,7 +126,7 @@ X-Aplazame-Media-Type: aplazame.v1
 ```http
 PATCH /me/campaigns/:campaignId HTTP/1.1
 Accept: application/vnd.aplazame.v1+json
-Authorization: Bearer $api_token{private}
+Authorization: Bearer api_private_key
 Host: api.aplazame.com
 Content-Type: application/json
 ```
@@ -141,7 +141,7 @@ Content-Type: application/json
 ```shell
 $ curl "https://api.aplazame.com/me/campaigns/:campaignId" \
     -H "Accept: application/vnd.aplazame.v1+json" \
-    -H "Authorization: Bearer $api_token{private}"\
+    -H "Authorization: Bearer api_private_key"\
     -X PATCH\
     --data-binary '{
       "start_date": "2016-06-22T00:00:00"
@@ -153,7 +153,7 @@ $ curl "https://api.aplazame.com/me/campaigns/:campaignId" \
 ```python
 import aplazame_sdk
 
-client = aplazame_sdk.Client('$api_token{private}')
+client = aplazame_sdk.Client('api_private_key')
 response = client.patch_campaign(':merchantId', ':campaignId', {
   'start_date': '2016-06-22'
 })
@@ -164,7 +164,7 @@ response = client.patch_campaign(':merchantId', ':campaignId', {
 ```php
 use Aplazame\Api\Client as AplazameClient;
 
-$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "api_private_key");
 
 $campaign = [
   "start_date" => Aplazame\Serializer\Decimal::fromDateTime(new DateTime("2016-06-22 00:00:00")),
@@ -177,7 +177,7 @@ $result = $aplazameClient->patch("/me/campaigns/{campaignId}", $campaign);
 ```cs
 using Aplazame.Api;
 
-Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "api_private_key");
 
 dynamic campaign = new {
   start_date = Aplazame.Serializer.DateType.FromDateTime(DateTime.Parse("2016-06-22 00:00:00")),
@@ -189,8 +189,8 @@ dynamic result = client.Patch($"/me/campaigns/{campaignId}", campaign);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:merchantId | hash | ${yes} | `id` de la tienda con el que hacer las peticiones
-:campaignId | hash | ${yes} | `id` de la campaña con el que hacer las peticiones
+:merchantId | hash | <t id="table.yes">Sí</t> | `id` de la tienda con el que hacer las peticiones
+:campaignId | hash | <t id="table.yes">Sí</t> | `id` de la campaña con el que hacer las peticiones
 
 ### Respuesta
 

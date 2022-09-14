@@ -111,7 +111,7 @@ Para mostrar el botón de pago con Aplazame en función de los productos configu
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
- selector | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | no | Selector CSS para mostrar/ocultar el método de pago Aplazame.
+ selector | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | No | Selector CSS para mostrar/ocultar el método de pago Aplazame.
  amount | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Cantidad a financiar.
  currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="table.yes">Sí</t> | Código de la moneda del pedido.
 
@@ -293,12 +293,12 @@ Para comproabr la disponibilidad del producto "Paga en 4", debes añadir `data-p
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-onStatusChange | function | no | `function onStatusChange(status) { /**/}` Función a la que se llamará cuando el Checkout cambie de estado.
+onStatusChange | function | No | `function onStatusChange(status) { /**/}` Función a la que se llamará cuando el Checkout cambie de estado.
  **Posibles estados**: `success`, `pending`, `ko`. **(Al enviar esta señal, el checkout seguirá abierto hasta que se llame a algún callback abajo mencionado)**
-onClose | function | no | Función a la que se llamará cuando el Checkout se cierre. `function onClose(status) { /**/}` **Posibles estados**: `success`, `pending`, `ko`, `dismiss`.
-onSuccess | function | no | Función a la que se llamará cuando se haya completado el pago. Al definir esta función el valor de `success_url` es ignorado
-onPending | function | no | Función a la que se llamará cuando el pago quede pendiente de confirmación. Al definir esta función el valor de `pending_url` es ignorado
-onKO | function | no | Función a la que se llamará cuando se haya denegado el pago. Al definir esta función el valor de `ko_url` es ignorado
-onError | function | no | Función a la que se llamará cuando haya habido un error. Al definir esta función el valor de `error_url` es ignorado
-onDismiss | function | no | Función a la que se llamará cuando el usuario escoge volver a la tienda. Al definir esta función el valor de `dismiss_url` es ignorado
+onClose | function | No | Función a la que se llamará cuando el Checkout se cierre. `function onClose(status) { /**/}` **Posibles estados**: `success`, `pending`, `ko`, `dismiss`.
+onSuccess | function | No | Función a la que se llamará cuando se haya completado el pago. Al definir esta función el valor de `success_url` es ignorado
+onPending | function | No | Función a la que se llamará cuando el pago quede pendiente de confirmación. Al definir esta función el valor de `pending_url` es ignorado
+onKO | function | No | Función a la que se llamará cuando se haya denegado el pago. Al definir esta función el valor de `ko_url` es ignorado
+onError | function | No | Función a la que se llamará cuando haya habido un error. Al definir esta función el valor de `error_url` es ignorado
+onDismiss | function | No | Función a la que se llamará cuando el usuario escoge volver a la tienda. Al definir esta función el valor de `dismiss_url` es ignorado
 
