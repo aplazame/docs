@@ -1,0 +1,360 @@
+---
+title: Articles
+sidebar_position: 6
+keywords: [API campañas, articles]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Articles
+
+## Add
+Once the campaign is created, you must add the list of the articles to which it applies.
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+POST /me/campaigns/:campaignId/articles HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+```json
+[
+  {
+    "id": "89793238462643383279",
+    "name": "Reloj en oro blanco de 18 quilates y diamantes",
+    "description": "Movimiento de cuarzo de alta precisión",
+    "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+    "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg"
+  },
+  {
+    "id": "59825349042875546873",
+    "name": "Nº5 eau premiere spray",
+    "description": "A decidedly lighter, fresher...",
+    "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+    "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg"
+  }
+]
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/me/campaigns/:campaignId/articles" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"\
+    --data-binary '[
+  {
+    "id": "89793238462643383279",
+    "name": "Reloj en oro blanco de 18 quilates y diamantes",
+    "description": "Movimiento de cuarzo de alta precisión",
+    "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+    "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg"
+  },
+  {
+    "id": "59825349042875546873",
+    "name": "Nº5 eau premiere spray",
+    "description": "A decidedly lighter, fresher...",
+    "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+    "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg"
+  }
+]'
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client('$api_token{private}')
+response = client.post_campaign_articles(':merchantId', ':campaignId', [
+  {
+    'id': '89793238462643383279',
+    'name': '$message{ es: "Reloj en oro blanco de 18 quilates y diamantes", en: "18 ct white gold watch with diamonds" }',
+    'description': '$message{ es: "Movimiento de cuarzo de alta precisión", en: "High-precision quartz movement" }',
+    'url': 'http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083',
+    'image_url': 'http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg',
+  },
+  {
+    'id': '59825349042875546873',
+    'name': 'Nº5 eau premiere spray',
+    'description': 'A decidedly lighter, fresher...',
+    'url': 'http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083',
+    'image_url': 'http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg',
+  }
+])
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+
+$articles = [
+  [
+    "id" => "89793238462643383279",
+    "name" => "$message{ es: "Reloj en oro blanco de 18 quilates y diamantes", en: "18 ct white gold watch with diamonds" }",
+    "description" => "$message{ es: "Movimiento de cuarzo de alta precisión", en: "High-precision quartz movement" }",
+    "url" => "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+    "image_url" => "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+  ],
+  [
+    "id" => "59825349042875546873",
+    "name" => "N°5 eau premiere spray",
+    "description" => "A decidedly lighter, fresher...",
+    "url" => "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+    "image_url" => "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+  ]
+];
+$result = $aplazameClient->post("/me/campaigns/{$campaignId}/articles", $articles);
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+
+dynamic[] articles = new dynamic[] {
+  new {
+    id = "89793238462643383279",
+    name = "$message{ es: "Reloj en oro blanco de 18 quilates y diamantes", en: "18 ct white gold watch with diamonds" }",
+    description = "$message{ es: "Movimiento de cuarzo de alta precisión", en: "High-precision quartz movement" }",
+    url = "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+    image_url = "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+  },
+  new {
+    id = "59825349042875546873",
+    name = "N°5 eau premiere spray",
+    description = "A decidedly lighter, fresher...",
+    url = "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
+    image_url = "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
+  }
+};
+dynamic result = client.Post($"/me/campaigns/{campaignId}/articles", articles);
+```
+  </TabItem>
+</Tabs>
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+id | string | ${yes} | Article `id`
+name | string | ${yes} | Article name
+description | string | ${no} | Article description
+url | URL | ${yes} | Article absolute URL
+image_url | URL | ${no} | Article image absolute URL
+
+### Response
+
+```http
+HTTP/1.1 204 NO CONTENT
+Content-Type: application/vnd.aplazame.v1+json
+```
+
+## Delete
+Individual deletion of an article included in a campaign.
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+DELETE /me/campaigns/:campaignId/articles/:articleId HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/me/campaigns/:campaignId/articles/:articleId" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"\
+    -X DELETE'
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client('$api_token{private}')
+response = client.delete_campaign_article(':merchantId', ':campaignId', ':articleId')
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$result = $aplazameClient->delete("/me/campaigns/{$campaignId}/articles/{$articleId}");
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+dynamic result = client.Delete($"/me/campaigns/{campaignId}/articles/{articleId}");
+```
+  </TabItem>
+</Tabs>
+
+### Response
+
+```http
+HTTP/1.1 204 NO CONTENT
+Content-Type: application/vnd.aplazame.v1+json
+```
+
+## Delete all
+if you do not include the article `id` in the URL, all campaign articles are referenced.
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+DELETE /me/campaigns/:campaignId/articles HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/me/campaigns/:campaignId/articles" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"\
+    -X DELETE'
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client('$api_token{private}')
+response = client.delete_campaign_articles(':merchantId', ':campaignId')
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$result = $aplazameClient->delete("/me/campaigns/{$campaignId}/articles");
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+dynamic result = client.Delete($"/me/campaigns/{campaignId}/articles");
+```
+  </TabItem>
+</Tabs>
+
+### Response
+
+
+```http
+HTTP/1.1 204 NO CONTENT
+Content-Type: application/vnd.aplazame.v1+json
+```
+
+## List
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+GET /me/campaigns/:campaignId/articles?page=2 HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/me/campaigns/:campaignId/articles" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client('$api_token{private}')
+response = client.get_campaign_articles(':merchantId', ':campaignId')
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$result = $aplazameClient->get("/me/campaigns/{$campaignId}/articles");
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client(
+  "https://api.aplazame.com",
+  Client.EnvironmentProduction,
+  "$api_token{private}"
+);
+dynamic result = client.Get($"/me/campaigns/{campaignId}/articles");
+```
+  </TabItem>
+</Tabs>
+
+:::info
+See [pagination docs](../../api-reference/#paginacion)
+:::
+
+### Response
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+```json
+{
+  "cursor": {
+    "after": 3,
+    "before": 1
+  },
+  "paging": {
+    "count": 314,
+    "next": "https://api.aplazame.com/me/campaigns/:campaignId/articles?page=3",
+    "previous": "https://api.aplazame.com/me/campaigns/:campaignId/articles?page=1"
+  },
+  "results": [
+  ]
+}
+```
+
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
+cursor | object | Pagination cursor object
+paging | object | Pagination status
+results | collection | List of campaigns

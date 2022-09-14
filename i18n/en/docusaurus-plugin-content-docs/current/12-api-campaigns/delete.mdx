@@ -1,0 +1,66 @@
+---
+title: Delete
+sidebar_position: 4
+keywords: [API campañas, crear campaña]
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Delete campaigns
+
+<Tabs>
+  <TabItem value="http" label="http">
+
+```http
+DELETE /me/campaigns/:campaignId HTTP/1.1
+Accept: application/vnd.aplazame.v1+json
+Authorization: Bearer $api_token{private}
+Host: api.aplazame.com
+```
+
+  </TabItem>
+  <TabItem value="shell" label="shell">
+
+```shell
+$ curl "https://api.aplazame.com/me/campaigns/:campaignId " \
+    -H "Accept: application/vnd.aplazame.v1+json" \
+    -H "Authorization: Bearer $api_token{private}"\
+    -X DELETE
+```
+  </TabItem>
+  <TabItem value="python" label="python">
+
+```python
+import aplazame_sdk
+
+client = aplazame_sdk.Client('$api_token{private}')
+response = client.delete_campaign(':merchantId', ':campaignId')
+```
+  </TabItem>
+  <TabItem value="php" label="php">
+
+```php
+use Aplazame\Api\Client as AplazameClient;
+
+$aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient::ENVIRONMENT_PRODUCTION, "$api_token{private}");
+$result = $aplazameClient->delete("/me/campaigns/{$campaignId}");
+```
+  </TabItem>
+  <TabItem value="c" label="C#">
+
+```cs
+using Aplazame.Api;
+
+Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduction, "$api_token{private}");
+dynamic result = client.Delete($"/me/campaigns/{campaignId}");
+```
+  </TabItem>
+</Tabs>
+
+ ### Response
+
+```http
+HTTP/1.1 204 NO CONTENT
+X-Aplazame-Media-Type: aplazame.v1
+```
+
