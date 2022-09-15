@@ -47,6 +47,7 @@ table td:last-child {
   white-space: normal;
 }
 
+.admonitionHeading_tbUL,
 .admonitionHeading_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module{
   display: none; /* workaround to hide INFO CAUTION TIP etc. */
 }

@@ -47,6 +47,10 @@ The build generate content for all the languages and check internal links:
 yarn build
 ```
 
+To test your build locally.
+```shell
+npm run serve
+```
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
 ### Deployment

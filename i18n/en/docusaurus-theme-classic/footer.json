@@ -4,51 +4,51 @@
     "description": "The title of the footer links column with title=Clientes in the footer"
   },
   "link.title.Negocios": {
-    "message": "Negocios",
+    "message": "Business",
     "description": "The title of the footer links column with title=Negocios in the footer"
   },
   "link.title.Recursos para comercios": {
-    "message": "Recursos para comercios",
+    "message": "Merchant Resources",
     "description": "The title of the footer links column with title=Recursos para comercios in the footer"
   },
   "link.title.Sobre Aplazame": {
-    "message": "Sobre Aplazame",
+    "message": "about Aplazame",
     "description": "The title of the footer links column with title=Sobre Aplazame in the footer"
   },
   "link.item.label.Favoritos": {
-    "message": "Favoritos",
+    "message": "Favorites",
     "description": "The label of footer link with label=Favoritos linking to https://aplazame.com/favoritos/"
   },
   "link.item.label.Compra ahora, paga después": {
-    "message": "Compra ahora, paga después",
+    "message": "Buy now, pay later",
     "description": "The label of footer link with label=Compra ahora, paga después linking to https://aplazame.com/pagar-despues/"
   },
   "link.item.label.La app de Aplazame": {
-    "message": "La app de Aplazame",
+    "message": "The Aplazame App",
     "description": "The label of footer link with label=La app de Aplazame linking to https://aplazame.com/app/"
   },
   "link.item.label.Atención al cliente": {
-    "message": "Atención al cliente",
+    "message": "Customer Support",
     "description": "The label of footer link with label=Atención al cliente linking to https://aplazame.com/ayuda/atencion-al-cliente/"
   },
   "link.item.label.Directorio de tiendas": {
-    "message": "Directorio de tiendas",
+    "message": "Store directory",
     "description": "The label of footer link with label=Directorio de tiendas linking to https://aplazame.com/tiendas-aplazame/"
   },
   "link.item.label.Colecciones": {
-    "message": "Colecciones",
+    "message": "Collections",
     "description": "The label of footer link with label=Colecciones linking to https://aplazame.com/colecciones/"
   },
   "link.item.label.Vende con Aplazame": {
-    "message": "Vende con Aplazame",
+    "message": "Sell with Aplazame",
     "description": "The label of footer link with label=Vende con Aplazame linking to https://aplazame.com/negocios/"
   },
   "link.item.label.Pago a plazos": {
-    "message": "Pago a plazos",
+    "message": "Installment payment",
     "description": "The label of footer link with label=Pago a plazos linking to https://aplazame.com/negocios/pago-a-plazos/"
   },
   "link.item.label.Divide en 4 pagos": {
-    "message": "Divide en 4 pagos",
+    "message": "Pay in 4 payments",
     "description": "The label of footer link with label=Divide en 4 pagos linking to https://aplazame.com/negocios/pago-en-4/"
   },
   "link.item.label.Pago en 15 días": {
@@ -60,27 +60,27 @@
     "description": "The label of footer link with label=Financiación en Punto de Venta linking to https://aplazame.com/negocios/financiacion-punto-venta/"
   },
   "link.item.label.Integraciones": {
-    "message": "Integraciones",
+    "message": "Integrations",
     "description": "The label of footer link with label=Integraciones linking to https://aplazame.com/integraciones/"
   },
   "link.item.label.Pide una demo": {
-    "message": "Pide una demo",
+    "message": "Request a demo",
     "description": "The label of footer link with label=Pide una demo linking to https://aplazame.com/negocios/pide-una-demo/"
   },
   "link.item.label.Contactar": {
-    "message": "Contactar",
+    "message": "Contact",
     "description": "The label of footer link with label=Contactar linking to https://aplazame.com/negocios/contactar/"
   },
   "link.item.label.Precios": {
-    "message": "Precios",
+    "message": "Prices",
     "description": "The label of footer link with label=Precios linking to https://aplazame.com/negocios/precios/"
   },
   "link.item.label.Casos de éxito": {
-    "message": "Casos de éxito",
+    "message": "Success stories",
     "description": "The label of footer link with label=Casos de éxito linking to https://aplazame.com/negocios/recursos/historias/"
   },
   "link.item.label.eBooks, informes y guías": {
-    "message": "eBooks, informes y guías",
+    "message": "eBooks, reports and guides",
     "description": "The label of footer link with label=eBooks, informes y guías linking to https://aplazame.com/negocios/recursos/guias/"
   },
   "link.item.label.Blog": {
@@ -88,19 +88,19 @@
     "description": "The label of footer link with label=Blog linking to https://aplazame.com/blog/"
   },
   "link.item.label.Buenas prácticas": {
-    "message": "Buenas prácticas",
+    "message": "Good practices",
     "description": "The label of footer link with label=Buenas prácticas linking to https://ayuda.aplazame.com/hc/es-es/sections/360004278740-Buenas-pr%C3%A1cticas"
   },
   "link.item.label.Equipo": {
-    "message": "Equipo",
+    "message": "Team",
     "description": "The label of footer link with label=Equipo linking to https://aplazame.com/equipo/"
   },
   "link.item.label.Trabaja con nosotros": {
-    "message": "Trabaja con nosotros",
+    "message": "Work with us",
     "description": "The label of footer link with label=Trabaja con nosotros linking to https://aplazame.com/trabaja-con-nosotros/"
   },
   "link.item.label.Servicio At. Cliente": {
-    "message": "Servicio At. Cliente",
+    "message": "Customer Service",
     "description": "The label of footer link with label=Servicio At. Cliente linking to https://aplazame.com/reclamaciones-y-defensa-del-cliente/"
   },
   "copyright": {
