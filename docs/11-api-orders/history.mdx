@@ -6,7 +6,7 @@ keywords: [orders history, list, index]
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Historial de pedidos
+# Historial de pedidos {#history}
 
 :::info
 Una vez iniciado el proceso de pago, se recomienda realizar el envío del historial de compra del cliente en el comercio para mejorar la concesión de la solicitud de financiación.
@@ -214,8 +214,8 @@ dynamic result = client.Post($"/orders/{orderId}/history", payload);
 |---------|---------|---------|
 :orderId | string | <t id="docs.yes">Sí</t> | `id` del pedido
 id | string | <t id="docs.yes">Sí</t> | `id` del pedido
-amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Importe del pedido
-due | [decimal](../api-reference/#decimals) | No | Importe total del pedido
+amount | [decimal](../api-reference#decimals) | <t id="docs.yes">Sí</t> | Importe del pedido
+due | [decimal](../api-reference#decimals) | No | Importe total del pedido
 status | string | <t id="docs.yes">Sí</t> | Estado del pedido; Las opciones son `pending`, `cancelled`, `processing` y `complete`
 type | string | <t id="docs.yes">Sí</t> | Tipo de pedido
 order_date | string | <t id="docs.yes">Sí</t> | Fecha del pedido

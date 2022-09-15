@@ -61,10 +61,10 @@ dynamic result = client.Get("/orders?my-param-term=value");
 </Tabs>
 
 :::info
-You may want to check [general API filters documentation](../../api-reference/#filtros).
+You may want to check [general API filters documentation](../api-reference#filters).
 :::
 
-**Filters lookups** are listed **[HERE](../search/#campos)** (`string`, `choices`, `range`, `isnull` y `date`).
+**Filters lookups** are listed **[HERE](./search/#fields)** (`string`, `choices`, `range`, `isnull` y `date`).
 
 #### Exact total amount
 
@@ -206,9 +206,9 @@ dynamic result = client.Get($"/orders?verified-isnull=yes&confirmed-isnull=no");
 |---------|---------|---------|---------|
 id | hash | `string` | Your order `ID` in aplazame
 mid | string | `string` | Your order ID
-total_amount | [decimal](../api-reference/#decimals) | `range` | Order amount
-discount | [decimal](../api-reference/#decimals) | `isnull`, `range` | Order discount amount
-discount_rate | [decimal](../api-reference/#decimals) | `isnull`, `range` | Discount rate on the price of the order
+total_amount | [decimal](../api-reference#decimals) | `range` | Order amount
+discount | [decimal](../api-reference#decimals) | `isnull`, `range` | Order discount amount
+discount_rate | [decimal](../api-reference#decimals) | `isnull`, `range` | Discount rate on the price of the order
 created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Date designating when the order was created
 verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the order was verified
 confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the order was confirmed
@@ -261,7 +261,7 @@ dynamic result = client.Get($"/orders?instalment_plan-downpayment-state=failed")
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 instalment_plan-downpayment-state | string | `choices` | Downpayment status
-instalment_plan-downpayment-amount | [decimal](../api-reference/#decimals) | `isnull`, `range` | Downpayment amount
+instalment_plan-downpayment-amount | [decimal](../api-reference#decimals) | `isnull`, `range` | Downpayment amount
 
 ## By phone
 Customer phone number exact

@@ -61,10 +61,10 @@ dynamic result = client.Get("/orders?my-param-term=value");
 </Tabs>
 
 :::info
-Te puede interesar consultar la [documentación general de filtros de la API](../../api-reference/#filtros).
+Te puede interesar consultar la [documentación general de filtros de la API](../api-reference#filters).
 :::
 
-**Los tipos de búsquedas** están explicados **[AQUÍ](../search/#campos)** (`string`, `choices`, `range`, `isnull` y `date`).
+**Los tipos de búsquedas** están explicados **[AQUÍ](./search/#fields)** (`string`, `choices`, `range`, `isnull` y `date`).
 
 #### Cantidad financiada exacta
 
@@ -206,9 +206,9 @@ dynamic result = client.Get($"/orders?verified-isnull=yes&confirmed-isnull=no");
 |---------|---------|---------|---------|
 id | hash | `string` | `ID` del pedido en aplazame
 mid | string | `string` | `ID` del pedido
-total_amount | [decimal](../api-reference/#decimals) | `range` | Importe del pedido
-discount | [decimal](../api-reference/#decimals) | `isnull`, `range` | Cantidad del descuento del pedido
-discount_rate | [decimal](../api-reference/#decimals) | `isnull`, `range` | Tasa de descuento en el precio del pedido
+total_amount | [decimal](../api-reference#decimals) | `range` | Importe del pedido
+discount | [decimal](../api-reference#decimals) | `isnull`, `range` | Cantidad del descuento del pedido
+discount_rate | [decimal](../api-reference#decimals) | `isnull`, `range` | Tasa de descuento en el precio del pedido
 created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Fecha de creación del pedido
 verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se ha verificado el pedido
 confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se confirmó el pedido
@@ -261,7 +261,7 @@ dynamic result = client.Get($"/orders?instalment_plan-downpayment-state=failed")
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 instalment_plan-downpayment-state | string | `choices` | Estado del pago inicial
-instalment_plan-downpayment-amount | [decimal](../api-reference/#decimals) | `isnull`, `range` | Importe del pago inicial
+instalment_plan-downpayment-amount | [decimal](../api-reference#decimals) | `isnull`, `range` | Importe del pago inicial
 
 ## Por teléfono
 Número de teléfono del cliente exacto

@@ -109,11 +109,11 @@ dynamic result = client.Post($"/me/campaigns", campaign);
 name | string | <t id="table.yes">Sí</t> | Campaign name
 start_date | $type{date} | <t id="table.yes">Sí</t> | Start date of the campaign
 end_date | $type{date} | No | End date of the campaign
-interest | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Interest discount rate
+interest | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Interest discount rate
 partial | Boolean | No | Determines if the campaign applies to all products, `false` by default
 num_instalments | array | No | Minimum shopping cart amount (order.total_amount) to which the campaign applies
-min_order_amount | [decimal](../api-reference/#decimals) | No | [Minimum shopping cart amount (order.total_amount)](../checkout-creation/#order) to which the campaign applies
-max_order_amount | [decimal](../api-reference/#decimals) | No | [Maximum shopping cart amount (order.total_amount)](../checkout-creation/#order) to which the campaign applies
+min_order_amount | [decimal](../api-reference#decimals) | No | [Minimum shopping cart amount (order.total_amount)](../checkout-creation/#order) to which the campaign applies
+max_order_amount | [decimal](../api-reference#decimals) | No | [Maximum shopping cart amount (order.total_amount)](../checkout-creation/#order) to which the campaign applies
 
  ### Response
 

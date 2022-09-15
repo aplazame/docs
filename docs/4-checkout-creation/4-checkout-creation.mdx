@@ -15,9 +15,9 @@ La creación del checkout se realizará mediante una petición **POST** al [serv
 Esta página describe como crear un checkout para los productos que tenemos disponibles. Esto dependerá también de la configuración que tenga tu comercio en nuestro backend. Si no se indica tipo de producto en la request (primer caso descrito), se creará el que te corresponda según esa configuración.
 :::
 
-Si estás iniciando la integración, te puede interesar consultar cómo establecer el [modo de pruebas](../test-environment/#modo-de-pruebas) y también los [datos de prueba](../test-environment/#datos-de-prueba) disponibles para la integración.
+Si estás iniciando la integración, te puede interesar consultar cómo establecer el [modo de pruebas](../test-environment/test-mode) y también los [datos de prueba](../test-environment/test-data) disponibles para la integración.
 
-Para mejorar la concesión de crédito, es recomendable que configures el envío del historial de pedidos del cliente ([ver documentación](../orders/#historial)).
+Para mejorar la concesión de crédito, es recomendable que configures el envío del historial de pedidos del cliente ([ver documentación](../api-orders/history)).
 
 :::caution
 Recuerda visitar [primeros pasos](https://ayuda.aplazame.com/hc/es-es/articles/360014854679--C%C3%B3mo-me-creo-una-cuenta-como-tienda-en-Aplazame-) para obtener tu `api_private_key`.
@@ -225,13 +225,13 @@ Aplazame no permite diferentes pedidos con el mismo ID.
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
 id | string | <t id="table.yes">Sí</t> | `ID` del pedido
-discount | [decimal](../api-reference/#decimals) | No | Importe de descuento en el precio del pedido
-discount_rate | [decimal](../api-reference/#decimals) | No | Tasa de descuento en el precio del pedido
-cart_discount | [decimal](../api-reference/#decimals) | No | Importe de descuento en el precio del carrito
-cart_discount_rate | [decimal](../api-reference/#decimals) | No | Tasa de descuento en el precio del carrito
+discount | [decimal](../api-reference#decimals) | No | Importe de descuento en el precio del pedido
+discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio del pedido
+cart_discount | [decimal](../api-reference#decimals) | No | Importe de descuento en el precio del carrito
+cart_discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio del carrito
 currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="table.yes">Sí</t> | Código de la moneda del pedido
-total_amount | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Cantidad a financiar
-[tax_rate](#tax_rate) | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Tasa de impuesto en el precio del pedido
+total_amount | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Cantidad a financiar
+[tax_rate](#tax_rate) | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Tasa de impuesto en el precio del pedido
 [options](#options) | object | No | Permite definir opciones concretas de esta order, por ejemplo, la fecha del primer pago.
 [articles](#article) | collection | <t id="table.yes">Sí</t> | Artículos en el carrito
 
@@ -279,10 +279,10 @@ description | string | No |Descripción
 url | URL | <t id="table.yes">Sí</t> | URL absoluta del artículo
 image_url | URL | <t id="table.yes">Sí</t> | URL absoluta de la imagen del artículo
 quantity | integer | <t id="table.yes">Sí</t> | Cantidad
-price | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Precio (sin impuestos)
-tax_rate | [decimal](../api-reference/#decimals) | No | Tasa de impuestos en el precio
-discount | [decimal](../api-reference/#decimals) | No | Importe de descuento en el precio
-discount_rate | [decimal](../api-reference/#decimals) | No | Tasa de descuento en el precio
+price | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Precio (sin impuestos)
+tax_rate | [decimal](../api-reference#decimals) | No | Tasa de impuestos en el precio
+discount | [decimal](../api-reference#decimals) | No | Importe de descuento en el precio
+discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio
 
 
 ## customer
@@ -417,8 +417,8 @@ state | string | <t id="table.yes">Sí</t> | Estado / provincia
 country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.yes">Sí</t> | Código de país
 postcode | string | <t id="table.yes">Sí</t> | Código postal
 name | string | <t id="table.yes">Sí</t> | Nombre del envío
-price | [decimal](../api-reference/#decimals) | <t id="table.yes">Sí</t> | Precio del envío (impuestos no incluidos)
-tax_rate | [decimal](../api-reference/#decimals) | No | Tasa de impuestos en el precio del envío
-discount | [decimal](../api-reference/#decimals) | No | Cantidad de descuento en el precio del envío
-discount_rate | [decimal](../api-reference/#decimals) | No | Tasa de descuento en el precio del envío
+price | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Precio del envío (impuestos no incluidos)
+tax_rate | [decimal](../api-reference#decimals) | No | Tasa de impuestos en el precio del envío
+discount | [decimal](../api-reference#decimals) | No | Cantidad de descuento en el precio del envío
+discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio del envío
 method | string |  No | Método de envío; las opciones son `pickup_store` recogida en tienda, `pickup_point` punto de recogida, `postal` envio por correo.

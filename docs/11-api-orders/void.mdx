@@ -99,7 +99,7 @@ X-Aplazame-Media-Type: aplazame.v1
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-remaining_amount | [decimal](../api-reference/#decimals) | Cantidad restante del pedido
+remaining_amount | [decimal](../api-reference#decimals) | Cantidad restante del pedido
 results | collection | Listado de anulaciones
 
 ## 02 - Solicitar anulación
@@ -166,7 +166,7 @@ dynamic result = client.Post($"/orders/{orderId}/void", new {amount = Aplazame.S
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 :orderId | string | <t id="docs.yes">Sí</t> | ID del pedido
-amount | [decimal](../api-reference/#decimals) | <t id="docs.yes">Sí</t> | Importe a anular
+amount | [decimal](../api-reference#decimals) | <t id="docs.yes">Sí</t> | Importe a anular
 
 ### Respuesta
 
@@ -195,6 +195,6 @@ X-Aplazame-Media-Type: aplazame.v1
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-remaining_amount | [decimal](../api-reference/#decimals) | Cantidad restante del pedido
+remaining_amount | [decimal](../api-reference#decimals) | Cantidad restante del pedido
 results | collection | Listado de anulaciones
 

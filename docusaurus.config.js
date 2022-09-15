@@ -11,8 +11,8 @@ const config = {
   tagline: 'Trabajamos para que la integración de Aplazame en tu plataforma de comercio electrónico sea rápida, ágil y fácil, tanto si tu tienda es de desarrollo propio como si usas una de las plataformas más populares del mercado.',
   url: 'https://aplazame.dev',
   baseUrl: '/',
-  onBrokenLinks: 'warn', // https://docusaurus.io/docs/api/docusaurus-config#onBrokenLinks
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw', // https://docusaurus.io/docs/api/docusaurus-config#onBrokenLinks
+  onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
