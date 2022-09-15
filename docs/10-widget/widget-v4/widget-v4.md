@@ -51,7 +51,7 @@ Los valores por defecto en ese caso, son los que se muestran en esta documentaci
 |---------|---------|---------|---------|
 |data-price | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | <t id="docs.yes">Sí</t> | Selector CSS que indique el elemento que contiene el precio final. Se actualiza en vivo si hay cambios en el precio. Si se usa conjuntamente con `data-amount`, se mostrará el valor de este último y de data-price si el precio cambia.
 |data-amount | decimal | <t id="docs.yes">Sí</t> | Cantidad a financiar **en céntimos**. Este campo se puede omitir si se usa [`data-price`](#precio-variable)
-|data-type | enum | No | El diseño del widget cambiará en función del valor seleccionado. <br/>Los posibles valores son: `product`, `cart`. Por omisión se usará: `product`
+|data-type | enum | No | El diseño del widget cambiará en función del valor seleccionado. Los posibles valores son: `product`, `cart`. Por omisión se usará: `product`
 |data-option-legal-advice | boolean | No | Indica si debe mostrarse el texto legal justo después del widget. El valor por omisión es `false`.
 |data-option-primary-color | [css color](https://developer.mozilla.org/es/docs/Web/CSS/color_value) | No | Establece el color del fondo del botón y del borde.
 |data-option-layout | enum | No | Se puede escoger la posición `horizontal` (que cambiará automáticamente si no tiene el suficiente espacio) o `vertical`. Vertical por defecto.
