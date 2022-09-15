@@ -47,13 +47,19 @@ table td:last-child {
   white-space: normal;
 }
 
-
 .admonitionHeading_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-styles-module{
-  color: transparent; /* workaround to hide INFO CAUTION TIP etc. */
-  display: none;
+  display: none; /* workaround to hide INFO CAUTION TIP etc. */
 }
 
-
 .language-http.theme-code-block + .language-json.theme-code-block {
-  margin-top: -1.5rem
+  margin-top: -2rem
+}
+
+.test-data {
+  display: inline-block;
+}
+
+.test-data img {
+  max-width: 160px;
+  display: 'block';
 }
