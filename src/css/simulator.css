@@ -87,6 +87,12 @@
   margin: auto;
 }
 
+.form-configurator {
+  max-width: 600px;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+
 .form-configurator input[type='text'] {
   border: 1px solid var(--ifm-table-border-color);
   padding: 0 12px;

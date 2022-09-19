@@ -288,7 +288,7 @@
   "simulator.legal_advertise":{ "message": "Legal advertise" },
   "simulator.show_border":{ "message": "Show border" },
   "simulator.custom_styles":{ "message": "Custom styles" },
-  "simulator.default_title":{ "message": "Título por defecto" },
-  "simulator.campaign_title":{ "message": "Título de campaña" },
+  "simulator.default_title":{ "message": "Default title" },
+  "simulator.campaign_title":{ "message": "Campaign title" },
   "simulator.pay_in_4":{ "message": "Pay in 4" }
 }

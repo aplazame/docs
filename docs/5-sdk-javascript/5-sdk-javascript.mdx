@@ -293,8 +293,7 @@ Para comproabr la disponibilidad del producto "Paga en 4", debes añadir `data-p
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-onStatusChange | function | No | `function onStatusChange(status) { /**/}` Función a la que se llamará cuando el Checkout cambie de estado.
- **Posibles estados**: `success`, `pending`, `ko`. **(Al enviar esta señal, el checkout seguirá abierto hasta que se llame a algún callback abajo mencionado)**
+onStatusChange | function | No | `function onStatusChange(status) { /**/}` Función a la que se llamará cuando el Checkout cambie de estado. **Posibles estados**: `success`, `pending`, `ko`. **(Al enviar esta señal, el checkout seguirá abierto hasta que se llame a algún callback abajo mencionado)**
 onClose | function | No | Función a la que se llamará cuando el Checkout se cierre. `function onClose(status) { /**/}` **Posibles estados**: `success`, `pending`, `ko`, `dismiss`.
 onSuccess | function | No | Función a la que se llamará cuando se haya completado el pago. Al definir esta función el valor de `success_url` es ignorado
 onPending | function | No | Función a la que se llamará cuando el pago quede pendiente de confirmación. Al definir esta función el valor de `pending_url` es ignorado

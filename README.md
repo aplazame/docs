@@ -7,6 +7,9 @@ This website is built using [Docusaurus 2](https://docusaurus.io/), a modern sta
 yarn
 ```
 
+### Requirements
+Node >=16.14
+
 ### Local Development
 
 ```shell

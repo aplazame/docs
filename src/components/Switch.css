@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  width: 60px;
+  width: 4rem;
   height: 28px;
   background: grey;
   border-radius: 100px;
@@ -39,4 +39,35 @@
 
 .react-switch-checkbox:checked + .react-switch-label {
   background: var(--ifm-link-color);
+}
+
+
+.text-yes,
+.text-no {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  color: #fff;
+  font-size: 15px;
+  opacity: 0;
+  transition: opacity .4s;
+}
+.text-no {
+  right: 0.5rem;
+}
+.text-yes {
+  left: 0.5rem;
+}
+
+.is-checked .text-yes,
+.text-no {
+  opacity: 1;
+}
+
+.is-checked .text-no {
+  opacity: 0;
 }
