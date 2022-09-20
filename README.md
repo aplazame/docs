@@ -59,6 +59,9 @@ npm run serve
 ```
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+### Search bar
+https://github.com/praveenn77/docusaurus-lunr-search
+
 ### Deployment
 
 https://docusaurus.io/docs/deployment 
