@@ -29,8 +29,9 @@ const config = {
           // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/aplazame/webapp-documentation/tree/master/',
           editLocalizedFiles: true,
+          // routeBasePath: '/', // Set this value to '/' to remove /docs/ prefix.
         },
-
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -192,9 +193,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-
         additionalLanguages: ['http', 'powershell', 'php', 'csharp', 'python', 'swift', 'java'],
-
       },
     }),
   // Even if you don't use internalization, you can use this field to set useful
@@ -204,20 +203,6 @@ const config = {
     defaultLocale: 'es',
     locales: ['en', 'es'],
     path: 'i18n',
-    /*localeConfigs: {
-      es: {
-        label: 'Español',
-        htmlLang: 'es-ES',
-        calendar: 'gregory',
-        path: '/',
-      },
-      en: {
-        label: 'English',
-        htmlLang: 'en-US',
-        calendar: 'gregory',
-        path: 'en',
-      },
-    },*/
   },
 };
 
