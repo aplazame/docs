@@ -13,7 +13,7 @@ Existe la posibilidad de integrar una nueva versión del widget, para ello, hay 
 <div 
   data-aplazame-widget-instalments="v4"
   data-amount="3900">
-  </div>
+</div>
 ```
 
 Esta versión pretende simplificar la integración para el widget de pago a plazos. Tiene dos diseños: `product` y `cart` y dos posiciones `horizontal` y `vertical`.

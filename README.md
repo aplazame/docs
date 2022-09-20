@@ -27,22 +27,25 @@ npx docusaurus start
 ```
 
 ```shell
-yarn run start -- --locale es
-yarn run start -- --locale en
+yarn run start --locale es
+yarn run start --locale en
 ```
 
-
+or
 ```shell
-$ yarn start
+npm run start -- --locale en
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
 ### Build translations
 This command generate pending translations:
+
 ```
 yarn run write-translations --locale en
 ```
+
+The docusaurus write-translations command will statically analyze all React code files used in your site, extract calls to these APIs, and aggregate them in the code.json file. [More info](https://docusaurus.io/docs/i18n/tutorial)
 
 ### Build
 The build generate content for all the languages and check internal links:
@@ -58,4 +61,5 @@ This command generates static content into the `build` directory and can be serv
 
 ### Deployment
 
+https://docusaurus.io/docs/deployment 
 To Do...

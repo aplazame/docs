@@ -5,6 +5,7 @@ import ColorPicker from '@site/src/components/ColorPicker';
 import Switch from '@site/src/components/Switch';
 import reactCSS from 'reactcss'
 import Translate from '@docusaurus/Translate';
+import { translate } from '@docusaurus/Translate';
 
 class WidgetSimulator extends React.Component {
 
@@ -229,9 +230,9 @@ class WidgetSimulator extends React.Component {
                     onChange={(e) => this.updateValueState(e.target.value, "optionAlign")}
                     className="apz-select"
                     value={this.state.values.optionAlign}>
-                    <option value="left">Izquierda</option>
-                    <option value="center">Centrado</option>
-                    <option value="right">Derecha</option>
+                    <option value="left">{translate({id: 'simulator.left'})}</option>
+                    <option value="center">{translate({id: 'simulator.center'})}</option>
+                    <option value="right">{translate({id: 'simulator.right'})}</option>
                   </select>
                 </label>
               }
@@ -242,8 +243,8 @@ class WidgetSimulator extends React.Component {
                     onChange={(e) => this.updateValueState(e.target.value, "optionLayout")}
                     className="apz-select"
                     value={this.state.values.optionLayout}>
-                    <option value="vertical">Vertical</option>
-                    <option value="horizontal" defaultValue>Horizontal</option>
+                    <option value="vertical">{translate({id: 'simulator.vertical'})}</option>
+                    <option value="horizontal" defaultValue>{translate({id: 'simulator.horizontal'})}</option>
                   </select>
                 </label>
               }

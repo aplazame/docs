@@ -1,40 +1,10 @@
 import React from 'react';
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
+import  { Redirect } from 'react-router-dom';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import Layout from '@theme/Layout';
-// import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Translate from '@docusaurus/Translate';
-import styles from './index.module.css';
-
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <h1 className="hero__title"><Translate id="title" description="home page title">Integración técnica de Aplazame</Translate>.</h1>
-        <p className="hero__subtitle"><Translate id="tagline" description="home page tag line">Trabajamos para que la integración de Aplazame en tu plataforma de comercio electrónico sea rápida, ágil y fácil, tanto si tu tienda es de desarrollo propio como si usas una de las plataformas más populares del mercado</Translate>.</p>
-        <p className="hero__subtitle"><Translate id="hero__subtitle" description="home page subtitle">En el centro de desarrolladores encontrarás la documentación de la API para realizar la integración de Aplazame con tu desarrollo propio con un par de líneas de código</Translate>.</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/widget/">
-              <Translate id="see_more" description="Main see more link">Ver más</Translate>
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
 
 export default function Home() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <Layout
-      title={`${siteConfig.title}`}
-      description="siteConfig title">
-      <HomepageHeader />
-    </Layout>
-  );
-  //  <main> <HomepageFeatures />  </main>
+  const { i18n } = useDocusaurusContext();
+  const prefix = i18n.currentLocale === i18n.defaultLocale ? '' : '/' + i18n.currentLocale
+
+  return <Redirect to={ prefix +  "/docs/checkout-process/" } />;
 }

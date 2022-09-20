@@ -12,7 +12,7 @@ There is the possibility of integrating a new version of the widget, for this, y
 <div 
   data-aplazame-widget-instalments="v4"
   data-amount="3900">
-  </div>
+</div>
 ```
 
 This version aims to simplify the integration for the installment payment widget. It has two layouts: `product` and `cart` and two positions `horizontal` y `vertical`.
@@ -68,8 +68,7 @@ If you want to configure the widget according to your requirements you can use t
 - Configure the different parameters according to your requirements. Apply the colours you want, choose the alignment and decide whether you want your widget to show the legal text.
 
 
-
-### Configurador
+### Configurator
 
 <WidgetSimulator
   data-amount="14900"
