@@ -64,3 +64,12 @@ table td:last-child {
   max-width: 160px;
   display: 'block';
 }
+
+.navbar__search-input {
+  outline-color: var(--ifm-color-secondary);
+}
+
+.navbar__search-input:focus {
+  outline-color: var(--ifm-color-primary);
+  transition: outline-color var(--ifm-transition-fast);
+}
