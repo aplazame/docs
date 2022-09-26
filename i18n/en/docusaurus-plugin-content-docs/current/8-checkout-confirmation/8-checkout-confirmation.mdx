@@ -1,8 +1,10 @@
 ---
 title: Checkout confirmation
-sidebar_position: 4
+sidebar_position: 8
 keywords: [crear, checkout, iniciar, aplazame]
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Order confirmation
 Aplazame uses the callback URL defined in the creation of the checkout as [notification_url](../checkout-creation/#merchant) to provide notifications of relevant changes in the status of the order. The store must implement an endpoint at the address provided in order to respond to notifications.

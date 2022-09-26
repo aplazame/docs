@@ -62,6 +62,18 @@ This command generates static content into the `build` directory and can be serv
 ### Search bar
 https://github.com/praveenn77/docusaurus-lunr-search
 
+### Testing
+
+#### Open Cypress App
+```shell
+npx cypress open
+```
+
+#### Run Cypress tests (with Chrome)
+```shell
+cypress run --browser chrome
+```
+
 ### Deployment
 
 https://docusaurus.io/docs/deployment 
