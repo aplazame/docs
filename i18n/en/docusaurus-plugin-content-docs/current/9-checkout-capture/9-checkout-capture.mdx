@@ -37,7 +37,7 @@ remaining_amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí
 
 
 
-### 01 - Capture detail
+## 01 - Capture detail
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -96,7 +96,7 @@ dynamic result = client.Get($"/orders/{orderId}/captures");
 |---------|---------|---------|---------|
 orderId | string | <t id="table.yes">Sí</t> | Order ID
 
-#### Response
+### Response
 
 ```http
 HTTP/1.1 200 OK
@@ -124,7 +124,7 @@ X-Aplazame-Media-Type: aplazame.v1
 remaining_capture_amount | [decimal](../api-reference#decimals)  | Remaining order amount without capture (It will always be 0)
 [results](./#captura) | object | Captures of order
 
-### 02 - Request capture
+## 02 - Request capture
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -191,7 +191,7 @@ dynamic result = client.Post($"/orders/{orderId}/captures", new {amount = Aplaza
 |orderId | string | <t id="table.yes">Sí</t> | Order ID
 |amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí</t> | Amount to capture
 
-#### Response
+### Response
 
 ```http
 HTTP/1.1 200 OK

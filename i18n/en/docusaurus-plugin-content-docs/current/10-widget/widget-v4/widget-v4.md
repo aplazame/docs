@@ -4,7 +4,7 @@ sidebar_position: 5
 keywords: [widget V4]
 ---
 
-# Widget v4
+# New widget v4
 ## Integration 
 There is the possibility of integrating a new version of the widget, for this, you must assign the value "v4" to the HTML attribute: `data-aplazame-widget-instalments="v4"`
 
