@@ -174,7 +174,7 @@ pipeline {
                 sh "npm audit || true"
                 sh "npx browserslist || true"
                 //sh "make count.lines"
-                sh "make lint"
+                //sh "make lint"
                 sh "make ci.test"
                 // stash includes: 'coverage/**/*', name: 'coverage'
               }
