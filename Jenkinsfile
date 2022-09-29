@@ -42,7 +42,7 @@ PROD_bucket_name = 'apidocs.aplazame.com' // 'checkout.aplazame.com'
 envs_by_branch = [
   master: ['pre', 'staging', 'dev'],
   release: ['prod'],
-   default: ['staging', 'dev'], //default: ['staging', 'dev', 'squad'], // 'public/staging public/dev public/squad', // ephemerals
+   default: ['dev'], //default: ['staging', 'dev', 'squad'], // 'public/staging public/dev public/squad', // ephemerals
 ]
 
 envs_by_branch[branch_like_master] = envs_by_branch.master
@@ -192,7 +192,7 @@ pipeline {
               script {  
                 branch_envs.each{env ->
                   // sh "ENV=${env} make log.ENV_DATA"
-                  sh "ENV=${env} OUT_DIR=public/${env} make build"
+                  //sh "ENV=${env} OUT_DIR=public/${env} make build"
                 }
               }
 
@@ -204,61 +204,61 @@ pipeline {
           }
         }
 
-        //stage('Ephemerals 🪣 S3') {
-        //  when { not { anyOf {
-        //    // { branch 'master' }  not working propertly in PRs
-        //    expression { githubBranch == 'master' }
-        //    expression { githubBranch == branch_like_master }
-        //    expression { githubBranch == 'release' }
-        //    expression { githubBranch == branch_like_release }
-        //  } } }
-        //  steps {
-        //    container('node') {
-        //      script {
-        //        sh """
-        //          load-config
-        //          export AWS_PROFILE=Aplazame
-        //        """
-//
-        //        def first_deploy = !folderExistsInS3(
-        //          's3://' + getKey(ephe_bucket_name_by_env, 'staging') + getKey(ephe_suffix_by_env, 'staging') + '/' + app + '/sc-' + sc_story
-        //        )
-//
-        //        branch_envs.each { env ->
-        //          def s3_path = 's3://' + getKey(ephe_bucket_name_by_env, env) + getKey(ephe_suffix_by_env, env) + '/' + app + '/sc-' + sc_story
-//
-        //          echo "🚀 [[ deploying 'public/${env}' to '${s3_path}' ]] 🪣"
-        //          uploadFolderToS3('public/' + env, s3_path,
-        //            acl: 'public-read',
-        //            files_no_cache: '*.html',
-        //          )
-        //        }
-//
-        //        def message = getEphemeralsDeployMessage()
-        //        def curl_message = message.replaceAll('\\n', '\\\\n')
-//
-        //        if (first_deploy) {
-        //          sh (returnStdout: true, script: """
-        //            curl -X POST https://api.app.shortcut.com/api/v3/stories/${sc_story}/comments \
-        //              -H "Shortcut-Token: \$SHORTCUT_API_TOKEN" \
-        //              -H "Content-Type: application/json" \
-        //              -d '{ "text": "${curl_message}" }'
-        //          """.stripIndent())
-        //        }
-//
-        //        if (first_deploy) {
-        //          slackSend(
-        //            failOnError: true,
-        //            color: '#8000FF',
-        //            channel: '#frontend-environments',
-        //            message: message,
-        //            username: "Jenkins CI",
-        //          )
-        //        }
-        //      }
-        //    }
-        //  }
-        //}
+        stage('Ephemerals 🪣 S3') {
+          when { not { anyOf {
+            // { branch 'master' }  not working propertly in PRs
+            expression { githubBranch == 'master' }
+            expression { githubBranch == branch_like_master }
+            expression { githubBranch == 'release' }
+            expression { githubBranch == branch_like_release }
+          } } }
+          steps {
+            container('node') {
+              script {
+                sh """
+                  load-config
+                  export AWS_PROFILE=Aplazame
+                """
+
+                def first_deploy = !folderExistsInS3(
+                  's3://' + getKey(ephe_bucket_name_by_env, 'staging') + getKey(ephe_suffix_by_env, 'staging') + '/' + app + '/sc-' + sc_story
+                )
+
+                branch_envs.each { env ->
+                  def s3_path = 's3://' + getKey(ephe_bucket_name_by_env, env) + getKey(ephe_suffix_by_env, env) + '/' + app + '/sc-' + sc_story
+
+                  echo "🚀 [[ deploying 'public/${env}' to '${s3_path}' ]] 🪣"
+                  uploadFolderToS3('public/' + env, s3_path,
+                    acl: 'public-read',
+                    files_no_cache: '*.html',
+                  )
+                }
+
+                def message = getEphemeralsDeployMessage()
+                def curl_message = message.replaceAll('\\n', '\\\\n')
+
+                if (first_deploy) {
+                  sh (returnStdout: true, script: """
+                    curl -X POST https://api.app.shortcut.com/api/v3/stories/${sc_story}/comments \
+                      -H "Shortcut-Token: \$SHORTCUT_API_TOKEN" \
+                      -H "Content-Type: application/json" \
+                      -d '{ "text": "${curl_message}" }'
+                  """.stripIndent())
+                }
+
+                if (first_deploy) {
+                  slackSend(
+                    failOnError: true,
+                    color: '#8000FF',
+                    channel: '#frontend-environments',
+                    message: message,
+                    username: "Jenkins CI",
+                  )
+                }
+              }
+            }
+          }
+        }
 
         stage('[master] 🪣 S3') {
           when { anyOf {
