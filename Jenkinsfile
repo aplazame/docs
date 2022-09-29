@@ -105,17 +105,17 @@ pipeline {
 
   stages {
     stage('⭐') {
-      when {
-        anyOf {
-          changeRequest(target: 'master')
-          branch 'master'
-          // branch 'release'
-        }
-        // not {
-        //   tag "*"
-        // }
-        beforeAgent true
-      }
+      //when {
+      //  anyOf {
+      //    changeRequest(target: 'master')
+      //    branch 'master'
+      //    // branch 'release'
+      //  }
+      //  // not {
+      //  //   tag "*"
+      //  // }
+      //  beforeAgent true
+      //}
 
       stages {
         // stage('Cache ⚙') {
@@ -167,7 +167,7 @@ pipeline {
           }
         }
 
-        stage('✅ & 📊') {
+        stage('Test ✅ & 📊') {
           steps {
             container('node') {
               sshagent(['ssh-github']) {
