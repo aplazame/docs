@@ -175,7 +175,7 @@ pipeline {
                 sh "npx browserslist || true"
                 //sh "make count.lines"
                 //sh "make lint"
-                sh "make ci.test"
+                //sh "make ci.test"
                 // stash includes: 'coverage/**/*', name: 'coverage'
               }
             }
