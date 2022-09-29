@@ -32,17 +32,17 @@ ephe_bucket_name_by_env = [
 
 bucket_name_by_env = [
   pre: 'apidocs-pre.aplazame.org',
-  staging: 'apidocs-staging.aplazame.org', // 'checkout-staging.aplazame.com'
-  //squad: 'apidocs-squad.aplazame.org', // 'checkout-squad?.aplazame.org'
+  staging: 'aplazame-apidocs-staging', // 'checkout-staging.aplazame.com'
+  squad: 'aplazame-apidocs-squad', // 'checkout-squad?.aplazame.org'
   // prod: <- ⚠️ IS VERY DANGEROUS TO PUT IT HERE ⚠️
-  default: 'apidocs-dev.aplazame.org', // `dev` by default 'checkout-dev.aplazame.org'
+  default: 'aplazame-apidocs-dev', // `dev` by default 'checkout-dev.aplazame.org'
 ]
-PROD_bucket_name = 'apidocs.aplazame.com' // 'checkout.aplazame.com'
+PROD_bucket_name = 'aplazame-apidocs' // 'checkout.aplazame.com'
 
 envs_by_branch = [
   master: ['pre', 'staging', 'dev'],
   release: ['prod'],
-   default: ['dev'], //default: ['staging', 'dev', 'squad'], // 'public/staging public/dev public/squad', // ephemerals
+  default: ['staging', 'dev', 'squad'], // 'public/staging public/dev public/squad', // ephemerals
 ]
 
 envs_by_branch[branch_like_master] = envs_by_branch.master
@@ -98,24 +98,24 @@ pipeline {
 
   environment {
     SHORTCUT_API_TOKEN = credentials('CLUBHOUSE_API_TOKEN')
-    APP_RELEASY = "apidocs"
+    APP_RELEASY = "webapp-apidocs"
     SLACK_TOKEN = credentials('SLACK_TOKEN_FRONTEND')
     SLACK_HOOK = "https://hooks.slack.com/services/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"
   }
 
   stages {
     stage('⭐') {
-      //when {
-      //  anyOf {
-      //    changeRequest(target: 'master')
-      //    branch 'master'
-      //    // branch 'release'
-      //  }
-      //  // not {
-      //  //   tag "*"
-      //  // }
-      //  beforeAgent true
-      //}
+      when {
+        anyOf {
+          changeRequest(target: 'master')
+          branch 'master'
+          // branch 'release'
+        }
+        // not {
+        //   tag "*"
+        // }
+        beforeAgent true
+      }
 
       stages {
         // stage('Cache ⚙') {
@@ -167,15 +167,15 @@ pipeline {
           }
         }
 
-        stage('Test ✅ & 📊') {
+        stage('✅ & 📊') {
           steps {
             container('node') {
               sshagent(['ssh-github']) {
                 sh "npm audit || true"
                 sh "npx browserslist || true"
-                //sh "make count.lines"
-                //sh "make lint"
-                //sh "make ci.test"
+                sh "make count.lines"
+                sh "make lint"
+                sh "make ci.test"
                 // stash includes: 'coverage/**/*', name: 'coverage'
               }
             }
@@ -192,7 +192,7 @@ pipeline {
               script {  
                 branch_envs.each{env ->
                   // sh "ENV=${env} make log.ENV_DATA"
-                  //sh "ENV=${env} OUT_DIR=public/${env} make build"
+                  sh "ENV=${env} OUT_DIR=public/${env} make build"
                 }
               }
 
