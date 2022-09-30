@@ -134,7 +134,7 @@ pipeline {
             }
           }
         }
-
+/*
         stage('✅ & 📊') {
           steps {
             container('node') {
@@ -144,7 +144,7 @@ pipeline {
             }
           }
         }
-
+*/
         stage('Build 🍳') {
           environment {
             AWS_PROFILE = "AplazameSharedServices"
