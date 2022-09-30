@@ -7,7 +7,7 @@ spec:
     fsGroup: 1000
   containers:
   - name: node
-    image: 666356151544.dkr.ecr.eu-central-1.amazonaws.com/tools/node:14.17.3
+    image: 666356151544.dkr.ecr.eu-central-1.amazonaws.com/tools/node:16.14.0_v1
     imagePullPolicy: Always
     command:
     - cat
