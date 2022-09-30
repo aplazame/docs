@@ -127,7 +127,7 @@ pipeline {
 
                 sh "ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts"
 
-                sh "yarn install"
+                sh "make install"
               }
             }
           }
@@ -152,7 +152,7 @@ pipeline {
             container('node') {
               script {
                 branch_envs.each{env ->
-                  sh "OUT_DIR=build/${env} yarn build"
+                  sh "OUT_DIR=build/${env} make build"
                 }
               }
             }
