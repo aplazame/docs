@@ -119,10 +119,10 @@ pipeline {
           environment {
             AWS_PROFILE = "AplazameSharedServices"
           }
-          
+
           steps {
             checkout scm
-            
+
             container('node') {
               sshagent(['ssh-github']) {
                 logEnvVars()
@@ -139,7 +139,7 @@ pipeline {
           steps {
             container('node') {
               sshagent(['ssh-github']) {
-                sh "npm tests"
+                sh "npm run tests"
               }
             }
           }
@@ -152,7 +152,7 @@ pipeline {
 
           steps {
             container('node') {
-              script {  
+              script {
                 branch_envs.each{env ->
                   sh "ENV=${env} OUT_DIR=public/${env} yarn build"
                 }
