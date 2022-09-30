@@ -2,7 +2,7 @@
 SHELL := env PATH=$(shell npm bin):$(PATH) /bin/bash -O extglob
 
 .SILENT:
-.PHONY: install
+.PHONY: install build
 
 default: build
 .DEFAULT_GOAL := default
@@ -17,15 +17,27 @@ ifndef LOCALE
   export LOCALE=es
 endif
 
+ifndef OUT_DIR
+  export OUT_DIR=build
+endif
+
+ifndef CYPRESS_BROWSER
+  export CYPRESS_BROWSER=chrome
+endif
+
 node_modules:; yarn install
 install:; yarn install
 i: install
 
-up:
-	yarn start --locale $(LOCALE)
+test.cypress:
+	cypress run --browser ${CYPRESS_BROWSER}
 
-build:
-	yarn build
+up: node_modules
+	docusaurus start --locale $(LOCALE)
 
-preview:
-	yarn serve
+build: node_modules
+	docusaurus build --out-dir $(OUT_DIR)
+
+preview: node_modules
+	docusaurus serve
+

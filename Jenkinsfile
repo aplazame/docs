@@ -38,15 +38,13 @@ PROD_bucket_name = 'aplazame.dev' // 'checkout.aplazame.com'
 envs_by_branch = [
   master: ['staging'],
   release: ['prod'],
-  default: ['staging'], // 'public/staging public/dev public/squad', // ephemerals
+  default: ['staging'],
 ]
 
 envs_by_branch[branch_like_master] = envs_by_branch.master
 envs_by_branch[branch_like_release] = envs_by_branch.release
 
 branch_envs = getKey(envs_by_branch, githubBranch)
-public_dirs = branch_envs.collect({env -> "public/${env}"}).join(' ')
-num_public_dirs = branch_envs.size()
 
 sc_story = getStoryIdFromBranchName(githubBranch)
 
@@ -134,17 +132,17 @@ pipeline {
             }
           }
         }
-/*
-        stage('✅ & 📊') {
-          steps {
-            container('node') {
-              sshagent(['ssh-github']) {
-                sh "npm run tests"
-              }
-            }
-          }
-        }
-*/
+
+        // stage('✅ & 📊') {
+        //   steps {
+        //     container('node') {
+        //       sshagent(['ssh-github']) {
+        //         sh "npm run tests"
+        //       }
+        //     }
+        //   }
+        // }
+
         stage('Build 🍳') {
           environment {
             AWS_PROFILE = "AplazameSharedServices"
@@ -154,7 +152,7 @@ pipeline {
             container('node') {
               script {
                 branch_envs.each{env ->
-                  sh "ENV=${env} OUT_DIR=public/${env} yarn build"
+                  sh "OUT_DIR=build/${env} yarn build"
                 }
               }
             }
@@ -184,8 +182,8 @@ pipeline {
                 branch_envs.each { env ->
                   def s3_path = 's3://' + getKey(ephe_bucket_name_by_env, env) + getKey(ephe_suffix_by_env, env) + '/' + app + '/sc-' + sc_story
 
-                  echo "🚀 [[ deploying 'public/${env}' to '${s3_path}' ]] 🪣"
-                  uploadFolderToS3('public/' + env, s3_path,
+                  echo "🚀 [[ deploying 'build/${env}' to '${s3_path}' ]] 🪣"
+                  uploadFolderToS3('build/' + env, s3_path,
                     acl: 'public-read',
                     files_no_cache: '*.html',
                   )
@@ -229,8 +227,8 @@ pipeline {
                 branch_envs.each { env ->
                   def s3_path = 's3://' + getKey(bucket_name_by_env, env)
 
-                  echo "🚀 [[ deploying 'public/${env}' to '${s3_path}' ]] 🪣"
-                  def result = uploadFolderToS3('public/' + env, s3_path,
+                  echo "🚀 [[ deploying 'build/${env}' to '${s3_path}' ]] 🪣"
+                  def result = uploadFolderToS3('build/' + env, s3_path,
                     aws_profile: getKey(aws_profile_by_env, env),
                     files_no_cache: '*.html',
                   )

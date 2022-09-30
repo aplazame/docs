@@ -30,7 +30,8 @@
   "devDependencies": {
     "@docusaurus/eslint-plugin": "^2.1.0",
     "@docusaurus/module-type-aliases": "^2.1.0",
-    "cypress": "^10.8.0"
+    "cypress": "^10.8.0",
+    "yarn": "^1.22.19"
   },
   "browserslist": {
     "production": [
