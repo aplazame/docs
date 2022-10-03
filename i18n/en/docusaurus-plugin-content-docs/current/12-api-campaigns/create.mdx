@@ -9,9 +9,9 @@ import TabItem from '@theme/TabItem';
 # Create
 The type of campaign is determined by the `partial` parameter, it could be a *full campaign* that applies to all items in your store, or it could be a *partial campaign* that applies to specific items.
 
-In the case of a *partial campaign* it is necessary [to add the articles](./articles/#add) to which the *financing campaign* applies.
+In the case of a *partial campaign* it is necessary [to add the articles](../articles/#add) to which the *financing campaign* applies.
 
-Learn how to manage the [articles](./articles/) of a *financing campaign*.
+Learn how to manage the [articles](../articles/) of a *financing campaign*.
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -107,13 +107,13 @@ dynamic result = client.Post($"/me/campaigns", campaign);
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 name | string | <t id="table.yes">Sí</t> | Campaign name
-start_date | $type{date} | <t id="table.yes">Sí</t> | Start date of the campaign
-end_date | $type{date} | No | End date of the campaign
-interest | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Interest discount rate
+start_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | <t id="table.yes">Sí</t> | Start date of the campaign
+end_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | End date of the campaign
+interest | [decimal](../../api-reference#decimals) | <t id="table.yes">Sí</t> | Interest discount rate
 partial | Boolean | No | Determines if the campaign applies to all products, `false` by default
 num_instalments | array | No | Minimum shopping cart amount (order.total_amount) to which the campaign applies
-min_order_amount | [decimal](../api-reference#decimals) | No | [Minimum shopping cart amount (order.total_amount)](../checkout-creation/#order) to which the campaign applies
-max_order_amount | [decimal](../api-reference#decimals) | No | [Maximum shopping cart amount (order.total_amount)](../checkout-creation/#order) to which the campaign applies
+min_order_amount | [decimal](../../api-reference#decimals) | No | [Minimum shopping cart amount (order.total_amount)](../../checkout-creation/#order) to which the campaign applies
+max_order_amount | [decimal](../../api-reference#decimals) | No | [Maximum shopping cart amount (order.total_amount)](../../checkout-creation/#order) to which the campaign applies
 
  ### Response
 

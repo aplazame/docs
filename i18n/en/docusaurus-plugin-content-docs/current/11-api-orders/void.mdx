@@ -99,7 +99,7 @@ X-Aplazame-Media-Type: aplazame.v1
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-remaining_amount | [decimal](../api-reference#decimals) | Remaining capture amount
+remaining_amount | [decimal](../../api-reference#decimals) | Remaining capture amount
 results | collection | List of voids
 
 ## 02 - Request void
@@ -166,7 +166,7 @@ dynamic result = client.Post($"/orders/{orderId}/void", new {amount = Aplazame.S
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 :orderId | string | <t id="docs.yes">Sí</t> | Order ID
-amount | [decimal](../api-reference#decimals) | <t id="docs.yes">Sí</t> | Amount to void
+amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Amount to void
 
 ### Response
 
@@ -195,5 +195,5 @@ X-Aplazame-Media-Type: aplazame.v1
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-remaining_amount | [decimal](../api-reference#decimals) | Remaining capture amount
+remaining_amount | [decimal](../../api-reference#decimals) | Remaining capture amount
 results | collection | List of voids
