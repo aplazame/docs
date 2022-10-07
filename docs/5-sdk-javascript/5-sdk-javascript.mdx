@@ -37,7 +37,7 @@ requirejs.config({
 
 require(['aplazame'], function (aplazame) {
   aplazame.init({
-    // replace with merchant public key
+    // reemplazar con la public key del merchant
     public_key: "api_public_key",
     sandbox: true
   });
@@ -52,7 +52,7 @@ require(['aplazame'], function (aplazame) {
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-public-key | string | <t id="table.yes">Sí</t> | [tu clave pública](https://vendors.aplazame.com)
+public-key | string | <t id="table.yes">Sí</t> | [tu clave pública](https://vendors.aplazame.com).
 sandbox | boolean | <t id="table.yes">Sí</t> | Indica si las peticiones usarán el modo de pruebas (true) o producción (false).
 
 :::caution
@@ -81,7 +81,7 @@ Para mostrar el botón de pago con Aplazame en función de los productos configu
  ```js
  (window.aplazame = window.aplazame || []).push(function (aplazame)
    aplazame.button(
-     selector: '#some-button-or-wrapper-id', // accepts any valid CSS selector
+     selector: '#some-button-or-wrapper-id', // se acepta cualquier selector CSS válido
      amount: 12050,
      currency: 'EUR'
    )
@@ -145,7 +145,7 @@ Para comproabr la disponibilidad del producto "Pay later", debes añadir `data-p
  ```js
  (window.aplazame = window.aplazame || []).push(function (aplazame)
    aplazame.button(
-    selector: '#some-button-or-wrapper-id', // accepts any valid CSS selector
+    selector: '#some-button-or-wrapper-id', // se acepta cualquier selector CSS válido
     amount: 12050,
     currency: 'EUR'
     product: {
@@ -200,7 +200,7 @@ Para comproabr la disponibilidad del producto "Paga en 4", debes añadir `data-p
  ```js
 (window.aplazame = window.aplazame || []).push(function (aplazame)
   aplazame.button(
-    selector: '#some-button-or-wrapper-id', // accepts any valid CSS selector
+    selector: '#some-button-or-wrapper-id', // se acepta cualquier selector CSS válido
     amount: 12050,
     currency: 'EUR'
     product:
@@ -231,13 +231,13 @@ Para comproabr la disponibilidad del producto "Paga en 4", debes añadir `data-p
 
 
 ## Inicio del checkout
-[Here](#integration) you can see how to integrate the SDK
+[Aquí](#integration) puedes consultar como integrar el SDK
 
 
 ```html
 <script>
 (window.aplazame = window.aplazame || []).push(function (aplazame)
-  // This function is executed when aplazame.js is ready
+  // Esta función se ejecuta cuando aplazame.js esté listo
 
   aplazame.checkout(checkout_id,
     // callbacks ...
@@ -250,8 +250,7 @@ Para comproabr la disponibilidad del producto "Paga en 4", debes añadir `data-p
 
 ```js
 (window.aplazame = window.aplazame || []).push(function (aplazame)
-  // This function is executed when aplazame.js is ready
-
+  // Esta función se ejecuta cuando aplazame.js esté listo
 
   aplazame.checkout(checkout_id,
     onStatusChange: function (result_status) {
@@ -293,11 +292,11 @@ Para comproabr la disponibilidad del producto "Paga en 4", debes añadir `data-p
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-onStatusChange | function | No | `function onStatusChange(status) { /**/}` Función a la que se llamará cuando el Checkout cambie de estado. **Posibles estados**: `success`, `pending`, `ko`. **(Al enviar esta señal, el checkout seguirá abierto hasta que se llame a algún callback abajo mencionado)**
+onStatusChange | function | No | `function onStatusChange(status) { /**/}` Función a la que se llamará cuando el Checkout cambie de estado. **Posibles estados**: `success`, `pending`, `ko`. **(Al enviar esta señal, el checkout seguirá abierto hasta que se llame a algún callback abajo mencionado)**.
 onClose | function | No | Función a la que se llamará cuando el Checkout se cierre. `function onClose(status) { /**/}` **Posibles estados**: `success`, `pending`, `ko`, `dismiss`.
-onSuccess | function | No | Función a la que se llamará cuando se haya completado el pago. Al definir esta función el valor de `success_url` es ignorado
-onPending | function | No | Función a la que se llamará cuando el pago quede pendiente de confirmación. Al definir esta función el valor de `pending_url` es ignorado
-onKO | function | No | Función a la que se llamará cuando se haya denegado el pago. Al definir esta función el valor de `ko_url` es ignorado
-onError | function | No | Función a la que se llamará cuando haya habido un error. Al definir esta función el valor de `error_url` es ignorado
-onDismiss | function | No | Función a la que se llamará cuando el usuario escoge volver a la tienda. Al definir esta función el valor de `dismiss_url` es ignorado
+onSuccess | function | No | Función a la que se llamará cuando se haya completado el pago. Al definir esta función el valor de `success_url` es ignorado.
+onPending | function | No | Función a la que se llamará cuando el pago quede pendiente de confirmación. Al definir esta función el valor de `pending_url` es ignorado.
+onKO | function | No | Función a la que se llamará cuando se haya denegado el pago. Al definir esta función el valor de `ko_url` es ignorado.
+onError | function | No | Función a la que se llamará cuando haya habido un error. Al definir esta función el valor de `error_url` es ignorado.
+onDismiss | function | No | Función a la que se llamará cuando el usuario escoge volver a la tienda. Al definir esta función el valor de `dismiss_url` es ignorado.
 

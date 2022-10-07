@@ -32,8 +32,8 @@ Content-Type: application/json
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-[customer](../checkout-creation/#customer) | object | <t id="table.yes">Sí</t> | Datos del cliente
-[order](../checkout-creation/#order) | object | <t id="table.yes">Sí</t> | Datos del pedido
+[customer](../checkout-creation/#customer) | object | <t id="table.yes">Sí</t> | Datos del cliente.
+[order](../checkout-creation/#order) | object | <t id="table.yes">Sí</t> | Datos del pedido.
 [billing](../checkout-creation/#billing) | object | No | Dirección de facturación.
 [shipping](../checkout-creation/#shipping) | object | No | Información de envío.
 [ipn_url](../checkout-creation/#merchant) | object | No | (Instant Payment Notification) URL absoluta donde se envían los cambios de estado del checkout.
@@ -149,7 +149,7 @@ sandbox | boolean | El pedido fue realizado en el entorno de pruebas
 
 En función del campo `status` del pedido, el campo `status_reason` proporciona información específica de las razones de Aplazame para determinar el estado del pedido.
 
-Status | Status reason | Cause
+Estado | Razón | Causa
 ------ | ---- | -----
 pending | in_process | El comprador ha iniciado el proceso de pago pero aún no lo ha completado.
 pending | confirmation_required | La solicitud de financiación ha sido aceptada por Aplazame y está a la espera de la confirmación final de la tienda.

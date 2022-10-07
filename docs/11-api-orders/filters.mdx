@@ -204,15 +204,15 @@ dynamic result = client.Get($"/orders?verified-isnull=yes&confirmed-isnull=no");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-id | hash | `string` | `ID` del pedido en aplazame
-mid | string | `string` | `ID` del pedido
-total_amount | [decimal](../../api-reference#decimals) | `range` | Importe del pedido
-discount | [decimal](../../api-reference#decimals) | `isnull`, `range` | Cantidad del descuento del pedido
-discount_rate | [decimal](../../api-reference#decimals) | `isnull`, `range` | Tasa de descuento en el precio del pedido
-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Fecha de creación del pedido
-verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se ha verificado el pedido
-confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se confirmó el pedido
-cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se canceló el pedido
+id | hash | `string` | `ID` del pedido en aplazame.
+mid | string | `string` | `ID` del pedido.
+total_amount | [decimal](../../api-reference#decimals) | `range` | Importe del pedido.
+discount | [decimal](../../api-reference#decimals) | `isnull`, `range` | Cantidad del descuento del pedido.
+discount_rate | [decimal](../../api-reference#decimals) | `isnull`, `range` | Tasa de descuento en el precio del pedido.
+created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Fecha de creación del pedido.
+verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se ha verificado el pedido.
+confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se confirmó el pedido.
+cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se canceló el pedido.
 
 #### Pago inicial
 
@@ -260,8 +260,8 @@ dynamic result = client.Get($"/orders?instalment_plan-downpayment-state=failed")
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-instalment_plan-downpayment-state | string | `choices` | Estado del pago inicial
-instalment_plan-downpayment-amount | [decimal](../../api-reference#decimals) | `isnull`, `range` | Importe del pago inicial
+instalment_plan-downpayment-state | string | `choices` | Estado del pago inicial.
+instalment_plan-downpayment-amount | [decimal](../../api-reference#decimals) | `isnull`, `range` | Importe del pago inicial.
 
 ## Por teléfono
 Número de teléfono del cliente exacto
@@ -310,10 +310,10 @@ dynamic result = client.Get($"/orders?customer-phone-number=612345678");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-customer-id | hash | `string` | `ID` de cliente
-customer-phone-number | string | `string` | Teléfono móvil del cliente
-customer-phone-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | Prefijo telefónico del país
-customer-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Fecha de creación
+customer-id | hash | `string` | `ID` de cliente.
+customer-phone-number | string | `string` | Teléfono móvil del cliente.
+customer-phone-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | Prefijo telefónico del país.
+customer-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Fecha de creación.
 
 ## Por documento de identificación del cliente
 
@@ -364,9 +364,9 @@ dynamic result = client.Get($"/orders?customer-document_id-type=nif&customer-doc
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-customer-document_id-number | string | `string` | Número de identificación del documento del cliente
-customer-document_id-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | País emisor del documento de identificación del cliente
-customer-document_id-type | string | `choices` | Tipo de documento identificativo del cliente, los valores pueden ser `nif`, `nie`, `cif`, `passport`, `others`
+customer-document_id-number | string | `string` | Número de identificación del documento del cliente.
+customer-document_id-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | País emisor del documento de identificación del cliente.
+customer-document_id-type | string | `choices` | Tipo de documento identificativo del cliente, los valores pueden ser `nif`, `nie`, `cif`, `passport`, `others`.
 
 ## Por cuenta
 
@@ -464,8 +464,8 @@ dynamic result = client.Get($"/orders?account-last_login-isnull=no");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-account-id | hash | `string` | `ID` del cliente
-account-type | string | `choices` | Tipo de cliente; las opciones son `g` invitado, `n` nuevo, `e` existente
-account-gender | integer | `choices` | Género; las opciones son `0` desconocido, `1` hombre, `2` mujer, `3` no aplica
+account-id | hash | `string` | `ID` del cliente.
+account-type | string | `choices` | Tipo de cliente; las opciones son `g` invitado, `n` nuevo, `e` existente.
+account-gender | integer | `choices` | Género; las opciones son `0` desconocido, `1` hombre, `2` mujer, `3` no aplica.
 account-last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha del último inicio de sesión.
 account-date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Fecha que designa cuando se creó la cuenta.

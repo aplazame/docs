@@ -65,8 +65,8 @@ dynamic result = client.Get("/orders");
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-Accept | string | <t id="table.yes">Sí</t> | Specifies the Aplazame API version and the datatype expected
-Authorization | string | <t id="table.yes">Sí</t> | Type and access key
+Accept | string | <t id="table.yes">Sí</t> | Specifies the Aplazame API version and the datatype expected.
+Authorization | string | <t id="table.yes">Sí</t> | Type and access key.
 
 ### Response
 
@@ -130,9 +130,6 @@ Header | Version | Expected format | Value
 Accept | 1 | json | application/vnd.aplazame.**v1**+**json**
 Accept | 1 | xml | application/vnd.aplazame.**v1**+**xml**
 
-:::caution
-The latest API version is version 1 and the latest CHECKOUT version is version 2; this is the v1.2
-:::
 
 ## Decimals
 
@@ -226,8 +223,8 @@ Code | Error | Meaning
 401 | Unauthorized | If the token (public/private key) is not sent in the request or is wrong.
 403 | Forbidden | If you do not have permission to do this operation.
 404 | Not Found |If the object or the resource is not found.
-405 | Method Not Allowed | You tried to access with an invalid method (GET/POST/...)
-406 | Not Acceptable | The Accept header is invalid [see headers](#headers)
+405 | Method Not Allowed | You tried to access with an invalid method (GET/POST/...).
+406 | Not Acceptable | The Accept header is invalid [see headers](#headers).
 408 | Request timeout | The server timed out waiting for the request.
 409 | Conflict | Indicates that the request could not be processed because of a conflict in the request.
 415 | Unsupported Media Type | There is no support for the content type indicated in the Content-Type header.
@@ -420,7 +417,7 @@ Host: api.aplazame.com
 
 Term | Usage | Description
 ---- | ----- | -----------
-exact | `name-exact=AplaZame` | Exact match
+exact | `name-exact=AplaZame` | Exact match.
 iexact | `name-iexact=aplazame` | Case-insensitive* exact match.
 regex | `name-regex=^[A-Z].*$` | Case-sensitive regular expression.
 iregex | `name-iregex=^[a-z].*$` | *Case-insensitive* regular expression.
@@ -433,7 +430,7 @@ iendswith | `name-iendswith=zame` | String ending with *case-insensitive* value.
 in | `name-in=AplaZame,Aplazar` | Matches any of the comma-separated values.
 search | `name-search=Ap` | String search value.
 
-### Por fecha
+### By date
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -485,7 +482,7 @@ Term | Usage | Description
 ---- | ----- | -----------
 year | `created-year=2015` | Dates whose year matches the value entered.
 month | `created-month=10` | Dates whose month matches the value entered.
-week_day | `created-week_day=monday` | Day of the week; the choices are: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`
+week_day | `created-week_day=monday` | Day of the week; the choices are: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.
 day | `created-day=2` | Dates whose day matches the value entered.
 hour | `created-hour=14` | Dates whose time matches the value entered.
 
@@ -547,9 +544,9 @@ dynamic result = client.Get("/orders?confirmed-gte=2015-10-02T18:15:45.101838Z")
 
 Term | Usage | Description
 ---- | ----- | -----------
-exact | `total_amount-exact=10000` | Exact value
-gt | `total_amount-gt=8000` | Greater than
-gte | `total_amount-gte=10000` | Greater than or equal to
-lt | `total_amount-lt=12000` | Less than
-lte | `total_amount-lte=10000` | Less than or equal to
+exact | `total_amount-exact=10000` | Exact value.
+gt | `total_amount-gt=8000` | Greater than.
+gte | `total_amount-gte=10000` | Greater than or equal to.
+lt | `total_amount-lt=12000` | Less than.
+lte | `total_amount-lte=10000` | Less than or equal to.
 

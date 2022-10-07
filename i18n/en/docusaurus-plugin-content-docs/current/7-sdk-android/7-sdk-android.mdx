@@ -27,17 +27,17 @@ String currency = "EUR";
 AplazameSDK.checkAvailability(amount, currency, new AvailabilityCallback() {
   @Override
   public void onAvailable() {
-    // Aplazame está disponible para este crédito
+    // Aplazame is available for this checkout
   }
 
   @Override
   public void onNotAvailable() {
-    // Aplazame no está disponible para este crédito. No deberías mostrar Aplazame como un método de pago disponible
+    // Aplazame is not available for this checkout. You should not show Aplazame as an available payment method.
   }
 
   @Override
   public void onFailure() {
-    // Ha ocurrido un error
+    // An error has occurred
   }
 });
 ```
@@ -65,7 +65,7 @@ WebView webView = findViewById(R.id.webview);
 AplazameSDK.initializeAplazameWebView(webView, new JsWebViewEvents() {
   @Override
   public void onReadyEvent() {
-    // La aplicación JS ha iniciado
+    // JS application has been started
     webView.setVisibility(View.VISIBLE);
   }
 

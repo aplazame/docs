@@ -104,12 +104,12 @@ dynamic result = client.Put($"/me/campaigns/{campaignId}", campaign);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-name | string | <t id="table.yes">Sí</t> | $message{ Nombre de la campaña
-start_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | <t id="table.yes">Sí</t> | Fecha de inicio de la campaña
-end_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | Fecha fin de la campaña
-interest | [decimal](../../api-reference#decimals) | <t id="table.yes">Sí</t> | Tasa de descuento en los intereses
-partial | Boolean | No | Determina si la campaña aplica a todos los productos, por defecto `false`
-num_instalments | array | No | Número de cuotas disponibles para la campaña
+name | string | <t id="table.yes">Sí</t> | Nombre de la campaña.
+start_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | <t id="table.yes">Sí</t> | Fecha de inicio de la campaña.
+end_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | Fecha fin de la campaña.
+interest | [decimal](../../api-reference#decimals) | <t id="table.yes">Sí</t> | Tasa de descuento en los intereses.
+partial | Boolean | No | Determina si la campaña aplica a todos los productos, por defecto `false`.
+num_instalments | array | No | Número de cuotas disponibles para la campaña.
 
  ### Respuesta
 
@@ -189,8 +189,8 @@ dynamic result = client.Patch($"/me/campaigns/{campaignId}", campaign);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:merchantId | hash | <t id="table.yes">Sí</t> | `id` de la tienda con el que hacer las peticiones
-:campaignId | hash | <t id="table.yes">Sí</t> | `id` de la campaña con el que hacer las peticiones
+:merchantId | hash | <t id="table.yes">Sí</t> | `id` de la tienda con el que hacer las peticiones.
+:campaignId | hash | <t id="table.yes">Sí</t> | `id` de la campaña con el que hacer las peticiones.
 
 ### Respuesta
 
