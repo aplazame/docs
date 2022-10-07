@@ -28,12 +28,12 @@ Se ha de realizar una captura cuando se proceda al envío del producto o product
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí</t> | Importe de la captura
-id | string | <t id="table.yes">Sí</t> | `id` de la captura
-created | string | <t id="table.yes">Sí</t> | Fecha de la captura
+amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí</t> | Importe de la captura.
+id | string | <t id="table.yes">Sí</t> | `id` de la captura.
+created | string | <t id="table.yes">Sí</t> | Fecha de la captura.
 [refunds](./#pago-en-15-dias) | object | No | Devoluciones realizadas a la captura.
-refunded_amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí</t> | Cantidad devuelta de la captura
-remaining_amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí</t> | Cantidad restante de la captura (Siempre será 0)
+refunded_amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí</t> | Cantidad devuelta de la captura.
+remaining_amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí</t> | Cantidad restante de la captura (Siempre será 0).
 
 
 ## 01 - Detalle de la captura
@@ -120,8 +120,8 @@ X-Aplazame-Media-Type: aplazame.v1
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-remaining_capture_amount | [decimal](../api-reference#decimals)  | Cantidad restante del pedido sin capturar (Siempre será 0)
-[results](./#captura) | object | Capturas del pedido
+remaining_capture_amount | [decimal](../api-reference#decimals)  | Cantidad restante del pedido sin capturar (Siempre será 0).
+[results](./#captura) | object | Capturas del pedido.
 
 ## 02 - Solicitar captura
 
@@ -190,7 +190,7 @@ dynamic result = client.Post($"/orders/{orderId}/captures", new {amount = Aplaza
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 |orderId | string | <t id="table.yes">Sí</t> | ID del pedido.
-|amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí</t> | Importe a capturar
+|amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí</t> | Importe a capturar.
 
 ### Respuesta
 
@@ -213,10 +213,10 @@ X-Aplazame-Media-Type: aplazame.v1
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-remaining_capture_amount | [decimal](../api-reference#decimals)  | Cantidad restante del pedido sin capturar (Siempre será 0)
-amount | [decimal](../api-reference#decimals)  | Importe de la captura
-id | string | `id` de la captura
+remaining_capture_amount | [decimal](../api-reference#decimals) | Cantidad restante del pedido sin capturar (Siempre será 0).
+amount | [decimal](../api-reference#decimals) | Importe de la captura.
+id | string | `id` de la captura.
 created | string | Fecha de la captura
 [refunds](./#pago-en-15-dias) | object | Devoluciones realizadas a la captura.
-refunded_amount | [decimal](../api-reference#decimals)  | Cantidad devuelta de la captura
-remaining_amount | [decimal](../api-reference#decimals)  | Cantidad restante de la captura (Siempre será 0)
+refunded_amount | [decimal](../api-reference#decimals)  | Cantidad devuelta de la captura.
+remaining_amount | [decimal](../api-reference#decimals)  | Cantidad restante de la captura (Siempre será 0).

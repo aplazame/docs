@@ -106,14 +106,14 @@ dynamic result = client.Post($"/me/campaigns", campaign);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-name | string | <t id="table.yes">Sí</t> | Campaign name
-start_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | <t id="table.yes">Sí</t> | Start date of the campaign
-end_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | End date of the campaign
-interest | [decimal](../../api-reference#decimals) | <t id="table.yes">Sí</t> | Interest discount rate
-partial | Boolean | No | Determines if the campaign applies to all products, `false` by default
-num_instalments | array | No | Minimum shopping cart amount (order.total_amount) to which the campaign applies
-min_order_amount | [decimal](../../api-reference#decimals) | No | [Minimum shopping cart amount (order.total_amount)](../../checkout-creation/#order) to which the campaign applies
-max_order_amount | [decimal](../../api-reference#decimals) | No | [Maximum shopping cart amount (order.total_amount)](../../checkout-creation/#order) to which the campaign applies
+name | string | <t id="table.yes">Sí</t> | Campaign name.
+start_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | <t id="table.yes">Sí</t> | Start date of the campaign.
+end_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | End date of the campaign.
+interest | [decimal](../../api-reference#decimals) | <t id="table.yes">Sí</t> | Interest discount rate.
+partial | Boolean | No | Determines if the campaign applies to all products, `false` by default.
+num_instalments | array | No | Minimum shopping cart amount (order.total_amount) to which the campaign applies.
+min_order_amount | [decimal](../../api-reference#decimals) | No | [Minimum shopping cart amount (order.total_amount)](../../checkout-creation/#order) to which the campaign applies.
+max_order_amount | [decimal](../../api-reference#decimals) | No | [Maximum shopping cart amount (order.total_amount)](../../checkout-creation/#order) to which the campaign applies.
 
  ### Response
 

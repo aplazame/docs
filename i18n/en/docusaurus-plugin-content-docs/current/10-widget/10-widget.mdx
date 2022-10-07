@@ -37,8 +37,7 @@ The Aplazame widget allows you to show a simulation of the financing instalments
 
     require(['aplazame'], function (aplazame) {
       aplazame.init({
-        // reemplazar con la clave pública de la tienda
-        public_key: "api_public_key",
+        public_key: "api_public_key", // replace with merchant public_key
         sandbox: false
       });
     });
@@ -53,8 +52,8 @@ The value of sandbox must be `false` for production environment
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-|public-key | string | yes | [your public key](https://vendors.aplazame.com)
-|sandbox | boolean | yes | Set if the requests will be in sandbox mode (true) or production (false)
+| public-key | string | yes | [your public key](https://vendors.aplazame.com).
+| sandbox | boolean | yes | Set if the requests will be in sandbox mode (true) or production (false).
 
 
 ## Customize legal text

@@ -104,12 +104,12 @@ dynamic result = client.Put($"/me/campaigns/{campaignId}", campaign);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-name | string | <t id="table.yes">Sí</t> | Campaign name
-start_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | <t id="table.yes">Sí</t> | Start date of the campaign
-end_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | End date of the campaign
-interest | [decimal](../../api-reference#decimals) | <t id="table.yes">Sí</t> | Interest discount rate
-partial | Boolean | No | Determines if the campaign applies to all products, `false` by default
-num_instalments | array | No | Number of instalments available for the campaign
+name | string | <t id="table.yes">Sí</t> | Campaign name.
+start_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | <t id="table.yes">Sí</t> | Start date of the campaign.
+end_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | End date of the campaign.
+interest | [decimal](../../api-reference#decimals) | <t id="table.yes">Sí</t> | Interest discount rate.
+partial | Boolean | No | Determines if the campaign applies to all products, `false` by default.
+num_instalments | array | No | Number of instalments available for the campaign.
 
  ### Response
 
@@ -189,8 +189,8 @@ dynamic result = client.Patch($"/me/campaigns/{campaignId}", campaign);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:merchantId | hash | <t id="table.yes">Sí</t> | `id` of the store to perform action with
-:campaignId | hash | <t id="table.yes">Sí</t> | `id` of the campaign to perform action with
+:merchantId | hash | <t id="table.yes">Sí</t> | `id` of the store to perform action with.
+:campaignId | hash | <t id="table.yes">Sí</t> | `id` of the campaign to perform action with.
 
 ### Response
 

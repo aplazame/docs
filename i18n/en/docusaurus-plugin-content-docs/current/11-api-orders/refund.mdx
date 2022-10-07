@@ -77,7 +77,7 @@ dynamic result = client.Get($"/orders/{orderId}/refund");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | Order ID
+:orderId | string | <t id="docs.yes">Sí</t> | Order ID.
 
 ### Response
 
@@ -155,8 +155,8 @@ dynamic result = client.Post($"/orders/{orderId}/refund", new {amount = Aplazame
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | Order ID
-amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | mporte a devolver
+:orderId | string | <t id="docs.yes">Sí</t> | Order ID.
+amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Amount to refund.
 
 ### Response
 
@@ -176,10 +176,10 @@ X-Aplazame-Media-Type: aplazame.v1
 remaining_amount | [decimal](../../api-reference#decimals) | Remaining capture amount
 results | collection | List of voids
 
-## Pago en 15 días
-La devolución para la modalidad de pago en 15 días se realiza a nivel de captura dentro de un pedido.
+## Check remaining amount
+The refund is made at the capture level within an order. Being possible the refund of several captures.
 
-Una captura de un pedido acepta varias devoluciones parciales siempre que el sumatorio del importe de las mismas no supere el total de la captura original.
+A capture of an order accepts several partial refunds only if the sum of the amount does not exceed the total of the original capture.
 
 ```json
 {
@@ -195,16 +195,17 @@ Una captura de un pedido acepta varias devoluciones parciales siempre que el sum
 ```
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-id | string | <t id="docs.yes">Sí</t> | `id` de la devolución
-amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Importe de la devolución
-pending_amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Cantidad restante de la captura
-accrual_date | string | <t id="docs.yes">Sí</t> | Fecha efectiva
-credit_to_customer | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Importe devuelto al cliente
-completed | boolean | <t id="docs.yes">Sí</t> | Pedido completado
-completed_but_defaults | boolean | <t id="docs.yes">Sí</t> | Pedido completado peor con deudas
-created | string | <t id="docs.yes">Sí</t> | Fecha de la devolución
+id | string | <t id="docs.yes">Sí</t> | Your refund `ID`.
+amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Refund amount.
+pending_amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Remaining capture amount.
+accrual_date | string | <t id="docs.yes">Sí</t> | Effective date of refund.
+credit_to_customer | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Refund amount to customer.
+completed | boolean | <t id="docs.yes">Sí</t> | Order completed.
+completed_but_defaults | boolean | <t id="docs.yes">Sí</t> | Order completed but with defaults.
+created | string | <t id="docs.yes">Sí</t> | Date of refund.
 
-### 01 - Comprobar cantidad restante
+
+### 01 - Check remaining amount
 
 
 <Tabs>
@@ -286,15 +287,15 @@ X-Aplazame-Media-Type: aplazame.v1
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-amount | [decimal](../../api-reference#decimals) | Importe de la captura
-id | string | `id` de la captura
-created | string | Fecha de la captura
-[refunds](./#pago-en-15-dias) | object | Devoluciones realizadas a la captura.
-refunded_amount | [decimal](../../api-reference#decimals) | Cantidad devuelta de la captura
-remaining_amount | [decimal](../../api-reference#decimals) | Cantidad restante de la captura
+amount | [decimal](../../api-reference#decimals) | Capture amount
+id | string |  Your capture `id`
+created | string | Date of the capture
+[refunds](./#pago-en-15-dias) | object | Refunds on capture done
+refunded_amount | [decimal](../../api-reference#decimals) | Refunded capture amount
+remaining_amount | [decimal](../../api-reference#decimals) | Remaining capture amount (It will always be 0)
 
 
-### 02 - Solicitar devolución
+### 02 - Request refund
 
 
 <Tabs>
@@ -358,9 +359,9 @@ dynamic result = client.Post($"/orders/{orderId}/captures/{captureId}/refunds", 
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | Order ID
-:captureId | string | <t id="docs.yes">Sí</t> | ID de la captura
-amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Importe a devolver
+:orderId | string | <t id="docs.yes">Sí</t> | Order ID.
+:captureId | string | <t id="docs.yes">Sí</t> | Capture ID.
+amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Amount to refund.
 
 ### Response
 
@@ -393,10 +394,9 @@ X-Aplazame-Media-Type: aplazame.v1
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-amount | [decimal](../../api-reference#decimals) | Importe de la captura
-id | string | `id` de la captura
-created | string | Fecha de la captura
-[refunds](./#pago-en-15-dias) | object | Devoluciones realizadas a la captura
-refunded_amount | [decimal](../../api-reference#decimals) | Cantidad devuelta de la captura
-remaining_amount | [decimal](../../api-reference#decimals) | Cantidad restante de la captura
-
+amount | [decimal](../../api-reference#decimals) | Capture amount.
+id | string | Your capture `ID`.
+created | string | Date of the capture.
+[refunds](./#pago-en-15-dias) | object | Refunds on capture done.
+refunded_amount | [decimal](../../api-reference#decimals) | Remaining capture amount.
+remaining_amount | [decimal](../../api-reference#decimals) | Remaining capture amount.
