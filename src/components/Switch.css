@@ -56,15 +56,17 @@
   opacity: 0;
   transition: opacity .4s;
 }
+
 .text-no {
-  right: 0.5rem;
-}
-.text-yes {
-  left: 0.5rem;
+  right: 0.8rem;
+  opacity: 1;
 }
 
-.is-checked .text-yes,
-.text-no {
+.text-yes {
+  left: 0.6rem;
+}
+
+.is-checked .text-yes {
   opacity: 1;
 }
 

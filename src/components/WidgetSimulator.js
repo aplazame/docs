@@ -339,6 +339,7 @@ class WidgetSimulator extends React.Component {
                   <div>
                     <input
                       type="text"
+                      class="text-box"
                       name="optionTitleDefault"
                       value={this.state.values.optionTitleDefault}
                       onChange={(e) => this.updateValueState(e.target.value, "optionTitleDefault" )}
@@ -352,6 +353,7 @@ class WidgetSimulator extends React.Component {
                   <div>
                     <input
                       type="text"
+                      class="text-box"
                       name="optionTitleZero"
                       value={this.state.values.optionTitleZero}
                       onChange={(e) => this.updateValueState(e.target.value, "optionTitleZero" )}
