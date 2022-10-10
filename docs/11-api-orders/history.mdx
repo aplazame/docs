@@ -212,16 +212,16 @@ dynamic result = client.Post($"/orders/{orderId}/history", payload);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | `id` del pedido
-id | string | <t id="docs.yes">Sí</t> | `id` del pedido
-amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Importe del pedido
-due | [decimal](../../api-reference#decimals) | No | Importe total del pedido
-status | string | <t id="docs.yes">Sí</t> | Estado del pedido; Las opciones son `pending`, `cancelled`, `processing` y `complete`
-type | string | <t id="docs.yes">Sí</t> | Tipo de pedido
-order_date | string | <t id="docs.yes">Sí</t> | Fecha del pedido
-currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="docs.yes">Sí</t> | Código de la moneda del pedido
-[billing](../../checkout-creation/#billing) | object | No | Dirección de facturación.
-[shipping](../../checkout-creation/#shipping) | object | No | Información de envío.
+:orderId | string | <t id="docs.yes">Sí.</t> | `id` del pedido
+id | string | <t id="docs.yes">Sí.</t> | `id` del pedido
+amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí.</t> | Importe del pedido
+due | [decimal](../../api-reference#decimals) | No. | Importe total del pedido
+status | string | <t id="docs.yes">Sí.</t> | Estado del pedido; Las opciones son `pending`, `cancelled`, `processing` y `complete`
+type | string | <t id="docs.yes">Sí.</t> | Tipo de pedido
+order_date | string | <t id="docs.yes">Sí.</t> | Fecha del pedido
+currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="docs.yes">Sí.</t> | Código de la moneda del pedido
+[billing](../../checkout-creation/#billing) | object | No. | Dirección de facturación.
+[shipping](../../checkout-creation/#shipping) | object | No. | Información de envío.
 
 #### Response
 
