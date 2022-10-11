@@ -103,7 +103,7 @@ pipeline {
         anyOf {
           changeRequest(target: 'master')
           branch 'master'
-          // branch 'release'
+          branch 'release'
         }
         // not {
         //   tag "*"
@@ -226,6 +226,29 @@ pipeline {
               script {
                 branch_envs.each { env ->
                   def s3_path = 's3://' + getKey(bucket_name_by_env, env)
+
+                  echo "🚀 [[ deploying 'build/${env}' to '${s3_path}' ]] 🪣"
+                  def result = uploadFolderToS3('build/' + env, s3_path,
+                    aws_profile: getKey(aws_profile_by_env, env),
+                    files_no_cache: '*.html',
+                  )
+                }
+              }
+            }
+          }
+        }
+
+        stage('[PROD] 🪣 S3') {
+          when { anyOf {
+            // { branch 'release' } not working propertly in PRs
+            expression { githubBranch == 'release' }
+            expression { githubBranch == branch_like_release }
+          } }
+          steps {
+            container('node') {
+              script {
+                branch_envs.each { env ->
+                  def s3_path = 's3://' + PROD_bucket_name
 
                   echo "🚀 [[ deploying 'build/${env}' to '${s3_path}' ]] 🪣"
                   def result = uploadFolderToS3('build/' + env, s3_path,
