@@ -52,7 +52,7 @@ require(['aplazame'], function (aplazame) {
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-public-key | string | <t id="table.yes">Sí</t> | [your public key](https://vendors.aplazame.com)
+public-key | string | <t id="table.yes">Sí</t> | [Your public key](https://vendors.aplazame.com).
 sandbox | boolean | <t id="table.yes">Sí</t> | Set if the requests will be in sandbox mode (true) or production (false).
 
 :::caution
@@ -297,11 +297,11 @@ To check "Pay in 4" product, yo need add `data-product-type="pay_in_4"`, or `pro
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-onStatusChange | function | No | `function onStatusChange(status) { /**/}` Function to be called when the Checkout changes its status. **Possible statuses**: `success`, `pending`, `ko`. **(When sending this signal, the checkout will remain open until a callback is made, as mentioned below)**
+onStatusChange | function | No | `function onStatusChange(status) { /**/}` Function to be called when the Checkout changes its status. **Possible statuses**: `success`, `pending`, `ko`. **(When sending this signal, the checkout will remain open until a callback is made, as mentioned below)**.
 onClose | function | No | Function to be called when the Checkout closes. `function onClose(status) { /**/}` **Possible statuses**: `success`, `pending`, `ko`, `dismiss`.
-onSuccess | function | No | Function to be called when the payment is completed. When defining this function the `success_url` value is ignored
-onPending | function | No | Function to be called when the payment is pending confirmation. When defining this function the `pending_url` value is ignored
-onKO | function | No | Function to be called when the payment is denied. When defining this function the `ko_url` value is ignored
-onError | function | No | Function to be called when an error occurs. When defining this function the `error_url` value is ignored
-onDismiss | function | No | Function to be called when the user chooses to return to the store. When defining this function the `dismiss_url` value is ignored
+onSuccess | function | No | Function to be called when the payment is completed. When defining this function the `success_url` value is ignored.
+onPending | function | No | Function to be called when the payment is pending confirmation. When defining this function the `pending_url` value is ignored.
+onKO | function | No | Function to be called when the payment is denied. When defining this function the `ko_url` value is ignored.
+onError | function | No | Function to be called when an error occurs. When defining this function the `error_url` value is ignored.
+onDismiss | function | No | Function to be called when the user chooses to return to the store. When defining this function the `dismiss_url` value is ignored.
 

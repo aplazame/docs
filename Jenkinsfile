@@ -20,37 +20,31 @@ aws_profile_by_env = [
 ]
 
 ephe_suffix_by_env = [
-  squad: '-squad',
-  dev: '-dev',
-  default: '',
+  default: '-staging',
 ]
 
 ephe_bucket_name_by_env = [
-  squad: 'aplazame-ephemeral-environments',
+  // squad: 'aplazame-ephemeral-environments',
   default: 'ephemeral-environments',
 ]
 
 bucket_name_by_env = [
-  pre: 'apidocs-pre.aplazame.org',
-  staging: 'aplazame-apidocs-staging', // 'checkout-staging.aplazame.com'
-  squad: 'aplazame-apidocs-squad', // 'checkout-squad?.aplazame.org'
+  // pre: 'apidocs-pre.aplazame.org',
   // prod: <- ⚠️ IS VERY DANGEROUS TO PUT IT HERE ⚠️
-  default: 'aplazame-apidocs-dev', // `dev` by default 'checkout-dev.aplazame.org'
+  default: 'apidocs-staging.aplazame.org', // `staging` by default 'checkout-staging.aplazame.org'
 ]
-PROD_bucket_name = 'aplazame-apidocs' // 'checkout.aplazame.com'
+PROD_bucket_name = 'aplazame.dev' // 'checkout.aplazame.com'
 
 envs_by_branch = [
-  master: ['pre', 'staging', 'dev'],
+  master: ['staging'],
   release: ['prod'],
-  default: ['staging', 'dev', 'squad'], // 'public/staging public/dev public/squad', // ephemerals
+  default: ['staging'],
 ]
 
 envs_by_branch[branch_like_master] = envs_by_branch.master
 envs_by_branch[branch_like_release] = envs_by_branch.release
 
 branch_envs = getKey(envs_by_branch, githubBranch)
-public_dirs = branch_envs.collect({env -> "public/${env}"}).join(' ')
-num_public_dirs = branch_envs.size()
 
 sc_story = getStoryIdFromBranchName(githubBranch)
 
@@ -109,7 +103,7 @@ pipeline {
         anyOf {
           changeRequest(target: 'master')
           branch 'master'
-          // branch 'release'
+          branch 'release'
         }
         // not {
         //   tag "*"
@@ -118,48 +112,20 @@ pipeline {
       }
 
       stages {
-        // stage('Cache ⚙') {
-        //   steps {
-        //     // checkout scm
-
-        //     script {
-        //       HASH = sh(script: 'md5sum package.json | awk \'{print \$1}\'', returnStdout: true).trim()
-        //       CACHE_KEY = 'node_14_vite-' + HASH
-        //     }
-
-        //     container('node') {
-        //       loadCache(CACHE_KEY)
-        //       sh "ls -la"
-
-        //       sh "load-config"
-        //     }
-        //   }
-        // }
 
         stage('Install ⚙') {
           environment {
             AWS_PROFILE = "AplazameSharedServices"
           }
-          
+
           steps {
             checkout scm
-            // script {
-            //   commitMsg = sh(returnStdout: true, script: "git log -2 --pretty=%B").trim()
-            //   forceNotifyShortcut = commitMsg.matches("[notify shortcut]") ? true : false
-            //   forceNotifySlack = commitMsg.matches("[notify slack]") ? true : false
 
-            //   echo "commitMsg: '${commitMsg}'"
-            //   echo "forceNotifyShortcut: '${forceNotifyShortcut}'"
-            //   echo "forceNotifySlack: '${forceNotifySlack}'"
-            // }
-            
             container('node') {
               sshagent(['ssh-github']) {
                 logEnvVars()
 
                 sh "ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts"
-
-                sh "[ -d ./node_modules ] && ls -ls node_modules || echo 'missing node_modules'"
 
                 sh "make install"
               }
@@ -167,20 +133,15 @@ pipeline {
           }
         }
 
-        stage('✅ & 📊') {
-          steps {
-            container('node') {
-              sshagent(['ssh-github']) {
-                sh "npm audit || true"
-                sh "npx browserslist || true"
-                sh "make count.lines"
-                sh "make lint"
-                sh "make ci.test"
-                // stash includes: 'coverage/**/*', name: 'coverage'
-              }
-            }
-          }
-        }
+        // stage('✅ & 📊') {
+        //   steps {
+        //     container('node') {
+        //       sshagent(['ssh-github']) {
+        //         sh "npm run tests"
+        //       }
+        //     }
+        //   }
+        // }
 
         stage('Build 🍳') {
           environment {
@@ -189,17 +150,11 @@ pipeline {
 
           steps {
             container('node') {
-              script {  
+              script {
                 branch_envs.each{env ->
-                  // sh "ENV=${env} make log.ENV_DATA"
-                  sh "ENV=${env} OUT_DIR=public/${env} make build"
+                  sh "OUT_DIR=build/${env} make build"
                 }
               }
-
-              // sh branch_envs
-              //     .collect({env -> "ENV=${env} OUT_DIR=public/${env} make build"})
-              //     .join(' & \\\n') +
-              //   """ & \\\n wait; """
             }
           }
         }
@@ -227,8 +182,8 @@ pipeline {
                 branch_envs.each { env ->
                   def s3_path = 's3://' + getKey(ephe_bucket_name_by_env, env) + getKey(ephe_suffix_by_env, env) + '/' + app + '/sc-' + sc_story
 
-                  echo "🚀 [[ deploying 'public/${env}' to '${s3_path}' ]] 🪣"
-                  uploadFolderToS3('public/' + env, s3_path,
+                  echo "🚀 [[ deploying 'build/${env}' to '${s3_path}' ]] 🪣"
+                  uploadFolderToS3('build/' + env, s3_path,
                     acl: 'public-read',
                     files_no_cache: '*.html',
                   )
@@ -272,8 +227,8 @@ pipeline {
                 branch_envs.each { env ->
                   def s3_path = 's3://' + getKey(bucket_name_by_env, env)
 
-                  echo "🚀 [[ deploying 'public/${env}' to '${s3_path}' ]] 🪣"
-                  def result = uploadFolderToS3('public/' + env, s3_path,
+                  echo "🚀 [[ deploying 'build/${env}' to '${s3_path}' ]] 🪣"
+                  def result = uploadFolderToS3('build/' + env, s3_path,
                     aws_profile: getKey(aws_profile_by_env, env),
                     files_no_cache: '*.html',
                   )
@@ -283,40 +238,28 @@ pipeline {
           }
         }
 
-        // stage('[PROD] 🪣 S3') {
-        //   when { anyOf {
-        //     // branch not working propertly in PRs
-        //     expression { githubBranch == 'release' }
-        //     expression { githubBranch == branch_like_release }
-        //   } }
-        //   steps {
-        //     container('node') {
-        //       script {
-        //         def s3_path = 's3://' + PROD_bucket_name
+        stage('[PROD] 🪣 S3') {
+          when { anyOf {
+            // { branch 'release' } not working propertly in PRs
+            expression { githubBranch == 'release' }
+            expression { githubBranch == branch_like_release }
+          } }
+          steps {
+            container('node') {
+              script {
+                branch_envs.each { env ->
+                  def s3_path = 's3://' + PROD_bucket_name
 
-        //         echo "🚀 [[ deploying 'public/prod' to '${s3_path}' ]] 🚀"
-        //         uploadFolderToS3('public/prod', 's3://' + PROD_bucket_name,
-        //           // aws_profile: 'Aplazame',
-        //           files_no_cache: '*.html',
-        //         )
-        //       }
-
-        //       releasySteps()
-        //     }
-        //   }
-        // }
-
-        // stage('cache 💾') {
-        //   environment {
-        //     AWS_PROFILE = "AplazameSharedServices"
-        //   }
-                    
-        //   steps {
-        //     container("node") {
-        //       saveCache(CACHE_KEY,["${foldersCache}"])
-        //     }
-        //   }
-        // }
+                  echo "🚀 [[ deploying 'build/${env}' to '${s3_path}' ]] 🪣"
+                  def result = uploadFolderToS3('build/' + env, s3_path,
+                    aws_profile: getKey(aws_profile_by_env, env),
+                    files_no_cache: '*.html',
+                  )
+                }
+              }
+            }
+          }
+        }
 
         stage('Done 🤘') {
           steps {

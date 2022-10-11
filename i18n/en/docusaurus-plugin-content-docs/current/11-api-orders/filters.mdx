@@ -61,10 +61,10 @@ dynamic result = client.Get("/orders?my-param-term=value");
 </Tabs>
 
 :::info
-You may want to check [general API filters documentation](../api-reference#filters).
+You may want to check [general API filters documentation](../../api-reference#filters).
 :::
 
-**Filters lookups** are listed **[HERE](./search/#fields)** (`string`, `choices`, `range`, `isnull` y `date`).
+**Filters lookups** are listed **[HERE](../search/#fields)** (`string`, `choices`, `range`, `isnull` y `date`).
 
 #### Exact total amount
 
@@ -204,15 +204,15 @@ dynamic result = client.Get($"/orders?verified-isnull=yes&confirmed-isnull=no");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-id | hash | `string` | Your order `ID` in aplazame
-mid | string | `string` | Your order ID
-total_amount | [decimal](../api-reference#decimals) | `range` | Order amount
-discount | [decimal](../api-reference#decimals) | `isnull`, `range` | Order discount amount
-discount_rate | [decimal](../api-reference#decimals) | `isnull`, `range` | Discount rate on the price of the order
-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Date designating when the order was created
-verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the order was verified
-confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the order was confirmed
-cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the order was cancelled
+id | hash | `string` | Your order `ID` in aplazame.
+mid | string | `string` | Your order ID.
+total_amount | [decimal](../../api-reference#decimals) | `range` | Order amount.
+discount | [decimal](../../api-reference#decimals) | `isnull`, `range` | Order discount amount.
+discount_rate | [decimal](../../api-reference#decimals) | `isnull`, `range` | Discount rate on the price of the order.
+created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Date designating when the order was created.
+verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the order was verified.
+confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the order was confirmed.
+cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the order was cancelled.
 
 #### Downpayment
 
@@ -260,8 +260,8 @@ dynamic result = client.Get($"/orders?instalment_plan-downpayment-state=failed")
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-instalment_plan-downpayment-state | string | `choices` | Downpayment status
-instalment_plan-downpayment-amount | [decimal](../api-reference#decimals) | `isnull`, `range` | Downpayment amount
+instalment_plan-downpayment-state | string | `choices` | Downpayment status.
+instalment_plan-downpayment-amount | [decimal](../../api-reference#decimals) | `isnull`, `range` | Downpayment amount.
 
 ## By phone
 Customer phone number exact
@@ -311,10 +311,10 @@ dynamic result = client.Get($"/orders?customer-phone-number=612345678");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-customer-id | hash | `string` | Customer `ID`
-customer-phone-number | string | `string` | Customer mobile phone number
-customer-phone-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | Customer phone country
-customer-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Date designating when the customer was created
+customer-id | hash | `string` | Customer `ID`.
+customer-phone-number | string | `string` | Customer mobile phone number.
+customer-phone-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | Customer phone country.
+customer-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `date`, `range` | Date designating when the customer was created.
 
 ## By customer document ID
 
@@ -365,9 +365,9 @@ dynamic result = client.Get($"/orders?customer-document_id-type=nif&customer-doc
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-customer-document_id-number | string | `string` | Customer document ID number
-customer-document_id-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | Customer document ID country
-customer-document_id-type | string | `choices` | Customer document ID type; the choices are `nif`, `nie`, `cif`, `passport`, `others`
+customer-document_id-number | string | `string` | Customer document ID number.
+customer-document_id-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | `string` | Customer document ID country.
+customer-document_id-type | string | `choices` | Customer document ID type; the choices are `nif`, `nie`, `cif`, `passport`, `others`.
 
 ## By account
 Gender exact
@@ -462,8 +462,8 @@ dynamic result = client.Get($"/orders?account-last_login-isnull=no");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-account-id | hash | `string` | Customer `ID`
-account-type | string | `choices` | Customer type; the choices are `g` guest, `n` new, `e` existing
-account-gender | integer | `choices` | Gender; the choices are `0` not known, `1` male, `2` female, `3` not applicable
-account-last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date of the customer's last login
-account-date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the customer account was created
+account-id | hash | `string` | Customer `ID`.
+account-type | string | `choices` | Customer type; the choices are `g` guest, `n` new, `e` existing.
+account-gender | integer | `choices` | Gender; the choices are `0` not known, `1` male, `2` female, `3` not applicable.
+account-last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date of the customer's last login.
+account-date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | `isnull`, `date`, `range` | Date designating when the customer account was created.

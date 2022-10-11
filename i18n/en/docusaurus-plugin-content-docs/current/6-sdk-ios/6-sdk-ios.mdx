@@ -22,16 +22,16 @@ To display the payment button with Aplazame based on the [limits set in your acc
 
 
 ```swift
-// Puedes entontrar información más detallada en https://github.com/aplazame/ios-sdk/
+// Check https://github.com/aplazame/ios-sdk/ for more detailed documentation
 
 paymentContext.checkAvailability(amount: 12050, currency: "EUR") { (status) in
   switch status {
     case .available:
-      // Aplazame está disponible para este crédito
+      // Aplazame is available for this checkout
     case .notAvailable:
-      // Aplazame no está disponible para este crédito. No deberías mostrar Aplazame como un método de pago disponible
+      // Aplazame is not available for this checkout. You should not show Aplazame as an available payment method.
     case .undefined:
-      // Ha ocurrido un error
+      // An error has occurred
     }
   }
 ```

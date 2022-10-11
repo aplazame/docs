@@ -72,7 +72,7 @@ $aplazameApiClient = new Aplazame\Api\Client($apiBaseUri, $environment, $private
 
 $order_created = $aplazameApiClient->post('/checkout', $payload);
 
-// checkout how to create the payload:
+// como crear el payload del checkout:
 // https://github.com/aplazame/php-sdk/blob/master/examples/step1_checkout_create.php#L39
 ```
 
@@ -117,11 +117,11 @@ $ curl --request POST "https://api.aplazame.com/checkout" \
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-[merchant](#merchant) | object | <t id="table.yes">Sí</t> | Datos del merchant
-[order](#order) | object | <t id="table.yes">Sí</t> | Datos del pedido
-[customer](#customer) | object | <t id="table.yes">Sí</t> | Datos del cliente
-[billing](#billing) | object | No | Dirección de facturación
-[shipping](#shipping) | object | <t id="table.yes">Sí</t> | Información de envío
+[merchant](#merchant) | object | <t id="table.yes">Sí</t> | Datos del merchant.
+[order](#order) | object | <t id="table.yes">Sí</t> | Datos del pedido.
+[customer](#customer) | object | <t id="table.yes">Sí</t> | Datos del cliente.
+[billing](#billing) | object | No | Dirección de facturación.
+[shipping](#shipping) | object | <t id="table.yes">Sí</t> | Información de envío.
 
 ### Pago a plazos
 Si no se especifica un campo `product`, el tipo de checkout por defecto será "Pago a plazos".
@@ -140,7 +140,7 @@ La creación de un checkout de tipo "Pago en 15 días" es igual que el "Pago a p
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-product | object | No| Tipo de producto. Si no se indica el producto, por defecto es "Pago a plazos". Puede ser `instalments` (valor por omisión), `pay_later` o `pay_in_4`
+product | object | No| Tipo de producto. Si no se indica el producto, por defecto es "Pago a plazos". Puede ser `instalments` (valor por omisión), `pay_later` o `pay_in_4`.
 
 
 ### Pago en 4
@@ -157,7 +157,7 @@ La creación de un checkout de tipo "Pago en 4" es igual que el "Pago a plazos" 
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-product | object | No| Tipo de producto. Si no se indica el producto, por defecto es "Pago a plazos". Puede ser `instalments` (valor por omisión), `pay_later` o `pay_in_4`
+product | object | No| Tipo de producto. Si no se indica el producto, por defecto es "Pago a plazos". Puede ser `instalments` (valor por omisión), `pay_later` o `pay_in_4`.
 
 
 
@@ -188,9 +188,9 @@ pending_url | [url](https://en.wikipedia.org/wiki/URL) | <t id="table.yes">Sí</
 error_url | [url](https://en.wikipedia.org/wiki/URL) | <t id="table.yes">Sí</t> | URL (relativa a la tienda) a la que se redirigirá al usuario cuando haya ocurrido un error.
 dismiss_url | [url](https://en.wikipedia.org/wiki/URL) | No | URL (relativa a la tienda) a la que se redirigirá al usuario cuando éste escoge volver a la tienda (por defecto '/').
 ko_url | [url](https://en.wikipedia.org/wiki/URL) | No | URL (relativa a la tienda) a la que se redirigirá al usuario cuando se haya denegado el pago.
-close_on_success | boolean | No | Indica si el checkout se redirige automáticamente a `success_url` en caso de éxito. ( por omisión: `false` )
-timeout_checkout | integer | No | Establece el tiempo máximo, en minutos, del que dispone el usuario para completar el proceso de checkout. (por omisión 60; mín. 1; máx. 120 )
-timeout_extra | integer | No | Establece el tiempo adicional, en minutos, del que dispone el usuario para completar la validación de identidad una vez finalizado el proceso de checkout. ( por omisión 2880; mín. 0; máx. 2880 )
+close_on_success | boolean | No | Indica si el checkout se redirige automáticamente a `success_url` en caso de éxito (por omisión: `false`).
+timeout_checkout | integer | No | Establece el tiempo máximo, en minutos, del que dispone el usuario para completar el proceso de checkout. (por omisión 60; mín. 1; máx. 120).
+timeout_extra | integer | No | Establece el tiempo adicional, en minutos, del que dispone el usuario para completar la validación de identidad una vez finalizado el proceso de checkout. (por omisión 2880; mín. 0; máx. 2880).
 
 ## order
 
@@ -224,16 +224,16 @@ Aplazame no permite diferentes pedidos con el mismo ID.
 ```
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-id | string | <t id="table.yes">Sí</t> | `ID` del pedido
-discount | [decimal](../api-reference#decimals) | No | Importe de descuento en el precio del pedido
-discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio del pedido
-cart_discount | [decimal](../api-reference#decimals) | No | Importe de descuento en el precio del carrito
-cart_discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio del carrito
-currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="table.yes">Sí</t> | Código de la moneda del pedido
-total_amount | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Cantidad a financiar
-[tax_rate](#tax_rate) | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Tasa de impuesto en el precio del pedido
+id | string | <t id="table.yes">Sí</t> | `ID` del pedido.
+discount | [decimal](../api-reference#decimals) | No | Importe de descuento en el precio del pedido.
+discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio del pedido.
+cart_discount | [decimal](../api-reference#decimals) | No | Importe de descuento en el precio del carrito.
+cart_discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio del carrito.
+currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="table.yes">Sí</t> | Código de la moneda del pedido.
+total_amount | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Cantidad a financiar.
+[tax_rate](#tax_rate) | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Tasa de impuesto en el precio del pedido.
 [options](#options) | object | No | Permite definir opciones concretas de esta order, por ejemplo, la fecha del primer pago.
-[articles](#article) | collection | <t id="table.yes">Sí</t> | Artículos en el carrito
+[articles](#article) | collection | <t id="table.yes">Sí</t> | Artículos en el carrito.
 
 
 ### tax_rate
@@ -273,16 +273,16 @@ event_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | Permite d
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-id | string | <t id="table.yes">Sí</t> | ID
-name | string | <t id="table.yes">Sí</t> | Nombre
-description | string | No |Descripción
-url | URL | <t id="table.yes">Sí</t> | URL absoluta del artículo
-image_url | URL | <t id="table.yes">Sí</t> | URL absoluta de la imagen del artículo
-quantity | integer | <t id="table.yes">Sí</t> | Cantidad
-price | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Precio (sin impuestos)
-tax_rate | [decimal](../api-reference#decimals) | No | Tasa de impuestos en el precio
-discount | [decimal](../api-reference#decimals) | No | Importe de descuento en el precio
-discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio
+id | string | <t id="table.yes">Sí</t> | ID.
+name | string | <t id="table.yes">Sí</t> | Nombre.
+description | string | No | Descripción.
+url | URL | <t id="table.yes">Sí</t> | URL absoluta del artículo.
+image_url | URL | <t id="table.yes">Sí</t> | URL absoluta de la imagen del artículo.
+quantity | integer | <t id="table.yes">Sí</t> | Cantidad.
+price | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Precio (sin impuestos).
+tax_rate | [decimal](../api-reference#decimals) | No | Tasa de impuestos en el precio.
+discount | [decimal](../api-reference#decimals) | No | Importe de descuento en el precio.
+discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio.
 
 
 ## customer
@@ -314,19 +314,18 @@ discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-id | string | No | `ID` del cliente
-email | string | <t id="table.yes">Sí</t> | Correo del cliente
-type | char | No | Tipo de cliente; las opciones son `g` invitado, `n` nuevo, `e` existente
-gender | integer | No | Género; las opciones son `0` desconocido, `1` hombre, `2` mujer, `3` no aplica
-first_name | string | No | Nombre
-last_name | string | No | Apellidos
-phone | string | No | Número de teléfono del cliente
-birthday | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | Fecha de nacimiento
-language | [ISO 639-1](http://es.wikipedia.org/wiki/ISO_639-1) | No | Preferencias de idioma
+id | string | No | `ID` del cliente.
+email | string | <t id="table.yes">Sí</t> | Correo del cliente.
+type | char | No | Tipo de cliente; las opciones son `g` invitado, `n` nuevo, `e` existente.
+gender | integer | No | Género; las opciones son `0` desconocido, `1` hombre, `2` mujer, `3` no aplica.
+first_name | string | No | Nombre.
+last_name | string | No | Apellidos.
+phone | string | No | Número de teléfono del cliente.
+birthday | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | Fecha de nacimiento.
+language | [ISO 639-1](http://es.wikipedia.org/wiki/ISO_639-1) | No | Preferencias de idioma.
 date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | Fecha que designa cuando se creó la cuenta.
 last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | Fecha del último inicio de sesión.
-[address](#customer-address)  | [object](http://docs.aplazame.com/#customer-address) | No | Dirección
-
+[address](#customer-address)  | [object](http://docs.aplazame.com/#customer-address) | No | Dirección.
 
 ### address
 
@@ -344,14 +343,14 @@ last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | Fecha del
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-phone | string | No | Número de teléfono de la dirección
-alt_phone | string | No | Número de teléfono alternativo
-street | string | <t id="table.yes">Sí</t> | Dirección
-address_addition | string | No | Línea adicional
-city | string | <t id="table.yes">Sí</t> | Municipio / ciudad
-state | string | <t id="table.yes">Sí</t> | Estado / provincia
-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.yes">Sí</t> | Código de país
-postcode | string | <t id="table.yes">Sí</t> | Código postal
+phone | string | No | Número de teléfono de la dirección.
+alt_phone | string | No | Número de teléfono alternativo.
+street | string | <t id="table.yes">Sí</t> | Dirección.
+address_addition | string | No | Línea adicional.
+city | string | <t id="table.yes">Sí</t> | Municipio / ciudad.
+state | string | <t id="table.yes">Sí</t> | Estado / provincia.
+country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.yes">Sí</t> | Código de país.
+postcode | string | <t id="table.yes">Sí</t> | Código postal.
 
 
 ## billing
@@ -372,16 +371,16 @@ postcode | string | <t id="table.yes">Sí</t> | Código postal
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-first_name | string | <t id="table.yes">Sí</t> | Nombre
-last_name | string | <t id="table.yes">Sí</t> | Apellido
-phone | string | No | Número de teléfono de la dirección
-alt_phone | string | No | Número de teléfono alternativo
-street | string | <t id="table.yes">Sí</t> | Dirección
-address_addition | string | No | Línea adicional
-city | string | <t id="table.yes">Sí</t> | Municipio / ciudad
-state | string | <t id="table.yes">Sí</t> | Estado / provincia
-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.yes">Sí</t> | Código de país
-postcode | string | <t id="table.yes">Sí</t> | Código postal
+first_name | string | <t id="table.yes">Sí</t> | Nombre.
+last_name | string | <t id="table.yes">Sí</t> | Apellido.
+phone | string | No | Número de teléfono de la dirección.
+alt_phone | string | No | Número de teléfono alternativo.
+street | string | <t id="table.yes">Sí</t> | Dirección.
+address_addition | string | No | Línea adicional.
+city | string | <t id="table.yes">Sí</t> | Municipio / ciudad.
+state | string | <t id="table.yes">Sí</t> | Estado / provincia.
+country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.yes">Sí</t> | Código de país.
+postcode | string | <t id="table.yes">Sí</t> | Código postal.
 
 ## shipping
 
@@ -406,19 +405,19 @@ postcode | string | <t id="table.yes">Sí</t> | Código postal
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-first_name | string | <t id="table.yes">Sí</t> | Nombre
-last_name | string | <t id="table.yes">Sí</t> | Apellido
-phone | string | No | Número de teléfono de la dirección
-alt_phone | string | No | Número de teléfono alternativo
-street | string | <t id="table.yes">Sí</t> | Dirección
-address_addition | string | No | Línea adicional
-city | string | <t id="table.yes">Sí</t> | Municipio / ciudad
-state | string | <t id="table.yes">Sí</t> | Estado / provincia
-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.yes">Sí</t> | Código de país
-postcode | string | <t id="table.yes">Sí</t> | Código postal
-name | string | <t id="table.yes">Sí</t> | Nombre del envío
-price | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Precio del envío (impuestos no incluidos)
-tax_rate | [decimal](../api-reference#decimals) | No | Tasa de impuestos en el precio del envío
-discount | [decimal](../api-reference#decimals) | No | Cantidad de descuento en el precio del envío
-discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio del envío
+first_name | string | <t id="table.yes">Sí</t> | Nombre.
+last_name | string | <t id="table.yes">Sí</t> | Apellido.
+phone | string | No | Número de teléfono de la dirección.
+alt_phone | string | No | Número de teléfono alternativo.
+street | string | <t id="table.yes">Sí</t> | Dirección.
+address_addition | string | No | Línea adicional.
+city | string | <t id="table.yes">Sí</t> | Municipio / ciudad.
+state | string | <t id="table.yes">Sí</t> | Estado / provincia.
+country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.yes">Sí</t> | Código de país.
+postcode | string | <t id="table.yes">Sí</t> | Código postal.
+name | string | <t id="table.yes">Sí</t> | Nombre del envío.
+price | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Precio del envío (impuestos no incluidos).
+tax_rate | [decimal](../api-reference#decimals) | No | Tasa de impuestos en el precio del envío.
+discount | [decimal](../api-reference#decimals) | No | Cantidad de descuento en el precio del envío.
+discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio del envío.
 method | string |  No | Método de envío; las opciones son `pickup_store` recogida en tienda, `pickup_point` punto de recogida, `postal` envio por correo.

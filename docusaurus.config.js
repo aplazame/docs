@@ -14,6 +14,7 @@ const config = {
   onBrokenLinks: 'throw', // https://docusaurus.io/docs/api/docusaurus-config#onBrokenLinks
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
+  trailingSlash: true,
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'Aplazame', // Usually your GitHub org/user name.

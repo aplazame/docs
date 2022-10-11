@@ -40,7 +40,7 @@ En caso de solicitud pendiente por validación de identidad el comercio recibir�
 En caso de solicitud aprobada el comercio recibirá una notificación cuyo `status` es `pending` y `status_reason` es `confirmation_required`.
 :::
 
-El comercio deberá responder a la notifiación de confirmación informando si finalmente [acepta](?tab-label=OK#formato-de-respuesta) o [deniega](?tab-label=KO#formato-de-respuesta) el pedido (ej: el producto ya no se encuentra en stock).
+El comercio deberá responder a la notificación de confirmación informando si finalmente [acepta](?tab-label=OK#formato-de-respuesta) o [deniega](?tab-label=KO#formato-de-respuesta) el pedido (ej: el producto ya no se encuentra en stock).
 
 En función de la respuesta del comercio, Aplazame realizará una última notificación adicional para informar del estado final del pedido. En caso que alguna de las notificaciones enviadas no obtengan respuesta o ésta no tenga el formato esperado, Aplazame realizará una serie de reintentos cuyo límite estará determinado por el tiempo de expiración máxima del pedido.
 
@@ -125,13 +125,13 @@ El estado del pedido se notifica en los campos `status` y `status_reason`. En fu
 
 - Un **pedido en estado** `ko` **significa** que el pedido ha sido rechazado por Aplazame o cancelado por el comercio. Éste es un estado final de un pedido.
 
-Status | Status reason | Cause
+Estado | Razón | Causa
 ------ | ---- | -----
 pending | confirmation_required | La solicitud de financiación ha sido aceptada por Aplazame y está a la espera de la confirmación final de la tienda.
 pending | challenge_required | Aplazame está a la espera de que el comprador complete un reto de validación de identidad tras finalizar la solicitud de financiación.
 ko | expired | La solicitud de financiación ha expirado.
 ko | expired_challenge | El comprador no ha superado el reto de validación de identidad a tiempo.
-ko | ko_generic | La solucitud de financiación no ha pasado el criterio de admisión de Aplazame.
+ko | ko_generic | La solicitud de financiación no ha pasado el criterio de admisión de Aplazame.
 ko | failed_challenge | El comprador no ha superado el reto de validación de identidad.
 ko | confirmation_rejected_by_merchant | La tienda ha rechazado el pedido.
 ko | merchant_failed_to_confirm | No se ha podido confirmar con la tienda.

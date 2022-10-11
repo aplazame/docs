@@ -230,9 +230,9 @@ class WidgetSimulator extends React.Component {
                     onChange={(e) => this.updateValueState(e.target.value, "optionAlign")}
                     className="apz-select"
                     value={this.state.values.optionAlign}>
-                    <option value="left">{translate({id: 'simulator.left'})}</option>
-                    <option value="center">{translate({id: 'simulator.center'})}</option>
-                    <option value="right">{translate({id: 'simulator.right'})}</option>
+                    <option value="left">{translate({id: 'simulator.left', message: 'Izquierda'})}</option>
+                    <option value="center">{ translate({id: 'simulator.center', message: 'Centrado'}) }</option>
+                    <option value="right">{translate({id: 'simulator.right', message: 'Derecha'})}</option>
                   </select>
                 </label>
               }
@@ -243,8 +243,8 @@ class WidgetSimulator extends React.Component {
                     onChange={(e) => this.updateValueState(e.target.value, "optionLayout")}
                     className="apz-select"
                     value={this.state.values.optionLayout}>
-                    <option value="vertical">{translate({id: 'simulator.vertical'})}</option>
-                    <option value="horizontal" defaultValue>{translate({id: 'simulator.horizontal'})}</option>
+                    <option value="vertical">{translate({id: 'simulator.vertical', message: 'Vertical'})}</option>
+                    <option value="horizontal" defaultValue>{translate({id: 'simulator.horizontal', message: 'Horizontal'})}</option>
                   </select>
                 </label>
               }
@@ -286,7 +286,7 @@ class WidgetSimulator extends React.Component {
               }
               {this.state.values.optionDisabledModal !== undefined &&
                 <label style={styles.label} className="col col--6 margin-bottom--md">
-                  <div><Translate id="simulator.disable_modal">Disabled modal</Translate></div>
+                  <div><Translate id="simulator.disable_modal">Desactivar modal</Translate></div>
                   <div>
                     <Switch
                       isOn={this.state.values.optionDisabledModal}
@@ -339,6 +339,7 @@ class WidgetSimulator extends React.Component {
                   <div>
                     <input
                       type="text"
+                      class="text-box"
                       name="optionTitleDefault"
                       value={this.state.values.optionTitleDefault}
                       onChange={(e) => this.updateValueState(e.target.value, "optionTitleDefault" )}
@@ -352,6 +353,7 @@ class WidgetSimulator extends React.Component {
                   <div>
                     <input
                       type="text"
+                      class="text-box"
                       name="optionTitleZero"
                       value={this.state.values.optionTitleZero}
                       onChange={(e) => this.updateValueState(e.target.value, "optionTitleZero" )}

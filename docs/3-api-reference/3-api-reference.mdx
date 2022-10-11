@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 # Peticiones a la API
 
 ## URL de API
-The URL of Aplazame’s API service is available at `https://api.aplazame.com`.
+La URL del servicio API de Aplazame se encuentra disponible en `https://api.aplazame.com`.
 
 ## Cabeceras HTTP {#headers}
 
@@ -64,8 +64,8 @@ dynamic result = client.Get("/orders");
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-Accept | string | <t id="table.yes">Sí</t> | Especifica la versión de la API de Aplazame y el tipo de dato esperado
-Authorization | string | <t id="table.yes">Sí</t> | Tipo y clave de acceso
+Accept | string | <t id="table.yes">Sí</t> | Especifica la versión de la API de Aplazame y el tipo de dato esperado.
+Authorization | string | <t id="table.yes">Sí</t> | Tipo y clave de acceso.
 
 ### Respuesta
 
@@ -81,7 +81,7 @@ OAuth2 es más sencillo que OAuth1 y proporciona mayor nivel de seguridad.
 
 
 ## Versionado
-The `Accept` header is used to indicate the API version, expected content type (and [sandbox mode](#sandbox-mode))
+Se utiliza la cabecera `Accept` tanto para indicar la versión de la API, el formato (y el [modo de pruebas](../test-environment/test-mode/)).
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -123,14 +123,11 @@ Si no se indica la versión de la API, se aplicará más reciente. Esto no es ac
 
 ### Tipos de formato soportados
 
-Header | Version | Expected format | Value
+Cabecera | Version | Formato esperado | Valor
 ------ | - | ----- | -----
 Accept | 1 | json | application/vnd.aplazame.**v1**+**json**
 Accept | 1 | xml | application/vnd.aplazame.**v1**+**xml**
 
-:::caution
-The latest API version is version 1 and the latest CHECKOUT version is version 2; this is the v1.2
-:::
 
 ## Decimales {#decimals}
 
@@ -220,20 +217,20 @@ Listado de códigos de error devueltos por la API.
 
 Código | Error | Significado
 ---- | ----- | -------
-400 | Bad Request | Si hay algún error en los datos enviados
-401 | Unauthorized | No se ha enviado el token (public/private key) o el que se ha enviado no es válido
+400 | Bad Request | Si hay algún error en los datos enviados.
+401 | Unauthorized | No se ha enviado el token (public/private key) o el que se ha enviado no es válido.
 403 | Forbidden | Aún siendo válido el token, la operación puede ser rechazada por permisos.
 404 | Not Found | No se ha encontrado el objeto o recurso.
-405 | Method Not Allowed | El método no está disponible para la url indicada (GET/POST/...)
-406 | Not Acceptable | La cabecera Accept no es válida [ver cabeceras](#headers)
+405 | Method Not Allowed | El método no está disponible para la url indicada (GET/POST/...).
+406 | Not Acceptable | La cabecera Accept no es válida [ver cabeceras](#headers).
 408 | Request timeout | Ha expirado el tiempo máximo de espera para la petición.
 409 | Conflict | Indica que se ha producido un conflicto con la petición, su significado depende del contexto.
-415 | Unsupported Media Type | No hay soporte para el tipo indicado por la cabecera 'Content-Type'
+415 | Unsupported Media Type | No hay soporte para el tipo indicado por la cabecera 'Content-Type'.
 429 | Too Many Requests | Se están recibiendo demasiadas peticiones.
 500 | Internal Server Error | Error en el servidor de la API, esto puede ser un fallo en la implementación, un problema puntual de la red, etc.
 503 | Service Unavailable | Fuera de servicio por mantenimiento.
 
-## Pagination
+## Paginación {#pagination}
 
 <Tabs>
   <TabItem value="pag_http" label="http">
@@ -313,9 +310,9 @@ X-Aplazame-Media-Type: aplazame.v1
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|
-[cursor](#cursor) | object | Puntero de paginación
-[paging](#paging) | object | Estado de paginación
-results | collection | Listado de tiendas
+[cursor](#cursor) | object | Puntero de paginación.
+[paging](#paging) | object | Estado de paginación.
+results | collection | Listado de tiendas.
 
 ### cursor {#cursor}
 ```json
@@ -419,20 +416,20 @@ Host: api.aplazame.com
 
 Término | Uso | Descripción
 ---- | ----- | -----------
-exact | `name-exact=AplaZame` | Coincidencia exacta
-iexact | `name-iexact=aplazame` | Coincidencia exacta *no sensible a mayúsculas/minúsculas*
+exact | `name-exact=AplaZame` | Coincidencia exacta.
+iexact | `name-iexact=aplazame` | Coincidencia exacta *no sensible a mayúsculas/minúsculas*.
 regex | `name-regex=^[A-Z].*$` | Expresión regular sensible a mayúsculas/minúsculas.
 iregex | `name-iregex=^[a-z].*$` | Expresión regular *no sensible a mayúsculas/minúsculas*.
-contains | `name-contains=plaZa` | Contiene la cadena especificada *no sensible a mayúsculas/minúsculas*
+contains | `name-contains=plaZa` | Contiene la cadena especificada *no sensible a mayúsculas/minúsculas*.
 icontains | `name-icontains=plaza` | Contiene la cadena especificada.
 startswith | `name-startswith=Apla` | Comienza por la cadena especificada.
 istartswith | `name-istartswith=apla` | Comienza por la cadena especificada *no sensible a mayúsculas/minúsculas*.
 endswith | `name-endswith=Zame` | Termina por la cadena especificada.
 iendswith | `name-iendswith=zame` | Termina por la cadena especificada *no sensible a mayúsculas/minúsculas*.
 in | `name-in=AplaZame,Aplazar` | Coincide con alguna de las opciones separadas por comas.
-search | `name-search=Ap` | Cadena de texto a buscar
+search | `name-search=Ap` | Cadena de texto a buscar.
 
-### Por fecha
+### Por fecha
 
 <Tabs>
   <TabItem value="http" label="http">
@@ -484,7 +481,7 @@ Término | Uso | Descripción
 ---- | ----- | -----------
 year | `created-year=2015` | Fechas cuyo año coincida con el indicado.
 month | `created-month=10` | Fechas cuyo mes coincida con el indicado.
-week_day | `created-week_day=monday` | Día de la semana, las opciones son: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`
+week_day | `created-week_day=monday` | Día de la semana, las opciones son: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`.
 day | `created-day=2` | Fechas cuyo día del mes coincida con el indicado.
 hour | `created-hour=14` | Fechas cuya hora coincida con la indicada.
 
@@ -492,7 +489,7 @@ hour | `created-hour=14` | Fechas cuya hora coincida con la indicada.
 ### Nulo
 Término | Uso | Descripción
 ---- | ----- | -----------
-isnull | `confirmed-isnull=yes` | Filtrar por campos nulos, `si` O `no`
+isnull | `confirmed-isnull=yes` | Filtrar por campos nulos, `si` O `no`.
 
 
 ### Rangos de valores
@@ -546,8 +543,8 @@ dynamic result = client.Get("/orders?confirmed-gte=2015-10-02T18:15:45.101838Z")
 
 Término | Uso | Descripción
 ---- | ----- | -----------
-exact | `total_amount-exact=10000` | Valor exacto
-gt | `total_amount-gt=8000` | Mayor qué
-gte | `total_amount-gte=10000` | Mayor o igual que
-lt | `total_amount-lt=12000` | Menor que
-lte | `total_amount-lte=10000` | Menor o igual que
+exact | `total_amount-exact=10000` | Valor exacto.
+gt | `total_amount-gt=8000` | Mayor qué.
+gte | `total_amount-gte=10000` | Mayor o igual que.
+lt | `total_amount-lt=12000` | Menor que.
+lte | `total_amount-lte=10000` | Menor o igual que.

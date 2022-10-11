@@ -93,7 +93,8 @@
   margin-bottom: 1rem;
 }
 
-.form-configurator input[type='text'] {
+.form-configurator input[type='text'],
+.form-configurator .text-box {
   border: 1px solid var(--ifm-table-border-color);
   padding: 0 12px;
   font-size: 1rem;

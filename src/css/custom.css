@@ -73,3 +73,17 @@ table td:last-child {
   outline-color: var(--ifm-color-primary);
   transition: outline-color var(--ifm-transition-fast);
 }
+
+
+/* Hack for images */
+img[title*="darkTheme"] {
+  display: none;
+}
+
+[data-theme='dark'] img[title*="darkTheme"] {
+  display: inline-block;
+}
+
+[data-theme='dark'] img[title*="lightTheme"] {
+  display: none;
+}

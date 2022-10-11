@@ -39,8 +39,7 @@ El widget de Aplazame te permite mostrar una simulación de las cuotas de una fi
 
     require(['aplazame'], function (aplazame) {
       aplazame.init({
-        // reemplazar con la clave pública de la tienda
-        public_key: "api_public_key",
+        public_key: "api_public_key", // reemplazar con la clave pública de la tienda
         sandbox: false
       });
     });
@@ -55,7 +54,7 @@ Para producción el valor de sandbox debe ser `false`
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-|public-key | string | <t id="table.yes">Sí</t> | [tu clave pública](https://vendors.aplazame.com)
+|public-key | string | <t id="table.yes">Sí</t> | [Tu clave pública](https://vendors.aplazame.com).
 |sandbox | boolean | <t id="table.yes">Sí</t> | Indica si las peticiones usarán el modo de pruebas (true) o producción (false).
 
 
@@ -65,15 +64,15 @@ Existe la opción de personalizar el texto legal que se muestra bajo el simulado
 
 |<t id="table.Variable">Variable</t> | <t id="table.description">Descripción</t> |
 --------- | ----
-|order_amount | Importe de la cesta
-|total_amount | Importe total adeudado
-|principal_amount | Importe a financiar
-|instalments_amount | Importe de la cuota
-|num_instalments | Número de cuotas
-|downpayment_amount | Entrada
-|tax | Comisión de apertura
-|tae | TAE
-|tin | TIN
+|order_amount | Importe de la cesta.
+|total_amount | Importe total adeudado.
+|principal_amount | Importe a financiar.
+|instalments_amount | Importe de la cuota.
+|num_instalments | Número de cuotas.
+|downpayment_amount | Entrada.
+|tax | Comisión de apertura.
+|tae | TAE.
+|tin | TIN.
 
 :::note
   Un ejemplo de texto legal con variables sería el texto que viene por defecto:

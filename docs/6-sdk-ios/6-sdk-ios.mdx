@@ -9,10 +9,10 @@ keywords: [SDK Ios, integration, OSx, Mac, Apple]
 ## Integración
 
 ```swift
-// Check https://github.com/aplazame/ios-sdk/ for more detailed documentation
-
 let config = APZConfig(accessToken: "api_public_key", environment: .sandbox)
 let paymentContext = APZPaymentContext(config: config)
+
+// Puedes entontrar información más detallada en https://github.com/aplazame/ios-sdk/
 ```
 
 
@@ -47,9 +47,9 @@ currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="table.yes
 [Aquí](#integracion) puedes consultar como integrar el SDK
 
 ```swift
-// Start activity indicator
+// Inicio de indicador de actividad
 paymentContext.requestCheckout(checkout: checkout, delegate: self, onReady: { vc in
-  // Stop activity indicator
+  // Parada de indicador de actividad
   self.navigationController?.pushViewController(vc, animated: true)
 })
 ```

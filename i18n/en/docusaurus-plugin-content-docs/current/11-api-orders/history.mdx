@@ -214,14 +214,14 @@ dynamic result = client.Post($"/orders/{orderId}/history", payload);
 |---------|---------|---------|
 :orderId | string | <t id="docs.yes">Sí</t> | Your order `id`
 id | string | <t id="docs.yes">Sí</t> | Your order `id`
-amount | [decimal](../api-reference#decimals) | <t id="docs.yes">Sí</t> | Order amount
-due | [decimal](../api-reference#decimals) | No | Total order amount due
+amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Order amount
+due | [decimal](../../api-reference#decimals) | No | Total order amount due
 status | string | <t id="docs.yes">Sí</t> | "Order status; the choices are `pending`, `cancelled`, `processing` and `complete`
 type | string | <t id="docs.yes">Sí</t> | Order type
 order_date | string | <t id="docs.yes">Sí</t> | Date of the order
 currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="docs.yes">Sí</t> | Currency code of the order
-[billing](../checkout-creation/#billing) | object | No | Billing address
-[shipping](../checkout-creation/#shipping) | object | No | Shipping info
+[billing](../../checkout-creation/#billing) | object | No | Billing address
+[shipping](../../checkout-creation/#shipping) | object | No | Shipping info
 
 #### Response
 

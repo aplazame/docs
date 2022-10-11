@@ -106,11 +106,11 @@ dynamic result = client.Get($"/orders?ordering=-total_amount,created");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-total_amount | [decimal](../api-reference#decimals) | Importe total del pedido
-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se creó el pedido
-verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se ha verificado el pedido
-confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha en que se designó cuando se confirmó el pedido
-cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se canceló el pedido
+total_amount | [decimal](../../api-reference#decimals) | Importe total del pedido.
+created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se creó el pedido.
+verified | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se ha verificado el pedido.
+confirmed | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha en que se designó cuando se confirmó el pedido.
+cancelled | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se canceló el pedido.
 
 
 ## Por cuenta
@@ -163,4 +163,4 @@ dynamic result = client.Get($"/orders?ordering=account-last_login,-account-creat
 |---------|---------|---------|
 account-last_login | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha del último inicio de sesión del cliente.
 account-date_joined | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se creó la cuenta de cliente.
-account-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se creó la cuenta de cliente en Aplazame
+account-created | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | Fecha que designa cuando se creó la cuenta de cliente en Aplazame.

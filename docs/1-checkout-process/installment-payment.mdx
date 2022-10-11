@@ -8,23 +8,21 @@ keywords: [checkout aplazame]
 Esta sección describe todo el proceso del checkout en el caso de que se quiera integrar el módulo de 'Pago a plazos'. Éste se divide en cuatro pasos: creación, inicio, confirmación y resultado. Desde aquí, se saltará a las diferentes secciones dónde se describe en detalle cada operación.
 
 ## Proceso checkout
-![checkout-flow](/img/checkout-integration-flow-es.svg)
-
+![checkout-flow](/img/es/checkout-integration-flow-es.svg "checkout-flow lightTheme")
+![checkout-flow](/img/es/checkout-integration-flow-es-dark.svg  "checkout-flow darkTheme")
 
 ### 1. Creación del checkout
 Una vez que el comprador ha seleccionado Aplazame como método de pago en tu comercio online, deberás implementar una llamada a tu servidor que permita iniciar la creación de un nuevo checkout usando la API REST de Aplazame.
 
-
-[Ver descripción técnica de cómo crear un checkout](../checkout-creation/)
+[Ver descripción técnica de cómo crear un checkout](../../checkout-creation/)
 
 :::info
 Te ofrecemos la posibilidad de integrar nuestro botón de pago con Aplazame, que habilita o deshabilita el método de pago de forma automática en función de los [límites configurados en tu cuenta](https://ayuda.aplazame.com/hc/es-es/articles/360014973600--C%C3%B3mo-configurar-el-widget-de-Aplazame-en-tu-tienda-)
 :::
 
-
-* [JavaScript SDK](../sdk-javascript/)
-* [iOS™ SDK](../sdk-ios/)
-* [Android™ SDK](../sdk-android/)
+* [JavaScript SDK](../../sdk-javascript/)
+* [iOS™ SDK](../../sdk-ios/)
+* [Android™ SDK](../../sdk-android/)
 
 ### 2. Inicio del checkout
 
@@ -35,7 +33,7 @@ Te ofrecemos la posibilidad de integrar nuestro botón de pago con Aplazame, que
   </div>
   <div className="col col--6 margin-bottom--lg text-right">
 
-  ![checkout-flow](/img/checkout-paylater-1-welcome.svg)
+  ![checkout-flow](/img/checkout-installments-welcome.svg)
   </div>
 </div>
 
@@ -43,16 +41,16 @@ Te ofrecemos la posibilidad de integrar nuestro botón de pago con Aplazame, que
 Consulta cómo iniciar el proceso de checkout para el comprador con:
 :::
 
-* [JavaScript SDK](../sdk-javascript/#inicio-del-checkout)
-* [iOS™ SDK](../sdk-ios/#inicio-del-checkout)
-* [Android™ SDK](../sdk-android/#inicio-del-checkout)
+* [JavaScript SDK](../../sdk-javascript/#inicio-del-checkout)
+* [iOS™ SDK](../../sdk-ios/#inicio-del-checkout)
+* [Android™ SDK](../../sdk-android/#inicio-del-checkout)
 
 
 ### 3. Confirmación del pedido
 
 Una vez que el comprador ha completado el proceso de pago satisfatoriamente, Aplazame confirmará el resultado con tu comercio.
 
-[Ver descripción técnica de cómo confirmar un pedido](../checkout-confirmation/)
+[Ver descripción técnica de cómo confirmar un pedido](../../checkout-confirmation/)
 
 ### 4. Resultado de la solicitud
 
@@ -62,6 +60,6 @@ Por último, una vez completado el proceso de pago Aplazame mostrará el resulta
 Si quieres, puedes configurar funciones de retorno para distintos eventos del proceso:
 :::
 
-* [JavaScript](../sdk-javascript/#mostrar-resultado)
-* [iOS™ SDK](../sdk-ios/#mostrar-resultado)
-* [Android™ SDK](../sdk-android/#mostrar-resultado)
+* [JavaScript](../../sdk-javascript/#mostrar-resultado)
+* [iOS™ SDK](../../sdk-ios/#mostrar-resultado)
+* [Android™ SDK](../../sdk-android/#mostrar-resultado)

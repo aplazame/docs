@@ -75,8 +75,8 @@ client = aplazame_sdk.Client('api_private_key')
 response = client.post_campaign_articles(':merchantId', ':campaignId', [
   {
     'id': '89793238462643383279',
-    'name': '$message{ es: "Reloj en oro blanco de 18 quilates y diamantes", en: "18 ct white gold watch with diamonds" }',
-    'description': '$message{ es: "Movimiento de cuarzo de alta precisión", en: "High-precision quartz movement" }',
+    'name': 'Reloj en oro blanco de 18 quilates y diamantes',
+    'description': 'Movimiento de cuarzo de alta precisión',
     'url': 'http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083',
     'image_url': 'http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg',
   },
@@ -100,8 +100,8 @@ $aplazameClient = new AplazameClient("https://api.aplazame.com", AplazameClient:
 $articles = [
   [
     "id" => "89793238462643383279",
-    "name" => "$message{ es: "Reloj en oro blanco de 18 quilates y diamantes", en: "18 ct white gold watch with diamonds" }",
-    "description" => "$message{ es: "Movimiento de cuarzo de alta precisión", en: "High-precision quartz movement" }",
+    "name" => "Reloj en oro blanco de 18 quilates y diamantes",
+    "description" => "Movimiento de cuarzo de alta precisión",
     "url" => "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
     "image_url" => "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
   ],
@@ -126,8 +126,8 @@ Client client = new Client("https://api.aplazame.com", Client.EnvironmentProduct
 dynamic[] articles = new dynamic[] {
   new {
     id = "89793238462643383279",
-    name = "$message{ es: "Reloj en oro blanco de 18 quilates y diamantes", en: "18 ct white gold watch with diamonds" }",
-    description = "$message{ es: "Movimiento de cuarzo de alta precisión", en: "High-precision quartz movement" }",
+    name = "Reloj en oro blanco de 18 quilates y diamantes",
+    description = "Movimiento de cuarzo de alta precisión",
     url = "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
     image_url = "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
   },
@@ -146,11 +146,11 @@ dynamic result = client.Post($"/me/campaigns/{campaignId}/articles", articles);
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-id | string | <t id="table.yes">Sí</t> | `ID` del artículo
-name | string | <t id="table.yes">Sí</t> | Nombre del artículo
-description | string | No | Descripción del artículo
-url | URL | <t id="table.yes">Sí</t> | URL absoluta del artículo
-image_url | URL | No | URL absoluta de la imagen del artículo
+id | string | <t id="table.yes">Sí</t> | `ID` del artículo.
+name | string | <t id="table.yes">Sí</t> | Nombre del artículo.
+description | string | No | Descripción del artículo.
+url | URL | <t id="table.yes">Sí</t> | URL absoluta del artículo.
+image_url | URL | No | URL absoluta de la imagen del artículo.
 
 ### Respuesta
 ```http
@@ -332,7 +332,7 @@ dynamic result = client.Get($"/me/campaigns/{campaignId}/articles");
 </Tabs>
 
 :::info
-Ver [documentación de paginación](../api-reference/#pagination)
+Ver [documentación de paginación](../../api-reference/#pagination)
 :::
 
 ### Respuesta
@@ -360,6 +360,6 @@ Content-Type: application/json
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|
-cursor | object | Puntero de paginación
-paging | object | Estado de paginación
-results | collection | Listado de campañas
+cursor | object | Puntero de paginación.
+paging | object | Estado de paginación.
+results | collection | Listado de campañas.

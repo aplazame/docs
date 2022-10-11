@@ -20,7 +20,7 @@ keywords: [installments widget]
 
 | Parameter | Type | Required | Description |
 |---------|---------|---------|---------|
-|data-amount | decimal | Yes | Quantity to be financed  **in cents**. This field can be omitted if the data-price is used.[`data-price`](../widget#precio-variable)
+|data-amount | decimal | Yes | Quantity to be financed  **in cents**. This field can be omitted if the data-price is used.[`data-price`](../../widget#precio-variable).
 |data-currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | Yes | Currency in which the item will be sold.
 |data-country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | Yes | Country where the sale will apply.
 |data-view | enum | No | The view where the widget is included corresponds to the customisation tab of the [control panel](https://vendors.aplazame.com/). The possible values are: `product` (by default) and `cart`.
@@ -87,9 +87,9 @@ keywords: [installments widget]
 |data-option-text-color | [css color](https://developer.mozilla.org/es/docs/Web/CSS/color_value) | No | Set the colour of the *text* that is *outside the button*.
 |data-option-btn-text-color | [css color](https://developer.mozilla.org/es/docs/Web/CSS/color_value) | No | Set the colour of the *text* of the button.
 |data-option-btn-bg-color | [css color](https://developer.mozilla.org/es/docs/Web/CSS/color_value) | No | Set the colour of the *background* of the button.
-|data-option-branding | boolean | No | Indicates whether or not to display the Aplazame logo on the bottom of the widget
-|data-option-downpayment-info | boolean | No | Indicates whether or not the down payment should be shown at the top of the widget
-|data-option-title-smart | boolean | No | Indicates whether or not the text should be shown at the top of the widget. This text will change depending on whether there is a campaign with no active interests. Normal text: *Pay it in instalments* Text interest free: *Get it interest free!*
+|data-option-branding | boolean | No | Indicates whether or not to display the Aplazame logo on the bottom of the widget.
+|data-option-downpayment-info | boolean | No | Indicates whether or not the down payment should be shown at the top of the widget.
+|data-option-title-smart | boolean | No | Indicates whether or not the text should be shown at the top of the widget. This text will change depending on whether there is a campaign with no active interests. Normal text: *Pay it in instalments* Text interest free: *Get it interest free!*.
 |data-option-title-default | texto | No | This option allows you to customize the text that appears above the widget when there are **no** active interest-free campaigns.
 |data-option-title-zero-interest | texto | No | This option allows you to customize the text that appears above the widget when there are active interest-free campaigns.
 |data-option-custom-styles | boolean | No | Indicates whether the styles are inherited from the `true` store or whether the Aplazame `false` styles are used.
@@ -98,7 +98,7 @@ keywords: [installments widget]
 |data-option-legal-text | texto | No | This option allows you to customize the legal text that appears after the widget.
 |data-option-url-more-info | texto | No | This option allows you to customize the landing page of the button ‘¿Quieres saber más?’
 |data-option-url-more-info-hide-mobile | boolean | No | This option allows you to hide the ‘¿Quieres saber más?’ button. Only in mobile version.
-|data-option-default-instalments | decimal | No | Allows you to configure the number of instalments that the widget will display by default
+|data-option-default-instalments | decimal | No | Allows you to configure the number of instalments that the widget will display by default.
 |data-option-out-of-limits | texto | No | Allows you to show an alternative widget if the cart total does not meet the requirements to display the widget. If we want the alternative widget to appear, the value must be 'show', the value by default is: 'hide'.
 |data-option-customer-id | texto | No | Customer document id. If the customer meets the requirements, the widget will show that the credit is pre-approved.
 
