@@ -133,21 +133,9 @@ const config = {
                 href: 'https://aplazame.com/negocios/pide-una-demo/',
               },
               {
-                label: 'Contactar',
-                href: 'https://aplazame.com/negocios/contactar/',
-              },
-              {
                 label: 'Precios',
                 href: 'https://aplazame.com/negocios/precios/',
               },
-
-
-
-
-
-
-
-
             ],
           },
           {
