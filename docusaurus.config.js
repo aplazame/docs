@@ -25,7 +25,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          // sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/aplazame/webapp-documentation/tree/master/',
@@ -59,9 +59,15 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'checkout-process/checkout-process',
+            docId: 'api/checkout-process/checkout-process',
             position: 'left',
-            label: 'Docs',
+            label: 'API',
+          },
+          {
+            type: 'doc',
+            docId: 'plugins/intro/intro',
+            position: 'left',
+            label: 'Plugins',
           },
           {
             type: 'localeDropdown',
