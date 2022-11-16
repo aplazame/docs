@@ -1,0 +1,58 @@
+---
+title: VTEX
+sidebar_position: 7
+keywords: [plugins, vtex]
+---
+# Integración en VTEX
+Aquí encontrarás todo lo necesario para integrar Aplazame en tu tienda VTEX.
+
+:::tip
+  Ten a mano la **clave API pública** relativa a tu tienda online, la cual puedes obtener desde tu [panel de control](https://vendors.aplazame.com/) en la sección **Preferencias**.
+:::
+
+## Configura el método de pago Aplazame
+- Accede al administrador de tu tienda VTEX, ve a **Pagos > Configuración**.
+- Selecciona la pestaña de **Afiliaciones**.
+- Añade el conector **Aplazame** con el nombre de afiliación que quieras y con la siguiente configuración:
+```diff
+Application Key: aplazame
+Application Token: <aquí debes copiar tu clave API pública>
+```
+:::caution
+En el apartado **Entorno** puedes elegir `Prueba` si quieres probar antes el método de pago usando nuestros [datos de prueba](../../api/test-environment/test-data/), pero no olvides cambiarlo a `Live/Producción` una vez termines con las pruebas.
+:::
+
+- Selecciona la pestaña **Planes de pago**.
+- Añade un nuevo plan y de categoría **Otro** en la que saldrá **Aplazame**. Lo configuramos como estado **Activo** y lo vinculamos a la afiliación creada anteriormente.
+:::info
+  Aplazame puede tardar hasta 10 minutos en aparecer en el checkout de tu tienda como una opción de pago. Tienes más información en la [documentación de VTEX](https://help.vtex.com/es/tutorial/configurar-pago-con-aplazame--3v2uLgnOZ1dSE9AnhpDt3s).
+:::
+
+## Widget para VTEX
+Disponemos de una [app para integrar nuestro widget en VTEX](https://github.com/aplazame/vtex-widget-app).
+
+### Instalación
+- [Instala](https://vtex.io/docs/recipes/development/installing-an-app/) la app `aplazame.aplazame-widget` en la cuenta VTEX con la que tengas tu tienda.
+- Añádela como dependencia en el `manifest.json` del tema de tu tienda.
+```diff
+"peerDependencies": {
++ "aplazame.aplazame-widget": "0.x"
+}
+```
+- En el administrador de tu tienda VTEX accede a la sección **App** y elige **Aplazame Widget**.
+- Pon tu **clave API pública** y guarda la configuración.
+
+### Añade el widget a tus productos
+Añade el bloque `aplazame-product-widget` en la plantilla de tu tienda (por ejemplo: `~/store/blocks/product.jsonc` en `flex-layout.col`):
+```diff
+"flex-layout.col#right-col": {
+  "props": { ... },
+  "children": [
+    ...
+    "flex-layout.row#buy-button",
++   "aplazame-product-widget",
+    "availability-subscriber",
+    ...
+  ]
+}
+```
