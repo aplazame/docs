@@ -1,0 +1,44 @@
+---
+title: Widget Shopify
+sidebar_position: 1
+keywords: [plugins, shopify, app, apps, widget]
+---
+# Widget for Shopify
+Here you will find everything related to the widget included in our Aplazame app for Shopify.
+
+## Add the widget
+Follow these steps to add the Aplazame widget to your Shopify store.
+:::info
+  You need an [Online Store 2.0](https://help.shopify.com/en/manual/online-store/themes/managing-themes/upgrading-themes) theme to add the widget.
+  In case you don't have it, you must include the [widget code](../../../api/widget) adapting it to your template.
+:::
+
+- Access your Shopify shop administration panel, go to **Online Store > Themes** and click the **Customize** button for your current theme.
+:::tip
+  Keep nearby the **public API key** related to your online store, which you can obtain from your [control panel](https://vendors.aplazame.com/) in the **Preferencias** section.
+:::
+
+### Product widget
+- Select the product template in the top dropdown or navigate to any product to access the template.
+- Add our app's **Widget (Producto)** block or **Widget v4 (Producto)** block, depending on the style you want, and move it to where you want to display the widget.
+
+### Cart widget
+- Select the cart template in the top dropdown or navigate to the cart to access the template.
+- Add our app's **Widget (Carrito)** block or **Widget v4 (Carrito)** block, depending on the style you want, and move it to where you want to display the widget.
+
+:::caution
+  Remember to configure each widget with your **public API key** and save the changes so that they are applied to your store.
+:::
+:::tip
+  The style of the  **Widget v4** is editable from the plugin settings, but the style of the standard **Widget** is edited from the [control panel](https://vendors.aplazame.com/) in the section **Preferencias > Ajustes del widget**.
+:::
+
+## Additional settings
+
+Field | Description
+----- | -----------
+CSS del precio | CSS selector that indicates the element that contains the final price. It is updated live if there are changes in the price.
+Texto legal | Indicates whether you should displaying the legal text after the widget.
+Cuotas por defecto | Allows you to configure the number of instalments that the widget will display by default.
+Si Aplazame no está disponible | Allows you to show an alternative widget if the product/cart total does not meet the requirements to display the widget.
+Forzar widget paga en 4 | This field causes a complete change in the rendering of the wdiget in case the merchant supports the product **Pay in 4**. In case it does not support it or the total of the checkout does not meet the requirements for the product, it will behave exactly the same as the [**Payment in installments widget**](../../../api/widget/installment-payment#simulation) or [widget **v4**](../../../api/widget/widget-v4).

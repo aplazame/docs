@@ -1,0 +1,35 @@
+---
+title: LogiCommerce
+sidebar_position: 9
+keywords: [plugins, logicommerce]
+---
+# LogiCommerce integration
+Here you will find everything you need to integrate Aplazame into your LogiCommerce store.
+
+:::tip
+  Keep close the **API keys** related to your online store, which you can obtain from your [control panel](https://vendors.aplazame.com/) in the **Preferencias** section.
+:::
+
+## Activate the Aplazame payment method
+To activate Aplazame in LogiCommerce, you will have to contact the Trilogi sales team through their [web](https://www.logicommerce.com/).
+
+## Configure the Aplazame payment method
+Access the administration panel of your LogiCommerce store.
+
+### Add the payment system
+- Go to **Settings > Payment Systems > New payment system**.
+- In step 1, choose **Aplazame**.
+- In step 2, enter the name you want to appear in the checkout as the payment method.
+- In step 3, choose the payment method.
+- Finally click on **Finish**.
+
+### Configure the Plugin
+- Go to **Settings > Plugins > Aplazame**.
+- Fill in the API URL details like `https://api.aplazame.com` and add your **API keys**.
+- Select the order statuses that will indicate if an order is canceled and the status that notifies the shipment of the order.
+
+### Test mode
+You can define the payment system and plugin as **Test** if you want to make a test purchase using our [test data](../../api/test-environment/test-data/).
+:::caution
+  Remember to change both to **Production** when you finish the tests to leave the payment method in production mode and real orders can be carried out.
+:::

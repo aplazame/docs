@@ -1,0 +1,32 @@
+---
+title: Additional settings WooCommerce
+sidebar_position: 1
+keywords: [plugins, woocommerce, widget]
+---
+# Additional settings in WooCommerce
+Here you will find everything related to the additional configuration of our Aplazame plugin for WooCommerce.
+
+## Widget
+
+Field | Description
+----- | -----------
+Product quantity CSS selector | CSS selector that indicates the element that contains the number of articles. It is updated live if there are changes in the number of articles.
+Product price CSS selector | CSS selector that indicates the element that contains the final price. It is updated live if there are changes in the price.
+Variable product price CSS selector | Same as `Product price CSS selector` but applied to variable products.
+Legal notice | Indicates whether you should displaying the legal text after the widget.
+Default instalments | Allows you to configure the number of instalments that the widget will display by default.
+Widget if Aplazame is not available | Allows you to show an alternative widget if the product/cart total does not meet the requirements to display the widget.
+Pay in 4 | This field causes a complete change in the rendering of the wdiget in case the merchant supports the product **Pay in 4**. In case it does not support it or the total of the checkout does not meet the requirements for the product, it will behave exactly the same as the [**Payment in installments widget**](../../../api/widget/installment-payment#simulation) or [widget **v4**](../../../api/widget/widget-v4).
+Widget legacy | Show the [standard widget](../../../api/widget/installment-payment#simulation) instead of the [v4 widget](../../../api/widget/widget-v4).
+:::tip
+  The style of the  **Widget v4** is editable from the plugin settings, but the style of the standard **Widget** is edited from the [control panel](https://vendors.aplazame.com/) in the section **Preferencias > Ajustes del widget**.
+:::
+
+## Payment button
+
+Field | Description
+----- | -----------
+Title | Text for the title to display next to the payment button.
+Description | Descriptive text of the payment method Aplazame.
+Button Selector | CSS selector to show/hide the Aplazame payment method.
+Button Image | URL of the image you want to display next to the payment button.
