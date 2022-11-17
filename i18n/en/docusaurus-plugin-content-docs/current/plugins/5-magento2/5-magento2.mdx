@@ -1,0 +1,33 @@
+---
+title: Magento 2.x
+sidebar_position: 5
+keywords: [plugins, magento, magento2]
+---
+# Plugin for Magento 2.x
+Here you will find everything related to the Aplazame plugin for Magento version 2 and later.
+
+:::tip
+  Keep nearby the **private API key** related to your online store, which you can obtain from your [control panel](https://vendors.aplazame.com/) in the **Preferencias** section.
+:::
+
+## Download and installation
+:::caution
+  You must have `composer` in your **Magento 2.x** installation.
+:::
+
+In the directory of your store created in Magento 2.x enter the following commands in the console:
+``` shell
+$ composer require aplazame/magento2
+  php bin/magento module:enable Aplazame_Payment
+  php bin/magento setup:upgrade
+  php bin/magento setup:di:compile
+```
+
+## Basic configuration
+In the payment method configuration settings (**Stores > Configuration > Sales > Payment Methods**) you must do the following:
+- Include your **private API key**.
+- Activate **Aplazame** as a payment method.
+- If you want to do a test, activate **Test Mode (Sandbox)** and make a test purchase using our [test data](../../api/test-environment/test-data/).
+:::warning
+  Remember to deactivate **Test Mode (Sandbox)** when you finish the tests to leave the payment method in production mode and real orders can be carried out.
+:::

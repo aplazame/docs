@@ -1,0 +1,28 @@
+---
+title: Magento 1.9.x
+sidebar_position: 4
+keywords: [plugins, magento]
+---
+# Plugin for Magento 1.9.x
+Here you will find everything related to the Aplazame plugin for 1.9.x versions of Magento.
+
+:::tip
+  Keep nearby the **private API key** related to your online store, which you can obtain from your [control panel](https://vendors.aplazame.com/) in the **Preferencias** section.
+:::
+
+## Download
+Download the plugin for 1.9.x versions of Magento from [this link](https://aplazame.com/static/sdk/magento-latest.tgz).
+
+## Installation
+- Access the administration panel of your store created in Magento 1.9.x.
+- Navigate to the **System > Magento Connect > Magento Connect Manager** section.
+- In the **Direct package file upload** section, select the downloaded file and click the **Upload** button.
+
+## Basic configuration
+In the payment method configuration settings (**System > Configuration > Sales > Payment Methods**) you must do the following:
+- Include your **private API key**.
+- Activate **Aplazame** as a payment method.
+- If you want to do a test, activate **Test Mode (Sandbox)** and make a test purchase using our [test data](../../api/test-environment/test-data/).
+:::warning
+  Remember to deactivate **Test Mode (Sandbox)** when you finish the tests to leave the payment method in production mode and real orders can be carried out.
+:::
