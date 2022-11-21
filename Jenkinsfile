@@ -103,8 +103,9 @@ pipeline {
         anyOf {
           changeRequest(target: 'master')
           expression { githubBranch == 'master' }
-          branch 'master'
-          branch 'release'
+          expression { githubBranch == 'release' }
+          // branch 'master' // not working propertly when a PR is opened from this branch
+          // branch 'release' // not working propertly when a PR is opened from this branch
         }
         // not {
         //   tag "*"
