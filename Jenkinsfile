@@ -102,6 +102,7 @@ pipeline {
       when {
         anyOf {
           changeRequest(target: 'master')
+          expression { githubBranch == 'master' }
           branch 'master'
           branch 'release'
         }
