@@ -81,4 +81,5 @@ cypress run --browser chrome
 ### Deployment
 
 https://docusaurus.io/docs/deployment 
-To Do...
+
+(Done by Jenkins)
