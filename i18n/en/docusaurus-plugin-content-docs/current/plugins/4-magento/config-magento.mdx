@@ -1,0 +1,35 @@
+---
+title: Additional settings Magento 1.9.x
+sidebar_position: 1
+keywords: [plugins, magento, widget]
+---
+# Additional settings in Magento 1.9.x
+Here you will find everything related to the additional configuration of our Aplazame plugin for 1.9.x versions of Magento.
+
+## Widget
+
+Field | Description
+----- | -----------
+Show legal notice in product/cart widget | Indicates whether you should displaying the legal text after the widget.
+Select the default number instalments for the product/cart widget | Allows you to configure the number of instalments that the widget will display by default.
+Show/hide alternative widget if Aplazame is not available | Allows you to show an alternative widget if the product/cart total does not meet the requirements to display the widget.
+Enable product/cart widget pay in 4 (if available) | This field causes a complete change in the rendering of the wdiget in case the merchant supports the product **Pay in 4**. In case it does not support it or the total of the checkout does not meet the requirements for the product, it will behave exactly the same as the [**standard widget**](../../../api/widget/installment-payment#simulation) or [widget **v4**](../../../api/widget/widget-v4).
+Show widget legacy instead new widget | Show the [standard widget](../../../api/widget/installment-payment#simulation) instead of the [v4 widget](../../../api/widget/widget-v4).
+:::tip
+  The style of the  **Widget v4** is editable from the plugin settings, but the style of the standard **Widget** is edited from the [control panel](https://vendors.aplazame.com/) in the section **Preferencias > Ajustes del widget**.
+:::
+
+## Payment method
+
+Field | Description
+----- | -----------
+Title | Text for the title to display next to the payment button.
+Instructions | Descriptive text of the payment method Aplazame.
+Aplazame Button CSS Selector | CSS selector to show/hide the Aplazame payment method.
+
+## Others
+
+Field | Description
+----- | -----------
+Automatic invoice generation | Create an invoice each time an order is paid with Aplazame.
+Use Magento native refund method | Choose whether to use Magento's native refund or always use the plugin's order refund. It is recommended to leave it active to have both methods available when making a refund.

@@ -1,0 +1,58 @@
+---
+title: VTEX
+sidebar_position: 7
+keywords: [plugins, vtex]
+---
+# VTEX integration
+Here you will find everything you need to integrate Aplazame into your VTEX store.
+
+:::tip
+  Keep nearby the **public API key** related to your online store, which you can obtain from your [control panel](https://vendors.aplazame.com/) in the **Preferencias** section.
+:::
+
+## Configure the Aplazame payment method
+- Access the administrator of your VTEX store, go to **Payments > Settings**.
+- Select the **Affiliations** tab.
+- Add the **Aplazame** connector with the affiliation name you want and with the following configuration:
+```diff
+Application Key: aplazame
+Application Token: <here you must copy your public API key>
+```
+:::caution
+  In the **Environment** section you can choose `Test` if you want to test the payment method first using our [test data](../../api/test-environment/test-data/), but don't forget change it to `Live/Production` once you are done with testing.
+:::
+
+- Select the **Payment Plans** tab.
+- Add a new plan and category **Other** in which **Aplazame** will appear. We set it to **Active** status and link it to the previously created affiliation.
+:::info
+  Aplazame can take up to 10 minutes to appear at the checkout of your store as a payment option. You have more information in the [VTEX documentation](https://help.vtex.com/en/tutorial/configurar-pago-con-aplazame--3v2uLgnOZ1dSE9AnhpDt3s).
+:::
+
+## Widget for VTEX
+We have an [app to display our widget in VTEX store](https://github.com/aplazame/vtex-widget-app).
+
+### Installation
+- [Install](https://vtex.io/docs/recipes/development/installing-an-app/) the `aplazame.aplazame-widget` app in the VTEX account which you are working on.
+- Add it as peer dependency in the `manifest.json` of your store theme.
+```diff
+"peerDependencies": {
++ "aplazame.aplazame-widget": "0.x"
+}
+```
+- In your VTEX account's admin, open the **App** section and select the **Aplazame Widget** app configuration.
+- Fill in your **public API key** and save your changes.
+
+### Adding widget to your store products
+Add the `aplazame-product-widget` block in your store product template (for example: `~/store/blocks/product.jsonc` at `flex-layout.col`):
+```diff
+"flex-layout.col#right-col": {
+  "props": { ... },
+  "children": [
+    ...
+    "flex-layout.row#buy-button",
++   "aplazame-product-widget",
+    "availability-subscriber",
+    ...
+  ]
+}
+```

@@ -1,0 +1,35 @@
+---
+title: Configuración adicional Magento 1.9.x
+sidebar_position: 1
+keywords: [plugins, magento, widget]
+---
+# Configuración adicional en Magento 1.9.x
+Aquí encontrarás todo lo referente a la configuración adicional de nuestro plugin de Aplazame para las versiones 1.9.x de Magento.
+
+## Widget
+
+Campo | Descripción
+----- | -----------
+Mostrar texto legal en el widget del producto/carrito | Indica si debe mostrarse el texto legal justo después del widget.
+Elige el número de cuotas a mostrar en el widget del producto/carrito | Permite configurar el número de cuotas seleccionadas que mostrará el widget por defecto.
+Muestra/oculta el widget alternativo si Aplazame no está disponible | Permite mostrar un widget diferente si el importe del producto (o carrito) está fuera de los límites configurados para tener Aplazame como método de pago. Con este widget, el cliente sabrá que aumentando el importe de la compra podrá financiarla (o pagarla en 4 pagos sin intereses).
+Activar widget del producto/carrito paga en 4 (si disponible) | Este campo provoca un cambio completo en la renderización del widget en caso de que el merchant soporte el producto **Pago en 4**. En caso de que no lo soporte o el total del checkout no cumpla los requisitos para el producto, se comportará exactamente igual que el [widget **estándar**](../../../api/widget/installment-payment#simulación) o que el [widget **v4**](../../../api/widget/widget-v4).
+Mostrar el widget legacy en lugar del nuevo widget | Muestra el [widget estándar](../../../api/widget/installment-payment#simulación) en lugar del [widget v4](../../../api/widget/widget-v4).
+:::tip
+  El estilo del  **Widget v4** es editable desde la configuración del plugin, pero el estilo del **Widget** estándar se edita desde el [panel de control](https://vendors.aplazame.com/) en la sección **Preferencias > Ajustes del widget**.
+:::
+
+## Método de pago
+
+Campo | Descripción
+----- | -----------
+Title | Texto para el título a mostrar junto al botón de pago.
+Instructions | Texto descriptivo del método de pago Aplazame.
+Selector CSS del botón de Aplazame | Selector CSS para mostrar/ocultar el método de pago Aplazame.
+
+## Otros
+
+Campo | Descripción
+----- | -----------
+Facturar automáticamente | Crea una factura cada vez que un pedido se paga con Aplazame.
+Usar la devolución nativa de Magento | Elige si se usa la devolución nativa de Magento o usar siempre la devolución de pedidos del plugin. Se recomienda dejarlo activo para tener ambos métodos disponibles al realizar una devolución.

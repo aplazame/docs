@@ -102,8 +102,10 @@ pipeline {
       when {
         anyOf {
           changeRequest(target: 'master')
-          branch 'master'
-          branch 'release'
+          expression { githubBranch == 'master' }
+          expression { githubBranch == 'release' }
+          // branch 'master' // not working propertly when a PR is opened from this branch
+          // branch 'release' // not working propertly when a PR is opened from this branch
         }
         // not {
         //   tag "*"
