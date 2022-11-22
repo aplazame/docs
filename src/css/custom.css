@@ -87,3 +87,12 @@ img[title*="darkTheme"] {
 [data-theme='dark'] img[title*="lightTheme"] {
   display: none;
 }
+
+.plain-table table thead {
+  background-color: var(--ifm-table-background);
+}
+
+.plain-table th:hover,
+.plain-table td:hover {
+  background-color: var(--ifm-table-stripe-background);
+}
