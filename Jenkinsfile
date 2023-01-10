@@ -20,7 +20,9 @@ aws_profile_by_env = [
 ]
 
 ephe_suffix_by_env = [
-  default: '-staging',
+  squad: '-squad',
+  dev: '-dev',
+  default: '',
 ]
 
 ephe_bucket_name_by_env = [
