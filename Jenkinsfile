@@ -73,7 +73,7 @@ def getEphemeralsDeployMessage () {
   branch_envs
     .each({env ->
       def ephe_subdomain = 'sc-' + sc_story + '-' + app + '-' + env
-      msg.push("- https://${ephe_subdomain}.demo.aplazame.org/demo/")
+      msg.push("- https://${ephe_subdomain}.demo.aplazame.org/")
     })
 
   return msg.join('\n')
