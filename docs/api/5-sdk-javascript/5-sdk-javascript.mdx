@@ -249,7 +249,7 @@ Para comproabr la disponibilidad del producto "Paga en 4", debes añadir `data-p
 ## Mostrar resultado
 
 ```js
-(window.aplazame = window.aplazame || []).push(function (aplazame)
+;(window.aplazame = window.aplazame || []).push(function (aplazame) {
   // Esta función se ejecuta cuando aplazame.js esté listo
 
   aplazame.checkout(checkout_id,
@@ -287,7 +287,7 @@ Para comproabr la disponibilidad del producto "Paga en 4", debes añadir `data-p
           break
       }
     })
-)
+})
 ```
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
