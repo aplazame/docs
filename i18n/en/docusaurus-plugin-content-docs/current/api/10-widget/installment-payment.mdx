@@ -62,6 +62,7 @@ keywords: [installments widget]
     data-currency="EUR"
     data-country="ES"
     data-type="button"
+    data-article-id="l33t"
     data-option-text-color="#333A3E"
     data-option-btn-text-color="#FFFFFF"
     data-option-btn-bg-color="#267BBD"
@@ -83,22 +84,23 @@ keywords: [installments widget]
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 |data-type | enum | No | Allows you to choose the type of widget. The options are: `text`, `button`, `select`, `big-button`. By default, the one defined in the [control panel](https://vendors.aplazame.com/) will be used.
+|data-article-id | text | No | The article identifier. It cannot have spaces. In case of having a partial campaign that includes it, the widget may indicate said campaign. You can [include multuple articles](#include-multuple-articles) if required.
 |data-option-text-color | [css color](https://developer.mozilla.org/es/docs/Web/CSS/color_value) | No | Set the colour of the *text* that is *outside the button*.
 |data-option-btn-text-color | [css color](https://developer.mozilla.org/es/docs/Web/CSS/color_value) | No | Set the colour of the *text* of the button.
 |data-option-btn-bg-color | [css color](https://developer.mozilla.org/es/docs/Web/CSS/color_value) | No | Set the colour of the *background* of the button.
 |data-option-branding | boolean | No | Indicates whether or not to display the Aplazame logo on the bottom of the widget.
 |data-option-downpayment-info | boolean | No | Indicates whether or not the down payment should be shown at the top of the widget.
 |data-option-title-smart | boolean | No | Indicates whether or not the text should be shown at the top of the widget. This text will change depending on whether there is a campaign with no active interests. Normal text: *Pay it in instalments* Text interest free: *Get it interest free!*.
-|data-option-title-default | texto | No | This option allows you to customize the text that appears above the widget when there are **no** active interest-free campaigns.
-|data-option-title-zero-interest | texto | No | This option allows you to customize the text that appears above the widget when there are active interest-free campaigns.
+|data-option-title-default | text | No | This option allows you to customize the text that appears above the widget when there are **no** active interest-free campaigns.
+|data-option-title-zero-interest | text | No | This option allows you to customize the text that appears above the widget when there are active interest-free campaigns.
 |data-option-custom-styles | boolean | No | Indicates whether the styles are inherited from the `true` store or whether the Aplazame `false` styles are used.
 |data-option-disable-modal | boolean | No | Indicates whether you should stop displaying the information for the 'text' and 'button’ modal types. The default value is `false`.
 |data-option-legal-advice | boolean | No | Indicates whether you should displaying the legal text after the widget. The default value is `false`.
-|data-option-legal-text | texto | No | This option allows you to customize the legal text that appears after the widget.
-|data-option-url-more-info | texto | No | This option allows you to customize the landing page of the button ‘¿Quieres saber más?’
+|data-option-legal-text | text | No | This option allows you to customize the legal text that appears after the widget.
+|data-option-url-more-info | text | No | This option allows you to customize the landing page of the button ‘¿Quieres saber más?’
 |data-option-url-more-info-hide-mobile | boolean | No | This option allows you to hide the ‘¿Quieres saber más?’ button. Only in mobile version.
 |data-option-default-instalments | decimal | No | Allows you to configure the number of instalments that the widget will display by default.
-|data-option-out-of-limits | texto | No | Allows you to show an alternative widget if the cart total does not meet the requirements to display the widget. If we want the alternative widget to appear, the value must be 'show', the value by default is: 'hide'.
+|data-option-out-of-limits | text | No | Allows you to show an alternative widget if the cart total does not meet the requirements to display the widget. If we want the alternative widget to appear, the value must be 'show', the value by default is: 'hide'.
 
 :::tip
 If you want to configure the widget according to your requirements you can use the advanced settings and decide which values you want to apply and with what look and feel
@@ -107,6 +109,30 @@ If you want to configure the widget according to your requirements you can use t
 - Configure the different parameters according to your requirements. Apply the colours you want, choose the alignment and decide whether you want your widget to use the smart title functionality and the Aplazame branding or not.
 
 - The example code of your widget will be updated according to the values you define. Once you have the design you are looking for, you just have to copy the code to take it to your online store, and that's it!
+
+### Include multuple articles
+
+In the case of including the widget in the cart or in the order summary, it's possible that you want to indicate if any of the articles is in the campaign period. The `data-article-id` parameter can be used for this purpose.
+
+```html
+<div data-aplazame-widget-instalments
+     ...
+     data-article-id="article_id: price*qty" >
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+|article_id | text | Yes | The article identifier. It cannot have spaces.
+|price | decimal | Yes | Amount to be financed **in cents**.
+|qty | decimal | No | The quantity of a certain item.
+
+Example of the snippet with values:
+
+```html
+<div data-aplazame-widget-instalments
+     ...
+     data-article-id="art46: 12495, art1337: 5600*2" >
+```
 
 ### Configurator
 
