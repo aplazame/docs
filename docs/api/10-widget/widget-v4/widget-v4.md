@@ -44,7 +44,8 @@ Los valores por defecto en ese caso, son los que se muestran en esta documentaci
     data-option-layout="vertical"
     data-option-default-instalments="6"
     data-option-border-product="true"
-    data-option-align="center"></div>
+    data-option-align="center"
+    data-option-customer-id="02667776Y"></div>
 ```
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
@@ -58,6 +59,7 @@ Los valores por defecto en ese caso, son los que se muestran en esta documentaci
 |data-option-default-instalments | decimal | No | Permite configurar el número de cuotas seleccionadas que mostrará el widget por defecto.
 |data-option-border-product |boolean | <t id="docs.yes">Sí</t> | Indica si debe mostrarse el borde de color cuando es de tipo `producto`. El valor por omisión es `true`.
 |data-option-align | enum | No | Indica la alineación del widget. Se puede alinear a la izquierda `left` o a la derecha `right`. El valor por omisión es `center`.
+|data-option-customer-id | dni/nie/nif | No | Indica si hay un crédito preaprobado para el cliente.
 
 :::tip
 Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el configurador y decidir qué valores quieres aplicar y con qué look and feel.
