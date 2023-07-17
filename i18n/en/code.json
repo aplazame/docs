@@ -290,5 +290,6 @@
   "simulator.custom_styles":{ "message": "Custom styles" },
   "simulator.default_title":{ "message": "Default title" },
   "simulator.campaign_title":{ "message": "Campaign title" },
-  "simulator.pay_in_4":{ "message": "Pay in 4" }
+  "simulator.pay_in_4":{ "message": "Pay in 4" },
+  "simulator.max_amount_desired":{ "message": "Enter maximum instalment" }
 }
