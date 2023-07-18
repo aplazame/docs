@@ -46,9 +46,9 @@ This version aims to simplify the integration for the installment payment widget
     data-option-layout="vertical"
     data-option-default-instalments="6"
     data-option-border-product="true"
+    data-option-align="center"
     data-option-customer-id="02667776Y"
-    data-option-max-amount-desired="false"
-    data-option-align="center"></div>
+    data-option-max-amount-desired="false"></div>
 ```
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
