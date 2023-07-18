@@ -63,6 +63,7 @@ Los valores por defecto en ese caso, son los que se muestran en esta documentaci
 |data-option-customer-id | dni/nie/nif | No | Indica si hay un crédito preaprobado para el cliente.
 |data-option-max-amount-desired | boolean | No | Modifica el widget para permitir al usuario introducir manualmente la cuota máxima que desea pagar, o la que más se aproxima. El valor por omisión es `false`.
 
+
 :::tip
 Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el configurador y decidir qué valores quieres aplicar y con qué look and feel.
 :::

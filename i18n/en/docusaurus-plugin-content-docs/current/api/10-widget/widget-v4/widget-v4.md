@@ -46,9 +46,9 @@ This version aims to simplify the integration for the installment payment widget
     data-option-layout="vertical"
     data-option-default-instalments="6"
     data-option-border-product="true"
-    data-option-align="center"
     data-option-customer-id="02667776Y"
-    data-option-max-amount-desired="false"></div>
+    data-option-max-amount-desired="false"
+    data-option-align="center"></div>
 ```
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
@@ -64,6 +64,7 @@ This version aims to simplify the integration for the installment payment widget
 |data-option-align | enum | No | Indicates widget alignment. Can be aligned at `left` or `right`. The default value is `center`.
 |data-option-customer-id | dni/nie/nif | No | Indicates if the customer has a preapproved credit.
 |data-option-max-amount-desired | boolean | No | Change the widget to allow the user to manually enter the maximum instalment they want to pay, or the closest. The default value is `false`.
+
 
 :::tip
 If you want to configure the widget according to your requirements you can use the configurator and decide which values you want to apply and with what look and feel.
