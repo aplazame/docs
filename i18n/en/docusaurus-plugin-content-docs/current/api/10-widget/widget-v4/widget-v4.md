@@ -85,5 +85,5 @@ If you want to configure the widget according to your requirements you can use t
   data-option-legal-advice="true"
   data-option-border-product="true"
   data-option-primary-color="#334BFF"
-  data-option-max-amount-desired="false">
-  data-aplazame-widget-instalments="v4"</WidgetSimulator>
+  data-option-max-amount-desired="false"
+  data-aplazame-widget-instalments="v4"></WidgetSimulator>

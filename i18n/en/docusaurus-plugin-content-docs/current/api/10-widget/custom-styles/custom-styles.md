@@ -41,5 +41,5 @@ To customize the styles of the widget via CSS you must include the `data-option-
   data-option-branding="true"
   data-option-downpayment-info="true"
   data-option-title-smart="true"  
-  data-option-legal-advice="true">
-  data-aplazame-widget-instalments</WidgetSimulator>
+  data-option-legal-advice="true"
+  data-aplazame-widget-instalments></WidgetSimulator>
