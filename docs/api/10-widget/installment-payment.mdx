@@ -62,6 +62,7 @@ sidebar_position: 1
     data-currency="EUR"
     data-country="ES"
     data-type="button"
+    data-article-id="l33t"
     data-option-text-color="#333A3E"
     data-option-btn-text-color="#FFFFFF"
     data-option-btn-bg-color="#267BBD"
@@ -76,14 +77,14 @@ sidebar_position: 1
     data-option-legal-text="${ simulator_legal_text }"
     data-option-url-more-info="https://www.aplazame.com"
     data-option-default-instalments="6"
-    data-option-out-of-limits="hide"
-    data-option-customer-id="12345678A">
+    data-option-out-of-limits="hide">
 </div>
 ```
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 |data-type | enum | No | Permite elegir el tipo de widget. Las opciones son: `text`, `button`, `select`, `big-button`. Por omisión se usará el que se haya definido en el [panel de control](https://vendors.aplazame.com/).
+|data-article-id | texto | No | El identificador del artículo. No puede tener espacios. En caso de tener una campaña parcial que incluya el mismo, el widget podrá indicar dicha campaña. Se pueden [incluir varios artículos](#incluir-varios-art%C3%ADculos) en caso de requerirlo.
 |data-option-text-color | [color css](https://developer.mozilla.org/es/docs/Web/CSS/color_value) | No | Establece el color del *texto* que queda *fuera del botón*.
 |data-option-btn-text-color | color css | No | Establece el color del *texto* del botón.
 |data-option-btn-bg-color | [color css](https://developer.mozilla.org/es/docs/Web/CSS/color_value) | No | Establece el color del *fondo* del botón.
@@ -100,7 +101,6 @@ sidebar_position: 1
 |data-option-url-more-info-hide-mobile | boolean | No | Esta opción permite ocultar el botón ‘¿Quieres saber más?’. Únicamente en versión mobile.
 |data-option-default-instalments | decimal | No | Permite configurar el número de cuotas seleccionadas que mostrará el widget por defecto.
 |data-option-out-of-limits | texto | No | Permite mostrar un widget diferente si el importe del producto (o carrito) está fuera de los límites configurados para tener Aplazame como método de pago. Con este widget, el cliente sabrá que aumentando el importe de la compra podrá financiarla (o pagarla en 4 pagos sin intereses). Si queremos que salga el widget alternativo, el valor debe ser 'show', por defecto el valor es 'hide'.
-|data-option-customer-id | texto | No | Documento de identidad del cliente. Si el cliente cumple los requisitos, el widget mostrará que el crédito está preaprobado.
 
 :::tip
 Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar la configuración avanzada y decidir qué valores quieres aplicar y con qué look and feel.
@@ -108,6 +108,31 @@ Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar la conf
 
 - Configura los distintos parámetros de acuerdo a tus necesidades. Aplica los colores que desees, elige la alineación y decide si quieres que tu widget use la funcionalidad de título inteligente y el branding de Aplazame o no.
 - El código de ejemplo de tu widget se irá actualizando en función de los valores que definas. Una vez tengas el diseño que buscabas, sólo tienes que copiar el código para llevártelo a tu tienda online y ¡listo!
+
+
+### Incluir varios artículos
+
+En el caso de incluir el widget en el carrito o en el resumen del pedido, es posible que se quiera indicar si alguno de los artículos está en periodo de campaña. El parámetro `data-article-id` se puede usar para este propósito.
+
+```html
+<div data-aplazame-widget-instalments
+     ...
+     data-article-id="article_id: price*qty" >
+```
+
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|---------|
+|article_id | texto | Sí | El identificador del artículo. No puede tener espacios.
+|price | decimal | Sí | Cantidad a financiar **en céntimos**.
+|qty | decimal | No | La cantidad de un determinado artículo.
+
+Ejemplo del snippet con valores:
+
+```html
+<div data-aplazame-widget-instalments
+     ...
+     data-article-id="art46: 12495, art1337: 5600*2" >
+```
 
 ### Configurador
 
@@ -131,6 +156,5 @@ Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar la conf
   data-option-url-more-info="https://www.aplazame.com"
   data-option-url-more-info-hide-mobile="true"
   data-option-default-instalments="6"
-  data-option-out-of-limits="hide"
-  data-option-customer-id="12345678A">
+  data-option-out-of-limits="hide">
   data-aplazame-widget-instalments</WidgetSimulator>
