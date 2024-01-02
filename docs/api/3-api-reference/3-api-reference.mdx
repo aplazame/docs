@@ -18,7 +18,7 @@ La URL del servicio API de Aplazame se encuentra disponible en `https://api.apla
 
 ```http
 GET /orders HTTP/1.1
-Accept: application/vnd.aplazame.v4+json
+Accept: application/vnd.aplazame.v1+json
 Authorization: Bearer api_private_key
 Host: api.aplazame.com
 ```
@@ -27,7 +27,7 @@ Host: api.aplazame.com
 
 ```shell
 $ curl "https://api.aplazame.com/orders" \
-    -H "Accept: application/vnd.aplazame.v4+json" \
+    -H "Accept: application/vnd.aplazame.v1+json" \
     -H "Authorization: Bearer api_private_key"
 ```
   </TabItem>
@@ -36,7 +36,7 @@ $ curl "https://api.aplazame.com/orders" \
 ```python
 import aplazame_sdk
 
-client = aplazame_sdk.Client('api_private_key', ctype='json', version='4')
+client = aplazame_sdk.Client('api_private_key', ctype='json', version='1')
 
 response = client.orders()
 ```
