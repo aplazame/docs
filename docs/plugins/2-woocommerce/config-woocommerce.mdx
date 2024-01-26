@@ -6,27 +6,45 @@ keywords: [plugins, woocommerce, widget]
 # Configuración adicional en WooCommerce
 Aquí encontrarás todo lo referente a la configuración adicional de nuestro plugin de Aplazame para WooCommerce.
 
-## Widget
-
-Campo | Descripción
------ | -----------
-Selector CSS de la cantidad del producto | Selector CSS que indique el elemento que contiene la cantidad del producto mostrado. Se actualiza en vivo si hay cambios en la cantidad.
-Selector CSS del precio del producto | Selector CSS que indique el elemento que contiene el precio final. Se actualiza en vivo si hay cambios en el precio.
-Selector CSS del precio del producto variable | Igual que `Selector CSS del precio del producto` pero aplicado a los productos variables.
-Aviso legal | Indica si debe mostrarse el texto legal justo después del widget.
-Plazos por defecto | Permite configurar el número de cuotas seleccionadas que mostrará el widget por defecto.
-Widget si Aplazame no está disponible | Permite mostrar un widget diferente si el importe del producto (o carrito) está fuera de los límites configurados para tener Aplazame como método de pago. Con este widget, el cliente sabrá que aumentando el importe de la compra podrá financiarla (o pagarla en 4 pagos sin intereses).
-Paga en 4 | Este campo provoca un cambio completo en la renderización del widget en caso de que el merchant soporte el producto **Pago en 4**. En caso de que no lo soporte o el total del checkout no cumpla los requisitos para el producto, se comportará exactamente igual que el [widget **estándar**](../../../api/widget/installment-payment#simulación) o que el [widget **v4**](../../../api/widget/widget-v4).
-Widget legacy | Muestra el [widget estándar](../../../api/widget/installment-payment#simulación) en lugar del [widget v4](../../../api/widget/widget-v4).
-:::tip
-  El estilo del  **Widget v4** es editable desde la configuración del plugin, pero el estilo del **Widget** estándar se edita desde el [panel de control](https://vendors.aplazame.com/) en la sección **Preferencias > Ajustes del widget**.
-:::
-
 ## Botón de pago
+Opciones de configuración para el botón o selector de pago con Aplazame.
 
 Campo | Descripción
 ----- | -----------
 Título | Texto para el título a mostrar junto al botón de pago.
 Descripción | Texto descriptivo del método de pago Aplazame.
-Selector del botón | Selector CSS para mostrar/ocultar el método de pago Aplazame.
 Imagen del botón | URL de la imagen que quieras mostrar junto al botón de pago.
+Selector del botón | Selector CSS para mostrar/ocultar el método de pago Aplazame.
+
+## Widget
+Opciones de configuración para el widget (tanto el [widget estándar](../../../api/widget/installment-payment#simulación) como el [widget v4](../../../api/widget/widget-v4)).
+
+Campo | Descripción
+----- | -----------
+Cuotas por defecto | Permite configurar el número de cuotas seleccionadas que mostrará el widget por defecto.
+Lugar a mostrar | Permite seleccionar con diferentes opciones en qué lugar se muestra el widget.
+Paga en 4 | Este campo provoca un cambio completo en la renderización del widget en caso de que el merchant soporte el producto **Pago en 4**. En caso de que no lo soporte o el total del checkout no cumpla los requisitos para el producto, se comportará exactamente igual que el [widget **estándar**](../../../api/widget/installment-payment#simulación) o que el [widget **v4**](../../../api/widget/widget-v4).
+Pago inicial | Indica si debe mostrarse o no el importe del pago inicial en la parte superior del widget.
+Selector CSS del número de unidades del producto | Selector CSS que indique el elemento que contiene la cantidad del producto mostrado. Se actualiza en vivo si hay cambios en la cantidad.
+Selector CSS del precio del producto | Selector CSS que indique el elemento que contiene el precio final. Se actualiza en vivo si hay cambios en el precio.
+Selector CSS del precio variable del producto | Igual que `Selector CSS del precio del producto` pero aplicado a los productos variables.
+Texto legal | Indica si debe mostrarse el texto legal justo después del widget.
+Widget legacy | Muestra el [widget estándar](../../../api/widget/installment-payment#simulación) en lugar del [widget v4](../../../api/widget/widget-v4).
+Widget si Aplazame no está disponible | Permite mostrar un widget diferente si el importe del producto (o carrito) está fuera de los límites configurados para tener Aplazame como método de pago. Con este widget, el cliente sabrá que aumentando el importe de la compra podrá financiarla (o pagarla en 4 pagos sin intereses).
+:::tip
+  Puedes editar el estilo del **Widget estándar** desde el [panel de control](https://vendors.aplazame.com/) en la sección **Preferencias > Ajustes del widget** pero ten en cuenta que, en los ajustes comunes con los del plugin, tienen prioridad los de este último.
+:::
+
+### Widget v4
+Opciones de configuración exclusivas del **Widget v4**, el cual está activo siempre y cuando la opción `Widget legacy` (descrita en el apartado anterior) esté desactivada.
+
+Campo | Descripción
+----- | -----------
+Alineación | Indica la alineación del widget. Se puede alinear a la `Izquierda`, a la `Derecha` o al `Centro`.
+Color principal | Establece el color del fondo del botón y del borde.
+Disposición | Se puede escoger la posición `Horizontal` (que cambiará automáticamente si no tiene el suficiente espacio) o `Vertical`.
+Introducir cuota máxima | Cambia el widget de forma que el cliente deba introducir manualmente una cantidad máxima que desea pagar por cuota, calculando tras esto las opciones disponibles.
+Marco | **Opción exclusiva del widget de producto.** Indica si debe mostrarse el borde de color.
+:::tip
+  El estilo del  **Widget v4** sólo es editable desde la configuración del plugin, el estilo del **Widget estándar** configurable desde el [panel de control](https://vendors.aplazame.com/) no se tiene en cuenta.
+:::
