@@ -249,11 +249,11 @@ Para comproabr la disponibilidad del producto "Paga en 4", debes añadir `data-p
 ## Mostrar resultado
 
 ```js
-(window.aplazame = window.aplazame || []).push(function (aplazame)
+;(window.aplazame = window.aplazame || []).push(function (aplazame) {
   // Esta función se ejecuta cuando aplazame.js esté listo
 
   aplazame.checkout(checkout_id,
-    onStatusChange: function (result_status) {
+    onStatusChange (result_status) {
       console.log('IMPORTANTE: EL CHECKOUT TODAVÍA SIGUE ABIERTO')
 
       switch (result_status) {
@@ -268,26 +268,26 @@ Para comproabr la disponibilidad del producto "Paga en 4", debes añadir `data-p
           break
       }
     },
-    onClose: function (result_status) {
+    onClose (result_status) {
       switch (result_status) {
-        case 'success':
+        case 'success': // equivalente a onSuccess
           console.log('el checkout ha sido completado correctamente')
           break
-        case 'pending':
+        case 'pending': // equivalente a onPending
           console.log('el checkout ha terminado pero está pendiente de ser validado')
           break
-        case 'error':
+        case 'error': // equivalente a onError
           console.log('ha ocurrido un error al cargar el checkout')
           break
-        case 'dismiss':
+        case 'dismiss': // equivalente a onDismiss
           console.log('el usuario ha cerrado el checkout sin haberlo completado')
           break
-        case 'ko':
+        case 'ko': // equivalente a onKO
           console.log('el proceso de pago ha sido rechazado por parte de Aplazame')
           break
       }
     })
-)
+})
 ```
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
