@@ -37,6 +37,7 @@ class WidgetSimulator extends React.Component {
       optionLegalAdvice: this.props['data-option-legal-advice'] ? this.props['data-option-legal-advice'] === 'true' : undefined,
       optionBorderProduct: this.props['data-option-border-product'] ? this.props['data-option-border-product'] === 'true' : undefined,
       optionCustomStyles: this.props['data-option-custom-styles'] ? this.props['data-option-custom-styles'] === 'true' : undefined, // Custom styles
+      optionMaxAmountDesired: this.props['data-option-max-amount-desired'] ? this.props['data-option-max-amount-desired'] === 'true' : undefined,
 
       // Text
       optionTitleDefault: this.props['data-option-title-default'],
@@ -68,6 +69,7 @@ class WidgetSimulator extends React.Component {
       ${this.state.values.optionTitleZero ? 'data-option-title-zero-interest="' + this.state.values.optionTitleZero + '"' : ''}
       ${this.state.values.optionLayout ? 'data-option-layout="' + this.state.values.optionLayout + '"' : ''}
       ${this.isBooleanDefined('optionCustomStyles') ? 'data-option-custom-styles="' + this.state.values.optionCustomStyles + '"' : ''}
+      ${this.isBooleanDefined('optionMaxAmountDesired') ? 'data-option-max-amount-desired="' + this.state.values.optionMaxAmountDesired + '"' : ''}
     ></div>`
 
     return text.replace(/  +/g, '').replace(/\n+/g, '\n')
@@ -331,6 +333,18 @@ class WidgetSimulator extends React.Component {
                   </div>
                 </label>
               }
+              {this.state.values.optionMaxAmountDesired !== undefined &&
+                <label style={styles.label} className="col col--6 margin-bottom--md">
+                  <div><Translate id="simulator.max_amount_desired">Introducir cuota máxima</Translate></div>
+                  <div>
+                    <Switch
+                      isOn={this.state.values.optionMaxAmountDesired}
+                      name="optionMaxAmountDesired"
+                      handleToggle={() => this.updateValueState(!this.state.values.optionMaxAmountDesired, "optionMaxAmountDesired" )}
+                    />
+                  </div>
+                </label>
+              }
               { this.state.values.optionTitleDefault !== undefined &&
                 <label style={styles.label} className="grid-12 margin-bottom--md">
                   <div>
@@ -394,6 +408,7 @@ class WidgetSimulator extends React.Component {
               data-option-legal-advice={this.state.values.optionLegalAdvice}
               data-option-border-product={this.state.values.optionBorderProduct}
               data-option-custom-styles={this.state.values.optionCustomStyles}
+              data-option-max-amount-desired={this.state.values.optionMaxAmountDesired}
               // Text
               data-option-title-default={this.state.values.optionTitleDefault}
               data-option-title-zero-interest={this.state.values.optionTitleZero}
