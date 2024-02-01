@@ -253,12 +253,12 @@ To check "Pay in 4" product, yo need add `data-product-type="pay_in_4"`, or `pro
 ## Show result
 
 ```js
-(window.aplazame = window.aplazame || []).push(function (aplazame)
+;(window.aplazame = window.aplazame || []).push(function (aplazame) {
   // This function is executed when aplazame.js is ready
 
 
   aplazame.checkout(checkout_id,
-    onStatusChange: function (result_status) {
+    onStatusChange (result_status) {
       console.log('IMPORTANT: THE CHECKOUT IS STILL OPEN')
 
       switch (result_status) {
@@ -273,26 +273,26 @@ To check "Pay in 4" product, yo need add `data-product-type="pay_in_4"`, or `pro
           break
       }
     },
-    onClose: function (result_status) {
+    onClose (result_status) {
       switch (result_status) {
-        case 'success':
+        case 'success':  // equivalent to onSuccess
           console.log('the checkout has been completed successfully')
           break
-        case 'pending':
+        case 'pending': // equivalent to onPending
           console.log('the checkout has been completed but is pending validation')
           break
-        case 'error':
+        case 'error': // equivalent to onError
           console.log('an error occurred while loading the checkout')
           break
-        case 'dismiss':
+        case 'dismiss': // equivalent to onDismiss
           console.log('the user closed the checkout without completing it')
           break
-        case 'ko':
+        case 'ko': // equivalent to onKO
           console.log('the payment process has been rejected by Aplazame')
           break
       }
     })
-)
+})
 ```
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
