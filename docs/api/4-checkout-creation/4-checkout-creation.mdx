@@ -29,7 +29,7 @@ La petición **POST** debe enviar los siguientes campos y cabeceras:
 
 ``` http
 POST https://api.aplazame.com/checkout
-Accept: application/vnd.aplazame.v1+json
+Accept: application/vnd.aplazame.v4+json
 Authorization: Bearer api_private_key
 Content-Type: application/json
 ````
@@ -47,7 +47,7 @@ Content-Type: application/json
 
 ``` http
 POST https://api.aplazame.com/checkout
-Accept: application/vnd.aplazame.sandbox.v1+json
+Accept: application/vnd.aplazame.sandbox.v4+json
 Authorization: Bearer api_private_key
 Content-Type: application/json
 ````
@@ -70,7 +70,7 @@ $apiBaseUri = 'https://api.aplazame.com';
 
 $aplazameApiClient = new Aplazame\Api\Client($apiBaseUri, $environment, $privateKey);
 
-$order_created = $aplazameApiClient->post('/checkout', $payload);
+$order_created = $aplazameApiClient->request('POST','/checkout', $payload, 4);
 
 // como crear el payload del checkout:
 // https://github.com/aplazame/php-sdk/blob/master/examples/step1_checkout_create.php#L39
@@ -107,7 +107,7 @@ aplazame.post('/checkout', {
 
 ``` shell
 $ curl --request POST "https://api.aplazame.com/checkout" \
-    --header "Accept: application/vnd.aplazame.v1+json" \
+    --header "Accept: application/vnd.aplazame.v4+json" \
     --header "Authorization: Bearer api_private_key" \
     --data '{ "merchant": {...}, "order": {...}, "customer": {...}, "billing": {...}, "shipping": {...} }'
 ```
