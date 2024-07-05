@@ -13,7 +13,7 @@ Aplazame proporciona un modo de pruebas para facilitar el proceso de integració
 
 ```http
   GET /orders HTTP/1.1
-  Accept: application/vnd.aplazame.sandbox.v1+json
+  Accept: application/vnd.aplazame.sandbox.v4+json
   Authorization: Bearer api_private_key
   Host: api.aplazame.com
 ```
@@ -23,7 +23,7 @@ Aplazame proporciona un modo de pruebas para facilitar el proceso de integració
 
 ```powershell
   $ curl "https://api.aplazame.com/orders" \
-  -H "Accept: application/vnd.aplazame.sandbox.v1+json" \
+  -H "Accept: application/vnd.aplazame.sandbox.v4+json" \
   -H "Authorization: Bearer api_private_key"
 ```
 
@@ -61,8 +61,8 @@ Aplazame proporciona un modo de pruebas para facilitar el proceso de integració
 
 Cabecera | Modo | Valor
 -------- | ---------------- | -----
-Accept | pruebas | application/vnd.aplazame.**sandbox**.v1+json
-Accept | producción | application/vnd.aplazame.v1+json
+Accept | pruebas | application/vnd.aplazame.**sandbox**.v4+json
+Accept | producción | application/vnd.aplazame.v4+json
 
 :::tip
 En la respuesta se indica el formato devuelto en la cabecera estándard `Content-Type` y la versión de la API en la cabecera `X-Aplazame-Media-Type`
@@ -71,7 +71,7 @@ En la respuesta se indica el formato devuelto en la cabecera estándard `Content
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
-X-Aplazame-Media-Type: aplazame.v1
+X-Aplazame-Media-Type: aplazame.v4
 ```
 
 
