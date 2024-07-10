@@ -1,0 +1,31 @@
+---
+title: Migrating to v4
+sidebar_position: 1
+keywords: [migrate, checkout, v4, aplazame]
+---
+
+# Migrating to checkout v4
+## Introduction
+
+This page describes how to migrate from previous versions of our checkout to the most recent version of it, with **checkout v4** being the most current to date. The section is aimed at all those integrations that have been carried out via API following the steps of [checkout creation](..) before having been updated to the new version.
+
+:::caution
+If you have an integration via plugin you will have to go to the [corresponding section](../../../plugins/intro/) and update it following the download and installation steps.
+:::
+
+## Migration
+
+The migration can be very simple or more laborious depending on the **confirmation process** being used.
+
+If you are not using the confirmation flow via [notification_url](../#merchant), it's best to completely review the [checkout process](../../checkout-process/installment-payment/#checkout-process), emphasizing the [checkout creation](..) and [confirmation process](../../checkout-confirmation), since these first versions of checkout vary basic parameters and processes of the latest versions.
+
+If you are already using the confirmation flow via [notification_url](../#merchant), the change you must make to migrate to **checkout v4** is to update the `Accept` header to the new version.
+
+Header | Version | Value
+-------- | ------- | -----
+Accept | Current (v4) | application/vnd.aplazame.**v4**+json
+Accept | Obsolete | application/vnd.aplazame.v1+json
+
+:::tip
+To perform tests on this version, there is also the **sandbox** variation available in the [test mode](../../test-environment/test-mode/) section.
+:::
