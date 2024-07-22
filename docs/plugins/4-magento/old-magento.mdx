@@ -1,0 +1,31 @@
+---
+title: Versiones anteriores Magento
+sidebar_position: 2
+keywords: [plugins, magento]
+---
+# Plugin para versiones anteriores de Magento
+Disponemos de un plugin para las **versiones 1.9.x de Magento**.
+
+:::caution
+  Al ser una versión de Magento ya no soportada oficialmente, el soporte que ofrecemos al plugin para dicha versión es limitado.
+:::
+:::tip
+  Ten a mano la **clave API privada** relativa a tu tienda online, la cual puedes obtener desde tu [panel de control](https://vendors.aplazame.com/) en la sección **Preferencias**.
+:::
+
+## Descarga
+Descarga el plugin para las versiones 1.9.x de Magento desde [este enlace](https://aplazame.com/static/sdk/magento-latest.tgz).
+
+## Instalación
+- Accede al panel de administración de tu tienda creada en Magento 1.9.x.
+- Navega hasta la sección **System > Magento Connect > Magento Connect Manager**.
+- En el apartado **Direct package file upload** selecciona el archivo descargado y pulsa en el botón **Upload**.
+
+## Configuración básica
+En los ajustes de configuración del método de pago (**System > Configuration > Sales > Payment Methods**) debes realizar lo siguiente:
+- Incluye tu **clave API privada**.
+- Activa **Aplazame** como método de pago.
+- Si quieres realizar una prueba, activa el **Modo de Pruebas (Sandbox)** y realiza una compra de prueba usando nuestros [datos de prueba](../../api/test-environment/test-data/).
+:::caution
+  Recuerda desactivar el **Modo de Pruebas (Sandbox)** cuando termines las pruebas para dejar el método de pago en modo producción y que se puedan llevar a cabo pedidos reales.
+:::
