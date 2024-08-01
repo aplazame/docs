@@ -1,25 +1,30 @@
 ---
-title: Magento 1.9.x
-sidebar_position: 4
-keywords: [plugins, magento]
+title: Magento
+sidebar_position: 5
+keywords: [plugins, magento, magento2]
 ---
-# Plugin for Magento 1.9.x
-Here you will find everything related to the Aplazame plugin for 1.9.x versions of Magento.
+# Plugin for Magento
+Here you will find everything related to the Aplazame plugin for **Magento version 2** and later. If you have an older version, in the section [Magento previous versions](./old-magento) you have our old plugin available.
 
 :::tip
   Keep nearby the **private API key** related to your online store, which you can obtain from your [control panel](https://vendors.aplazame.com/) in the **Preferencias** section.
 :::
 
-## Download
-Download the plugin for 1.9.x versions of Magento from [this link](https://aplazame.com/static/sdk/magento-latest.tgz).
+## Download and installation
+:::info
+  You must have `composer` in your **Magento 2.x** installation.
+:::
 
-## Installation
-- Access the administration panel of your store created in Magento 1.9.x.
-- Navigate to the **System > Magento Connect > Magento Connect Manager** section.
-- In the **Direct package file upload** section, select the downloaded file and click the **Upload** button.
+In the directory of your store created in Magento 2.x enter the following commands in the console:
+``` shell
+$ composer require aplazame/magento2
+  php bin/magento module:enable Aplazame_Payment
+  php bin/magento setup:upgrade
+  php bin/magento setup:di:compile
+```
 
 ## Basic configuration
-In the payment method configuration settings (**System > Configuration > Sales > Payment Methods**) you must do the following:
+In the payment method configuration settings (**Stores > Configuration > Sales > Payment Methods**) you must do the following:
 - Include your **private API key**.
 - Activate **Aplazame** as a payment method.
 - If you want to do a test, activate **Test Mode (Sandbox)** and make a test purchase using our [test data](../../api/test-environment/test-data/).
