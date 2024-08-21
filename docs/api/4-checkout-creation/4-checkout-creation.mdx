@@ -15,9 +15,10 @@ La creación del checkout se realizará mediante una petición **POST** al [serv
 Esta página describe como crear un checkout para los productos que tenemos disponibles. Esto dependerá también de la configuración que tenga tu comercio en nuestro backend. Si no se indica tipo de producto en la request (primer caso descrito), se creará el que te corresponda según esa configuración.
 :::
 
-Si estás iniciando la integración, te puede interesar consultar cómo establecer el [modo de pruebas](../test-environment/test-mode) y también los [datos de prueba](../test-environment/test-data) disponibles para la integración.
-
-Para mejorar la concesión de crédito, es recomendable que configures el envío del historial de pedidos del cliente ([ver documentación](../api-orders/history)).
+Si estás iniciando la integración, te puede interesar consultar cómo establecer el [modo de pruebas](../test-environment/test-mode) y también los [datos de prueba](../test-environment/test-data) disponibles para la integración. También disponemos de varios SDK para facilitar la creación del checkout:
+* [PHP SDK](https://github.com/aplazame/php-sdk)
+* [.NET SDK](https://github.com/aplazame/dotnet-sdk)
+* [Node.js SDK](https://github.com/aplazame/node-sdk)
 
 :::caution
 Recuerda visitar [primeros pasos](https://ayuda.aplazame.com/hc/es-es/articles/360014854679--C%C3%B3mo-me-creo-una-cuenta-como-tienda-en-Aplazame-) para obtener tu `api_private_key`.
@@ -123,28 +124,8 @@ $ curl --request POST "https://api.aplazame.com/checkout" \
 [billing](#billing) | object | No | Dirección de facturación.
 [shipping](#shipping) | object | <t id="table.yes">Sí</t> | Información de envío.
 
-### Pago a plazos
-Si no se especifica un campo `product`, el tipo de checkout por defecto será "Pago a plazos".
-
-### Pago en 15 días
-La creación de un checkout de tipo "Pago en 15 días" es igual que el "Pago a plazos" descrito anteriormente, con la diferencia de que hay añadir un campo adicional `product` con valor `{ type: "pay_later"}`, a la petición de creación de checkout:
-
-```json
-{
-  ...
-  "product": {
-    "type": "pay_later"
-  }
-}
-```
-
-| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
-|---------|---------|---------|---------|
-product | object | No| Tipo de producto. Si no se indica el producto, por defecto es "Pago a plazos". Puede ser `instalments` (valor por omisión), `pay_later` o `pay_in_4`.
-
-
-### Pago en 4
-La creación de un checkout de tipo "Pago en 4" es igual que el "Pago a plazos" descrito anteriormente, con la diferencia de que hay añadir una campo adicional `product` con valor `{ type: "pay_in_4"}`, a la petición de creación de checkout:
+### Forzar modalidad de pago
+Si no se especifica un campo `product`, el tipo de checkout por defecto será híbrido y se mostrarán todas las modalidades de pago disponibles. En caso de especificarse, se mostrará únicamente dicha modalidad sin dar opción al resto.
 
 ```json
 {
@@ -157,11 +138,12 @@ La creación de un checkout de tipo "Pago en 4" es igual que el "Pago a plazos" 
 
 | <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
 |---------|---------|---------|---------|
-product | object | No| Tipo de producto. Si no se indica el producto, por defecto es "Pago a plazos". Puede ser `instalments` (valor por omisión), `pay_later` o `pay_in_4`.
+product | object | No | Puede ser `instalments` (pago a plazos), `pay_in_4` (pago en 4) o `pay_later` (pago en 15 días).
 
 
 
 ## merchant
+Campos relacionados con las redirecciones web, [confirmación del pedido a través de la `notification_url`](../checkout-confirmation) y tiempos de expiración.
 
 ```js
 {
@@ -193,9 +175,11 @@ timeout_checkout | integer | No | Establece el tiempo máximo, en minutos, del q
 timeout_extra | integer | No | Establece el tiempo adicional, en minutos, del que dispone el usuario para completar la validación de identidad una vez finalizado el proceso de checkout. (por omisión 2880; mín. 0; máx. 2880).
 
 ## order
+Campos relacionados con el pedido, como su importe total y los artículos.
 
 :::caution
-Aplazame no permite diferentes pedidos con el mismo ID.
+* Aplazame no permite diferentes pedidos con el mismo `id`.
+* El campo `total_amount` debe ser igual a la suma total del precio de sus artículos y envío incluyendo impuestos y descuentos (ver apartado [Importe total del pedido](#importe-total-del-pedido)).
 :::
 
 ```json
@@ -208,7 +192,7 @@ Aplazame no permite diferentes pedidos con el mismo ID.
       "quantity": 2,
       "price": 402000,
       "tax_rate": 2100,
-      "discount_rate": 200,
+      "discount": 2000,
       "description": "Movimiento de cuarzo de alta precisión",
       "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
       "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg"
@@ -264,7 +248,7 @@ event_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | Permite d
   "quantity": 2,
   "price": 402000,
   "tax_rate": 2100,
-  "discount_rate": 200,
+  "discount": 2000,
   "description": "Movimiento de cuarzo de alta precisión",
   "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
   "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
@@ -288,6 +272,7 @@ category | string | No | Categoría del artículo.
 
 
 ## customer
+Campos realacionados con los datos del cliente.
 
 ```json
 {
@@ -356,6 +341,7 @@ postcode | string | <t id="table.yes">Sí</t> | Código postal.
 
 
 ## billing
+Campos relacionados con los datos de facturación del pedido.
 
 ```json
 {
@@ -385,6 +371,7 @@ country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.
 postcode | string | <t id="table.yes">Sí</t> | Código postal.
 
 ## shipping
+Campos relacionados con el envío del pedido.
 
 ```json
 {
@@ -423,3 +410,13 @@ tax_rate | [decimal](../api-reference#decimals) | No | Tasa de impuestos en el p
 discount | [decimal](../api-reference#decimals) | No | Cantidad de descuento en el precio del envío.
 discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en el precio del envío.
 method | string |  No | Método de envío; las opciones son `pickup_store` recogida en tienda, `pickup_point` punto de recogida, `postal` envio por correo.
+
+## Importe total del pedido
+Es importante que el importe total del pedido (incidado por `total_amount` en la lista `order`) sea el sumatorio de lo siguente:
+
+- **El precio de todos los artículos** (precio sin impuestos `price` + porcentaje de impuestos `tax_rate` - descuentos `discount`) de la lista [`articles`](#article).
+- **El precio del envío** (precio sin impuestos `price` + porcentaje de impuestos `tax_rate` - descuentos `discount`) de la lista [`shipping`](#shipping).
+
+:::info
+Alternativamente también se puede incluir un sólo campo `discount` en la lista [`order`](#order) (fuera de `articles`) que sume todos los descuentos.
+:::
