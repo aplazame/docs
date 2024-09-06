@@ -21,13 +21,12 @@ Esta versión pretende simplificar la integración para el widget de pago a plaz
 <div className="widget-container">
   <div data-aplazame-widget-instalments="v5"
     data-amount="3900"
-    data-type="product"
     data-option-legal-advice="false"
-    data-option-primary-color="#334bff"
-    data-option-layout="vertical"
     data-option-default-instalments="6"
-    data-option-border-product="true"
-    data-option-align="center">
+    data-option-align="center"
+    data-option-slider="true"
+    data-option-small-size="true"
+    data-option-customer-id="02667776Y">
   </div>
 </div>
 
@@ -36,14 +35,15 @@ Los valores por defecto en ese caso, son los que se muestran en esta documentaci
 :::
 
 ``` html
-<div data-aplazame-widget-instalments="v5"
+  <div data-aplazame-widget-instalments="v5"
     data-amount="3900"
     data-option-legal-advice="false"
-    data-option-primary-color="#334bff"
-    data-option-layout="vertical"
     data-option-default-instalments="6"
     data-option-align="center"
-    data-option-customer-id="02667776Y"></div>
+    data-option-slider="true"
+    data-option-small-size="true"
+    data-option-customer-id="02667776Y">
+  </div>
 ```
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
@@ -74,5 +74,4 @@ Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el conf
   data-option-legal-advice="true"
   data-option-slider="true"
   data-option-small-size="true"
-  >
-  data-aplazame-widget-instalments="v5"</WidgetSimulator>
+  data-aplazame-widget-instalments="v5"></WidgetSimulator>
