@@ -221,7 +221,7 @@ total_amount | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> 
 
 
 ### tax_rate
-Cada articulo del pedido debe tener `tax_rate`. Alternativamente puedes incluirlo globalmente en `order.tax_rate` o puedes aplicarlo a cada artículo y envío.
+Cada artículo del pedido debe tener `tax_rate`. Alternativamente puedes incluirlo globalmente en `order.tax_rate` o puedes aplicarlo a cada artículo y envío.
 
 :::caution
 El `tax_rate` en cada artículo o envío sobreescribe el valor global si existe.
@@ -412,7 +412,7 @@ discount_rate | [decimal](../api-reference#decimals) | No | Tasa de descuento en
 method | string |  No | Método de envío; las opciones son `pickup_store` recogida en tienda, `pickup_point` punto de recogida, `postal` envio por correo.
 
 ## Importe total del pedido
-Es importante que el importe total del pedido (incidado por `total_amount` en la lista `order`) sea el sumatorio de lo siguente:
+Es importante que el importe total del pedido (indicado por `total_amount` en la lista `order`) sea el sumatorio de lo siguente:
 
 - **El precio de todos los artículos** (precio sin impuestos `price` + porcentaje de impuestos `tax_rate` - descuentos `discount`) de la lista [`articles`](#article).
 - **El precio del envío** (precio sin impuestos `price` + porcentaje de impuestos `tax_rate` - descuentos `discount`) de la lista [`shipping`](#shipping).
