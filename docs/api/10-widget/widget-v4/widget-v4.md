@@ -63,7 +63,7 @@ Los valores por defecto en ese caso, son los que se muestran en esta documentaci
 
 
 :::tip
-Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el configurador y decidir qué valores quieres aplicar y con qué look and feel.
+Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el configurador y decidir qué valores quieres aplicar y con qué apariencia.
 :::
 
 - Configura los distintos parámetros de acuerdo a tus necesidades. Aplica los colores que desees, elige la alineación y decide si quieres que tu widget muestre el texto legal.

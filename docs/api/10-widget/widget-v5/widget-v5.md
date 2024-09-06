@@ -48,8 +48,8 @@ Los valores por defecto en ese caso, son los que se muestran en esta documentaci
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-|data-option-slider | boolean | Sí | Muestra o esconde el slider para desilzar con el ratón la cantidad de cuotas deseadas.
-|data-option-small-size | boolean | No | Permite mostrar el widget en el tamaño pequeño.
+|data-option-slider | boolean | Sí | Muestra o esconde el slider para deslizar con el ratón la cantidad de cuotas deseadas.
+|data-option-small-size | boolean | No | Permite mostrar el widget en tamaño pequeño.
 |data-amount | decimal | <t id="docs.yes">Sí</t> | Cantidad a financiar **en céntimos**. Este campo se puede omitir si se usa [`data-price`](#precio-variable).
 |data-option-legal-advice | boolean | No | Indica si debe mostrarse el texto legal justo después del widget. El valor por omisión es `false`.
 |data-option-default-instalments | decimal | No | Permite configurar el número de cuotas seleccionadas que mostrará el widget por defecto.
@@ -58,7 +58,7 @@ Los valores por defecto en ese caso, son los que se muestran en esta documentaci
 
 
 :::tip
-Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el configurador y decidir qué valores quieres aplicar y con qué look and feel.
+Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el configurador y decidir qué valores quieres aplicar y con qué apariencia.
 :::
 
 - Configura los distintos parámetros de acuerdo a tus necesidades. Aplica los colores que desees, elige la alineación y decide si quieres que tu widget muestre el texto legal.
