@@ -103,6 +103,8 @@ class WidgetSimulator extends React.Component {
     const calculateWidgetType = (inputProps) => {
       if (this.state.values.widgetType === 'data-aplazame-widget-instalments="v4"') {
         inputProps['data-aplazame-widget-instalments'] = 'v4'
+      } else if (this.state.values.widgetType === 'data-aplazame-widget-instalments="v5"') {
+        inputProps['data-aplazame-widget-instalments'] = 'v5'
       } else {
         inputProps[this.state.values.widgetType] = ''
       }

@@ -73,5 +73,5 @@ Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el conf
   data-option-align="center"
   data-option-legal-advice="true"
   data-option-slider="true"
-  data-option-small-size="true"
-  data-aplazame-widget-instalments="v5"></WidgetSimulator>
+  data-option-small-size="true">
+  data-aplazame-widget-instalments="v5"</WidgetSimulator>
