@@ -41,7 +41,7 @@ const config = {
   ],
   scripts: [
     {
-      src: 'https://cdn.aplazame.com/aplazame.js?public_key=12093289b594f50d3971e4719eedd5c314ceb6ba&sandbox=true',
+      src: 'https://cdn-staging.aplazame.com/aplazame.js?public_key=demo__public_key&sandbox',
       async: true,
     },
   ],
