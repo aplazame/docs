@@ -35,6 +35,7 @@ class WidgetSimulator extends React.Component {
       optionTitleSmart: this.props['data-option-title-smart'] ? this.props['data-option-title-smart'] === 'true' : undefined,
       optionDisabledModal: this.props['data-option-disable-modal'] ? this.props['data-option-disable-modal'] === 'true' : undefined,
       optionLegalAdvice: this.props['data-option-legal-advice'] ? this.props['data-option-legal-advice'] === 'true' : undefined,
+      optionSlider: this.props['data-option-slider'] ? this.props['data-option-slider'] === 'true' : undefined,
       optionBorderProduct: this.props['data-option-border-product'] ? this.props['data-option-border-product'] === 'true' : undefined,
       optionCustomStyles: this.props['data-option-custom-styles'] ? this.props['data-option-custom-styles'] === 'true' : undefined, // Custom styles
       optionMaxAmountDesired: this.props['data-option-max-amount-desired'] ? this.props['data-option-max-amount-desired'] === 'true' : undefined,
@@ -63,7 +64,7 @@ class WidgetSimulator extends React.Component {
       ${this.isBooleanDefined('optionDownpaymentInfo') ? 'data-downpayment-info="' + this.state.values.optionDownpaymentInfo + '"' : ''}
       ${this.isBooleanDefined('optionTitleSmart') ? 'data-option-title-smart="' + this.state.values.optionTitleSmart + '"' : ''}
       ${this.isBooleanDefined('optionDisabledModal') ? 'data-option-disable-modal="' + this.state.values.optionDisabledModal + '"' : ''}
-      ${this.isBooleanDefined('optionLegalAdvice') ? 'data-option-legal-advice="' + this.state.values.optionLegalAdvice + '"' : ''}
+      ${this.isBooleanDefined('optionSlider') ? 'data-option-slider="' + this.state.values.optionSlider + '"' : ''}
       ${this.isBooleanDefined('optionBorderProduct') ? 'data-option-border-product="' + this.state.values.optionBorderProduct + '"' : ''}
       ${this.state.values.optionTitleDefault ? 'data-option-title-default="' + this.state.values.optionTitleDefault + '"' : ''}
       ${this.state.values.optionTitleZero ? 'data-option-title-zero-interest="' + this.state.values.optionTitleZero + '"' : ''}
@@ -102,6 +103,8 @@ class WidgetSimulator extends React.Component {
     const calculateWidgetType = (inputProps) => {
       if (this.state.values.widgetType === 'data-aplazame-widget-instalments="v4"') {
         inputProps['data-aplazame-widget-instalments'] = 'v4'
+      } else if (this.state.values.widgetType === 'data-aplazame-widget-instalments="v5"') {
+        inputProps['data-aplazame-widget-instalments'] = 'v5'
       } else {
         inputProps[this.state.values.widgetType] = ''
       }
@@ -309,6 +312,17 @@ class WidgetSimulator extends React.Component {
                   </div>
                 </label>
               }
+            {this.state.values.optionSlider !== undefined &&
+                <label style={styles.label} className="col col--6 margin-bottom--md">
+                  <div><Translate id="simulator.slider">Slider</Translate></div>                      <div>
+                    <Switch
+                      isOn={this.state.values.optionSlider}
+                      name="optionSlider"
+                      handleToggle={() => this.updateValueState(!this.state.values.optionSlider, "optionSlider" )}
+                    />
+                  </div>
+                </label>
+              }
               {this.state.values.optionBorderProduct !== undefined &&
                 <label style={styles.label} className="col col--6 margin-bottom--md">
                   <div><Translate id="simulator.show_border">Ver borde</Translate></div>
@@ -406,6 +420,7 @@ class WidgetSimulator extends React.Component {
               data-option-title-smart={this.state.values.optionTitleSmart}
               data-option-disable-modal={this.state.values.optionDisabledModal}
               data-option-legal-advice={this.state.values.optionLegalAdvice}
+              data-option-slider={this.state.values.optionSlider}
               data-option-border-product={this.state.values.optionBorderProduct}
               data-option-custom-styles={this.state.values.optionCustomStyles}
               data-option-max-amount-desired={this.state.values.optionMaxAmountDesired}
