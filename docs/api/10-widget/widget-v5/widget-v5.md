@@ -25,7 +25,6 @@ Esta versión pretende simplificar la integración para el widget de pago a plaz
     data-option-default-instalments="6"
     data-option-align="center"
     data-option-slider="true"
-    data-option-small-size="true"
     data-option-customer-id="02667776Y">
   </div>
 </div>
@@ -41,7 +40,6 @@ Los valores por defecto en ese caso, son los que se muestran en esta documentaci
     data-option-default-instalments="6"
     data-option-align="center"
     data-option-slider="true"
-    data-option-small-size="true"
     data-option-customer-id="02667776Y">
   </div>
 ```
@@ -49,7 +47,6 @@ Los valores por defecto en ese caso, son los que se muestran en esta documentaci
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 |data-option-slider | boolean | Sí | Muestra o esconde el slider para deslizar con el ratón la cantidad de cuotas deseadas.
-|data-option-small-size | boolean | No | Permite mostrar el widget en tamaño pequeño.
 |data-amount | decimal | <t id="docs.yes">Sí</t> | Cantidad a financiar **en céntimos**. Este campo se puede omitir si se usa [`data-price`](#precio-variable).
 |data-option-legal-advice | boolean | No | Indica si debe mostrarse el texto legal justo después del widget. El valor por omisión es `false`.
 |data-option-default-instalments | decimal | No | Permite configurar el número de cuotas seleccionadas que mostrará el widget por defecto.
@@ -73,5 +70,5 @@ Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el conf
   data-option-align="center"
   data-option-legal-advice="true"
   data-option-slider="true"
-  data-option-small-size="true">
+>
   data-aplazame-widget-instalments="v5"</WidgetSimulator>
