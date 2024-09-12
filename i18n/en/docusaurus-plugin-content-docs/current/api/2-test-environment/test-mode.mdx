@@ -13,7 +13,7 @@ Aplazame provides a test mode to facilitate the integration process before movin
 
 ```http
   GET /orders HTTP/1.1
-  Accept: application/vnd.aplazame.sandbox.v1+json
+  Accept: application/vnd.aplazame.sandbox.v4+json
   Authorization: Bearer api_private_key
   Host: api.aplazame.com
 ```
@@ -23,7 +23,7 @@ Aplazame provides a test mode to facilitate the integration process before movin
 
 ```powershell
   $ curl "https://api.aplazame.com/orders" \
-  -H "Accept: application/vnd.aplazame.sandbox.v1+json" \
+  -H "Accept: application/vnd.aplazame.sandbox.v4+json" \
   -H "Authorization: Bearer api_private_key"
 ```
 
@@ -61,8 +61,8 @@ Aplazame provides a test mode to facilitate the integration process before movin
 
 HEader | Mode | Value
 -------- | ---------------- | -----
-Accept | pruebas | application/vnd.aplazame.**sandbox**.v1+json
-Accept | production | application/vnd.aplazame.v1+json
+Accept | pruebas | application/vnd.aplazame.**sandbox**.v4+json
+Accept | production | application/vnd.aplazame.v4+json
 
 :::tip
 The response indicates the format returned under the `Content-Type` standard header and the API version in the `X-Defer Me-Media-Type` header
@@ -71,7 +71,7 @@ The response indicates the format returned under the `Content-Type` standard hea
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json; charset=utf-8
-X-Aplazame-Media-Type: aplazame.v1
+X-Aplazame-Media-Type: aplazame.v4
 ```
 
 

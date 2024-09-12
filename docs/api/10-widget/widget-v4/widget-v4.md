@@ -1,10 +1,8 @@
 ---
-title: Nuevo widget v4
+title: Widget v4
 sidebar_position: 5
 keywords: [widget V4]
 ---
-
-# Nuevo widget v4
 
 ## Integración 
 Existe la posibilidad de integrar una nueva versión del widget, para ello, hay que asignar el valor "v4" al atributo HTML: `data-aplazame-widget-instalments="v4"`
@@ -65,7 +63,7 @@ Los valores por defecto en ese caso, son los que se muestran en esta documentaci
 
 
 :::tip
-Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el configurador y decidir qué valores quieres aplicar y con qué look and feel.
+Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el configurador y decidir qué valores quieres aplicar y con qué apariencia.
 :::
 
 - Configura los distintos parámetros de acuerdo a tus necesidades. Aplica los colores que desees, elige la alineación y decide si quieres que tu widget muestre el texto legal.

@@ -7,7 +7,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Checkout creation
-
 ## Request
 
 The creation of the checkout will be done by means of a **POST** request to the [Aplazame server](../api-reference/#api-url).
@@ -16,16 +15,16 @@ The creation of the checkout will be done by means of a **POST** request to the 
 This page describes how to create a checkout for the products we have available. This will also depend on the configuration that your trade has in our backend. If the type of product is not indicated in the request (first case described), the one that corresponds to you will be created according to that configuration.
 :::
 
-If you are starting the integration you may be interested in how to set the [test mode](../test-environment/test-mode) as well as [test data](../test-environment/test-data) available for the integration.
-
-To improve the provision of credit, it is recommended that you configure the sending of the customer's order history ([see documentation](../api-orders/history)).
+If you are starting the integration you may be interested in how to set the [test mode](../test-environment/test-mode) as well as [test data](../test-environment/test-data) available for the integration. We also have several SDKs to facilitate the checkout checkout:
+* [PHP SDK](https://github.com/aplazame/php-sdk)
+* [.NET SDK](https://github.com/aplazame/dotnet-sdk)
+* [Node.js SDK](https://github.com/aplazame/node-sdk)
 
 :::caution
 Before starting integration, we recommend you visit our [first steps](https://ayuda.aplazame.com/hc/es-es/articles/360014854679--C%C3%B3mo-me-creo-una-cuenta-como-tienda-en-Aplazame-) section to complete the registration process and obtain your `api_private_key`.
 :::
 
 **POST** request should have next fields and headers:
-
 <Tabs>
   <TabItem value="prod" label="production">
 
@@ -124,28 +123,8 @@ $ curl --request POST "https://api.aplazame.com/checkout" \
 [billing](#billing) | object | No | Billing address.
 [shipping](#shipping) | object | <t id="table.yes">Sí</t> | Shipping info.
 
-### Installment payment
-If a `product` field is not specified, the default checkout type will be "Installments".
-
-### Pay in 15 days
-The creation of a "Payment in 15 days" checkout is same as the "Installments" described above, with the difference that an additional field `product` with value `{ type: "pay_later"}` must be added, to the checkout creation request:
-
-```json
-{
-  ...
-  "product": {
-    "type": "pay_later"
-  }
-}
-```
-
-| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
-|---------|---------|---------|---------|
-product | object | No| Product type. If this parameter is not indicated, the type is `installments` by default. Valid values are: `instalments`, `pay_later`, `pay_in_4`.
-
-
-### Pay in 4
-The creation of a "Pay in 4" checkout is same as the "Installments" described above, with the difference that an additional field `product` with value `{ type: "pay_in_4"}` must be added, to the checkout creation request:
+### Force payment method
+If a `product` field is not specified, the default checkout type will be hybrid and all available payment methods will be displayed. If specified, only this modality will be shown without giving the rest options.
 
 ```json
 {
@@ -156,13 +135,14 @@ The creation of a "Pay in 4" checkout is same as the "Installments" described ab
 }
 ```
 
-| <t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>
-|---------|---------|---------|---------|
-product | object | No| Product type. If this parameter is not indicated, the type is `installments` by default. Valid values are: `instalments`, `pay_later`, `pay_in_4`.
+| <t id="table.parameter">Parameter</t> | <t id="table.type">Type</t> | <t id="table.required">Required</t> | <t id="table.description">Description</t>
+|---------|------|---------|---------|
+product | object | No | It can be `instalments` (instalments payment), `pay_in_4` (pay in 4) or `pay_later` (payment in 15 days).
 
 
 
 ## merchant
+Fields related to web redirects, [checkout confirmation via `notification_url`](../checkout-confirmation) and expiration times.
 
 ```js
 {
@@ -194,8 +174,11 @@ timeout_checkout | integer | No | It establishes the maximum time, in minutes, t
 timeout_extra | integer | No | It establishes the additional time, in minutes, that the user has to complete the identity validation task once the checkout process is finished (by default 2880; min. 0; max. 2880).
 
 ## order
+Fields related to the order, such as its total amount and items.
+
 :::caution
-Aplazame no permite diferentes pedidos con el mismo ID.
+* Aplazame does not allow different orders with the same `id`.
+* The `total_amount` field must be equal to the total sum of the price of your items and shipping including taxes and discounts (see section [Total order amount](#total-order-amount)).
 :::
 
 ```json
@@ -208,7 +191,7 @@ Aplazame no permite diferentes pedidos con el mismo ID.
       "quantity": 2,
       "price": 402000,
       "tax_rate": 2100,
-      "discount_rate": 200,
+      "discount": 2000,
       "description": "High-precision quartz movement",
       "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
       "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg"
@@ -230,8 +213,8 @@ discount_rate | [decimal](../api-reference#decimals) | No | Discount rate on the
 cart_discount | [decimal](../api-reference#decimals) | No | Discount amount of the cart.
 cart_discount_rate | [decimal](../api-reference#decimals) | No | Discount rate of the cart.
 currency | [ISO 4217](https://es.wikipedia.org/wiki/ISO_4217) | <t id="table.yes">Sí</t> | Currency code of the order.
-total_amount | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Order tax rate.
-[tax_rate](#tax_rate) | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Total order amount.
+total_amount | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Total order amount.
+[tax_rate](#tax_rate) | [decimal](../api-reference#decimals) | <t id="table.yes">Sí</t> | Order tax rate.
 [options](#options) | object | No | It allows defining specific options for this order, for example, the date of the first payment.
 [articles](#article) | collection | <t id="table.yes">Sí</t> | Articles in cart.
 
@@ -264,7 +247,7 @@ event_date | [ISO 8601](https://es.wikipedia.org/wiki/ISO_8601) | No | It allows
   "quantity": 2,
   "price": 402000,
   "tax_rate": 2100,
-  "discount_rate": 200,
+  "discount": 2000,
   "description": "High-precision quartz movement",
   "url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083",
   "image_url": "http://www.chanel.com/fragrance-beauty/Fragrance-N05-88145/sku/138083/product_01.jpg",
@@ -288,6 +271,7 @@ category | string | No | Category of the article.
 
 
 ## customer
+Fields related to customer data.
 
 ```json
 {
@@ -357,6 +341,7 @@ postcode | string | <t id="table.yes">Sí</t> | Post code.
 
 
 ## billing
+Fields related to the order billing data.
 
 ```json
 {
@@ -386,6 +371,7 @@ country | [ISO 3166-1](https://es.wikipedia.org/wiki/ISO_3166-1) | <t id="table.
 postcode | string | <t id="table.yes">Sí</t> | Código postal.
 
 ## shipping
+Fields related to the shipment of the order.
 
 ```json
 {
@@ -424,3 +410,13 @@ tax_rate | [decimal](../api-reference#decimals) | No | Shipping tax rate.
 discount | [decimal](../api-reference#decimals) | No | Discount amount of the shipping.
 discount_rate | [decimal](../api-reference#decimals) | No | Discount rate of the shipping.
 method | string |  No | Shipping method; choices are `pickup_store`, `pickup_point`, `postal`.
+
+## Total order amount
+It's important that the total amount of the order (indicated by `total_amount` in the `order` list) is the sum of the following:
+
+- **The price of all items** (price without tax `price` + tax percentage `tax_rate` - discounts `discount`) from the list [`articles`](#article).
+- **The shipping price** (price without tax `price` + tax percentage `tax_rate` - discounts `discount`) from the list [`shipping`](#shipping).
+
+:::info
+Alternatively you can also include a single `discount` field in the list [`order`](#order) (outside of `articles`) that sums up all the discounts.
+:::

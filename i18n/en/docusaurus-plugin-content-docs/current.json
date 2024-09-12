@@ -8,7 +8,7 @@
     "description": "The label for category Integración del widget in sidebar defaultSidebar"
   },
   "sidebar.defaultSidebar.category.Entorno de pruebas": {
-    "message": "Test enviroment",
+    "message": "Test environment",
     "description": "The label for category Entorno de pruebas in sidebar defaultSidebar"
   }
 }
