@@ -15,7 +15,7 @@ There is the possibility of integrating a new version of the widget, for this, y
 </div>
 ```
 
-This version aims to simplify the integration for the installment payment widget. It has one design with two posible sizes.
+This version aims to simplify the integration for the installment payment widget.
 
 <div className="widget-container">
   <div data-aplazame-widget-instalments="v5"
