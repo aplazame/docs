@@ -11,7 +11,9 @@ class WidgetSimulator extends React.Component {
 
   state = {
     values: {
-      widgetType: this.props.children,
+      isPayLater: this.props['data-aplazame-widget-paylater'] === '',
+      version: this.props['data-aplazame-widget-instalments'] || '',
+      // widgetType: this.props.children,
       amount: this.props['data-amount'],
       country: this.props['data-country'],
       type: this.props['data-type'],
@@ -51,7 +53,8 @@ class WidgetSimulator extends React.Component {
   }
 
   rawHTML = () => {
-    const text = `<div ${this.state.values.widgetType}
+    console.log('rawHTML --> ', this.props)
+    const text = `<div ${this.state.values.isPayLater ? 'data-aplazame-widget-paylater' : 'data-aplazame-widget-instalments="' + this.state.values.version + '"'}
       ${this.state.values.country ? 'data-country="' + this.state.values.country + '"' : ''}
       ${ 'data-amount="' + this.state.values.amount + '"' }
       ${this.state.values.type ? 'data-type="' + this.state.values.type + '"' : ''}
@@ -100,22 +103,28 @@ class WidgetSimulator extends React.Component {
       }
     })
 
-    const calculateWidgetType = (inputProps) => {
-      if (this.state.values.widgetType === 'data-aplazame-widget-instalments="v4"') {
-        inputProps['data-aplazame-widget-instalments'] = 'v4'
-      } else if (this.state.values.widgetType === 'data-aplazame-widget-instalments="v5"') {
-        inputProps['data-aplazame-widget-instalments'] = 'v5'
-      } else {
-        inputProps[this.state.values.widgetType] = ''
-      }
-      return inputProps
-    }
+    // const calculateWidgetType = (inputProps) => {
+    //   if (this.state.values.widgetType === 'data-aplazame-widget-instalments="v4"') {
+    //     inputProps['data-aplazame-widget-instalments'] = 'v4'
+    //   } else if (this.state.values.widgetType === 'data-aplazame-widget-instalments="v5"') {
+    //     inputProps['data-aplazame-widget-instalments'] = 'v5'
+    //   } else {
+    //     inputProps[this.state.values.widgetType] = ''
+    //   }
+    //   return inputProps
+    // }
 
     let inputProps = {
+      ...this.state.values.isPayLater && {
+        'data-aplazame-widget-paylater': ''
+      },
+      ...!this.state.values.isPayLater && {
+        'data-aplazame-widget-instalments': this.state.values.version,
+      },
       'data-pay-in-4' : this.state.values.optionPayIn !== undefined
     }
 
-    inputProps = calculateWidgetType(inputProps)
+    // inputProps = calculateWidgetType(inputProps)
 
     return (
       <div>
@@ -433,6 +442,8 @@ class WidgetSimulator extends React.Component {
             ></div>
           </div>
         </section>
+
+        <br></br>
 
         <CodeBlock language="html">{this.rawHTML()}</CodeBlock>
       </div>
