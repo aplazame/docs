@@ -16,7 +16,7 @@ Existe la posibilidad de integrar una nueva versión del widget, para ello, hay 
 </div>
 ```
 
-Esta versión pretende simplificar la integración para el widget de pago a plazos. Tiene un único diseño con 2 tamaños.
+Esta versión pretende simplificar la integración para el widget de pago a plazos.
 
 <div className="widget-container">
   <div data-aplazame-widget-instalments="v5"
