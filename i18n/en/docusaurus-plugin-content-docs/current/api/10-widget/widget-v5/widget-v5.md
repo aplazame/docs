@@ -73,5 +73,5 @@ If you want to configure the widget according to your requirements you can use t
   data-currency="EUR"
   data-option-align="center"
   data-option-legal-advice="true"
-  data-option-slider="true"
-  data-aplazame-widget-instalments="v5"></WidgetSimulator>
+  data-option-slider="true">
+  data-aplazame-widget-instalments="v5"</WidgetSimulator>
