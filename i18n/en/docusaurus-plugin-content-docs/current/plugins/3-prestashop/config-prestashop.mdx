@@ -17,33 +17,34 @@ Button Selector | CSS selector to show/hide the Aplazame payment method.
 Button Image | URL of the image you want to display next to the payment button.
 Create order at checkout | Every time a customer starts a financing process, an order is created in the ecommerce. It is recommended to have this option active to avoid checkout expiration errors.
 
-## Widget
-Settings for the widget (both the [standard widget](../../../api/widget/installment-payment#simulation) and the [v4 widget](../../../api/widget/widget-v4)).
+### Global settings
+Global settings for the widget.
 
 Field | Description
 ----- | -----------
-Turn on widget legacy | Show the [standard widget](../../../api/widget/installment-payment#simulation) instead of the [v4 widget](../../../api/widget/widget-v4).
 Variable price CSS | CSS selector that indicates the element that contains the final price. It is updated live if there are changes in the price.
 Default instalments | Allows you to configure the number of instalments that the widget will display by default.
 Hook Product Widget | Allows you to select between different hooks where the widget will be displayed in the product template.
-Pay in 4 | This field causes a complete change in the rendering of the wdiget in case the merchant supports the product **Pay in 4**. In case it does not support it or the total of the checkout does not meet the requirements for the product, it will behave exactly the same as the [standard widget](../../../api/widget/installment-payment#simulation) or [widget v4](../../../api/widget/widget-v4).
+Pay in 4 | This field causes a complete change in the rendering of the wdiget in case the merchant supports the product **Pay in 4**. In case it does not support it or the total of the checkout does not meet the requirements for the product, it will behave exactly the same as the chosen widget version.
 Downpayment info | Indicates whether or not the down payment should be shown at the top of the widget.
 Legal notice | Indicates whether you should displaying the legal text after the widget.
+Widget version | Allows to choose between [widget v3](../../../api/widget/installment-payment#simulación), [widget v4](../../../api/widget/widget-v4) or [widget v5](../../../api/widget/widget-v5).
 Widget if Aplazame is not available | Allows you to show an alternative widget if the product/cart total does not meet the requirements to display the widget.
 :::tip
-  You can edit the style of the **standard widget** from the [control panel](https://vendors.aplazame.com/) in the section **Preferencias > Ajustes del widget** but keep in mind that, in the common settings with those of the plugin, those of the latter take priority.
+  You can edit the style of the [**widget v3**](../../../api/widget/installment-payment#simulación) from the [control panel](https://vendors.aplazame.com/) in the section **Preferencias > Ajustes del widget** but keep in mind that, in the common settings with those of the plugin, those of the latter take priority.
 :::
 
-### Widget v4
-Exclusive settings for the **Widget v4**, which is active as long as the `Widget legacy` option (described in the previous section) is disabled.
+### Widget v4 & v5 settings
+Exclusive settings for the [widget v4](../../../api/widget/widget-v4) and the [widget v5](../../../api/widget/widget-v5).
 
-Field | Description
------ | -----------
-Alignment | Indicates widget alignment. Can be aligned at `Left`, `Right` or `Center`.
-Primary color | Set the background colour of the button and the border.
-Layout | You can choose `Horizontal` (which will change automatically if you don't have enough space) or `Vertical`.
-Enter maximum instalment | Change the widget to allow the user to manually enter the maximum instalment they want to pay, or the closest.
-Border | **Only product widget.** Indicates whether you should displaying the color border.
+Field | Version | Description
+----- | ------- | -----------
+Alignment | v4 & v5 | Indicates widget alignment. Can be aligned at `Left`, `Right` or `Center`.
+Slider | v5 | Shows of hides the slider that lets the customer select the amount of instalments.
+Primary color | v4 | Set the background colour of the button and the border.
+Layout | v4 | You can choose `Horizontal` (which will change automatically if you don't have enough space) or `Vertical`.
+Enter maximum instalment | v4 | Change the widget to allow the user to manually enter the maximum instalment they want to pay, or the closest.
+Border | v4 | **Only product widget.** Indicates whether you should displaying the color border.
 :::tip
-  The style of the **Widget v4** is only editable from the plugin setting, the style of the **standard widget** configurable from the [control panel](https://vendors.aplazame.com/) does not apply.
+  The style of the [**widget v4**](../../../api/widget/widget-v4) and the [**widget v5**](../../../api/widget/widget-v5) is only editable from the plugin settings, the style of the [**widget v3**](../../../api/widget/installment-payment#simulación) configurable from the [control panel](https://vendors.aplazame.com/) does not apply.
 :::
