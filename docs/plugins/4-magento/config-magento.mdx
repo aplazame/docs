@@ -17,31 +17,33 @@ Facturar automáticamente | Crea una factura cada vez que un pedido se paga con 
 Usar 'order' en Aplazame | Cada vez que se confirme un pedido, se usará el identificador de éste en lugar del identificador de carrito (`quote`) usando el prefijo `order_` para evitar problemas de base de datos con identificadores numéricos duplicados.
 
 ## Widget
-Opciones de configuración para el widget (tanto el [widget estándar](../../../api/widget/installment-payment#simulación) como el [widget v4](../../../api/widget/widget-v4)).
+### Opciones generales
+Opciones de configuración generales para el widget.
 
 Campo | Descripción
 ----- | -----------
 Cuotas por defecto | Permite configurar el número de cuotas seleccionadas que mostrará el widget por defecto.
-Forzar widget paga en 4 | Este campo provoca un cambio completo en la renderización del widget en caso de que el merchant soporte el producto **Pago en 4**. En caso de que no lo soporte o el total del checkout no cumpla los requisitos para el producto, se comportará exactamente igual que el [widget estándar](../../../api/widget/installment-payment#simulación) o que el [widget v4](../../../api/widget/widget-v4).
+Forzar widget paga en 4 | Este campo provoca un cambio completo en la renderización del widget en caso de que el merchant soporte el producto **Pago en 4**. En caso de que no lo soporte o el total del checkout no cumpla los requisitos para el producto, se comportará exactamente igual que la versión del widget elegido.
 Mostrar pago inicial | Indica si debe mostrarse o no el importe del pago inicial en la parte superior del widget.
 Mostrar texto legal | Indica si debe mostrarse el texto legal justo después del widget.
 Selector CSS del precio | Selector CSS que indique el elemento que contiene el precio final. Se actualiza en vivo si hay cambios en el precio.
-Widget legacy | Muestra el [widget estándar](../../../api/widget/installment-payment#simulación) en lugar del [widget v4](../../../api/widget/widget-v4).
+Versión del widget | Permite elegir entre el [widget v3](../../../api/widget/installment-payment#simulación), el [widget v4](../../../api/widget/widget-v4) o el [widget v5](../../../api/widget/widget-v5).
 Widget si Aplazame no está disponible | Permite mostrar un widget diferente si el importe del producto (o carrito) está fuera de los límites configurados para tener Aplazame como método de pago. Con este widget, el cliente sabrá que aumentando el importe de la compra podrá financiarla (o pagarla en 4 pagos sin intereses).
 :::tip
-  Puedes editar el estilo del **Widget estándar** desde el [panel de control](https://vendors.aplazame.com/) en la sección **Preferencias > Ajustes del widget** pero ten en cuenta que, en los ajustes comunes con los del plugin, tienen prioridad los de este último.
+  Puedes editar el estilo del [**widget v3**](../../../api/widget/installment-payment#simulación) desde el [panel de control](https://vendors.aplazame.com/) en la sección **Preferencias > Ajustes del widget** pero ten en cuenta que, en los ajustes comunes con los del plugin, tienen prioridad los de este último.
 :::
 
-### Widget v4
-Opciones de configuración exclusivas del **Widget v4**, el cual está activo siempre y cuando la opción `Widget legacy` (descrita en el apartado anterior) esté desactivada.
+### Opciones del widget v4 y v5
+Opciones de configuración exclusivas del [widget v4](../../../api/widget/widget-v4) y del [widget v5](../../../api/widget/widget-v5).
 
-Campo | Descripción
------ | -----------
-Alineación | Indica la alineación del widget. Se puede alinear a la `Izquierda`, a la `Derecha` o al `Centro`.
-Color principal | Establece el color del fondo del botón y del borde.
-Disposición | Se puede escoger la posición `Horizontal` (que cambiará automáticamente si no tiene el suficiente espacio) o `Vertical`.
-Introducir cuota máxima | Cambia el widget de forma que el cliente deba introducir manualmente una cantidad máxima que desea pagar por cuota, calculando tras esto las opciones disponibles.
-Mostrar marco | **Opción exclusiva del widget de producto.** Indica si debe mostrarse el borde de color.
+Campo | Versión | Descripción
+----- | ------- | -----------
+Alineación | v4 y v5 | Indica la alineación del widget. Se puede alinear a la `Izquierda`, a la `Derecha` o al `Centro`.
+Color principal | v4 | Establece el color del fondo del botón y del borde.
+Disposición | v4 | Se puede escoger la posición `Horizontal` (que cambiará automáticamente si no tiene el suficiente espacio) o `Vertical`.
+Introducir cuota máxima | v4 | Cambia el widget de forma que el cliente deba introducir manualmente una cantidad máxima que desea pagar por cuota, calculando tras esto las opciones disponibles.
+Mostrar barra deslizante | v5 | Muestra o esconde el slider para deslizar con el ratón la cantidad de cuotas deseadas.
+Mostrar marco | v4 | **Opción exclusiva del widget de producto.** Indica si debe mostrarse el borde de color.
 :::tip
-  El estilo del **Widget v4** sólo es editable desde la configuración del plugin, el estilo del **Widget estándar** configurable desde el [panel de control](https://vendors.aplazame.com/) no se tiene en cuenta.
+  El estilo del [**widget v4**](../../../api/widget/widget-v4) y del [**widget v5**](../../../api/widget/widget-v5) sólo es editable desde la configuración del plugin, el estilo del [**widget v3**](../../../api/widget/installment-payment#simulación) configurable desde el [panel de control](https://vendors.aplazame.com/) no se tiene en cuenta.
 :::
