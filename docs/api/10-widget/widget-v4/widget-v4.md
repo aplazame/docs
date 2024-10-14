@@ -72,6 +72,7 @@ Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el conf
 ### Configurador
 
 <WidgetSimulator
+  data-aplazame-widget-instalments="v4"
   data-amount="14900"
   data-country="ES"
   data-currency="EUR"
@@ -81,5 +82,5 @@ Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el conf
   data-option-legal-advice="true"
   data-option-border-product="true"
   data-option-primary-color="#334BFF"
-  data-option-max-amount-desired="false">
-  data-aplazame-widget-instalments="v4"</WidgetSimulator>
+  data-option-max-amount-desired="false"
+/>
