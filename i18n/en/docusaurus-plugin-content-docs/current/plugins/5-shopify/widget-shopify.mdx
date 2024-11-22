@@ -20,20 +20,22 @@ First of all, log in to your Shopify shop administration panel, go to **Online S
 
 ### Product widget
 - Select the product template in the top dropdown or navigate to any product to access the template.
-- Add our app's **Widget (Producto)** block or **Widget v4 (Producto)** block, depending on the style you want, and move it to where you want to display the widget.
+- Add our app's **Widget v3/v4/v5 (Producto)** block depending on the version you want and move it to where you want to display the widget.
 
 ### Cart widget
 - Select the cart template in the top dropdown or navigate to the cart to access the template.
-- Add our app's **Widget (Carrito)** block or **Widget v4 (Carrito)** block, depending on the style you want, and move it to where you want to display the widget.
+- Add our app's **Widget v3/v4/v5 (Carrito)** block depending on the version you want and move it to where you want to display the widget.
 
 :::caution
   Remember to configure each widget with your **public API key** and save the changes so that they are applied to your store.
 :::
 :::tip
-  The style of the  **Widget v4** is editable from the plugin settings, but the style of the standard **Widget** is edited from the [control panel](https://vendors.aplazame.com/) in the section **Preferencias > Ajustes del widget**.
+  The style of the [**widget v4**](../../../api/widget/widget-v4) and the [**widget v5**](../../../api/widget/widget-v5) is editable from the plugin settings, but the style of the [**widget v3**](../../../api/widget/installment-payment#simulación) is edited from the [control panel](https://vendors.aplazame.com/) in the section **Preferencias > Ajustes del widget**.
 :::
 
 ## Additional settings
+### Global settings
+Global settings for the widget.
 
 Field | Description
 ----- | -----------
@@ -41,4 +43,18 @@ CSS del precio | CSS selector that indicates the element that contains the final
 Texto legal | Indicates whether you should displaying the legal text after the widget.
 Cuotas por defecto | Allows you to configure the number of instalments that the widget will display by default.
 Si Aplazame no está disponible | Allows you to show an alternative widget if the product/cart total does not meet the requirements to display the widget.
-Forzar widget paga en 4 | This field causes a complete change in the rendering of the wdiget in case the merchant supports the product **Pay in 4**. In case it does not support it or the total of the checkout does not meet the requirements for the product, it will behave exactly the same as the [**standard widget**](../../../api/widget/installment-payment#simulation) or [widget **v4**](../../../api/widget/widget-v4).
+Forzar widget paga en 4 | This field causes a complete change in the rendering of the wdiget in case the merchant supports the product **Pay in 4**. In case it does not support it or the total of the checkout does not meet the requirements for the product, it will behave exactly the same as the chosen widget version.
+
+### Widget v4 & v5 settings
+Exclusive settings for the [widget v4](../../../api/widget/widget-v4) and the [widget v5](../../../api/widget/widget-v5).
+
+Field | Version | Description
+----- | ------- | -----------
+Alineación | v4 & v5 | Indicates widget alignment. Can be aligned at `Left`, `Right` or `Center`.
+Barra deslizante | v5 | Shows of hides the slider that lets the customer select the amount of instalments.
+Disposición | v4 | You can choose `Horizontal` (which will change automatically if you don't have enough space) or `Vertical`.
+Introducir cuota máxima | v4 | Change the widget to allow the user to manually enter the maximum instalment they want to pay, or the closest.
+Marco | v4 | **Only product widget.** Indicates whether you should displaying the color border.
+:::tip
+  The style of the [**widget v4**](../../../api/widget/widget-v4) and the [**widget v5**](../../../api/widget/widget-v5) is only editable from the plugin settings, the style of the [**widget v3**](../../../api/widget/installment-payment#simulación) configurable from the [control panel](https://vendors.aplazame.com/) does not apply.
+:::
