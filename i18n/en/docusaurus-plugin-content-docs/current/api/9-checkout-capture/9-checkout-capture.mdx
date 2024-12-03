@@ -31,7 +31,7 @@ A capture must be made when the product or products are sent with the import of 
 amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí</t> | Capture amount.
 id | string | <t id="table.yes">Sí</t> | Your capture `id`.
 created | string | <t id="table.yes">Sí</t> | Date of the capture.
-[refunds](./#pago-en-15-dias) | object | No | Refunds on capture done.
+refunds | object | No | Refunds on capture done.
 refunded_amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí</t> | Refunded capture amount.
 remaining_amount | [decimal](../api-reference#decimals)  | <t id="table.yes">Sí</t> | Remaining capture amount (It will always be 0).
 
@@ -122,7 +122,7 @@ X-Aplazame-Media-Type: aplazame.v1
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 remaining_capture_amount | [decimal](../api-reference#decimals)  | Remaining order amount without capture (It will always be 0).
-[results](./#captura) | object | Captures of order.
+results | object | Captures of order.
 
 ## 02 - Request capture
 
@@ -216,6 +216,6 @@ remaining_capture_amount | [decimal](../api-reference#decimals)  | Remaining ord
 amount | [decimal](../api-reference#decimals)  | Capture amount.
 id | string | Your capture `id`.
 created | string | Date of the capture.
-[refunds](./#pago-en-15-dias) | object | Refunds on capture done.
+refunds | object | Refunds on capture done.
 refunded_amount | [decimal](../api-reference#decimals) | Refunded capture amount.
 remaining_amount | [decimal](../api-reference#decimals) | Remaining capture amount (It will always be 0).
