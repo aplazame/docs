@@ -47,7 +47,7 @@ Los valores por defecto en ese caso, son los que se muestran en esta documentaci
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 |data-option-slider | boolean | Sí | Muestra o esconde el slider para deslizar con el ratón la cantidad de cuotas deseadas.
-|data-amount | decimal | <t id="docs.yes">Sí</t> | Cantidad a financiar **en céntimos**. Este campo se puede omitir si se usa [`data-price`](#precio-variable).
+|data-amount | decimal | <t id="docs.yes">Sí</t> | Cantidad a financiar **en céntimos**. Este campo se puede omitir si se usa [`data-price`](../../widget#precio-variable).
 |data-option-legal-advice | boolean | No | Indica si debe mostrarse el texto legal justo después del widget. El valor por omisión es `false`.
 |data-option-default-instalments | decimal | No | Permite configurar el número de cuotas seleccionadas que mostrará el widget por defecto.
 |data-option-align | enum | No | Indica la alineación del widget. Se puede alinear a la izquierda `left` o a la derecha `right`. El valor por omisión es `center`.

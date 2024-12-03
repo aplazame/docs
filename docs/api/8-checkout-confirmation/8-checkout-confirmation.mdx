@@ -95,11 +95,11 @@ Content-Type: application/json
 }
 ```
 
-|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
-|---------|---------|---------|---------|
+|<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.description">Descripción</t>|
+|---------|---------|---------|
 id | string | Identificador del pedido de Aplazame (inmutable).
-[status](#codigos-de-estado-del-pedido) | string |Estado del pedido (`ok`, `pending` o `ko`).
-[status_reason](#codigos-de-estado-del-pedido) | string | Código de estado del pedido.
+[status](#códigos-de-estado-del-pedido) | string |Estado del pedido (`ok`, `pending` o `ko`).
+[status_reason](#códigos-de-estado-del-pedido) | string | Código de estado del pedido.
 sandbox | boolean | El pedido fue realizado en el entorno de pruebas.
 mid | string | Identificador del pedido generado por el comercio o autogenerado por Aplazame.
 total_amount | [decimal](../api-reference#decimals) | Cantidad a financiar.

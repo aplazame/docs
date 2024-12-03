@@ -77,7 +77,7 @@ dynamic result = client.Get($"/orders/{orderId}/refund");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | Order ID.
+:orderId | string | <t id="docs.yes">Yes</t> | Order ID.
 
 ### Response
 
@@ -155,8 +155,8 @@ dynamic result = client.Post($"/orders/{orderId}/refund", new {amount = Aplazame
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | Order ID.
-amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Amount to refund.
+:orderId | string | <t id="docs.yes">Yes</t> | Order ID.
+amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Yes</t> | Amount to refund.
 
 ### Response
 
@@ -195,14 +195,14 @@ A capture of an order accepts several partial refunds only if the sum of the amo
 ```
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-id | string | <t id="docs.yes">Sí</t> | Your refund `ID`.
-amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Refund amount.
-pending_amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Remaining capture amount.
-accrual_date | string | <t id="docs.yes">Sí</t> | Effective date of refund.
-credit_to_customer | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Refund amount to customer.
-completed | boolean | <t id="docs.yes">Sí</t> | Order completed.
-completed_but_defaults | boolean | <t id="docs.yes">Sí</t> | Order completed but with defaults.
-created | string | <t id="docs.yes">Sí</t> | Date of refund.
+id | string | <t id="docs.yes">Yes</t> | Your refund `ID`.
+amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Yes</t> | Refund amount.
+pending_amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Yes</t> | Remaining capture amount.
+accrual_date | string | <t id="docs.yes">Yes</t> | Effective date of refund.
+credit_to_customer | [decimal](../../api-reference#decimals) | <t id="docs.yes">Yes</t> | Refund amount to customer.
+completed | boolean | <t id="docs.yes">Yes</t> | Order completed.
+completed_but_defaults | boolean | <t id="docs.yes">Yes</t> | Order completed but with defaults.
+created | string | <t id="docs.yes">Yes</t> | Date of refund.
 
 
 ### 01 - Check remaining amount
@@ -264,8 +264,8 @@ dynamic result = client.Get($"/orders/{orderId}/captures/{captureId}/refunds");
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | Order ID.
-:captureId | string | <t id="docs.yes">Sí</t> |ID de la captura.
+:orderId | string | <t id="docs.yes">Yes</t> | Order ID.
+:captureId | string | <t id="docs.yes">Yes</t> |ID de la captura.
 
 ### Response
 
@@ -290,7 +290,7 @@ X-Aplazame-Media-Type: aplazame.v1
 amount | [decimal](../../api-reference#decimals) | Capture amount
 id | string |  Your capture `id`
 created | string | Date of the capture
-[refunds](./#pago-en-15-dias) | object | Refunds on capture done
+refunds | object | Refunds on capture done
 refunded_amount | [decimal](../../api-reference#decimals) | Refunded capture amount
 remaining_amount | [decimal](../../api-reference#decimals) | Remaining capture amount (It will always be 0)
 
@@ -359,9 +359,9 @@ dynamic result = client.Post($"/orders/{orderId}/captures/{captureId}/refunds", 
 
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
-:orderId | string | <t id="docs.yes">Sí</t> | Order ID.
-:captureId | string | <t id="docs.yes">Sí</t> | Capture ID.
-amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Sí</t> | Amount to refund.
+:orderId | string | <t id="docs.yes">Yes</t> | Order ID.
+:captureId | string | <t id="docs.yes">Yes</t> | Capture ID.
+amount | [decimal](../../api-reference#decimals) | <t id="docs.yes">Yes</t> | Amount to refund.
 
 ### Response
 
@@ -397,6 +397,6 @@ X-Aplazame-Media-Type: aplazame.v1
 amount | [decimal](../../api-reference#decimals) | Capture amount.
 id | string | Your capture `ID`.
 created | string | Date of the capture.
-[refunds](./#pago-en-15-dias) | object | Refunds on capture done.
+refunds | object | Refunds on capture done.
 refunded_amount | [decimal](../../api-reference#decimals) | Remaining capture amount.
 remaining_amount | [decimal](../../api-reference#decimals) | Remaining capture amount.

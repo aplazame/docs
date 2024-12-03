@@ -54,7 +54,7 @@ This version aims to simplify the integration for the installment payment widget
 |<t id="table.parameter">Parámetro</t> | <t id="table.type">Tipo</t> | <t id="table.required">Requerido</t> | <t id="table.description">Descripción</t>|
 |---------|---------|---------|---------|
 |data-price | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | Yes | CSS selector that indicates the element that contains the final price. It is updated live if there are changes in the price. If used in conjunction with `data-amount`, the value of the latter and `data-price` will be shown if the price changes.
-|data-amount | decimal | Yes| Quantity to be financed in cents. This field can be omitted if the [`data-price`](./#variable-price) is used.
+|data-amount | decimal | Yes| Quantity to be financed in cents. This field can be omitted if the [`data-price`](../../widget#variable-price) is used.
 |data-type | enum | No | The widget layout will change based on the selected value. The possible values are: `product` (by default) and `cart`.
 |data-option-legal-advice | boolean | No | Indicates whether you should displaying the legal text after the widget. The default value is `false`.
 |data-option-primary-color | [css color](https://developer.mozilla.org/es/docs/Web/CSS/color_value) | No | Set the background colour of the button and the border.

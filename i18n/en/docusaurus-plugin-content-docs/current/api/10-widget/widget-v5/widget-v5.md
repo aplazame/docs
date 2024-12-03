@@ -4,13 +4,13 @@ sidebar_position: 5
 keywords: [widget V5]
 ---
 
-# New widget v4
+# New widget v5
 ## Integration 
 There is the possibility of integrating a new version of the widget, for this, you must assign the value "v5" to the HTML attribute: `data-aplazame-widget-instalments="v5"`
 
 ```html
 <div 
-  data-aplazame-widget-instalments="v4"
+  data-aplazame-widget-instalments="v5"
   data-amount="3900">
 </div>
 ```
@@ -50,7 +50,7 @@ This version aims to simplify the integration for the installment payment widget
 |---------|---------|---------|---------|
 |data-option-slider | boolean | Yes | Shows of hides the slider that lets the customer select the amount of instalments.
 |data-price | [css selector](https://developer.mozilla.org/en/docs/Web/Guide/CSS/Getting_started/Selectors) | Yes | CSS selector that indicates the element that contains the final price. It is updated live if there are changes in the price. If used in conjunction with `data-amount`, the value of the latter and `data-price` will be shown if the price changes.
-|data-amount | decimal | Yes| Quantity to be financed in cents. This field can be omitted if the [`data-price`](./#variable-price) is used.
+|data-amount | decimal | Yes| Quantity to be financed in cents. This field can be omitted if the [`data-price`](../../widget#variable-price) is used.
 |data-option-legal-advice | boolean | No | Indicates whether you should displaying the legal text after the widget. The default value is `false`.
 |data-option-default-instalments | decimal | No | Allows you to configure the number of instalments that the widget will display by default.
 |data-option-border-product |boolean | Yes | Indicates whether you should displaying the color border if the type is `product`. The default value is `true`.
