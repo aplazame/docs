@@ -122,6 +122,7 @@ pipeline {
         sonarScan(SONAR_TEST,CODE_SOURCE_DEFAULT)
         }
       }
+    }
     stage('⭐') {
       when {
         anyOf {
