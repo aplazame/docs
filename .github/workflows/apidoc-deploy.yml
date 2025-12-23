@@ -1,0 +1,75 @@
+name: CI Terraform
+
+on:
+  push:
+    branches:
+      - master
+      - release
+      - 'sc-*'
+
+env:
+  APP: "apidocs"
+  APP_RELEASY: "webapp-apidocs"
+  S3BUCKETCACHE: "aplazameshared-jenkins-cache"
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+  AWS_PROFILE: "AplazameSharedServices"
+  AWS_REGION: "eu-west-1"
+  S3_BUCKET_STAGING: apidocs-staging.aplazame.org
+  S3_PATH_STAGING: build/staging
+  S3_BUCKET_PRODUCTION: aplazame.dev
+  S3_PATH_PRODUCTION: build/prod
+
+jobs:
+  build-and-deploy:
+    runs-on: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/pro' ||
+                  github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'pro')
+                  && vars.AWS_RG_NAME_PRO || vars.AWS_RG_NAME_NONPRO }}
+    environment:  ${{ github.ref_name == 'master' && 'staging' || github.ref_name == 'release' && 'produccion' || github.ref_name == 'sc-*' && 'ephemeral' }} 
+    env:
+      OUT_DIR: "build/staging"  # ${{ vars.BUILD_DIR }}
+      S3_BUCKET: ${{ vars.S3_BUCKET }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@8e8c483 #v6.0.1
+        with:
+            fetch-depth: 0
+
+      - uses: actions/setup-node@395ad32  #v6.1.0
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      - name: Instalar dependencias
+        run: make install
+
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@61815dc  #v5.1.1
+        with:
+          role-to-assume: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/pro' ||
+                              github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'pro')
+                               && vars.AWS_OIDC_ROLE_TF_PRO || vars.AWS_OIDC_ROLE_TF_NONPRO }}
+          role-session-name: ${{ github.run_id }}
+          aws-region: ${{ vars.WZ_OIDC_AWS_REGION }}
+
+
+      - name: Build
+        run: make build
+
+      - name: Deploy to ephemerals - SC
+        if: contains(github.ref, 'sc-')
+        run: |
+          aws s3 sync build/dev s3://aplazame-ephemeral-environments/sc-${{ env.BRANCH_NAME }}-${{ env.APP }}-dev --acl public-read --cache-control "private, max-age:3600" --delete
+          aws s3 cp build/dev s3://aplazame-ephemeral-environments/sc-${{ env.BRANCH_NAME }}-${{ env.APP }}-dev --recursive --exclude '*' --include '*.html' --acl public-read --cache-control 'no-cache, no-store'
+
+
+      - name: Deploy to ${{ github.ref_name }}
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release'
+        run: |
+          aws s3 sync build/staging s3://apidocs-staging.aplazame.org --acl private --cache-control 'private, max-age:3600' --delete
+          aws s3 cp build/staging s3://apidocs-staging.aplazame.org --recursive --exclude '*' --include '*.html' --acl private --cache-control 'no-cache, no-store'
+
+    #  - name: Deploy to Staging - Production
+    #    if: github.ref == 'refs/heads/release'
+    #    run: |
+    #      aws s3 sync build/prod s3://aplazame.dev --acl private --cache-control 'private, max-age:3600' --delete
+    #      aws s3 cp build/prod s3://aplazame.dev --recursive --exclude '*' --include '*.html' --acl private --cache-control 'no-cache, no-store'
