@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build and Upload
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ env:
   S3_PATH_PRODUCTION: build/prod
 
 jobs:
-  build-and-deploy:
+  build-and-upload:
     environment:  ${{ github.ref_name == 'master' && 'staging' || github.ref_name == 'release' && 'produccion' || github.ref_name == 'sc-*' && 'ephemeral' }} 
     runs-on: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/master' ||
                   github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'master')
@@ -41,8 +41,11 @@ jobs:
           node-version: 16
           cache: 'npm'
 
-      - name: Instalar dependencias
-        run: make install
+      - name: Instalar dependencias make
+        run: |
+          sudo apt-get update 
+          sudo apt-get install -y make build-essential
+          make install
 
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708  #v5.1.1
@@ -52,7 +55,7 @@ jobs:
           aws-region: ${{ vars.WZ_OIDC_AWS_REGION }}
 
 
-      - name: Build
+      - name: Build Make
         run: make build
 
       - name: Deploy to ephemerals - SC
@@ -63,6 +66,9 @@ jobs:
 
 
       - name: Deploy to ${{ github.ref_name }}
+        env: 
+          S3_BUCKET: ${{ vars.S3_BUCKET }}
+          ENVIRONMENT: ${{ github.ref_name }}
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release'
         run: |
           aws s3 sync build/staging s3://apidocs-staging.aplazame.org --acl private --cache-control 'private, max-age:3600' --delete
