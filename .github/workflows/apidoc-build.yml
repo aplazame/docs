@@ -28,8 +28,9 @@ jobs:
                   github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'master')
                   && vars.AWS_RG_NAME_PRO || vars.AWS_RG_NAME_NONPRO }}
     env:
-      OUT_DIR: "build/staging"  # ${{ vars.BUILD_DIR }}
-      S3_BUCKET: ${{ vars.S3_BUCKET }}
+      ENVIRONMENT: ${{ vars.ENVIRONMENT }} 
+      OUT_DIR: "build/staging"  # ${{ vars.BUILD_DIR }} # build/prod (release) # build/staging (master>)
+      S3_BUCKET: ${{ vars.S3_BUCKET }} # aplazame.dev (release) # apidocs-staging.aplazame.org (master>)
     steps:
       - name: Checkout code
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 #v6.0.1
@@ -42,11 +43,9 @@ jobs:
           node-version: 16
           cache: 'npm'
 
-      - name: Install Yarn
-        run: npm install --g yarn
-
-      - name: Instalar dependencias make
+      - name: Instalar dependencias Make
         run: |
+          npm install --g yarn
           sudo apt-get update 
           sudo apt-get install -y make build-essential
           make install
@@ -58,28 +57,18 @@ jobs:
           role-session-name: ${{ github.run_id }}
           aws-region: ${{ vars.WZ_OIDC_AWS_REGION }}
 
-
       - name: Build Make
         run: make build
 
-      - name: Deploy to ephemerals - SC
+      - name: deploy to S3 Bucket
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release'
+        run: |
+          aws s3 sync ${{ env.OUT_DIR }} s3://${{ env.S3_BUCKET }} --acl private --cache-control 'private, max-age:3600' --delete
+          aws s3 cp ${{ env.OUT_DIR }} s3://${{ env.S3_BUCKET }} --recursive --exclude '*' --include '*.html' --acl private --cache-control 'no-cache, no-store'
+
+      - name: Deploy to ephemerals - Branch SC
         if: contains(github.ref, 'sc-')
         run: |
           aws s3 sync build/dev s3://aplazame-ephemeral-environments/sc-${{ env.BRANCH_NAME }}-${{ env.APP }}-dev --acl public-read --cache-control "private, max-age:3600" --delete
           aws s3 cp build/dev s3://aplazame-ephemeral-environments/sc-${{ env.BRANCH_NAME }}-${{ env.APP }}-dev --recursive --exclude '*' --include '*.html' --acl public-read --cache-control 'no-cache, no-store'
 
-
-      - name: Deploy to ${{ github.ref_name }}
-        env: 
-          S3_BUCKET: ${{ vars.S3_BUCKET }}
-          ENVIRONMENT: ${{ github.ref_name }}
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release'
-        run: |
-          aws s3 sync build/staging s3://apidocs-staging.aplazame.org --acl private --cache-control 'private, max-age:3600' --delete
-          aws s3 cp build/staging s3://apidocs-staging.aplazame.org --recursive --exclude '*' --include '*.html' --acl private --cache-control 'no-cache, no-store'
-
-    #  - name: Deploy to Staging - Production
-    #    if: github.ref == 'refs/heads/release'
-    #    run: |
-    #      aws s3 sync build/prod s3://aplazame.dev --acl private --cache-control 'private, max-age:3600' --delete
-    #      aws s3 cp build/prod s3://aplazame.dev --recursive --exclude '*' --include '*.html' --acl private --cache-control 'no-cache, no-store'
