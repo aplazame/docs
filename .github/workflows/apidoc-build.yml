@@ -1,7 +1,6 @@
 name: Build and Upload
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - sc-ddt-gha
@@ -24,7 +23,7 @@ env:
 permissions:
   contents: read
   id-token: write
-  
+
 jobs:
   build-and-upload:
     environment:  ${{ github.ref_name == 'master' && 'staging' || github.ref_name == 'release' && 'produccion' || github.ref_name == 'sc-*' && 'ephemeral' }} 
@@ -33,8 +32,8 @@ jobs:
                   && vars.AWS_RG_NAME_PRO || vars.AWS_RG_NAME_NONPRO }}
     env:
       ENVIRONMENT: ${{ github.ref_name == 'master' && 'staging' || github.ref_name == 'release' && 'prod' || github.ref_name == 'sc-*' && 'ephemeral' }} 
-      OUT_DIR: ${{ github.ref == 'refs/heads/master' && 'build/staging' || github.ref == 'refs/heads/release' && 'build/prod' || startsWith(github.ref, 'refs/heads/sc-') && 'build/dev' }} 
-      S3_BUCKET: ${{ github.ref == 'refs/heads/master' && vars.S3_BUCKET_STAGING || github.ref == 'refs/heads/release' && vars.S3_BUCKET_PRODUCTION || startsWith(github.ref, 'refs/heads/sc-') && 'aplazame-ephemeral-environments' }}
+      OUT_DIR: ${{ github.ref == 'refs/heads/master' && 'build/staging' || github.ref == 'refs/heads/release' && 'build/prod' || startsWith(github.ref, 'refs/heads/sc-') && 'build/staging' }} 
+      S3_BUCKET: ${{ github.ref == 'refs/heads/master' && vars.S3_BUCKET_STAGING || github.ref == 'refs/heads/release' && vars.S3_BUCKET_PRODUCTION || startsWith(github.ref, 'refs/heads/sc-') && 'ephemeral-environments' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 #v6.0.1
@@ -73,6 +72,6 @@ jobs:
       - name: Deploy to ephemerals - Branch SC
         if: startsWith(github.ref, 'refs/heads/sc-')
         run: |
-          aws s3 sync build/dev s3://aplazame-ephemeral-environments/sc-${{ env.BRANCH_NAME }}-${{ env.APP }}-dev --acl public-read --cache-control "private, max-age:3600" --delete
-          aws s3 cp build/dev s3://aplazame-ephemeral-environments/sc-${{ env.BRANCH_NAME }}-${{ env.APP }}-dev --recursive --exclude '*' --include '*.html' --acl public-read --cache-control 'no-cache, no-store'
+          aws s3 sync build/staging s3://ephemeral-environments/${{ env.APP }}${{ env.BRANCH_NAME }} --acl public-read --cache-control "private, max-age:3600" --delete
+          aws s3 cp build/staging s3://ephemeral-environments/${{ env.APP }}/${{ env.BRANCH_NAME }} --recursive --exclude '*' --include '*.html' --acl public-read --cache-control 'no-cache, no-store'
 
