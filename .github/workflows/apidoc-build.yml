@@ -28,7 +28,7 @@ jobs:
                   github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'master')
                   && vars.AWS_RG_NAME_PRO || vars.AWS_RG_NAME_NONPRO }}
     env:
-      ENVIRONMENT: ${{ vars.ENVIRONMENT }} 
+      ENVIRONMENT: ${{ github.ref_name == 'master' && 'staging' || github.ref_name == 'release' && 'prod' || github.ref_name == 'sc-*' && 'ephemeral' }} 
       OUT_DIR: ${{ github.ref == 'refs/heads/master' && 'build/staging' || github.ref == 'refs/heads/release' && 'build/prod' || startsWith(github.ref, 'refs/heads/sc-') && 'build/dev' }} 
       S3_BUCKET: ${{ github.ref == 'refs/heads/master' && vars.S3_BUCKET_STAGING || github.ref == 'refs/heads/release' && vars.S3_BUCKET_PRODUCTION || startsWith(github.ref, 'refs/heads/sc-') && 'aplazame-ephemeral-environments' }}
     steps:
