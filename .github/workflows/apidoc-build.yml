@@ -21,6 +21,10 @@ env:
   S3_BUCKET_PRODUCTION: aplazame.dev
   S3_PATH_PRODUCTION: build/prod
 
+permissions:
+  contents: read
+  id-token: write
+  
 jobs:
   build-and-upload:
     environment:  ${{ github.ref_name == 'master' && 'staging' || github.ref_name == 'release' && 'produccion' || github.ref_name == 'sc-*' && 'ephemeral' }} 
