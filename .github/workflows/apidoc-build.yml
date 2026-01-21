@@ -26,7 +26,6 @@ permissions:
 
 jobs:
   build-and-upload:
-    environment:  ${{ github.ref_name == 'master' && 'staging' || github.ref_name == 'release' && 'produccion' || github.ref_name == 'sc-*' && 'ephemeral' }} 
     runs-on: ${{ vars.AWS_RG_NAME_PRO }}
     env:
       ENVIRONMENT: ${{ github.ref_name == 'master' && 'staging' || github.ref_name == 'release' && 'prod' || github.ref_name == 'sc-*' && 'ephemeral' }} 
@@ -67,20 +66,16 @@ jobs:
       - name: Build Make
         run: make build
       
-      - name: Deploy to ephemerals - Branch SC
-        if: startsWith(github.ref, 'refs/heads/sc-')
-        run: |
-          aws --profile Aplazame s3 sync build/staging s3://ephemeral-environments/${{ env.APP }}${{ env.BRANCH_NAME }} --acl public-read --cache-control "private, max-age:3600" --delete
-          aws --profile Aplazame s3 cp build/staging s3://ephemeral-environments/${{ env.APP }}/${{ env.BRANCH_NAME }} --recursive --exclude '*' --include '*.html' --acl public-read --cache-control 'no-cache, no-store'
-
-      - name: Deploy to S3 Bucket
+      - name: Deploy to S3 Bucket ${{ env.ENVIRONMENT }}
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release'
         run: |
-          aws s3 sync ${{ env.OUT_DIR }} s3://${{ env.S3_BUCKET }} --acl private --cache-control 'private, max-age:3600' --delete
-          aws s3 cp ${{ env.OUT_DIR }} s3://${{ env.S3_BUCKET }} --recursive --exclude '*' --include '*.html' --acl private --cache-control 'no-cache, no-store'
+         if [[ "${{ github.ref_name }}" == "master" || "${{ github.ref_name }}" == "release" ]]; then
+          echo "Deploying to ${{ env.ENVIRONMENT }} S3 bucket: ${{ env.S3_BUCKET }}"
+          #aws --profile Aplazame s3 sync ${{ env.OUT_DIR }} s3://${{ env.S3_BUCKET }} --acl private --cache-control 'private, max-age:3600' --delete
+          #aws --profile Aplazame s3 cp ${{ env.OUT_DIR }} s3://${{ env.S3_BUCKET }} --recursive --exclude '*' --include '*.html' --acl private --cache-control 'no-cache, no-store'
+         elif [[ "${{ github.ref_name }}" == sc-* ]]; then
+          echo "Deploy to ephemeral environment for branch ${{ github.ref_name }}"
+          #aws --profile Aplazame s3 sync build/staging s3://ephemeral-environments/${{ env.APP }}${{ env.BRANCH_NAME }} --acl public-read --cache-control "private, max-age:3600" --delete
+          #aws --profile Aplazame s3 cp build/staging s3://ephemeral-environments/${{ env.APP }}/${{ env.BRANCH_NAME }} --recursive --exclude '*' --include '*.html' --acl public-read --cache-control 'no-cache, no-store'
+         fi
 
-
-
-  # Aplazame prod
-  # AWS_PROFILE=Aplazame= ephimeral
-  # AWS_PROFILE=Aplazame= master
