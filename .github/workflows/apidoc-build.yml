@@ -67,7 +67,6 @@ jobs:
         run: make build
       
       - name: Deploy to S3 Bucket ${{ env.ENVIRONMENT }}
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release'
         run: |
          if [[ "${{ github.ref_name }}" == "master" || "${{ github.ref_name }}" == "release" ]]; then
           echo "Deploying to ${{ env.ENVIRONMENT }} S3 bucket: ${{ env.S3_BUCKET }}"
