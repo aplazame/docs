@@ -3,10 +3,9 @@ name: Build and Upload
 on:
   push:
     branches:
-      - sc-ddt-gha
-  #    - master
-  #    - release
-  #    - 'sc-*'
+      - master
+      - release
+      - 'sc-*'
 
 env:
   APP: "apidocs"
@@ -74,7 +73,7 @@ jobs:
           #aws --profile Aplazame s3 cp ${{ env.OUT_DIR }} s3://${{ env.S3_BUCKET }} --recursive --exclude '*' --include '*.html' --acl private --cache-control 'no-cache, no-store'
          elif [[ "${{ github.ref_name }}" == sc-* ]]; then
           echo "Deploy to ephemeral environment for branch ${{ github.ref_name }}"
-          #aws --profile Aplazame s3 sync build/staging s3://ephemeral-environments/${{ env.APP }}${{ env.BRANCH_NAME }} --acl public-read --cache-control "private, max-age:3600" --delete
+          #aws --profile Aplazame s3 sync build/staging s3://ephemeral-environments/${{ env.APP }}/${{ env.BRANCH_NAME }} --acl public-read --cache-control "private, max-age:3600" --delete
           #aws --profile Aplazame s3 cp build/staging s3://ephemeral-environments/${{ env.APP }}/${{ env.BRANCH_NAME }} --recursive --exclude '*' --include '*.html' --acl public-read --cache-control 'no-cache, no-store'
          fi
 
