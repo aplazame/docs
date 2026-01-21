@@ -27,9 +27,7 @@ permissions:
 jobs:
   build-and-upload:
     environment:  ${{ github.ref_name == 'master' && 'staging' || github.ref_name == 'release' && 'produccion' || github.ref_name == 'sc-*' && 'ephemeral' }} 
-    runs-on: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/master' || 
-                  github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'master')
-                  && vars.AWS_RG_NAME_PRO || vars.AWS_RG_NAME_NONPRO }}
+    runs-on: ${{ vars.AWS_RG_NAME_PRO }}
     env:
       ENVIRONMENT: ${{ github.ref_name == 'master' && 'staging' || github.ref_name == 'release' && 'prod' || github.ref_name == 'sc-*' && 'ephemeral' }} 
       OUT_DIR: ${{ github.ref == 'refs/heads/master' && 'build/staging' || github.ref == 'refs/heads/release' && 'build/prod' || startsWith(github.ref, 'refs/heads/sc-') && 'build/staging' }} 
@@ -62,7 +60,7 @@ jobs:
       - name: Configure aws credentials
         uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708  #v5.1.1
         with:
-          role-to-assume: ${{ github.ref == 'refs/heads/master' && vars.AWS_OIDC_ROLE_TF_PRO || vars.AWS_OIDC_ROLE_TF_NONPRO }}
+          role-to-assume: ${{ vars.AWS_OIDC_ROLE_TF_PRO }}
           role-session-name: ${{ github.run_id }}
           aws-region: ${{ vars.WZ_OIDC_AWS_REGION }}
 
@@ -72,12 +70,17 @@ jobs:
       - name: Deploy to ephemerals - Branch SC
         if: startsWith(github.ref, 'refs/heads/sc-')
         run: |
-          aws s3 sync build/staging s3://ephemeral-environments/${{ env.APP }}${{ env.BRANCH_NAME }} --acl public-read --cache-control "private, max-age:3600" --delete
-          aws s3 cp build/staging s3://ephemeral-environments/${{ env.APP }}/${{ env.BRANCH_NAME }} --recursive --exclude '*' --include '*.html' --acl public-read --cache-control 'no-cache, no-store'
+          aws --profile Aplazame s3 sync build/staging s3://ephemeral-environments/${{ env.APP }}${{ env.BRANCH_NAME }} --acl public-read --cache-control "private, max-age:3600" --delete
+          aws --profile Aplazame s3 cp build/staging s3://ephemeral-environments/${{ env.APP }}/${{ env.BRANCH_NAME }} --recursive --exclude '*' --include '*.html' --acl public-read --cache-control 'no-cache, no-store'
 
       - name: Deploy to S3 Bucket
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release'
         run: |
           aws s3 sync ${{ env.OUT_DIR }} s3://${{ env.S3_BUCKET }} --acl private --cache-control 'private, max-age:3600' --delete
           aws s3 cp ${{ env.OUT_DIR }} s3://${{ env.S3_BUCKET }} --recursive --exclude '*' --include '*.html' --acl private --cache-control 'no-cache, no-store'
-#
+
+
+
+  # Aplazame prod
+  # AWS_PROFILE=Aplazame= ephimeral
+  # AWS_PROFILE=Aplazame= master
