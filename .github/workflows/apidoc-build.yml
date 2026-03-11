@@ -41,11 +41,14 @@ jobs:
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
           sudo ./aws/install --update
+          sudo rm -f awscliv2.zip
+          sudo rm -rf aws/
           aws --version
+
       - name: Setup Node.js
         uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f  #v6.1.0
         with:
-          node-version: 16
+          node-version: 24
           cache: 'npm'
 
       - name: Instalar dependencias Make
