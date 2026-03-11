@@ -44,11 +44,12 @@ jobs:
           sudo rm -f awscliv2.zip
           sudo rm -rf aws/
           aws --version
+          echo NODE_OPTIONS="" >> $GITHUB_ENV
 
       - name: Setup Node.js
         uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f  #v6.1.0
         with:
-          node-version: 20
+          node-version: 16
 
       - name: Instalar dependencias Make
         run: |
