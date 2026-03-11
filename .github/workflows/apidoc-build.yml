@@ -48,14 +48,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f  #v6.1.0
         with:
-          node-version: 24
-          cache: 'npm'
+          node-version: 20
 
       - name: Instalar dependencias Make
         run: |
-          npm install --g yarn
+          npm install -g yarn
           sudo apt-get update 
-          sudo apt-get install -y make build-essential
+          sudo apt-get install -y make build-essential 
           make install
 
       - name: Configure aws credentials
