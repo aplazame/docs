@@ -18,7 +18,8 @@ There is the possibility of integrating a new version of the widget, for this, y
 This version aims to simplify the integration for the installment payment widget.
 
 <div className="widget-container">
-  <div data-aplazame-widget-instalments="v5"
+  <div
+    data-aplazame-widget-instalments="v5"
     data-amount="3900"
     data-option-legal-advice="false"
     data-option-default-instalments="6"
@@ -68,10 +69,11 @@ If you want to configure the widget according to your requirements you can use t
 ### Configurator
 
 <WidgetSimulator
+  data-aplazame-widget-instalments="v5"
   data-amount="14900"
   data-country="ES"
   data-currency="EUR"
   data-option-align="center"
   data-option-legal-advice="true"
-  data-option-slider="true">
-  data-aplazame-widget-instalments="v5"</WidgetSimulator>
+  data-option-slider="true"
+/>

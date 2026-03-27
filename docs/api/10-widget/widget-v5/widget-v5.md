@@ -64,11 +64,11 @@ Si deseas configurar el widget de acuerdo a tus necesidades, puedes usar el conf
 ### Configurador
 
 <WidgetSimulator
+  data-aplazame-widget-instalments="v5"
   data-amount="14900"
   data-country="ES"
   data-currency="EUR"
   data-option-align="center"
   data-option-legal-advice="true"
   data-option-slider="true"
->
-  data-aplazame-widget-instalments="v5"</WidgetSimulator>
+/>
